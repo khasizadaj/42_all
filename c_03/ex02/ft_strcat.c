@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:55:01 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/08 15:04:17 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:40:38 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-char *ft_strcat(char *dest, char *src)
+char	*ft_strcat(char *dest, char *src)
 {
-	int j;
-	int i;
+	int	j;
+	int	i;
 
 	j = ft_strlen(dest);
 	i = 0;
@@ -37,6 +37,5 @@ char *ft_strcat(char *dest, char *src)
 		i++;
 	}
 	dest[j] = '\0';
-
-	return dest;
+	return (dest);
 }
