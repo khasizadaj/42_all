@@ -1,6 +1,6 @@
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
-NAME := rush-02
+NAME := bsq
 
 all: final
 
