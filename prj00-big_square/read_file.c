@@ -21,8 +21,8 @@ char	*ft_realloc(char *old, int old_size, int new_size)
 	int		i;
 
 	new = malloc(sizeof(char) * new_size);
-	if (new == 0)
-		return (0);
+	if (new == NULL)
+		return (new);
 	i = 0;
 	while (i < old_size)
 	{
@@ -43,19 +43,30 @@ char	*read_file(char *file)
 
 	allocated_size = 10;
 	i = 0;
-	str = malloc(sizeof(char) * 10);
+	str = malloc(sizeof(char) * allocated_size + 1);
+	if (str == NULL)
+		return (str);
 	fd = open(file, O_RDONLY);
 	while (read(fd, &current, 1) != 0)
 	{
 		str[i] = current;
 		i++;
+		printf("i=%d\n", i);
 		if (i == allocated_size)
 		{
 			allocated_size = allocated_size + 10;
-			str = ft_realloc(str, (allocated_size - 10),
-					sizeof(char) * allocated_size);
+			char *new = ft_realloc(str, i + 1, sizeof(char) * allocated_size + 1);
+			if (new != NULL)
+				str = new;
+			else
+			{
+				free(str);
+				return (new);
+			}
 		}
 	}
+	printf("i=%d, size=%lu\n", i, sizeof(str));
+	// TODO Close it, it's cold
 	str[i] = '\0';
 	return (str);
 }
