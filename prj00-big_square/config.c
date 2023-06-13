@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 18:48:25 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/12 22:08:26 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:05:39 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 
 int		ft_atoi(char *str);
 int		ft_strstr_pos(char *str, char *to_find);
-char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*ft_strlcpy(char *dest, char *src, unsigned int n);
+int		ft_str_is_numeric(char *str);
+int		ft_char_is_printable(char c);
+void	memory_error(void);
+void	map_error(void);
 
 struct s_config
 {
@@ -50,27 +54,29 @@ struct s_config	init_config(void)
 struct s_config	*set_config(char *map_as_str, struct s_config *config)
 {
 	int				line_count;
-	int				pos_of_newline;
+	int				end_pos_of_first_line;
 	char			*number_of_lines_as_str;
 
-	pos_of_newline = ft_strstr_pos(map_as_str, "\n");
-	if (pos_of_newline > 13)
+	end_pos_of_first_line = ft_strstr_pos(map_as_str, "\n");
+	if (end_pos_of_first_line > 13)
 		return (config);
-	number_of_lines_as_str = malloc(sizeof(char) * pos_of_newline - 2);
-	ft_strncpy(number_of_lines_as_str, map_as_str, pos_of_newline - 2);
-	number_of_lines_as_str[pos_of_newline - 2] = '\0';
-	line_count = ft_atoi(number_of_lines_as_str); // TODO Validate input
-	config->line_count = line_count;
-	config->empty = map_as_str[pos_of_newline - 3]; // TODO Validate input
-	config->obstacle = map_as_str[pos_of_newline - 2]; // TODO Validate input
-	config->full = map_as_str[pos_of_newline - 1]; // TODO Validate input
+	number_of_lines_as_str = malloc(sizeof(char) * end_pos_of_first_line - 2);
+	if (number_of_lines_as_str == NULL)
+		memory_error();
+	ft_strlcpy(number_of_lines_as_str, map_as_str, end_pos_of_first_line - 2);
+	if (ft_str_is_numeric(number_of_lines_as_str) == 1)
+	{
+		line_count = ft_atoi(number_of_lines_as_str);
+		config->line_count = line_count;
+		free(number_of_lines_as_str);
+	}
+	if (ft_char_is_printable(map_as_str[end_pos_of_first_line - 3]))
+		config->empty = map_as_str[end_pos_of_first_line - 3];
+	if (ft_char_is_printable(map_as_str[end_pos_of_first_line - 2]))
+		config->obstacle = map_as_str[end_pos_of_first_line - 2];
+	if (ft_char_is_printable(map_as_str[end_pos_of_first_line - 1]))
+		config->full = map_as_str[end_pos_of_first_line - 1];
 	return (config);
-}
-
-void	map_error(void)
-{
-	write(1, "map error\n", 10);
-	exit(0);
 }
 
 /*
@@ -80,10 +86,15 @@ int	main(void)
 	struct s_config	config;
 
 	config = init_config();
-	map_as_str = "1234567890.ox\n....ox\n";
+	map_as_str = "1234567890.x\n\n....ox\n";
 	if (validate_config(set_config(map_as_str, &config)) == 0)
 		map_error();
-	printf("Number of lines: \"%d\"\n", config.line_count);
-	printf("Empty character: \"%c\"\n", config.empty);
+	else
+	{
+		printf("Number of lines: \"%d\"\n", config.line_count);
+		printf("Empty character: \"%c\"\n", config.empty);
+		printf("Obstacle character: \"%c\"\n", config.obstacle);
+		printf("Full character: \"%c\"\n", config.full);
+	}
 }
 */
