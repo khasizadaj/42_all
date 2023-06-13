@@ -6,13 +6,14 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 18:48:25 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/13 14:05:39 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:25:30 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "structs.h"
 
 int		ft_atoi(char *str);
 int		ft_strstr_pos(char *str, char *to_find);
@@ -22,15 +23,7 @@ int		ft_char_is_printable(char c);
 void	memory_error(void);
 void	map_error(void);
 
-struct s_config
-{
-	int		line_count;
-	char	empty;
-	char	full;
-	char	obstacle;
-};
-
-int	validate_config(struct s_config *config)
+int	validate_config(t_config *config)
 {
 	if (config->line_count < 0)
 		return (0);
@@ -40,9 +33,9 @@ int	validate_config(struct s_config *config)
 	return (1);
 }
 
-struct s_config	init_config(void)
+t_config	init_config(void)
 {
-	struct s_config	config;
+	t_config	config;
 
 	config.line_count = -1;
 	config.empty = '\0';
@@ -51,7 +44,7 @@ struct s_config	init_config(void)
 	return (config);
 }
 
-struct s_config	*set_config(char *map_as_str, struct s_config *config)
+t_config	*set_config(char *map_as_str, t_config *config)
 {
 	int				line_count;
 	int				end_pos_of_first_line;
@@ -76,6 +69,11 @@ struct s_config	*set_config(char *map_as_str, struct s_config *config)
 		config->obstacle = map_as_str[end_pos_of_first_line - 2];
 	if (ft_char_is_printable(map_as_str[end_pos_of_first_line - 1]))
 		config->full = map_as_str[end_pos_of_first_line - 1];
+
+	printf("1 -=> Number of lines: \"%d\"\n", config->line_count);
+	printf("2 -=> Empty character: \"%c\"\n", config->empty);
+	printf("3 -=> Obstacle character: \"%c\"\n", config->obstacle);
+	printf("4 -=> Full character: \"%c\"\n", config->full);
 	return (config);
 }
 
@@ -83,7 +81,7 @@ struct s_config	*set_config(char *map_as_str, struct s_config *config)
 int	main(void)
 {
 	char			*map_as_str;
-	struct s_config	config;
+	t_config	config;
 
 	config = init_config();
 	map_as_str = "1234567890.x\n\n....ox\n";

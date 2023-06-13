@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:05 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/12 18:45:44 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:30:12 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*open_and_read(char *file)
 	if (fd != -1)
 	{
 		str = read_file(fd);
-	
 		if (close(fd) == -1)
 			ft_putstr("file error");
 		return (str);
