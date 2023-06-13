@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:45:53 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/12 15:56:24 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:06:58 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main() {
     // Test Case 1: Basic conversion with no leading whitespace or signs
     const char* str1 = "123";
     int result1 = ft_atoi(str1);
-    printf("Result 1: %d\n, [123]", result1);  // Expected output: Result 1: 123
+    printf("Result 1: %d, [123]\n", result1);  // Expected output: Result 1: 123
 
     // Test Case 2: Leading whitespace and signs
     const char* str2 = "   -+456";
