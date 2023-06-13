@@ -12,6 +12,9 @@
 
 #include <stdio.h>
 
+int	ft_strlen_till_char(char *str, char c);
+char	*ft_strstr(char *str, char *to_find);
+
 int	count_lines(char *str)
 {
 	int	i;
@@ -25,71 +28,34 @@ int	count_lines(char *str)
 			lines++;
 		i++;
 	}
+	printf("%d\n\n", lines);
 	return (lines);
 }
 
-int	ft_strlen_till_char(char *str, char c)
+int	compare_length(char *str, int lines_count)
 {
-	unsigned int	i;
+	char	*next_line;
+	int		expected_length;
+	int		curr_length;
 
-	i = 0;
-	while (str[i])
+	next_line = ft_strstr(str, "\n");
+	expected_length = ft_strlen_till_char(next_line + 1, '\n');
+	while (lines_count - 1 > 1)
 	{
-		if (c == str[i])
-			return (i);
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_strstr(char *str, char *to_find)
-{
-	int	i;
-	int	j;
-
-	if (to_find[0] == '\0')
-		return (str);
-	i = 0;
-	j = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == to_find[j])
-		{
-			if (to_find[j + 1] == '\0')
-				return (str + i - j);
-			j++;
-		}
-		else
-			j = 0;
-		i++;
-	}
-	return (0);
-}
-
-int	compare_length(char *str, int lines)
-{
-	char	*ptr;
-	int		n;
-	int		compare;
-
-	ptr = ft_strstr(str, "\n");
-	n = ft_strlen_till_char(ptr + 1, '\n');
-	while (*str != '\0' && lines - 1 > 1)
-	{
-		ptr = ft_strstr(ptr + 1, "\n");
-		compare = ft_strlen_till_char(ptr + 1, '\n');
-		if (compare != n)
+		next_line = ft_strstr(next_line + 1, "\n");
+		curr_length = ft_strlen_till_char(next_line + 1, '\n');
+		if (curr_length != expected_length)
 			return (0);
-		lines--;
+		lines_count--;
 	}
 	return (1);
 }	
 
 int	check_validity(char *str)
 {
-	if (count_lines(str) < 1)
+	if (count_lines(str) != 9 + 1) // should be taken from config
 		return (0);
-	else if (compare_length(str, count_lines(str)) == 0)
+	else if (compare_length(str, 9 + 1) == 0)
 		return (0);
 	return (1);
 }
