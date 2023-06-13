@@ -28,7 +28,6 @@ int	count_lines(char *str)
 			lines++;
 		i++;
 	}
-	printf("%d\n\n", lines);
 	return (lines);
 }
 
@@ -47,6 +46,7 @@ int	compare_length(char *str, int lines_count)
 		if (curr_length != expected_length)
 			return (0);
 		lines_count--;
+
 	}
 	return (1);
 }	

@@ -35,6 +35,7 @@ char	*ft_realloc(char *old, int old_size, int new_size)
 	return (new);
 }
 
+
 char	*read_file(int fd)
 {
 	int		i;
