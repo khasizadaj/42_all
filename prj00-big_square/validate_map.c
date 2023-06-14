@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:27:12 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/14 18:05:59 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:06:55 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,19 @@ int	check_validity(char *str, t_conf *config)
 		return (0);
 	else if (compare_length(str, config->line_count + 1) == 0)
 		return (0);
+	return (1);
+}
+
+int	check_characters(char *map_as_str, t_conf *config)
+{
+	while (*map_as_str != '\n')
+		map_as_str++;
+	map_as_str++;
+	while (*map_as_str)
+	{
+		if (*map_as_str != config->empty && *map_as_str != config->obstacle)
+			return (0);
+		map_as_str++;
+	}
 	return (1);
 }
