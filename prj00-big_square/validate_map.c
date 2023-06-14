@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_validity.c                                   :+:      :+:    :+:   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:27:12 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/12 19:27:13 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:38:23 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "structs.h"
 
-int	ft_strlen_till_char(char *str, char c);
+int		ft_strlen_till_char(char *str, char c);
 char	*ft_strstr(char *str, char *to_find);
 
 int	count_lines(char *str)
@@ -46,16 +47,15 @@ int	compare_length(char *str, int lines_count)
 		if (curr_length != expected_length)
 			return (0);
 		lines_count--;
-
 	}
 	return (1);
 }	
 
-int	check_validity(char *str)
+int	check_validity(char *str, t_conf *config)
 {
-	if (count_lines(str) != 9 + 1) // should be taken from config
+	if (count_lines(str) != config->line_count + 1)
 		return (0);
-	else if (compare_length(str, 9 + 1) == 0)
+	else if (compare_length(str, config->line_count + 1) == 0)
 		return (0);
 	return (1);
 }

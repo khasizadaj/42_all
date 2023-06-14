@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 13:55:56 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/13 20:16:03 by jkhasiza         ###   ########.fr       */
+/*   Created: 2023/06/13 19:42:29 by jkhasiza          #+#    #+#             */
+/*   Updated: 2023/06/14 16:38:19 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-void	memory_error(void)
+typedef struct s_config
 {
-	write(2, "memory error\n", 12);
-	exit(0);
-}
+	int		line_count;
+	char	empty;
+	char	full;
+	char	obstacle;
+}	t_conf;
 
-void	map_error(void)
+typedef struct s_solution
 {
-	write(1, "map error\n", 10);
-	exit(0);
-}
+	int	start_i;
+	int	start_j;
+	int	size;
+}	t_sol;
 
-void	argument_error(void)
+typedef struct s_next_sol_arg
 {
-	write(1, "argument error\n", 15);
-	exit(0);
-}
+	t_conf	*conf;
+	int		next_size;
+}	t_next_sol_arg;
+
+#endif
