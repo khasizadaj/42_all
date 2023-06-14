@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:27:12 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/13 20:31:10 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:38:23 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,11 @@ int	compare_length(char *str, int lines_count)
 		if (curr_length != expected_length)
 			return (0);
 		lines_count--;
-
 	}
 	return (1);
 }	
 
-int	check_validity(char *str, t_config *config)
+int	check_validity(char *str, t_conf *config)
 {
 	if (count_lines(str) != config->line_count + 1)
 		return (0);

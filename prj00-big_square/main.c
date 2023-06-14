@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:18:55 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/14 16:09:49 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:47:39 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 #include <unistd.h>
 #include "structs.h"
 
-char		*open_and_read(char *file);
-int			check_validity(char *str, t_config *config);
-void		memory_error(void);
-void		map_error(void);
-void		argument_error(void);
-t_config	init_config(void);
-int			validate_config(t_config *config);
-t_config	*set_config(char *map_as_str, t_config *config);
-void		ft_putstr(char *str);
-t_solution	find_solution(char **map, t_config conf);
+char	*open_and_read(char *file);
+int		check_validity(char *str, t_conf *config);
+void	memory_error(void);
+void	map_error(void);
+void	argument_error(void);
+t_conf	init_config(void);
+int		validate_config(t_conf *config);
+t_conf	*set_config(char *map_as_str, t_conf *config);
+void	ft_putstr(char *str);
+t_sol	find_solution(char **map, t_conf conf);
 
 char	**generate_map_array(char *map_as_str)
 {
@@ -33,7 +33,7 @@ char	**generate_map_array(char *map_as_str)
 
 	// TODO update sizeof() later on
 	map = malloc((8 + 1) * sizeof(map_as_str));
-	map[0] = "..oo..\0";
+	map[0] = "..o...\0";
 	map[1] = "..o...\0";
 	map[2] = "..o...\0";
 	map[3] = "..oo..\0";
@@ -64,9 +64,9 @@ void	print_map(char **map)
 int	main(int argc, char *argv[])
 {
 	char		*map_as_str;
-	t_config	config;
+	t_conf	config;
 	char		**map;
-	t_solution	solution;
+	t_sol	solution;
 
 	if (argc == 1)
 		argument_error();

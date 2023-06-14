@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:05 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/13 19:30:12 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:38:11 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*ft_realloc(char *old, int old_size, int new_size)
 	free (old);
 	return (new);
 }
-
 
 char	*read_file(int fd)
 {
