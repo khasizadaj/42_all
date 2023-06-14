@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:18:55 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/14 20:15:56 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/06/14 22:52:24 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "structs.h"
-
-char	*open_and_read(char *file);
-int		check_validity(char *str, t_conf *config);
-void	memory_error(void);
-void	map_error(void);
-void	argument_error(void);
-t_conf	init_config(void);
-int		validate_config(t_conf *config);
-t_conf	*set_config(char *map_as_str, t_conf *config);
-void	ft_putstr(char *str);
-t_sol	find_solution(char **map, t_conf conf);
-int		compare_length(char *str, int lines_count);
-int		count_lines(char *str);
-char	*get_numbers_of_lines(char *map_as_str, int size);
-void	print_map(char **map);
-int		ft_strlen(char *str);
-int		ft_strstr_pos(char *str, char *to_find);
+#include "sample_header.h"
 
 char	**generate_map_array(char *map_as_str, t_conf *conf)
 {
