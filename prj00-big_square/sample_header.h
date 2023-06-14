@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef SAMPLE_HEADER_H
-# define HEADER_FILE
+# define SAMPLE_HEADER_H
 
 char	*open_and_read(char *file);
 int		check_validity(char *str, t_conf *config);
@@ -28,6 +28,8 @@ int		count_lines(char *str);
 char	*get_numbers_of_lines(char *map_as_str, int size);
 void	print_map(char **map);
 int		ft_strlen(char *str);
-int		ft_strstr_pos(char *str, char *to_find);/* add your prototypes here */
+int		ft_strstr_pos(char *str, char *to_find);
+char	**fill_up_solution(t_conf *config, t_sol solution, char **map);
+char	*read_file(int fd);
 
 #endif

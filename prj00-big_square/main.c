@@ -30,9 +30,12 @@ char	**generate_map_array(char *map_as_str, t_conf *conf)
 	while (i < conf->line_count)
 	{
 		map[i] = malloc((conf->width + 1) * sizeof(char));
-		j = -1;
+		j = 0;
 		while (map_as_str[k] != '\n' && map_as_str[k] != '\0')
-			map [i][++j] = map_as_str[k++];
+		{
+			map [i][j] = map_as_str[k++];
+			j++;
+		}
 		map[i][j] = '\0';
 		k++;
 		i++;
@@ -47,13 +50,12 @@ void	print_map(char **map)
 	int	i;
 
 	i = -1;
-	ft_putstr("\n==== MAP START \n\n");
 	while (map[++i][0] != '\0')
 	{
 		ft_putstr(map[i]);
 		ft_putstr("\n");
 	}
-	ft_putstr("\n==== MAP END \n\n");
+	ft_putstr("\n");
 }
 
 void	free_us(char **map)
@@ -70,33 +72,53 @@ void	free_us(char **map)
 	free(map);
 }
 
-int	main(int argc, char *argv[])
+void	std_in(void)
 {
-	char	*map_as_str;
-	t_conf	config;
-	char	**map;
-	t_sol	solution;
+	char		*map_as_str;
+	t_conf		config;
+	char		**map;
+	t_sol		solution;
 
-	if (argc == 1)
-		argument_error();
-	map_as_str = open_and_read(argv[1]);
+	map_as_str = read_file(0);
 	if (map_as_str == NULL)
 		memory_error();
 	config = init_config();
 	if (validate_config(set_config(map_as_str, &config)) == 0)
 		map_error();
-
-	// printf("\n%s\n\n", map_as_str);
-	// printf("\nValidity: %d\n", check_validity(map_as_str, &config));
-
 	map = generate_map_array(map_as_str, &config);
-	print_map(map);
 	solution = find_solution(map, config);
-
-	printf("solution.start_i: %d\n", solution.start_i);
-	printf("solution.start_j: %d\n", solution.start_j);
-	printf("solution.size: %d\n", solution.size);
+	map = fill_up_solution(&config, solution, map);
+	ft_putstr("\n");
+	print_map(map);
 	free_us(map);
 	free(map_as_str);
+}
+
+int	main(int argc, char *argv[])
+{
+	char		*map_as_str;
+	t_conf		config;
+	char		**map;
+	t_sol		solution;
+	int			i;
+
+	i = 0;
+	if (argc == 1)
+		std_in();
+	while (++i < argc)
+	{
+		map_as_str = open_and_read(argv[i]);
+		if (map_as_str == NULL)
+			memory_error();
+		config = init_config();
+		if (validate_config(set_config(map_as_str, &config)) == 0)
+			map_error();
+		map = generate_map_array(map_as_str, &config);
+		solution = find_solution(map, config);
+		map = fill_up_solution(&config, solution, map);
+		print_map(map);
+		free_us(map);
+		free(map_as_str);
+	}
 	return (0);
 }
