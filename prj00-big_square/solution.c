@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solution.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 04:46:47 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/14 16:48:20 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 19:58:37 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_sol	find_next_solution(int i, int j, char **map, t_next_sol_arg *args)
 	while (curr_row < i + args->next_size)
 	{
 		curr_col = j;
-		if (j + args->next_size > 6) // TODO save width as well
+		if (j + args->next_size > args->conf->width)
 			return (solution);
 		while (curr_col < j + args->next_size)
 		{
@@ -76,12 +76,12 @@ t_sol	find_solution(char **map, t_conf conf)
 	t_sol			curr_sol;
 	t_next_sol_arg	next_sol_arg;
 
-	i = -1;
+	i = 0;
 	f_sol = init_solution();
-	while (map[++i][0] != '\0')
+	while (map[i][0] != '\0')
 	{
-		j = -1;
-		while (map[i][++j] != '\0')
+		j = 0;
+		while (map[i][j] != '\0')
 		{
 			next_sol_arg = get_next_sol_arg(&conf, f_sol.size + 1);
 			curr_sol = find_next_solution(i, j, map, &next_sol_arg);
@@ -89,9 +89,12 @@ t_sol	find_solution(char **map, t_conf conf)
 			{
 				update_solution(&f_sol, &curr_sol);
 				next_sol_arg.next_size = f_sol.size + 1;
+				printf("$%d\n", next_sol_arg.next_size);
 				curr_sol = find_next_solution(i, j, map, &next_sol_arg);
 			}
+			j++;
 		}
+		i++;
 	}
 	return (f_sol);
 }
