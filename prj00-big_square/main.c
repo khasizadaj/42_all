@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:18:55 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/14 12:48:48 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:09:49 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,16 @@ int	main(int argc, char *argv[])
 	if (validate_config(set_config(map_as_str, &config)) == 0)
 		map_error();
 
-
 	// printf("\n%s\n\n", map_as_str);
 	// printf("\nValidity: %d\n", check_validity(map_as_str, &config));
 
 	map = generate_map_array("");
 	print_map(map);
 	solution = find_solution(map, config);
+
+	printf("solution.start_i: %d\n", solution.start_i);
+	printf("solution.start_j: %d\n", solution.start_j);
+	printf("solution.size: %d\n", solution.size);
 
 	free(map_as_str);
 	return (0);
