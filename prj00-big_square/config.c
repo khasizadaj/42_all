@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 18:48:25 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/14 19:24:46 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:14:18 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_conf	*set_config(char *map_as_str, t_conf *config)
 	line_count = ft_atoi(number_of_lines_as_str);
 	config->width = compare_length(map_as_str, line_count);
 	config->line_count = line_count;
-	if (ft_str_is_numeric(number_of_lines_as_str) == 1)	
+	if (ft_str_is_numeric(number_of_lines_as_str) == 1)
 		free(number_of_lines_as_str);
 	if (ft_char_is_printable(map_as_str[end_pos - 3]))
 		config->empty = map_as_str[end_pos - 3];
@@ -78,30 +78,5 @@ t_conf	*set_config(char *map_as_str, t_conf *config)
 		config->obstacle = map_as_str[end_pos - 2];
 	if (ft_char_is_printable(map_as_str[end_pos - 1]))
 		config->full = map_as_str[end_pos - 1];
-	printf("1 -=> Number of lines: \"%d\"\n", config->line_count);
-	printf("2 -=> Empty character: \"%c\"\n", config->empty);
-	printf("3 -=> Obstacle character: \"%c\"\n", config->obstacle);
-	printf("4 -=> Full character: \"%c\"\n", config->full);
-	printf("5 -=> Map width: \"%d\"\n", config->width);
 	return (config);
 }
-
-/*
-int	main(void)
-{
-	char			*map_as_str;
-	t_config	config;
-
-	config = init_config();
-	map_as_str = "1234567890.x\n\n....ox\n";
-	if (validate_config(set_config(map_as_str, &config)) == 0)
-		map_error();
-	else
-	{
-		printf("Number of lines: \"%d\"\n", config.line_count);
-		printf("Empty character: \"%c\"\n", config.empty);
-		printf("Obstacle character: \"%c\"\n", config.obstacle);
-		printf("Full character: \"%c\"\n", config.full);
-	}
-}
-*/
