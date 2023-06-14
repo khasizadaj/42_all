@@ -6,38 +6,16 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 04:46:47 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/14 19:58:37 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:09:08 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include <stdio.h>
 
-t_next_sol_arg	get_next_sol_arg(t_conf *conf, int size)
-{
-	t_next_sol_arg	next_sol_arg;
-
-	next_sol_arg.conf = conf;
-	next_sol_arg.next_size = size;
-	return (next_sol_arg);
-}
-
-t_sol	init_solution(void)
-{
-	t_sol	solution;
-
-	solution.start_i = -1;
-	solution.start_j = -1;
-	solution.size = 0;
-	return (solution);
-}
-
-void	update_solution(t_sol *final_solution, t_sol *curr_solution)
-{
-	final_solution->start_i = curr_solution->start_i;
-	final_solution->start_j = curr_solution->start_j;
-	final_solution->size = curr_solution->size;
-}
+t_next_sol_arg	get_next_sol_arg(t_conf *conf, int size);
+t_sol			init_solution(void);
+void			update_solution(t_sol *final_solution, t_sol *curr_solution);
 
 t_sol	find_next_solution(int i, int j, char **map, t_next_sol_arg *args)
 {
@@ -76,12 +54,12 @@ t_sol	find_solution(char **map, t_conf conf)
 	t_sol			curr_sol;
 	t_next_sol_arg	next_sol_arg;
 
-	i = 0;
+	i = -1;
 	f_sol = init_solution();
-	while (map[i][0] != '\0')
+	while (map[++i][0] != '\0')
 	{
-		j = 0;
-		while (map[i][j] != '\0')
+		j = -1;
+		while (map[i][++j] != '\0')
 		{
 			next_sol_arg = get_next_sol_arg(&conf, f_sol.size + 1);
 			curr_sol = find_next_solution(i, j, map, &next_sol_arg);
@@ -89,12 +67,30 @@ t_sol	find_solution(char **map, t_conf conf)
 			{
 				update_solution(&f_sol, &curr_sol);
 				next_sol_arg.next_size = f_sol.size + 1;
-				printf("$%d\n", next_sol_arg.next_size);
 				curr_sol = find_next_solution(i, j, map, &next_sol_arg);
 			}
-			j++;
 		}
-		i++;
 	}
 	return (f_sol);
+}
+
+char	**fill_up_solution(t_conf *config, t_sol solution, char **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	x = solution.start_i;
+	while (x < solution.start_i + solution.size)
+	{
+		y = solution.start_j;
+		while (y < solution.start_j + solution.size)
+		{
+			map[x][y] = config->full;
+			y++;
+		}
+		x++;
+	}
+	return (map);
 }

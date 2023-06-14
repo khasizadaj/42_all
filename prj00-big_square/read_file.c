@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:05 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/14 16:38:11 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:13:04 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,33 @@ char	*read_file(int fd)
 	if (str == NULL)
 		return (str);
 	while (read(fd, &current, 1) != 0)
+	{
+		str[i] = current;
+		if (++i % 10 == 0)
+		{
+			new = ft_realloc(str, i + 1, sizeof(char) * i + 11);
+			if (new != NULL)
+				str = new;
+			else
+				return (str);
+		}
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*read_file_stdin(void)
+{
+	int		i;
+	char	*str;
+	char	current;
+	char	*new;
+
+	i = 0;
+	str = malloc(sizeof(char) * 11);
+	if (str == NULL)
+		return (str);
+	while (read(0, &current, 1) != 0 && current != EOF)
 	{
 		str[i] = current;
 		if (++i % 10 == 0)
