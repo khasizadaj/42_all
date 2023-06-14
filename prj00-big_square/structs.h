@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:42:29 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/14 16:38:19 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 19:42:25 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 typedef struct s_config
 {
 	int		line_count;
-	char	empty;
+	int		width;
 	char	full;
 	char	obstacle;
+	char	empty;
 }	t_conf;
 
 typedef struct s_solution

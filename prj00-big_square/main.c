@@ -6,7 +6,7 @@
 /*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:18:55 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/14 18:38:29 by abied-ch         ###   ########.fr       */
+/*   Updated: 2023/06/14 20:15:56 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		compare_length(char *str, int lines_count);
 int		count_lines(char *str);
 char	*get_numbers_of_lines(char *map_as_str, int size);
 void	print_map(char **map);
-int	ft_strlen(char *str);
+int		ft_strlen(char *str);
+int		ft_strstr_pos(char *str, char *to_find);
 
 char	**generate_map_array(char *map_as_str, t_conf *conf)
 {
@@ -38,25 +39,22 @@ char	**generate_map_array(char *map_as_str, t_conf *conf)
 	int		i;
 	int		j;
 	int		k;
-	int		size;
 
-	size = compare_length(map_as_str, count_lines(map_as_str));
-	i = -1;
-	k = 0;
+	i = 0;
+	k = ft_strstr_pos(map_as_str, "\n") + 1;
 	map = malloc((conf->line_count + 1) * sizeof(char *));
-	while (++i < conf->line_count)
+	while (i < conf->line_count)
 	{
-		map[i] = malloc((size + 1) * sizeof(char));
-		printf("Memory of map[%d] = %p\n", i, &map[i]);
+		map[i] = malloc((conf->width + 1) * sizeof(char));
 		j = -1;
 		while (map_as_str[k] != '\n' && map_as_str[k] != '\0')
 			map [i][++j] = map_as_str[k++];
+		map[i][j] = '\0';
 		k++;
+		i++;
 	}
-	map[i] = malloc(sizeof(char *));
-	printf("Memory of map[%d] = %p\n", i, &map[i]);
-	
-	map[i] = "\0";
+	map[i] = malloc(sizeof(char));
+	map[i][0] = '\0';
 	return (map);
 }
 
@@ -65,9 +63,8 @@ void	print_map(char **map)
 	int	i;
 
 	i = -1;
-
 	ft_putstr("\n==== MAP START \n\n");
-	while (map[++i][0])
+	while (map[++i][0] != '\0')
 	{
 		ft_putstr(map[i]);
 		ft_putstr("\n");
@@ -75,7 +72,7 @@ void	print_map(char **map)
 	ft_putstr("\n==== MAP END \n\n");
 }
 
-void	free_javid(char **map)
+void	free_us(char **map)
 {
 	int	i;
 
@@ -83,19 +80,17 @@ void	free_javid(char **map)
 	while (map[i][0] != 0)
 	{
 		free(map[i]);
-		printf("Freed map[%d] = %p\n", i, &map[i]);
 		i++;
 	}
-	printf("Freed map[%d] = %p\n", i, &map[i]);
-	free(map[i]); // TODO Freeing last item doesn't work, we need to fix it.
+	free(map[i]);
 	free(map);
 }
 
 int	main(int argc, char *argv[])
 {
-	char		*map_as_str;
+	char	*map_as_str;
 	t_conf	config;
-	char		**map;
+	char	**map;
 	t_sol	solution;
 
 	if (argc == 1)
@@ -117,7 +112,7 @@ int	main(int argc, char *argv[])
 	printf("solution.start_i: %d\n", solution.start_i);
 	printf("solution.start_j: %d\n", solution.start_j);
 	printf("solution.size: %d\n", solution.size);
-	free_javid(map);
+	free_us(map);
 	free(map_as_str);
 	return (0);
 }

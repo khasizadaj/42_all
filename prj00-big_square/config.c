@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 18:48:25 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/14 16:45:07 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 19:24:46 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		ft_str_is_numeric(char *str);
 int		ft_char_is_printable(char c);
 void	memory_error(void);
 void	map_error(void);
+int		compare_length(char *str, int lines_count);
 
 int	validate_config(t_conf *config)
 {
@@ -38,6 +39,7 @@ t_conf	init_config(void)
 	t_conf	config;
 
 	config.line_count = -1;
+	config.width = -1;
 	config.empty = '\0';
 	config.full = '\0';
 	config.obstacle = '\0';
@@ -65,12 +67,11 @@ t_conf	*set_config(char *map_as_str, t_conf *config)
 	if (end_pos > 13)
 		return (config);
 	number_of_lines_as_str = get_numbers_of_lines(map_as_str, end_pos - 2);
-	if (ft_str_is_numeric(number_of_lines_as_str) == 1)
-	{
-		line_count = ft_atoi(number_of_lines_as_str);
-		config->line_count = line_count;
+	line_count = ft_atoi(number_of_lines_as_str);
+	config->width = compare_length(map_as_str, line_count);
+	config->line_count = line_count;
+	if (ft_str_is_numeric(number_of_lines_as_str) == 1)	
 		free(number_of_lines_as_str);
-	}
 	if (ft_char_is_printable(map_as_str[end_pos - 3]))
 		config->empty = map_as_str[end_pos - 3];
 	if (ft_char_is_printable(map_as_str[end_pos - 2]))
@@ -81,6 +82,7 @@ t_conf	*set_config(char *map_as_str, t_conf *config)
 	printf("2 -=> Empty character: \"%c\"\n", config->empty);
 	printf("3 -=> Obstacle character: \"%c\"\n", config->obstacle);
 	printf("4 -=> Full character: \"%c\"\n", config->full);
+	printf("5 -=> Map width: \"%d\"\n", config->width);
 	return (config);
 }
 
