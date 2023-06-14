@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:42:29 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/06/13 19:57:00 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 05:35:14 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,12 @@ typedef struct s_config
 	char	full;
 	char	obstacle;
 }	t_config;
+
+typedef struct s_solution
+{
+	int	start_i;
+	int	start_j;
+	int	size;
+}	t_solution;
 
 #endif

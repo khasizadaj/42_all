@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:18:55 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/14 04:40:18 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:48:48 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_config	init_config(void);
 int			validate_config(t_config *config);
 t_config	*set_config(char *map_as_str, t_config *config);
 void		ft_putstr(char *str);
+t_solution	find_solution(char **map, t_config conf);
 
 char	**generate_map_array(char *map_as_str)
 {
@@ -32,15 +33,15 @@ char	**generate_map_array(char *map_as_str)
 
 	// TODO update sizeof() later on
 	map = malloc((8 + 1) * sizeof(map_as_str));
-	map[0] = "......";
-	map[1] = "..o...";
-	map[2] = "..o...";
-	map[3] = "..oo..";
-	map[4] = "oo....";
-	map[5] = "...o..";
-	map[6] = "......";
-	map[7] = "......";
-	map[8] = "\0";
+	map[0] = "..oo..\0";
+	map[1] = "..o...\0";
+	map[2] = "..o...\0";
+	map[3] = "..oo..\0";
+	map[4] = "oo....\0";
+	map[5] = "...o..\0";
+	map[6] = "......\0";
+	map[7] = "......\0";
+	map[8] = "\0\0\0\0\0\0\0\0\0";
 
 	return (map);
 }
@@ -64,7 +65,8 @@ int	main(int argc, char *argv[])
 {
 	char		*map_as_str;
 	t_config	config;
-	char **map;
+	char		**map;
+	t_solution	solution;
 
 	if (argc == 1)
 		argument_error();
@@ -77,10 +79,11 @@ int	main(int argc, char *argv[])
 
 
 	// printf("\n%s\n\n", map_as_str);
-	printf("\nValidity: %d\n", check_validity(map_as_str, &config));
+	// printf("\nValidity: %d\n", check_validity(map_as_str, &config));
 
 	map = generate_map_array("");
 	print_map(map);
+	solution = find_solution(map, config);
 
 	free(map_as_str);
 	return (0);
