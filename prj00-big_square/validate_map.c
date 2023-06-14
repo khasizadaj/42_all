@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abied-ch <abied-ch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 19:27:12 by abied-ch          #+#    #+#             */
-/*   Updated: 2023/06/14 16:38:23 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:05:59 by abied-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	compare_length(char *str, int lines_count)
 			return (0);
 		lines_count--;
 	}
-	return (1);
+	return (expected_length);
 }	
 
 int	check_validity(char *str, t_conf *config)
