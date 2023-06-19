@@ -36,12 +36,12 @@ void	populate_zero(int **array, int size)
 	int	k;
 
 	b = 0;
-	k = 0;
 	while (b < size)
 	{
+		k = 0;
 		while (k < size)
 		{
-			array[k][b] = 0;
+			array[b][k] = 0;
 			k++;
 		}
 		b++;
