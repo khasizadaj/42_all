@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	print_lines(int **array, int size);
+void	print_lines(int **array, int size, int edges);
 int		ft_calculate(int **board, int size);
 
 int	**allocate_array(int size)
@@ -113,16 +113,12 @@ int	write_input(int *base, int size)
 	if (array == NULL)
 		return (0);
 
-	printf("Before CALCULATION\n\n");
-	print_lines(array, size);
 	if (ft_calculate(array, size) == 0)
 	{
 		free_array(array, size);
 		return (0);
 	}
-	printf("After CALCULATION\n\n");
-	print_lines(array, size);
-	free_array(array, size);
+	print_lines(array, size, 0);
 	return (1);
 }
 

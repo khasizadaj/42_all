@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rush.h"
+
 int	skyscrapersy(int **array, int size, int y, int direction)
 {
 	int	i;
@@ -59,7 +61,7 @@ int	skyscrapersx(int **array, int size, int x, int direction)
 }
 
 int	check_row(int **array, int size, int x)
-{
+{	
 	if (skyscrapersx(array, size, x, 1) != array[x][0])
 		return (0);
 	if (skyscrapersx(array, size, x, -1) != array[x][size - 1])

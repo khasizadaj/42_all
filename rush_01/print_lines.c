@@ -10,31 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "rush.h"
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-void	print_lines(int **array, int size)
+void	print_lines(int **array, int size, int edges)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char 	c;
+	int		start;
+	int		end;
 
-	i = 1;
-	while (i < size -1)
+	start = 1;
+	end = size - 1;
+	if (edges)
 	{
-		j = 1;
-		while (j < size -1)
+		start = 0;
+		end = size;
+	}
+
+
+	i = start;
+	while (i < end)
+	{
+		j = start;
+		while (j < end)
 		{	
-			if (j < (size - 2))
+			c = '0' + array[i][j];
+			if (j < (end - 1))
 			{
-				ft_putchar(array[i][j] + 48);
+				ft_putchar(c);
 				ft_putchar(' ');
 			}
 			else
-				ft_putchar(array[i][j] + 48);
+				ft_putchar(c);
 			j++;
 		}
 		ft_putchar('\n');
