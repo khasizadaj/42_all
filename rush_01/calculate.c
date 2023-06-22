@@ -13,7 +13,7 @@
 #include "rush.h"
 
 int	check_row(int **array, int size, int x);
-int	check_column(int **array, int size, int x);
+int	check_column(int **array, int size, int y);
 int	check_calculation(int **array, int size);
 int	skyscrapersy(int **array, int size, int y, int direction);
 int	skyscrapersx(int **array, int size, int x, int direction);
@@ -117,14 +117,10 @@ int	ft_calculate(int **board, int size)
 	int	j;
 	int	result;
 	int	val;
-	int	count;
 
-	count = 0;
 	i = 1;
 	while (i < size - 1)
 	{
-		if (count >= 2000000)
-			return (0);
 		j = 1;
 		while (j < size - 1)
 		{
@@ -148,6 +144,8 @@ int	ft_calculate(int **board, int size)
 					val++;
 				}
 			}
+			if (board[i][j] == 0)
+				return (0);
 			j++;
 		}
 		if (check_row(board, size, i) == 0)
@@ -158,6 +156,5 @@ int	ft_calculate(int **board, int size)
 	{
 		return (1);
 	}
-	count++;
 	return (0);
 }

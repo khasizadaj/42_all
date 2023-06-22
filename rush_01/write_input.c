@@ -60,14 +60,6 @@ void	populate_inputs(int **array, int *base, int size)
 	int size_of_map = size - 2;
 	while (base[b])
 	{	
-		// populate left column
-		k = 1;
-		while (b < size_of_map)
-			array[k++][0] = base[b++];
-		// populate right column
-		k = 1;
-		while ((size_of_map) <= b && b < (size_of_map) * 2)
-			array[k++][size - 1] = base[b++];
 		// populate top row
 		k = 1;
 		while ((size_of_map) * 2 <= b && b < (size_of_map) * 3)
@@ -76,6 +68,14 @@ void	populate_inputs(int **array, int *base, int size)
 		k = 1;
 		while ((size_of_map) * 3 <= b && b < (size_of_map) * 4)
 			array[size - 1][k++] = base[b++];
+		// populate left column
+		k = 1;
+		while (b < size_of_map)
+			array[k++][0] = base[b++];
+		// populate right column
+		k = 1;
+		while ((size_of_map) <= b && b < (size_of_map) * 2)
+			array[k++][size - 1] = base[b++];
 	}
 }
 
