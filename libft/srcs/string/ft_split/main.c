@@ -34,21 +34,25 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 
 int	main(int argc, char *argv)
 {
-	printf("Test 1: \n");
-	char	*s_1 = "Hello World !!!!\n";
-	char	**exp_1;
-	char	delimeter_1;
 	int		count;
 
-	exp_1 = malloc(sizeof(char *) * 3);
+	printf("Test 1: \n");
+	char	*s_1 = "Hello Worlds !!!!";
+	char	**exp_1;
+	char	delimeter_1;
+
+	count = 4;
+	exp_1 = malloc(sizeof(char *) * count);
 	delimeter_1 = ' ';
 	exp_1[0] = "Hello";
-	exp_1[1] = "World";
-	exp_1[2] = "!!!!\n";
-	count = 3;
+	exp_1[1] = "Worlds";
+	exp_1[2] = "!!!!";
+	exp_1[3] = '\0';
+
+	printf("String: \"%s\"\n", s_1);
 
 	char **res_1 = ft_split(s_1, delimeter_1);
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < count - 1; i++)
 	{
 		printf("Word %d\n", i);
 		if (ft_strncmp(exp_1[i], res_1[i], sizeof(exp_1[0])) == 0)
@@ -57,24 +61,76 @@ int	main(int argc, char *argv)
 			printf("Not good || \n\tEXP: '%s'; \n\tRES: '%s'\n\n", exp_1[i], res_1[i]);	
 	}
 
-	printf("Test 2: \n");
-	char	*s_2 = "Hello World\n";
-	char	**exp_2;
-	char	delimeter_2;
+	printf("Test 5: \n");
+	char	*s_5 = "Hello World Welcome";
+	char	**exp_5;
+	char	delimeter_5;
 
-	exp_2 = malloc(sizeof(char *) * 3);
-	delimeter_2 = ' ';
-	exp_2[0] = "Hello";
-	exp_2[1] = "World";
-	count = 2;
+	count = 4;
+	exp_5 = malloc(sizeof(char *) * count);
+	delimeter_5 = ' ';
+	exp_5[0] = "Hello";
+	exp_5[1] = "World";
+	exp_5[2] = "Welcome";
+	exp_5[3] = '\0';
 
-	char **res_2 = ft_split(s_2, delimeter_2);
-	for (int i = 0; i < count; i++)
+	printf("String: \"%s\"\n", s_5);
+
+	char **res_5 = ft_split(s_5, delimeter_5);
+	for (int i = 0; i < count - 1; i++)
 	{
 		printf("Word %d\n", i);
-		if (ft_strncmp(exp_2[i], res_2[i], sizeof(exp_2[0])) == 0)
+		if (ft_strncmp(exp_5[i], res_5[i], sizeof(exp_5[0])) == 0)
 			printf("All good!\n\n");
 		else
-			printf("Not good || \n\tEXP: '%s'; \n\tRES: '%s'\n\n", exp_2[i], res_2[i]);	
+			printf("Not good || \n\tEXP: '%s'; \n\tRES: '%s'\n\n", exp_5[i], res_5[i]);	
 	}
+
+
+	// printf("Test 3: Empty string\n");
+	// char	*s_3 = "";
+	// char	**exp_3;
+	// char	delimeter_3;
+
+	// count = 2;
+	// exp_3 = malloc(sizeof(char *) * count);
+	// delimeter_3 = ' ';
+	// exp_3[0] = "";
+	// exp_3[1] = '\0';
+
+	// printf("String: \"%s\"\n", s_3);
+
+	// char **res_3 = ft_split(s_3, delimeter_3);
+	// for (int i = 0; i < count - 1; i++)
+	// {
+	// 	printf("Word %d\n", i);
+	// 	if (ft_strncmp(exp_3[i], res_3[i], sizeof(exp_3[0])) == 0)
+	// 		printf("All good!\n\n");
+	// 	else
+	// 		printf("Not good || \n\tEXP: '%s'; \n\tRES: '%s'\n\n", exp_3[i], res_3[i]);	
+	// }
+
+	// printf("Test 4: Empty string\n");
+	// char	*s_4 = " Hello World ";
+	// char	**exp_4;
+	// char	delimeter_4;
+
+	// count = 3;
+	// exp_4 = malloc(sizeof(char *) * count);
+	// delimeter_4 = ' ';
+	// exp_4[0] = "Hello";
+	// exp_4[1] = "World";
+	// exp_4[2] = '\0';
+
+	// printf("String: \"%s\"\n", s_4);
+
+	// char **res_4 = ft_split(s_4, delimeter_4);
+	// for (int i = 0; i < count - 1; i++)
+	// {
+	// 	printf("Word %d\n", i);
+	// 	if (ft_strncmp(exp_4[i], res_4[i], sizeof(exp_4[0])) == 0)
+	// 		printf("All good!\n\n");
+	// 	else
+	// 		printf("Not good || \n\tEXP: '%s'; \n\tRES: '%s'\n\n", exp_4[i], res_4[i]);	
+	// }
 }
