@@ -37,8 +37,8 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 
 - [x] ft_substr
 - [x] ft_strjoin
-- [ ] ft_strtrim
-- [ ] ft_split
+- [x] ft_strtrim
+- [x] ft_split
 - [x] ft_itoa
 - [ ] ft_strmapi
 - [ ] ft_striteri
