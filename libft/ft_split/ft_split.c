@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jkhasiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 22:46:14 by jkhasiza          #+#    #+#             */
+/*   Updated: 2023/09/11 22:46:16 by jkhasiza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -10,7 +22,6 @@ int	count_words(char const *s, char c)
 	i = 0;
 	count = 0;
 	counting = 0;
-
 	while (s[i])
 	{
 		if (s[i] != c && counting == 0)
@@ -35,34 +46,62 @@ int	length_of_next(int i, char const *s, char c)
 	return (end_of_next - i);
 }
 
+char	*get_next_word(char const *s, int start, int len)
+{
+	char	*word;
+	int		j;
+
+	word = malloc(sizeof(char) * (len + 1));
+	if (word == NULL)
+		return (NULL);
+	j = 0;
+	while (s[start] && j < len)
+	{
+		word[j] = s[start];
+		start++;
+		j++;
+	}
+	word[j] = '\0';
+	return (word);
+}
+
+void	free_result(int i, char **result)
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
+	{
+		free(result[j]);
+		j++;
+	}
+	free(result);
+}
 
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
-	int		count;
 	int		i;
-	int		len;
 	int		curr_word;
 
-	count = count_words(s, c);
-	// printf("Count of Words %d\n", count);
-	
-	// TODO TRIM STRING BEFORE
-	result = malloc(sizeof(char *) * count + 1);
+	result = malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (result == NULL)
+		return (NULL);
 	i = 0;
 	curr_word = 0;
 	while (s[i])
 	{
 		if (s[i] != c)
 		{
-			len = length_of_next(i, s, c);
-			// printf("\tLen of Word %d\n", len);
-			result[curr_word++] = "";
-			i += len;
+			result[curr_word] = get_next_word(s, i, length_of_next(i, s, c));
+			if (result[curr_word] == NULL)
+				return (free_result(curr_word, result), NULL);
+			curr_word++; 
+			i += length_of_next(i, s, c);
 		}
 		else
 			i++;
 	}
-	result[i] = '\0';
+	result[curr_word] = '\0';
 	return (result);
 }
