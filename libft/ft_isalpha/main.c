@@ -12,7 +12,7 @@ void	run_test(char ch, int exp)
 	res = ft_isalpha(ch);
 	if ((res == 0 && exp == 0) || (res > 0 && exp > 0))
 		printf("\n>> PASS: All good!\n\n");
-	else if (res > 0 && exp > 0)
+	else
 		printf("\n>> FAIL: Not good || \n\tEXP: '%d'; \n\tRES: '%d'\n\n", exp, res);	
 	return ;
 }
