@@ -1,18 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int	ft_strlen(char const *str)
-{
-	int	len;
-
-	len = 0;
-	while (*str != '\0')
-	{
-		str++;
-		len++;
-	}
-	return (len);
-}
+int	ft_strlen(char const *str);
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

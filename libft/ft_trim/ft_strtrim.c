@@ -27,20 +27,7 @@ int	chr_in(char c, char const *str)
 	return (0);
 }
 
-int	ft_strlen(char const *str)
-{
-	int	len;
-	int	i;
-
-	i = 0;
-	len = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-		len++;
-	}
-	return (len);
-}
+int	ft_strlen(char const *str);
 
 int	ft_strltrim_count(char const *s1, char const *set)
 {
