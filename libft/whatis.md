@@ -11,7 +11,7 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [ ] ft_bzero
 - [x] ft_isalpha
 - [x] ft_isdigit
-- [ ] ft_isalnum
+- [x] ft_isalnum
 - [ ] ft_isascii
 - [ ] ft_isprint
 - [ ] ft_strlen
