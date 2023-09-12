@@ -10,7 +10,7 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [ ] ft_atoi
 - [ ] ft_bzero
 - [x] ft_isalpha
-- [ ] ft_isdigit
+- [x] ft_isdigit
 - [ ] ft_isalnum
 - [ ] ft_isascii
 - [ ] ft_isprint
