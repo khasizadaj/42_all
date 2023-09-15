@@ -25,7 +25,7 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [ ] ft_toupper
 - [ ] ft_tolower
 - [x] ft_strchr
-- [ ] ft_strrchr
+- [x] ft_strrchr
 - [ ] ft_strncmp
 - [ ] ft_strnstr
 
