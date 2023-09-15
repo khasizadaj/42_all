@@ -29,8 +29,8 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [ ] ft_strncmp
 - [ ] ft_strnstr
 
-- [ ] ft_calloc (note: use `malloc`)
-- [ ] ft_strdup (note: use `malloc`)
+- [x] ft_calloc (note: use `malloc`)
+- [x] ft_strdup (note: use `malloc`)
 
 
 ### Part 2
