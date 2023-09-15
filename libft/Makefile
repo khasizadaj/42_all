@@ -17,6 +17,7 @@ SRCS := ft_bzero.c \
 	ft_strlen.c \
 	ft_strtrim.c \
 	ft_substr.c \
+	ft_tolower.c \
 	ft_toupper.c \
 
 OBJS := $(SRCS:%.c=%.o)
