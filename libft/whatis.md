@@ -27,7 +27,7 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [x] ft_strchr
 - [x] ft_strrchr
 - [x] ft_strncmp
-- [ ] ft_strnstr
+- [x] ft_strnstr
 
 - [x] ft_calloc (note: use `malloc`)
 - [x] ft_strdup (note: use `malloc`)
