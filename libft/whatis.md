@@ -16,15 +16,15 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [ ] ft_isprint
 - [x] ft_strlen
 - [x] ft_memset
-- [ ] ft_memchr
-- [ ] ft_memcmp
-- [ ] ft_memcpy
-- [ ] ft_memmove
+- [x] ft_memchr
+- [x] ft_memcmp
+- [x] ft_memcpy
+- [x] ft_memmove
 - [ ] ft_strlcpy
 - [ ] ft_strlcat
 - [ ] ft_toupper
 - [ ] ft_tolower
-- [ ] ft_strchr
+- [x] ft_strchr
 - [ ] ft_strrchr
 - [ ] ft_strncmp
 - [ ] ft_strnstr
