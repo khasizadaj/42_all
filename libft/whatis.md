@@ -8,14 +8,14 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 ### Part 1
 
 - [ ] ft_atoi
-- [ ] ft_bzero
+- [x] ft_bzero
 - [x] ft_isalpha
 - [x] ft_isdigit
 - [x] ft_isalnum
-- [ ] ft_isascii
+- [x] ft_isascii
 - [ ] ft_isprint
-- [ ] ft_strlen
-- [ ] ft_memset
+- [x] ft_strlen
+- [x] ft_memset
 - [ ] ft_memchr
 - [ ] ft_memcmp
 - [ ] ft_memcpy
