@@ -13,10 +13,14 @@ SRCS := ft_bzero.c \
 	ft_strlen.c \
 	ft_strtrim.c \
 	ft_substr.c \
+	main.c
 
 OBJS := $(SRCS:%.c=%.o)
 
 all: $(NAME)
+
+compile: $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o a.out
 
 re: fclean all
 
