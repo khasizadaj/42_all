@@ -21,6 +21,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strchr(const char *s, int c);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
+int             ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strdup(const char *s);
 char			*ft_strrchr(const char *s, int c);
 int				ft_strlen(char *str);

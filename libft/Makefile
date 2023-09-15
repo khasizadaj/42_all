@@ -3,6 +3,7 @@ CFLAGS := -Wall -Wextra -Werror
 NAME := libft.a
 SRCS := ft_bzero.c \
 	ft_isalnum.c \
+	ft_isalpha.c \
 	ft_isascii.c \
 	ft_isdigit.c \
 	ft_itoa.c \
@@ -17,6 +18,7 @@ SRCS := ft_bzero.c \
 	ft_strdup.c \
 	ft_strlcpy.c \
 	ft_strlcat.c \
+	ft_strncmp.c \
 	ft_strrchr.c \
 	ft_strlen.c \
 	ft_strtrim.c \

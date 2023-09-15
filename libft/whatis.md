@@ -20,13 +20,13 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [x] ft_memcmp
 - [x] ft_memcpy
 - [x] ft_memmove
-- [ ] ft_strlcpy
-- [ ] ft_strlcat
+- [x] ft_strlcpy
+- [x] ft_strlcat
 - [x] ft_toupper
 - [x] ft_tolower
 - [x] ft_strchr
 - [x] ft_strrchr
-- [ ] ft_strncmp
+- [x] ft_strncmp
 - [ ] ft_strnstr
 
 - [x] ft_calloc (note: use `malloc`)
