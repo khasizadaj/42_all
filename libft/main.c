@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main-ft_memcpy.c                                   :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:02:51 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/09/15 12:08:29 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:35:27 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ int	main()
 	char	*to_be_copied;
 	char	*exp_1;
 	int		n;
-	int		i;
 
 	to_be_copied = "123456789";
 	n = 10;
-	i = 0;
 	res_1 = malloc(sizeof(char) * n);
 
-	i = 0;
 	exp_1 = malloc(sizeof(char) * n);
 
 	ft_memcpy(res_1, to_be_copied, n);
