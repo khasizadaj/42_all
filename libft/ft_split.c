@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:46:14 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/09/11 22:46:16 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:48:04 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ char	**ft_split(char const *s, char c)
 		else
 			i++;
 	}
-	result[curr_word] = '\0';
+	result[curr_word] = NULL;
 	return (result);
 }
