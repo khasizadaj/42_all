@@ -6,11 +6,12 @@ SRCS := ft_bzero.c \
 	ft_isascii.c \
 	ft_isdigit.c \
 	ft_itoa.c \
+	ft_memcpy \
 	ft_memset.c \
 	ft_split.c \
 	ft_strlen.c \
 	ft_strtrim.c \
-	ft_substr.c
+	ft_substr.c \
 
 OBJS := $(SRCS:%.c=%.o)
 
