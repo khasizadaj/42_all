@@ -22,8 +22,8 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [x] ft_memmove
 - [ ] ft_strlcpy
 - [ ] ft_strlcat
-- [ ] ft_toupper
-- [ ] ft_tolower
+- [x] ft_toupper
+- [x] ft_tolower
 - [x] ft_strchr
 - [x] ft_strrchr
 - [ ] ft_strncmp
