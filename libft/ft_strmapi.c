@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 09:32:29 by codespace         #+#    #+#             */
-/*   Updated: 2023/09/16 10:12:27 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/16 18:35:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*res;
-	int		i;
+	size_t	i;
 
 	res = ft_calloc(ft_strlen((char *) s) + 1, sizeof(char));
 	if (res == NULL)

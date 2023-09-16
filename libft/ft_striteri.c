@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 09:32:29 by codespace         #+#    #+#             */
-/*   Updated: 2023/09/16 10:49:35 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/16 18:35:08 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_striteri(char const *s, void (*f)(unsigned int, char *))
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (i < ft_strlen((char *) s))
