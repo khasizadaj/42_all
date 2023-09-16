@@ -14,6 +14,7 @@ SRCS := ft_bzero.c \
 	ft_memchr.c \
 	ft_memset.c \
 	ft_putchar_fd.c \
+	ft_putstr_fd.c \
 	ft_split.c \
 	ft_strchr.c \
 	ft_strdup.c \
