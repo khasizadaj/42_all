@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 22:30:36 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/09/10 22:30:41 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/09/16 15:32:46 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	chr_in(char c, char const *str)
 {
@@ -27,8 +26,6 @@ int	chr_in(char c, char const *str)
 	return (0);
 }
 
-int	ft_strlen(char const *str);
-
 int	ft_strltrim_count(char const *s1, char const *set)
 {
 	int	i;
@@ -41,16 +38,16 @@ int	ft_strltrim_count(char const *s1, char const *set)
 	return (i);
 }
 
-int	ft_strrtrim_count(char const *s1, char const *set)
+int	ft_strrtrim_count(char const *s1, char const *set, int l_count)
 {
 	int	len;
 	int	i;
 
-	len = ft_strlen(s1);
+	len = ft_strlen((char *) s1);
 	if (len == 0)
 		return (0);
 	i = len - 1;
-	while (s1[i] && chr_in(s1[i], set) == 1)
+	while (s1[i] && chr_in(s1[i], set) == 1 && i > l_count - 1)
 	{
 		i--;
 	}
@@ -61,24 +58,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		l_count;
 	int		r_count;
-	char	*trimmed;
-	int		j;
-	int		i;
 
+	if (ft_strlen((char *) set) == 0)
+		return ((ft_substr(s1, 0, ft_strlen((char *) s1))));
 	l_count = ft_strltrim_count(s1, set);
-	r_count = ft_strrtrim_count(s1, set);
-	trimmed = malloc(sizeof(char) * (ft_strlen(s1) - l_count - r_count + 1));
-	if (trimmed == NULL)
-		return (NULL);
-	if (ft_strlen(s1) == 0)
-		return (trimmed);
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		if (i >= l_count && i <= (ft_strlen(s1) - 1 - r_count))
-			trimmed[j++] = s1[i];
-		i++;
-	}
-	return (trimmed);
+	r_count = ft_strrtrim_count(s1, set, l_count);
+	return (ft_substr(s1, l_count, ft_strlen((char *) s1) - l_count - r_count));
 }
