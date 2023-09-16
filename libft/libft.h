@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2023/09/16 12:08:58 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/16 17:19:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int				ft_isalnum(char c);
 int				ft_isalpha(char c);
 int				ft_isascii(int c);
 int				ft_isdigit(char c);
+int             ft_isprint(int c);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa(int n);
 void			*ft_memchr(const void *s, int c, size_t n);
