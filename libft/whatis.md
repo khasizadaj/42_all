@@ -13,7 +13,7 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [x] ft_isdigit
 - [x] ft_isalnum
 - [x] ft_isascii
-- [ ] ft_isprint
+- [x] ft_isprint
 - [x] ft_strlen
 - [x] ft_memset
 - [x] ft_memchr
@@ -45,7 +45,7 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [x] ft_putchar_fd
 - [x] ft_putstr_fd
 - [x] ft_putendl_fd
-- [ ] ft_putnbr_fd
+- [x] ft_putnbr_fd
 
 
 ### Bonus
