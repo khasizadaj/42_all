@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:46:14 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/09/15 10:48:04 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:38:07 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**ft_split(char const *s, char c)
 			result[curr_word] = get_next_word(s, i, length_of_next(i, s, c));
 			if (result[curr_word] == NULL)
 				return (free_result(curr_word, result), NULL);
-			curr_word++; 
+			curr_word++;
 			i += length_of_next(i, s, c);
 		}
 		else
