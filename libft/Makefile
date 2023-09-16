@@ -2,12 +2,14 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 NAME := libft.a
 SRCS := ft_bzero.c \
+	ft_atoi.c \
 	ft_isalnum.c \
 	ft_isalpha.c \
 	ft_isascii.c \
 	ft_isdigit.c \
 	ft_isprint.c \
 	ft_itoa.c \
+	ft_isspace.c \
 	ft_calloc.c \
 	ft_memcmp.c \
 	ft_memcpy.c \
