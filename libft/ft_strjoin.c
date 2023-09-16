@@ -12,7 +12,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	len_1 = ft_strlen(s1);
 	len_2 = ft_strlen(s2);
-	joined = malloc(sizeof(char) * (len_1 + len_2));
+	joined = malloc(sizeof(char) * (len_1 + len_2 + 1));
+	if (joined == NULL)
+		return (NULL);
 	i = -1;
 	while (s1[++i] != '\0')
 	{
@@ -23,5 +25,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	{
 		joined[len_1 + i] = s2[i];
 	}
+	joined[len_1 + i] = '\0';
 	return (joined);
 }
