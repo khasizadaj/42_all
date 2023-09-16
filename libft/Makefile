@@ -37,23 +37,29 @@ SRCS := ft_bzero.c \
 	ft_tolower.c \
 	ft_toupper.c \
 
+BONUS_SRCS := ft_lstnew.c
+
 OBJS := $(SRCS:%.c=%.o)
+BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
 
 all: $(NAME)
+
+$(NAME): $(OBJS)
+	ar -rcs $(NAME) $(OBJS)
+
+bonus: $(BONUS_OBJS) $(OBJS)
+	ar -rcs $(NAME) $^
 
 compile: $(NAME)
 	$(CC) $(CFLAGS) $(OBJS) -o a.out
 
 re: fclean all
 
-$(NAME): $(OBJS)
-	ar -rcs $(NAME) $(OBJS) $^
-
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
