@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 12:09:26 by codespace         #+#    #+#             */
-/*   Updated: 2023/09/16 12:25:59 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/16 12:54:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	ft_putstr_fd(ft_strjoin(s, "\n"), fd);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }
