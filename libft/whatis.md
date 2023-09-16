@@ -7,7 +7,7 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 
 ### Part 1
 
-- [ ] ft_atoi
+- [x] ft_atoi
 - [x] ft_bzero
 - [x] ft_isalpha
 - [x] ft_isdigit
