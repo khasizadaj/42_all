@@ -41,7 +41,7 @@ link to pdf: https://cdn.intra.42.fr/pdf/pdf/101362/en.subject.pdf
 - [x] ft_split
 - [x] ft_itoa
 - [x] ft_strmapi
-- [ ] ft_striteri
+- [x] ft_striteri
 - [ ] ft_putchar_fd
 - [ ] ft_putstr_fd
 - [ ] ft_putendl_fd
