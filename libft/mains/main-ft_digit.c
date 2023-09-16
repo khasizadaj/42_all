@@ -10,7 +10,7 @@ void	run_test(char ch, int exp)
 	printf("CHAR: '%c'\n", ch);
 	printf("EXP: '%d'\n", exp);
 	res = ft_isdigit(ch);
-	if ((res == 0 && exp == 0) || (res > 0 && exp > 0))
+	if (res == exp)
 		printf("\n>> PASS: All good!\n\n");
 	else
 		printf("\n>> FAIL: Not good || \n\tEXP: '%d'; \n\tRES: '%d'\n\n", exp, res);	
@@ -36,7 +36,7 @@ int	main()
     char ch_3;
 	int exp_3;
 
-	ch_3 = '/';
+	ch_3 = '7';
 	exp_3 = isdigit(ch_3);
 	run_test(ch_3, exp_3);
 }

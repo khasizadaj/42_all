@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2023/09/16 17:19:26 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/16 17:41:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <fcntl.h>
 
 void			ft_bzero(void *s, size_t n);
-int				ft_isalnum(char c);
-int				ft_isalpha(char c);
+int				ft_isalnum(int c);
+int				ft_isalpha(int c);
 int				ft_isascii(int c);
-int				ft_isdigit(char c);
+int				ft_isdigit(int c);
 int             ft_isprint(int c);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa(int n);
