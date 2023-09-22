@@ -6,14 +6,14 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:19:15 by codespace         #+#    #+#             */
-/*   Updated: 2023/09/16 18:20:24 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/22 17:08:43 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isspace(int c)
 {
 	if ((char) c != '\f' && (char) c != '\n' && (char) c != '\r'
-		&& (char) c != '\t' && (char) c != '\v' && (char) c != 32 
+		&& (char) c != '\t' && (char) c != '\v' && (char) c != 32
 		&& (char) c != ' ')
 		return (0);
 	return (1);
