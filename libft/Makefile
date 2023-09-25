@@ -9,7 +9,6 @@ SRCS := ft_bzero.c \
 	ft_isdigit.c \
 	ft_isprint.c \
 	ft_itoa.c \
-	ft_isspace.c \
 	ft_calloc.c \
 	ft_memcmp.c \
 	ft_memcpy.c \
