@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	count_words(char const *s, char c)
 {
@@ -46,25 +45,6 @@ int	length_of_next(int i, char const *s, char c)
 	return (end_of_next - i);
 }
 
-char	*get_next_word(char const *s, int start, int len)
-{
-	char	*word;
-	int		j;
-
-	word = malloc(sizeof(char) * (len + 1));
-	if (word == NULL)
-		return (NULL);
-	j = 0;
-	while (s[start] && j < len)
-	{
-		word[j] = s[start];
-		start++;
-		j++;
-	}
-	word[j] = '\0';
-	return (word);
-}
-
 void	free_result(int i, char **result)
 {
 	int	j;
@@ -81,7 +61,7 @@ void	free_result(int i, char **result)
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
-	int		i;
+	unsigned int		i;
 	int		curr_word;
 
 	result = malloc(sizeof(char *) * (count_words(s, c) + 1));
@@ -93,7 +73,7 @@ char	**ft_split(char const *s, char c)
 	{
 		if (s[i] != c)
 		{
-			result[curr_word] = get_next_word(s, i, length_of_next(i, s, c));
+			result[curr_word] = ft_substr(s, i, length_of_next(i, s, c));
 			if (result[curr_word] == NULL)
 				return (free_result(curr_word, result), NULL);
 			curr_word++;
