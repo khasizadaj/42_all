@@ -58,7 +58,7 @@ $(NAME): $(OBJS)
 	ranlib $(NAME)
 
 bonus: $(BONUS_OBJS)
-	ar -rcs $(NAME) $^
+	ar -rcs $(NAME) $(BONUS_OBJS)
 	ranlib $(NAME)
 
 re: fclean all
