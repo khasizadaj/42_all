@@ -30,3 +30,9 @@ Write a library that contains `ft_printf()`, a function that will mimic the orig
     - Don’t implement the buffer management of the original `printf()`.
     - Compare your implementation against the original `printf()`.
     - Use the command `ar` to create your library. Using the `libtool` command is forbidden.
+
+## How to test
+
+- Run `make` command
+- Link archive to new compilation that uses functions inside the library
+    - See this link: https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_C_libraries.html
