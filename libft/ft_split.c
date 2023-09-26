@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:46:14 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/09/16 18:38:07 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/26 17:17:59 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	free_result(int i, char **result)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	unsigned int		i;
-	int		curr_word;
+	char			**result;
+	unsigned int	i;
+	int				curr_word;
 
 	result = malloc(sizeof(char *) * (count_words(s, c) + 1));
 	if (result == NULL)
