@@ -1,6 +1,8 @@
-#include "./libft/libft.h"
+#include "ft_printf.h"
 
 int main(void)
 {
-    ft_putstr_fd("HELLOhagshg\n", 1);
+    ft_printf("Hello %s hh %c n=%d\n", "Hey", 'z', -125);
+    printf("i=%i\n", -124);
+    return (0);
 }
