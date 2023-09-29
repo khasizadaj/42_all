@@ -31,7 +31,9 @@ re: fclean all
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	(cd $(LIBFT_PATH) && $(MAKE) clean)
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
+	(cd $(LIBFT_PATH) && $(MAKE) fclean)
 	rm -f $(NAME)
