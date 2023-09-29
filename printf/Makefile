@@ -2,6 +2,7 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror -I.
 NAME := libftprintf.a
 LIBFT_PATH = ./libft
+LIBFT_NAME = libft.a
 
 SRCS := ft_printf.c
 # BONUS_SRCS := bonus.c
@@ -14,9 +15,12 @@ OBJS := $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	(cd $(LIBFT_PATH) && $(MAKE))
-	ar -rcs $(NAME) $(OBJS)
+	@${MAKE} -C ./libft --no-print-directory
+	cp ./libft/libft.a $(NAME)
+	ar -rcs $(NAME) $(OBJS) 
 	ranlib $(NAME)
+
+# (cd $(LIBFT_PATH) --no-print-directory && $(MAKE))
 
 # bonus: $(BONUS_OBJS)
 # 	cd ./libft
