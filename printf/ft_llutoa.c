@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ulltoa.c                                        :+:      :+:    :+:   */
+/*   ft_llutoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:34:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/10/01 19:32:30 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:50:44 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	count_digits(int n)
 {
 	int	count;
 
+	if (n < 0)
+		n *= -1;
 	count = 1;
 	n = n / 10;
 	while (n != 0)
@@ -23,23 +25,7 @@ int	count_digits(int n)
 		count++;
 		n = n / 10;
 	}
-	if (n < 0)
-		count++;
 	return (count);
-}
-
-char	*allocate_memory(int n)
-{
-	int		size;
-	char	*str;
-
-	size = count_digits(n);
-	if (n < 0)
-		size++;
-	str = malloc(sizeof(char) * size + 1);
-	if (str == NULL)
-		return (NULL);
-	return (str);
 }
 
 int	get_size(int n)
@@ -52,14 +38,14 @@ int	get_size(int n)
 	return (size);
 }
 
-char	*ft_llutoa(unsigned long long n)
+char	*ft_lldtoa(int n)
 {
 	char			*str;
 	int				size;
 	int				i;
 
 	size = get_size(n);
-	str = malloc(sizeof(char) * size + 1);
+	str = ft_calloc(sizeof(char), size + 1);
 	if (str == NULL)
 		return (NULL);
 	if (n < 0)

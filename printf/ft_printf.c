@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:43:16 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/01 19:52:19 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/01 23:26:20 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,53 +51,61 @@ void    ft_putmemory(void *arg)
 		return ;
 	write(1, "0x", 2);
 	write(1, hex, ft_strlen(hex));
+	free(hex);
 }
 
 int	get_length(char type, void *arg)
 {
-	int		len;
 	char	*hex;
+	char	*num_as_str;
+	int		len;
 
 	len = 1;
-	hex = "";
-	if (!arg)
-		len = 6;
+	if (type == 's')
+		return (ft_strlen((char *) arg));
+	else if (chr_in(type, "diu"))
 	{
-		if (type == 's')
-			len = ft_strlen((char *) arg);
-		else if (chr_in(type, "diu"))
-			len = ft_strlen(ft_llutoa(*((unsigned long long *) &arg)));
-		else if (chr_in(type, "pxX"))
-		{
-			hex = nbr_to_hex((unsigned long long) arg, 0);
-			if (!hex)
-				return (0);
-			len = ft_strlen(hex);
-			if (type == 'p')
-				len += 2;
-		}
-		else if (chr_in(type, "c%"))
-			len = 1;
+		num_as_str = ft_lldtoa(*((int *) &arg));
+		if (!num_as_str)
+			return (0);
+		len = ft_strlen(num_as_str);
+		return (free(num_as_str), len);
 	}
-	return (len);
+	else if (chr_in(type, "pxX"))
+	{
+		hex = nbr_to_hex((unsigned long long) arg, 0);
+		if (!hex)
+			return (0);
+		len = ft_strlen(hex);
+		if (type == 'p')
+			return (free(hex), len + 2);
+		return (free(hex), len);
+	}
+	return (1);
 }
 
 int	dispatch(char type, void *arg)
 {
-	if (arg == NULL)
-		ft_putstr_fd("(null)", 1);
 	if (type == 's')
+	{
+		if (arg == NULL && type == 's')
+			return (ft_putstr_fd("(null)", 1), 6);
 		ft_putstr_fd((char *) arg, 1);
+	}
 	else if (type == 'c')
 		ft_putchar_fd(*((char *) &arg), 1);
 	else if (type == 'd' || type == 'i')
 		ft_putnbr_fd(*((int *) &arg), 1);
 	else if (type == 'p')
+	{
+		if (arg == NULL && type == 'p')
+			return (ft_putstr_fd("(nil)", 1), 5);
 		ft_putmemory(arg);
+	}
 	else if (type == 'u')
 		ft_putuint(*(unsigned int *) &arg, 1);
 	else if (type == 'x')
-		ft_puthexlower_fd(arg, 0);
+		ft_puthexlower_fd(arg, 1);
 	else if (type == 'X')
 		ft_puthexupper_fd(arg, 1);
 	else if (type == '%')
@@ -109,7 +117,6 @@ int	ft_printf(const char *input, ...)
 {
 	va_list	args;
 	int		i;
-	void	*next_arg;
 	int		written;
 
 	if (!input)
@@ -121,19 +128,69 @@ int	ft_printf(const char *input, ...)
 	{
 		if (is_placeholder((char *) &input[i]))
 		{
-			next_arg = va_arg(args, void *);
-			written += dispatch(input[i + 1], next_arg);
+			written += dispatch(input[i + 1], va_arg(args, void *));
 			i += 2;
 		}
 		else
 		{
-			ft_putchar_fd(input[++i], 1);
+			ft_putchar_fd(input[i++], 1);
 			written++;
 		}
 	}
 	va_end(args);
 	return (written);
 }
+
+// void	dispatch_2(char type, va_list args, int *count)
+// {
+// 	if (type == 's')
+// 	{
+// 		ft_putstr_count(va_arg(args, char *), count);
+// 	}
+// 	else if (type == 'c')
+// 		ft_putchar_fd(*((char *) &arg), 1);
+// 	else if (type == 'd' || type == 'i')
+// 		ft_putnbr_fd(*((int *) &arg), 1);
+// 	else if (type == 'p')
+// 		ft_putmemory(arg);
+// 	else if (type == 'u')
+// 		ft_putuint(*(unsigned int *) &arg, 1);
+// 	else if (type == 'x')
+// 		ft_puthexlower_fd(arg, 0);
+// 	else if (type == 'X')
+// 		ft_puthexupper_fd(arg, 1);
+// 	else if (type == '%')
+// 		ft_putchar_fd('%', 1);
+// 	return (get_length(type, arg));
+// }
+
+// int	ft_printf(const char *input, ...)
+// {
+// 	va_list	args;
+// 	int		i;
+// 	int		written;
+
+// 	if (!input)
+// 		return (0);
+// 	va_start(args, input);
+// 	i = 0;
+// 	written = 0;
+// 	while (input[i])
+// 	{
+// 		if (is_placeholder((char *) &input[i]))
+// 		{
+// 			written += dispatch_2(input[i + 1], args, &written);
+// 			i += 2;
+// 		}
+// 		else
+// 		{
+// 			ft_putchar_fd(input[i++], 1);
+// 			written++;
+// 		}
+// 	}
+// 	va_end(args);
+// 	return (written);
+// }
 
 char    *strjoin_on_steroids(int n, ...)
 {
