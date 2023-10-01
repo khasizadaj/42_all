@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:34:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/09/16 17:16:09 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/01 18:41:01 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*ft_itoa(int n)
 {
 	char			*str;
 	int				size;
-	long long		big_number;
+	unsigned long long	big_number;
 	int				i;
 
 	size = get_size(n);

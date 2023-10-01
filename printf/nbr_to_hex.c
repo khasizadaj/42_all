@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nbr_to_hex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:40:30 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/01 14:44:53 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/01 18:12:35 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*build_hex_string(char reversed_result[17], int size)
 	return (final_result);
 }
 
-char	*nbr_to_hex(unsigned long long n)
+char	*nbr_to_hex(unsigned long long n, int lowercase)
 {
 	char	*hex_string;
 	char	result[17];
@@ -43,7 +43,10 @@ char	*nbr_to_hex(unsigned long long n)
 		result[index++] = '0';
 	while (n)
 	{
-		result[index++] = hex_string[n % 16];
+		if (lowercase == 0)
+			result[index++] = ft_tolower(hex_string[n % 16]);
+		else if (lowercase == 1)
+			result[index++] = ft_toupper(hex_string[n % 16]);
 		n /= 16;
 	}
 	result[index] = '\0';
