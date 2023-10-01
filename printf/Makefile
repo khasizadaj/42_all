@@ -4,7 +4,7 @@ NAME := libftprintf.a
 LIBFT_PATH = ./libft
 LIBFT_NAME = libft.a
 
-SRCS := ft_printf.c
+SRCS := ft_printf.c nbr_to_hex.c
 # BONUS_SRCS := bonus.c
 
 OBJS := $(SRCS:%.c=%.o)
