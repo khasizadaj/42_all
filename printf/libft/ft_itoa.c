@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:34:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/10/01 18:41:01 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:42:50 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*ft_itoa(int n)
 {
 	char			*str;
 	int				size;
-	unsigned long long	big_number;
+	long long		big_number;
 	int				i;
 
 	size = get_size(n);
