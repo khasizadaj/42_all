@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 11:23:32 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/01 20:14:41 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 20:55:36 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,5 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s)
-	{
-		write(fd, "(null)", 6);
-		return ;
-	}
 	write(fd, s, ft_strlen(s));
 }

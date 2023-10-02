@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:43:16 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/01 23:26:20 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:18:11 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_placeholder(char *str)
 {
 	char    *placeholders;
 
-	placeholders = "scdpiuxX\%";
+	placeholders = "scdpiuxX%";
 	if (str[0] == '%' && chr_in(str[1], placeholders))
 		return (1);
 	return (0);
@@ -46,7 +46,7 @@ void    ft_putmemory(void *arg)
 	if (arg == NULL)
 		return ;
 	decimal_value = (unsigned long long) arg;
-	hex = nbr_to_hex(decimal_value, 0);
+	hex = llu_to_hex(decimal_value, 0);
 	if (!hex)
 		return ;
 	write(1, "0x", 2);
@@ -54,41 +54,73 @@ void    ft_putmemory(void *arg)
 	free(hex);
 }
 
+int	get_length_di(int n)
+{
+	char	*num_as_str;
+	int		len;
+
+	num_as_str = ft_lldtoa(n);
+	if (!num_as_str)
+		return (0);
+	len = ft_strlen(num_as_str);
+	return (free(num_as_str), len);
+}
+
+int	get_length_u(unsigned int n)
+{
+	char	*num_as_str;
+	int		len;
+
+	num_as_str = ft_utoa(n);
+	if (!num_as_str)
+		return (0);
+	len = ft_strlen(num_as_str);
+	return (free(num_as_str), len);
+}
+
+int	get_length_p(unsigned long long n)
+{
+	char	*hex;
+	int		len;
+
+	hex = llu_to_hex(n, 0);
+	if (!hex)
+		return (0);
+	len = ft_strlen(hex);
+	return (free(hex), len + 2);
+}
+
+
 int	get_length(char type, void *arg)
 {
 	char	*hex;
-	char	*num_as_str;
 	int		len;
 
 	len = 1;
 	if (type == 's')
 		return (ft_strlen((char *) arg));
-	else if (chr_in(type, "diu"))
+	else if (type == 'u')
+		return (get_length_u(*((unsigned int *) &arg)));
+	else if (chr_in(type, "di"))
+		return (get_length_di(*((int *) &arg)));
+	else if (chr_in(type, "xX"))
 	{
-		num_as_str = ft_lldtoa(*((int *) &arg));
-		if (!num_as_str)
-			return (0);
-		len = ft_strlen(num_as_str);
-		return (free(num_as_str), len);
-	}
-	else if (chr_in(type, "pxX"))
-	{
-		hex = nbr_to_hex((unsigned long long) arg, 0);
+		hex = u_to_hex(*((unsigned int *) &arg), 0);
 		if (!hex)
 			return (0);
 		len = ft_strlen(hex);
-		if (type == 'p')
-			return (free(hex), len + 2);
 		return (free(hex), len);
 	}
-	return (1);
+	else if (type == 'p')
+		return (get_length_p(*((unsigned long long *) &arg)));
+	return (len);
 }
 
 int	dispatch(char type, void *arg)
 {
 	if (type == 's')
 	{
-		if (arg == NULL && type == 's')
+		if (arg == NULL)
 			return (ft_putstr_fd("(null)", 1), 6);
 		ft_putstr_fd((char *) arg, 1);
 	}
@@ -98,101 +130,60 @@ int	dispatch(char type, void *arg)
 		ft_putnbr_fd(*((int *) &arg), 1);
 	else if (type == 'p')
 	{
-		if (arg == NULL && type == 'p')
+		if (arg == NULL)
 			return (ft_putstr_fd("(nil)", 1), 5);
 		ft_putmemory(arg);
 	}
 	else if (type == 'u')
 		ft_putuint(*(unsigned int *) &arg, 1);
 	else if (type == 'x')
-		ft_puthexlower_fd(arg, 1);
+		ft_puthexlower_fd(*(unsigned int *) &arg, 1);
 	else if (type == 'X')
-		ft_puthexupper_fd(arg, 1);
-	else if (type == '%')
-		ft_putchar_fd('%', 1);
+		ft_puthexupper_fd(*(unsigned int *) &arg, 1);
 	return (get_length(type, arg));
 }
 
-int	ft_printf(const char *input, ...)
+void	format(va_list args, const char *input, int *count)
 {
-	va_list	args;
-	int		i;
-	int		written;
-
-	if (!input)
-		return (0);
-	va_start(args, input);
+	int	i;
+	
 	i = 0;
-	written = 0;
 	while (input[i])
 	{
 		if (is_placeholder((char *) &input[i]))
 		{
-			written += dispatch(input[i + 1], va_arg(args, void *));
+			if (input[i + 1] != '%')
+				*count += dispatch(input[i + 1], va_arg(args, void *));
+			else
+			{
+				ft_putchar_fd('%', 1);
+				*count = (*count + 1);
+			}
 			i += 2;
 		}
 		else
 		{
 			ft_putchar_fd(input[i++], 1);
-			written++;
+			*count = (*count + 1);
 		}
 	}
+}
+
+int	ft_printf(const char *input, ...)
+{
+	va_list	args;
+	int		written;
+
+	if (!input)
+		return (0);
+	va_start(args, input);
+	written = 0; 
+	format(args, input, &written);
 	va_end(args);
 	return (written);
 }
 
-// void	dispatch_2(char type, va_list args, int *count)
-// {
-// 	if (type == 's')
-// 	{
-// 		ft_putstr_count(va_arg(args, char *), count);
-// 	}
-// 	else if (type == 'c')
-// 		ft_putchar_fd(*((char *) &arg), 1);
-// 	else if (type == 'd' || type == 'i')
-// 		ft_putnbr_fd(*((int *) &arg), 1);
-// 	else if (type == 'p')
-// 		ft_putmemory(arg);
-// 	else if (type == 'u')
-// 		ft_putuint(*(unsigned int *) &arg, 1);
-// 	else if (type == 'x')
-// 		ft_puthexlower_fd(arg, 0);
-// 	else if (type == 'X')
-// 		ft_puthexupper_fd(arg, 1);
-// 	else if (type == '%')
-// 		ft_putchar_fd('%', 1);
-// 	return (get_length(type, arg));
-// }
-
-// int	ft_printf(const char *input, ...)
-// {
-// 	va_list	args;
-// 	int		i;
-// 	int		written;
-
-// 	if (!input)
-// 		return (0);
-// 	va_start(args, input);
-// 	i = 0;
-// 	written = 0;
-// 	while (input[i])
-// 	{
-// 		if (is_placeholder((char *) &input[i]))
-// 		{
-// 			written += dispatch_2(input[i + 1], args, &written);
-// 			i += 2;
-// 		}
-// 		else
-// 		{
-// 			ft_putchar_fd(input[i++], 1);
-// 			written++;
-// 		}
-// 	}
-// 	va_end(args);
-// 	return (written);
-// }
-
-char    *strjoin_on_steroids(int n, ...)
+char    *ft_strjoin_on_steroids(int n, ...)
 {
 	va_list list;
 	char    *result;
