@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:34:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/10/02 19:02:46 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:26:59 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	get_size(int n)
 	return (size);
 }
 
-char	*ft_lldtoa(int n)
+char	*ft_dtoa(int n)
 {
 	char			*str;
 	int				size;
