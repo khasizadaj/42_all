@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 21:31:36 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/10/02 21:32:09 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:39:48 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_putuint(unsigned int n, int fd)
 	}
 }
 
-void    ft_putmemory(void *arg)
+void	ft_putmemory(void *arg)
 {
-	unsigned long long  decimal_value;
+	unsigned long long	decimal_value;
 	char				*hex;
 
 	if (arg == NULL)

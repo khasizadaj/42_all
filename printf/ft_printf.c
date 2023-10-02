@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:43:16 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/02 21:34:07 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:39:00 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_placeholder(char *str)
 {
-	char    *placeholders;
+	char	*placeholders;
 
 	placeholders = "scdpiuxX%";
 	if (str[0] == '%' && chr_in(str[1], placeholders))
@@ -77,7 +77,7 @@ int	dispatch(char type, void *arg)
 void	format(va_list args, const char *input, int *count)
 {
 	int	i;
-	
+
 	i = 0;
 	while (input[i])
 	{
@@ -108,7 +108,7 @@ int	ft_printf(const char *input, ...)
 	if (!input)
 		return (0);
 	va_start(args, input);
-	written = 0; 
+	written = 0;
 	format(args, input, &written);
 	va_end(args);
 	return (written);

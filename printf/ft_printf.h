@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:10:18 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/10/02 21:31:59 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:39:23 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,4 @@ int		get_length_u(unsigned int n);
 int		get_length_p(unsigned long long n);
 int		get_length(char type, void *arg);
 void	ft_putuint(unsigned int n, int fd);
-void    ft_putmemory(void *arg);
+void	ft_putmemory(void *arg);

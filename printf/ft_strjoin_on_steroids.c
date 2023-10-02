@@ -6,22 +6,22 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 21:33:38 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/10/02 21:33:57 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:40:59 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char    *ft_strjoin_on_steroids(int n, ...)
+char	*ft_strjoin_on_steroids(int n, ...)
 {
-	va_list list;
-	char    *result;
-	char    *prov;
+	va_list	list;
+	char	*result;
+	char	*prov;
+	int		i;
 
 	va_start(list, n);
-
 	result = "";
-	int i = 0;
+	i = 0;
 	while (i < n)
 	{
 		prov = va_arg(list, char *);
