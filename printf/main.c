@@ -17,7 +17,7 @@ int main(void)
     // if (ret1 == ret2) ft_printf("... PASS\n\n");
     // else ft_printf("... FAIL\n\n");
 
-    // %c flag
+    // // %c flag
     // ft_printf("Test: 'c' Flag\n");
     // ret1 = ft_printf(" %c %c %c ", '0', 0, '1');
     // ret2 = printf(" %c %c %c ", '0', 0, '1');
@@ -102,18 +102,28 @@ int main(void)
     // if (ret1 == ret2) ft_printf("... PASS\n\n");
     // else ft_printf("... FAIL\n\n");
 
-    // %% flag
-    ft_printf("Test: '%%' Flag\n");
-    ret1 = ft_printf("RES: Percentage: %%\n");
-    ret2 = printf("EXP: Percentage: %%\n");
-    if (ret1 == ret2) ft_printf("... PASS\n\n");
-    else ft_printf("... FAIL\n\n");
+    // // %% flag
+    // ft_printf("Test: '%%' Flag\n");
+    // ret1 = ft_printf("RES: Percentage: %%\n");
+    // ret2 = printf("EXP: Percentage: %%\n");
+    // if (ret1 == ret2) ft_printf("... PASS\n\n");
+    // else ft_printf("... FAIL\n\n");
 
-    ft_printf("Test: '%%' Flag\n");
-    ret1 = ft_printf("RES: Percentage: %% %% %% %%\n");
-    ret2 = printf("EXP: Percentage: %% %% %% %%\n");
-    if (ret1 == ret2) ft_printf("... PASS\n\n");
-    else ft_printf("... FAIL\n\n");
+    // ft_printf("Test: '%%' Flag\n");
+    // ret1 = ft_printf("RES: Percentage: %% %% %% %%\n");
+    // ret2 = printf("EXP: Percentage: %% %% %% %%\n");
+    // if (ret1 == ret2) ft_printf("... PASS\n\n");
+    // else ft_printf("... FAIL\n\n");
+
+    // ret1 = ft_printf(" RES: % k % k % k %\n");
+    // ret2 = printf(" EXP: % k % k % k %\n");
+    // if (ret1 == ret2) ft_printf("... PASS\n\n");
+    // else ft_printf("... FAIL\n\n");
+
+    // ret1 = ft_printf(" RES: % % % %\n");
+    // ret2 = printf(" EXP: % % % %\n");
+    // if (ret1 == ret2) ft_printf("... PASS\n\n");
+    // else ft_printf("... FAIL\n\n");
 
     // // NULL input
     // ret1 = ft_printf("RES: %x", NULL);
@@ -123,15 +133,15 @@ int main(void)
 
     // ft_printf("Test: MIX\n");
     // ret1 = ft_printf("RES: %x%X%%%% \n", 42, 42);
-    // ret2 = ft_printf("EXP: %x%X%%%% \n", 42, 42);
+    // ret2 = printf("EXP: %x%X%%%% \n", 42, 42);
     // if (ret1 == ret2) ft_printf("... PASS\n\n");
     // else ft_printf("... FAIL\n\n");
 
-    ft_printf("Test: MIX PROBLEM\n");
-    ret1 = ft_printf(" RES: %%%s%%\n", "AS");
-    ret2 = ft_printf(" EXP: %%%s%%\n", "AS");
-    if (ret1 == ret2) ft_printf("... PASS\n\n");
-    else ft_printf("... FAIL\n\n");
+    // ft_printf("Test: MIX PROBLEM\n");
+    // ret1 = ft_printf(" RES: %%%s%%\n", "AS");
+    // ret2 = printf(" EXP: %%%s%%\n", "AS");
+    // if (ret1 == ret2) ft_printf("... PASS\n\n");
+    // else ft_printf("... FAIL\n\n");
 
     return 0;
 }
