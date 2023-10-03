@@ -143,5 +143,20 @@ int main(void)
     // if (ret1 == ret2) ft_printf("... PASS\n\n");
     // else ft_printf("... FAIL\n\n");
 
+    ft_printf("Test: percentage at the end\n");
+    ret1 = ft_printf("\n RES: xxx%");
+    ret2 = printf("\n EXP: xxx%");
+    printf("\n RES: %d\n", ret1);
+    printf(" EXP: %d\n", ret2);
+    if (ret1 == ret2) ft_printf("... PASS\n\n");
+    else ft_printf("... FAIL\n\n");
+
+    // ft_printf("Test: NULL\n");
+    // ret1 = ft_printf(NULL);
+    // ret2 = printf(NULL);
+    // if (ret1 == ret2) ft_printf("... PASS\n\n");
+    // else ft_printf("... FAIL\n\n");
+
+
     return 0;
 }

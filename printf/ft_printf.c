@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:43:16 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/02 21:39:00 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/03 22:42:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ void	format(va_list args, const char *input, int *count)
 		}
 		else
 		{
+			if (input[i + 1] == '\0')
+			{
+				*count = -1;
+				return ;
+			}
 			ft_putchar_fd(input[i++], 1);
 			*count = (*count + 1);
 		}
@@ -106,7 +111,7 @@ int	ft_printf(const char *input, ...)
 	int		written;
 
 	if (!input)
-		return (0);
+		return (-1);
 	va_start(args, input);
 	written = 0;
 	format(args, input, &written);
