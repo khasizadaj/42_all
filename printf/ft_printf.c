@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:43:16 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/04 16:15:15 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/04 16:25:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	dispatch(char type, void *arg)
 	}
 	else if (type == 'c')
 		ft_putchar_fd(*((char *) &arg), 1);
+	else if (type == '%')
+		ft_putchar_fd('%', 1);
 	else if (type == 'd' || type == 'i')
 		ft_putnbr_fd(*((int *) &arg), 1);
 	else if (type == 'p')
@@ -76,20 +78,18 @@ int	dispatch(char type, void *arg)
 
 void	format(va_list args, const char *input, int *count)
 {
-	int	i;
+	int		i;
+	void *	arg;
 
 	i = 0;
+	arg = NULL;
 	while (input[i])
 	{
 		if (is_placeholder((char *) &input[i]))
 		{
 			if (input[i + 1] != '%')
-				*count += dispatch(input[i + 1], va_arg(args, void *));
-			else
-			{
-				ft_putchar_fd('%', 1);
-				*count = (*count + 1);
-			}
+				arg = va_arg(args, void *);
+			*count += dispatch(input[i + 1], arg);
 			i += 2;
 		}
 		else
