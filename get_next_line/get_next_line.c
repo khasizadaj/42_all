@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/04 17:33:54 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/04 20:36:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ read from a file descriptor.
 
 char	*get_next_line(int fd)
 {
-	printf("hi, %d", fd);
+	printf("GNL, biach!!! %d\n", fd);
 	return ("");
 }

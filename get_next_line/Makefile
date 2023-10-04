@@ -1,7 +1,7 @@
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -I. -D BUFFER_SIZE=10
 NAME := get_next_line.a
-SRCS := get_next_line.c get_next_line_utils.c
+SRCS := get_next_line.c get_next_line_utils.c ft_atoi.c
 
 OBJS := $(SRCS:%.c=%.o)
 BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
