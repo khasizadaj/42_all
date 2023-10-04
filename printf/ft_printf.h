@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include <stdarg.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
+# include "./libft/libft.h"
+# include <stdarg.h>
 
 int		chr_in(char c, char const *str);
 int		ft_printf(const char *input, ...);
@@ -28,3 +31,5 @@ int		get_length_p(unsigned long long n);
 int		get_length(char type, void *arg);
 void	ft_putuint(unsigned int n, int fd);
 void	ft_putmemory(void *arg);
+
+#endif
