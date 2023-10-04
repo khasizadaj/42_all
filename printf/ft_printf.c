@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:43:16 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/03 22:42:45 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:15:15 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	format(va_list args, const char *input, int *count)
 		}
 		else
 		{
-			if (input[i + 1] == '\0')
+			if (input[i] == '%' && input[i + 1] == '\0')
 			{
 				*count = -1;
 				return ;

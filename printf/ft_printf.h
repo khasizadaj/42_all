@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:10:18 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/10/02 21:39:23 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:08:24 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
+#include <stdarg.h>
 
 int		chr_in(char c, char const *str);
 int		ft_printf(const char *input, ...);
