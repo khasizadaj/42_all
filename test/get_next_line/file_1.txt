@@ -1,0 +1,6 @@
+read000
+exactly
+0000000
+0buffer
+size000
+0000000
