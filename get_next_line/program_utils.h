@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   program_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 17:29:57 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 20:38:10 by codespace        ###   ########.fr       */
+/*   Created: 2023/10/05 16:29:38 by codespace         #+#    #+#             */
+/*   Updated: 2023/10/05 20:15:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef PROGRAM_UTILS_H
+# define PROGRAM_UTILS_H
 
 # include <stdio.h>
 # include <errno.h>
@@ -20,18 +20,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_fd
-{
-	int			fd;
-	struct s_fd	*next;
-}	t_fd;
-
 char    *get_next_line(int fd);
+size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
-void	ft_lstadd_back(t_fd **lst, t_fd *new);
-void	ft_lstclear(t_fd **lst, void (*del)(void *));
-t_fd	*lstget(t_fd **lst, int fd);
-t_fd	*ft_lstnew(int fd);
-
+void	ft_bzero(void *s, size_t n);
+void	*ft_memset(void *s, int c, size_t n);
+int		ft_atoi(const char *nptr);
 
 #endif

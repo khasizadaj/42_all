@@ -6,17 +6,12 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:44:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/04 21:27:41 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/05 20:47:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(const char *s);
-int		ft_atoi(const char *nptr);
-void	*ft_calloc(size_t nmemb, size_t size);
-
-
+#include "program_utils.h"
 
 typedef struct s_files {
 	char    **file_list;
@@ -63,6 +58,12 @@ int main(int argc, char const *argv[])
 	t_files *files;
 	int     file_id;
 
+    if (argc < 2) {
+        printf("Error: Missing argument.\n");
+        return (-1);
+    }
+
+	// TODO: Read multiple args
 	file_id = ft_atoi(argv[1]) - 1;
 	files = ft_calloc(1, sizeof(t_files));
 	if (!files)
@@ -71,67 +72,30 @@ int main(int argc, char const *argv[])
 	if (!get_files(files))
 		return (free(files), -1);
 
-	printf("File %d: %s\n", file_id, files->path_list[file_id]);
 	fd = open(files->path_list[file_id], O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error number: %d\n", errno);
 		perror("Program");
+		return (-1);
 	}
-
 	line = get_next_line(fd);
  
+ 	int temp_fd = fd;
+	fd = open(files->path_list[file_id + 1], O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error number: %d\n", errno);
+		perror("Program");
+		return (-1);
+	}
+	line = get_next_line(fd);
+	line = get_next_line(temp_fd);
+
 	if (close(fd) < 0) {
 		perror("Program");
 		exit(1);
 	}
+	free(files);
 	return 0;
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*p;
-
-	p = s;
-	i = 0;
-	while (i < n)
-	{
-		p[i] = (unsigned char) c;
-		i++;
-	}
-	return (s);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, '\0', n);
-	return ;
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void	*res;
-
-	if (nmemb == 0 || size == 0)
-		return (malloc(0));
-	if ((nmemb * size) / nmemb != size)
-		return (NULL);
-	res = malloc(size * nmemb);
-	if (res == NULL)
-		return (NULL);
-	ft_bzero(res, size * nmemb);
-	return (res);
 }

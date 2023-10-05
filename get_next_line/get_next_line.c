@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/04 20:36:54 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/05 20:52:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ read from a file descriptor.
 
 char	*get_next_line(int fd)
 {
-	printf("GNL, biach!!! %d\n", fd);
+	static t_fd	*list = NULL;
+	t_fd		*file;
+
+	printf("Curr fd: %d\n", fd);
+	if (fd < 0)
+		return (NULL);
+	file = lstget(&list, fd);
+	if (!file)
+	{
+		file = ft_lstnew(fd);
+		if (!file)
+			return (ft_lstclear(&list, &free), NULL);
+		ft_lstadd_back(&list, file);
+	}
 	return ("");
 }
