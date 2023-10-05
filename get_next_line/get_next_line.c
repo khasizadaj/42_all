@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 21:38:10 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/05 21:41:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ read from a file descriptor.
 */
 
 #include "get_next_line.h"
+
+void	print_list(t_fd *list);
 
 char	*get_next_line(int fd)
 {
@@ -42,5 +44,26 @@ char	*get_next_line(int fd)
 	// FIXME: Add logic to get rid of buffer when file finished
 	// if (file)
 	// 	ft_lstremove(&list, file);
+
+	// TODO: DELETE THIS LATER
+	// print all existing fds
+	print_list(list);
 	return ("");
+}
+
+void	print_list(t_fd *list)
+{
+	t_fd *current = list;
+	if (!current)
+		printf("\n========\nNO FILE LEFT\n");
+	else
+	{
+		printf("\n========\nPRINT ALL FILES\n");
+		while (current != NULL)
+		{
+			printf("fd=%d\n", current->fd);
+			current = current->next;
+		}
+	}
+	printf("========\n\n");
 }
