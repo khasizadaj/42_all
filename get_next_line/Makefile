@@ -1,5 +1,5 @@
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -I. -D BUFFER_SIZE=10
+CFLAGS := -Wall -Wextra -Werror -I.
 NAME := get_next_line.a
 SRCS := get_next_line.c get_next_line_utils.c ft_atoi.c
 
