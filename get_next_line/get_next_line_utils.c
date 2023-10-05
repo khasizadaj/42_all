@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 21:05:45 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/05 21:31:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ t_fd	*ft_lstnew(int fd)
 	node = malloc(sizeof(t_fd));
 	if (!node)
 		return (NULL);
-	// node->buffer = content;
+	node->buffer = malloc(sizeof(char) * BUFFER_SIZE);
+	if(!node->buffer)
+		return (free(node), NULL);
 	node->fd = fd;
 	node->next = NULL;
 	return (node);
@@ -82,4 +84,29 @@ t_fd *lstget(t_fd **lst, int fd)
 		current = current->next;
 	}
 	return (NULL);
+}
+
+void ft_lstremove(t_fd **lst, t_fd *to_be_removed)
+{
+	t_fd	*current;
+
+    if (!lst || !*lst || !to_be_removed)
+        return;
+    if (*lst == to_be_removed)
+    {
+        *lst = to_be_removed->next;
+        free(to_be_removed->buffer);
+		free(to_be_removed);
+        return;
+    }
+
+    current = *lst;
+    while (current->next && current->next != to_be_removed)
+        current = current->next;
+    if (current->next)
+    {
+        current->next = current->next->next;
+        free(to_be_removed->buffer);
+		free(to_be_removed);
+    }
 }

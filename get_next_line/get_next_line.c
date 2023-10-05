@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 20:52:50 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/05 21:38:10 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*get_next_line(int fd)
 	static t_fd	*list = NULL;
 	t_fd		*file;
 
-	printf("Curr fd: %d\n", fd);
+	printf("\nCurr fd: %d\n", fd);
+	// TODO: Add condition to free finished files but in list
 	if (fd < 0)
 		return (NULL);
 	file = lstget(&list, fd);
@@ -34,8 +35,12 @@ char	*get_next_line(int fd)
 	{
 		file = ft_lstnew(fd);
 		if (!file)
-			return (ft_lstclear(&list, &free), NULL);
+			return (ft_lstclear(&list, &free), free(file), NULL);
+		printf("new fd=%d\n", file->fd);
 		ft_lstadd_back(&list, file);
 	}
+	// FIXME: Add logic to get rid of buffer when file finished
+	// if (file)
+	// 	ft_lstremove(&list, file);
 	return ("");
 }
