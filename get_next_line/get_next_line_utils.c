@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 20:37:47 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/05 21:05:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_fd *lstget(t_fd **lst, int fd)
 {
 	t_fd *current;
 
-	current = *lst; 
+	current = *lst;
 	while (current != NULL)
 	{
 		if (current->fd == fd)

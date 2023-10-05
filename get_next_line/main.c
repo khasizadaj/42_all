@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:44:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 20:47:01 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/05 21:10:30 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,21 @@ int main(int argc, char const *argv[])
 	file_id = ft_atoi(argv[1]) - 1;
 	files = ft_calloc(1, sizeof(t_files));
 	if (!files)
-		return (-1);
+		return (1);
 
 	if (!get_files(files))
-		return (free(files), -1);
+		return (free(files->path_list), free(files->file_list), free(files), 1);
 
 	fd = open(files->path_list[file_id], O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error number: %d\n", errno);
 		perror("Program");
-		return (-1);
+		return (1);
 	}
 	line = get_next_line(fd);
+	if (line == NULL)
+		return (free(files->path_list), free(files->file_list), free(files), 1);
  
  	int temp_fd = fd;
 	fd = open(files->path_list[file_id + 1], O_RDONLY);
@@ -90,12 +92,16 @@ int main(int argc, char const *argv[])
 		return (-1);
 	}
 	line = get_next_line(fd);
-	line = get_next_line(temp_fd);
+	if (line == NULL)
+		return (free(files->path_list), free(files->file_list), free(files), 1);
+
+	// line = get_next_line(temp_fd);
+	// if (line == NULL)
+	// 	return (free(files->path_list), free(files->file_list), free(files), -1);
 
 	if (close(fd) < 0) {
 		perror("Program");
 		exit(1);
 	}
-	free(files);
-	return 0;
+	return (free(files->path_list), free(files->file_list), free(files), 0);
 }
