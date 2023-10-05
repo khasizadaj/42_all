@@ -6,10 +6,8 @@ LIBFT_NAME = libft.a
 
 SRCS := ft_printf.c ft_nbr_to_hex.c ft_hex.c ft_nbrtoa.c \
 	ft_nbrlen.c ft_put.c ft_strjoin_on_steroids.c
-# BONUS_SRCS := bonus.c
 
 OBJS := $(SRCS:%.c=%.o)
-# BONUS_OBJS := $(BONUS_SRCS:%.c=%.o)
 
 .PHONY: all clean fclean re bonus
 
@@ -21,24 +19,15 @@ $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS) 
 	ranlib $(NAME)
 
-# (cd $(LIBFT_PATH) --no-print-directory && $(MAKE))
-
-# bonus: $(BONUS_OBJS)
-# 	cd ./libft
-# 	make fclean all bonus
-# 	cd ..
-# 	ar -rcs $(NAME) $(BONUS_OBJS)
-# 	ranlib $(NAME)
-
 re: fclean all
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	(cd $(LIBFT_PATH) && $(MAKE) clean)
+	@${MAKE} clean -C ./libft --no-print-directory
 	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	(cd $(LIBFT_PATH) && $(MAKE) fclean)
+	@${MAKE} clean -C ./libft --no-print-directory
 	rm -f $(NAME)
