@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/06 01:26:31 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/06 15:46:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_fd	*ft_lstnew(int fd)
 		node->buffer[i] = '\0';
 	node->buffer[BUFFER_SIZE] = '\0';
 	node->read = 0;
+	node->start = 0;
 	node->fd = fd;
 	node->next = NULL;
 	return (node);
@@ -103,7 +104,7 @@ void ft_lstremove(t_fd **lst, t_fd *to_be_removed)
         *lst = to_be_removed->next;
         free(to_be_removed->buffer);
 		free(to_be_removed);
-        return;
+        return ;
     }
 
     current = *lst;
