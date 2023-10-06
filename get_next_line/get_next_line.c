@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/06 15:54:25 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/06 20:42:59 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,59 +105,6 @@ void	flush_buffer(t_fd *file)
 	// printf("[flush]\t[buff]\t'%s'\n", file->buffer);
 }
 
-// char	*process(t_fd *f)
-// {
-// 	char	*line;
-// 	char	*temp;
-
-// 	if (f->read < 0)
-// 		return (NULL);
-// 	line = malloc(1);
-// 	if (!line)
-// 		return (NULL);
-// 	line[0] = '\0';
-// 	if (*(f->buffer) && ft_strlen(f->buffer) > 0)
-// 	{
-// 		temp = line;
-// 		line = ft_strjoin_until(temp, f->buffer, '\n');
-// 		if (!line)
-// 			return (free(temp), NULL);
-// 		free(temp);
-// 	}
-// 	// FIXME: Can't handle bigger BUFFER_SIZE
-// 	while ((f->read = read(f->fd, f->buffer, BUFFER_SIZE)) > 0)
-// 	{
-// 		printf("[proc-w]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-// 		temp = line;
-// 		if (chr_in('\n', f->buffer))
-// 		{
-// 			line = ft_strjoin_until(temp, f->buffer, '\n');
-// 			if (!line)
-// 				return (free(temp), NULL);
-// 			return (free(temp), flush_buffer(f), line);	
-// 		}
-// 		else
-// 		{
-// 			line = ft_strjoin_until(temp, f->buffer, '\0');
-// 			if (!line)
-// 				return (free(temp), NULL);
-// 			flush_buffer(f);
-// 			free(temp);
-// 		}
-// 	}
-	
-// 	temp = line;
-// 	line = ft_strjoin_until(temp, f->buffer, '\n');
-// 	// if ((line && ft_strlen(line) == 0))
-// 	// 	return (line);
-// 	if (!line || (line && ft_strlen(line) == 0))
-// 		return (flush_buffer(f), free(temp), free(line), NULL);
-// 	printf("[proc]\t[rd=%d]\t'%s'\n", f->read, line);
-// 	if(f->read == 0 || chr_in('\n', f->buffer))
-// 		return (flush_buffer(f), free(line), free(temp), NULL);
-// 	return (free(temp), line);
-// }
-
 char	*process(t_fd *f)
 {
 	char	*line;
@@ -175,86 +122,93 @@ char	*process(t_fd *f)
 		// printf("[pr-1]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
 		f->start = 1;
 	}
-	printf("[pr-0]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
+	// printf("[pr-0]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
 	while (!chr_in('\n', f->buffer) && f->read >= 0)
 	{
 		if (ft_strlen(line) == 0)
 		{
 			temp = line;
 			line = ft_strjoin_until(temp, f->buffer, '\n');
-			// printf("[pr-5]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-			// printf("[pr-5]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
-			if (!line)
-				return (free(temp), NULL);
+			free(temp);
+			printf("[pr-5]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
+			printf("[pr-5]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
+			if (!line || ft_strlen(line))
+				return (flush_buffer(f), free(temp), free(line), NULL);
 		}
 		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
+		printf("f->read=%d\n", f->read);
 		if (f->read == 0)
-			return ((f->start+=1), flush_buffer(f), free(line), NULL);
+			break ;
+		else if (f->read <0)
+			return (free(line), flush_buffer(f), NULL);
 		temp = line;
 		line = ft_strjoin_until(temp, f->buffer, '\n');
-		// printf("[pr-2]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-		// printf("[pr-2]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
+		printf("[pr-2]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
+		printf("[pr-2]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
 		if (!line)
 			return (free(temp), NULL);
-		printf("[pr-3]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
+		// printf("[pr-3]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
 		if (chr_in('\n', line))
 			return (free(temp), flush_buffer(f), line);	
 	}
 	// FIXME: Can't handle new no new line at the end 
 	// FIXME: Can't handle empty buffer at the end
-	if (chr_in('\n', f->buffer))
+	temp = line;
+	line = ft_strjoin_until(temp, f->buffer, '\n');
+	if (!line)
+		return (free(temp), NULL);
+	printf("[pr-4]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
+	printf("[pr-4]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
+	if (ft_strlen(line) == 0 && f->read == 0)
+		return (free(temp), free(line), NULL);
+	return (free(temp), flush_buffer(f), line);	
+}
+
+char	*clean_process(t_fd *f)
+{
+	char	*line;
+	char	*temp;
+
+	if (f->read < 0)
+		return (NULL);
+	line = malloc(1);
+	if (!line)
+		return (NULL);
+	line[0] = '\0';
+	if (f->start == 0)
 	{
+		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
+		f->start = 1;
+	}
+	while (!chr_in('\n', f->buffer) && f->read >= 0)
+	{
+		if (ft_strlen(line) == 0)
+		{
+			temp = line;
+			line = ft_strjoin_until(temp, f->buffer, '\n');
+			if (!line || ft_strlen(line))
+				return (flush_buffer(f), free(temp), free(line), NULL);
+			free(temp);
+		}
+		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
+		if (f->read == 0)
+			break ;
+		else if (f->read <0)
+			return (free(line), flush_buffer(f), NULL);
 		temp = line;
 		line = ft_strjoin_until(temp, f->buffer, '\n');
 		if (!line)
 			return (free(temp), NULL);
-		printf("[pr-4]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-		printf("[pr-4]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
-		free(temp);
 		if (chr_in('\n', line))
-			return (flush_buffer(f), line);	
+			return (free(temp), flush_buffer(f), line);	
 	}
-	return (line);
-
-	// if (f->buffer[0] == '\0' && f->lread == 0)
-	// {
-	// 	f->read = read(f->fd, f->buffer, BUFFER_SIZE);
-	// 	f->lread++;
-	// 	printf("%d", f->lread);
-	// }
-
-	// FIXME: Can't handle bigger BUFFER_SIZE
-	// while ((f->read = read(f->fd, f->buffer, BUFFER_SIZE)) > 0)
-	// {
-	// 	temp = line;
-	// 	if (chr_in('\n', f->buffer))
-	// 	{
-	// 		line = ft_strjoin_until(temp, f->buffer, '\n');
-	// 		if (!line)
-	// 			return (free(temp), NULL);
-	// 		return (free(temp), flush_buffer(f), line);	
-	// 	}
-	// 	else
-	// 	{
-	// 		line = ft_strjoin_until(temp, f->buffer, '\0');
-	// 		if (!line)
-	// 			return (free(temp), NULL);
-	// 		flush_buffer(f);
-	// 		free(temp);
-	// 	}
-	// }
-	
-	// temp = line;
-	// line = ft_strjoin_until(temp, f->buffer, '\n');
-	// // if ((line && ft_strlen(line) == 0))
-	// // 	return (line);
-	// if (!line || (line && ft_strlen(line) == 0))
-	// 	return (flush_buffer(f), free(temp), free(line), NULL);
-	// printf("[proc]\t[rd=%d]\t'%s'\n", f->read, line);
-	// if(f->read == 0 || chr_in('\n', f->buffer))
-	// 	return (flush_buffer(f), free(line), free(temp), NULL);
-	return (line);
-	// return (free(temp), line);
+	temp = line;
+	line = ft_strjoin_until(temp, f->buffer, '\n');
+	if (!line)
+		return (free(temp), NULL);
+	if (ft_strlen(line) == 0 && f->read == 0)
+		return (free(temp), free(line), NULL);
+	return (free(temp), flush_buffer(f), line);	
 }
 
 void	print_list(t_fd *list);
@@ -266,7 +220,6 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	// printf("\n==\nCurr fd: %d\n", fd);
-	// TODO: Add condition to free finished files but in list
 	if (fd < 0)
 		return (NULL);
 	file = lstget(&list, fd);
@@ -284,7 +237,7 @@ char	*get_next_line(int fd)
 	printf("[gnl-f]\t[rd=%d]\t'%s'\n", file->read, file->buffer);
 
 	if (!line && file->read == 0)
-		return (ft_lstremove(&list, file), NULL);
+		return (ft_lstremove(&list, file), line);
 	else if (!line || file->read < 0)
 		return (ft_lstclear(&list, &free), NULL);
 	return (line);

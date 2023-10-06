@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:44:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/06 01:55:33 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/06 20:39:02 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,9 @@ int main(int argc, char const *argv[])
 	while (i++ < 10)
 	{
 		line = get_next_line(fd);
+		printf("[main]\t[fd=%d]:\t'%s'\n\n", fd, line);
 		if (line == NULL)
 			return (free(files->path_list), free(files->file_list), free(files), 1);
-
-		printf("[main]\t[fd=%d]:\t'%s'\n\n", fd, line);
 		free(line);
 	}
 
