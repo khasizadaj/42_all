@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:44:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/06 01:43:26 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/06 01:55:33 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int main(int argc, char const *argv[])
 	}
 
 	int i = 0;
-	printf("LOL");
 	while (i++ < 10)
 	{
 		line = get_next_line(fd);
