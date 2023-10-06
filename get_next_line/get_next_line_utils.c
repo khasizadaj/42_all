@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 21:31:21 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/06 01:26:31 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 t_fd	*ft_lstnew(int fd)
 {
 	t_fd	*node;
+	int		i;
 
 	node = malloc(sizeof(t_fd));
 	if (!node)
 		return (NULL);
-	node->buffer = malloc(sizeof(char) * BUFFER_SIZE);
+	node->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if(!node->buffer)
 		return (free(node), NULL);
+	i = 0;
+	while(i++ < BUFFER_SIZE)
+		node->buffer[i] = '\0';
+	node->buffer[BUFFER_SIZE] = '\0';
+	node->read = 0;
 	node->fd = fd;
 	node->next = NULL;
 	return (node);
@@ -60,12 +66,12 @@ void	ft_lstclear(t_fd **lst, void (*del)(void *))
 	while (head->next != NULL)
 	{
 		head = temp->next;
-        // del(head->buffer);
+        del(head->buffer);
         del(NULL);
 	    free(head);
 		temp = head;
 	}
-	// del(head->buffer);
+	del(head->buffer);
     del(NULL);
 	free(head);
 	*lst = NULL;

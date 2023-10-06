@@ -6,14 +6,14 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:57 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 21:32:52 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/06 01:46:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#define BUFFER_SIZE 6
+#define BUFFERSIZE BUFFER_SIZE
 
 # include <stdio.h>
 # include <errno.h>
@@ -27,6 +27,7 @@ typedef struct s_fd
 	int			fd;
 	char		*buffer;
 	struct s_fd	*next;
+	int			read;
 }	t_fd;
 
 char    *get_next_line(int fd);

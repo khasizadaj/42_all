@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:44:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/05 21:10:30 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/06 01:43:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int main(int argc, char const *argv[])
 
 	// TODO: Read multiple args
 	file_id = ft_atoi(argv[1]) - 1;
+	printf("FILE_ID=%d\n", file_id);
 	files = ft_calloc(1, sizeof(t_files));
 	if (!files)
 		return (1);
@@ -79,25 +80,18 @@ int main(int argc, char const *argv[])
 		perror("Program");
 		return (1);
 	}
-	line = get_next_line(fd);
-	if (line == NULL)
-		return (free(files->path_list), free(files->file_list), free(files), 1);
- 
- 	int temp_fd = fd;
-	fd = open(files->path_list[file_id + 1], O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Error number: %d\n", errno);
-		perror("Program");
-		return (-1);
-	}
-	line = get_next_line(fd);
-	if (line == NULL)
-		return (free(files->path_list), free(files->file_list), free(files), 1);
 
-	// line = get_next_line(temp_fd);
-	// if (line == NULL)
-	// 	return (free(files->path_list), free(files->file_list), free(files), -1);
+	int i = 0;
+	printf("LOL");
+	while (i++ < 10)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			return (free(files->path_list), free(files->file_list), free(files), 1);
+
+		printf("[main]\t[fd=%d]:\t'%s'\n\n", fd, line);
+		free(line);
+	}
 
 	if (close(fd) < 0) {
 		perror("Program");
