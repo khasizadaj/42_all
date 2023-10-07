@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/06 15:46:01 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/07 10:47:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_fd	*ft_lstnew(int fd)
 	node->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if(!node->buffer)
 		return (free(node), NULL);
-	i = 0;
-	while(i++ < BUFFER_SIZE)
-		node->buffer[i] = '\0';
+	i = -1;
+	while(++i < BUFFER_SIZE)
+		(node->buffer)[i] = (unsigned char) '\0';
 	node->buffer[BUFFER_SIZE] = '\0';
 	node->read = 0;
 	node->start = 0;

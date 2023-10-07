@@ -4,3 +4,9 @@
 ----- size
 vvvvv to
 ggggg test
+
+this is rather long line ot test allmighty get_next_line
+o
+n
+e
+ch

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/07 09:37:35 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/07 12:26:03 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*ft_strjoin_until(const char *s1, const char *s2, char until)
 	int		i;
 
 	len_1 = ft_strlen(s1);
+	// FIXME: I allocate more, I need to find length until new line
 	len_2 = ft_strlen(s2);
 	joined = malloc(sizeof(char) * (len_1 + len_2 + 1));
 	if (joined == NULL)
@@ -116,50 +117,47 @@ char	*process(t_fd *f)
 	if (!line)
 		return (NULL);
 	line[0] = '\0';
-	if (f->start == 0)
-	{
-		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
-		// printf("[pr-1]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-		f->start = 1;
-	}
 	// printf("[pr-0]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-	while (!chr_in('\n', f->buffer) && f->read >= 0)
+	if (ft_strlen(f->buffer) > 0)
 	{
-		if (ft_strlen(line) == 0)
-		{
-			temp = line;
-			line = ft_strjoin_until(temp, f->buffer, '\n');
-			free(temp);
-			printf("[pr-5]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-			printf("[pr-5]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
-			if (!line || ft_strlen(line))
-				return (flush_buffer(f), free(temp), free(line), NULL);
-		}
-		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
-		printf("f->read=%d\n", f->read);
-		if (f->read == 0)
-			break ;
-		else if (f->read <0)
-			return (free(line), flush_buffer(f), NULL);
 		temp = line;
 		line = ft_strjoin_until(temp, f->buffer, '\n');
-		printf("[pr-2]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-		printf("[pr-2]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
+		// printf("[pr-0]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
 		if (!line)
 			return (free(temp), NULL);
-		// printf("[pr-3]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
-		if (chr_in('\n', line))
-			return (free(temp), flush_buffer(f), line);	
+		free(temp);
+		flush_buffer(f);
 	}
+	while (!chr_in('\n', line) && !chr_in('\n', f->buffer))
+	{
+		// printf("[pr-1]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
+		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
+		// printf("[pr-1]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
+		if (f->read == 0 && ft_strlen(line) > 0)
+			return (line);
+		else if (f->read == 0 && ft_strlen(line) == 0 && ft_strlen(f->buffer) == 0)
+			return (free(line), NULL);
+		else if (f->read == -1)
+			return (free(line), NULL);
+		temp = line;
+		line = ft_strjoin_until(temp, f->buffer, '\n');
+		// printf("[pr-2]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
+		if (!line)
+			return (free(temp), NULL);
+		free(temp);
+		flush_buffer(f);
+	}
+	if (chr_in('\n', line))
+		return (line);
 	// FIXME: Can't handle new no new line at the end 
 	// FIXME: Can't handle empty buffer at the end
 	temp = line;
 	line = ft_strjoin_until(temp, f->buffer, '\n');
+	// printf("[pr-3]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
+	// printf("[pr-3]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
 	if (!line)
 		return (free(temp), NULL);
-	printf("[pr-4]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-	printf("[pr-4]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
-	if (ft_strlen(line) == 0 && f->read == 0)
+	if (ft_strlen(line) == 0)
 		return (free(temp), free(line), NULL);
 	return (free(temp), flush_buffer(f), line);	
 }
@@ -232,14 +230,13 @@ char	*get_next_line(int fd)
 		ft_lstadd_back(&list, file);
 	}
 	line = process(file);
-	printf("[gnl]\t[lrd=%d]\n", file->start);
-	printf("[gnl]\t[rd=%d]\t'%s'\n", file->read, line);
-	printf("[gnl-f]\t[rd=%d]\t'%s'\n", file->read, file->buffer);
+	// printf("[gnl]\t[rd=%d]\t'%s'\n", file->read, line);
+	// printf("[gnl-f]\t[rd=%d]\t'%s'\n", file->read, file->buffer);
 
 	if (!line && file->read == 0)
 		return (ft_lstremove(&list, file), line);
-	else if (!line || file->read < 0)
-		return (ft_lstclear(&list, &free), NULL);
+	else if (file->read < 0)
+		return (ft_lstclear(&list, &free), free(list), NULL);
 	return (line);
 }
 
