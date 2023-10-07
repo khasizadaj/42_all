@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/06 20:42:59 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/07 09:37:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	// printf("\n==\nCurr fd: %d\n", fd);
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (NULL);
 	file = lstget(&list, fd);
 	if (!file)
