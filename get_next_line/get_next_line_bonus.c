@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/07 17:07:29 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/08 17:14:42 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-
- == GET NEXT LINE
-
-This project is about programming a function that returns a line
-read from a file descriptor.
-
-*/
-
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin_until(const char *s1, const char *s2, char until);
 
