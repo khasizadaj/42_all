@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/08 17:15:13 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/12 19:10:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,12 @@ void	ft_lstclear(t_fd **lst, void (*del)(void *))
 	temp = *lst;
 	while (head->next != NULL)
 	{
-		head = temp->next;
+		temp = head->next;
         del(head->buffer);
-        del(NULL);
 	    free(head);
-		temp = head;
+		head = temp;
 	}
 	del(head->buffer);
-    del(NULL);
 	free(head);
 	*lst = NULL;
 	return ;

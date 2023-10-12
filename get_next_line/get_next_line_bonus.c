@@ -6,13 +6,11 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/08 17:14:42 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/12 19:26:45 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
-
-char	*ft_strjoin_until(const char *s1, const char *s2, char until);
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -153,53 +151,6 @@ char	*process(t_fd *f)
 	return (free(temp), flush_buffer(f), line);	
 }
 
-char	*clean_process(t_fd *f)
-{
-	char	*line;
-	char	*temp;
-
-	if (f->read < 0)
-		return (NULL);
-	line = malloc(1);
-	if (!line)
-		return (NULL);
-	line[0] = '\0';
-	if (f->start == 0)
-	{
-		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
-		f->start = 1;
-	}
-	while (!chr_in('\n', f->buffer) && f->read >= 0)
-	{
-		if (ft_strlen(line) == 0)
-		{
-			temp = line;
-			line = ft_strjoin_until(temp, f->buffer, '\n');
-			if (!line || ft_strlen(line))
-				return (flush_buffer(f), free(temp), free(line), NULL);
-			free(temp);
-		}
-		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
-		if (f->read == 0)
-			break ;
-		else if (f->read <0)
-			return (free(line), flush_buffer(f), NULL);
-		temp = line;
-		line = ft_strjoin_until(temp, f->buffer, '\n');
-		if (!line)
-			return (free(temp), NULL);
-		if (chr_in('\n', line))
-			return (free(temp), flush_buffer(f), line);	
-	}
-	temp = line;
-	line = ft_strjoin_until(temp, f->buffer, '\n');
-	if (!line)
-		return (free(temp), NULL);
-	if (ft_strlen(line) == 0 && f->read == 0)
-		return (free(temp), free(line), NULL);
-	return (free(temp), flush_buffer(f), line);	
-}
-
 void	print_list(t_fd *list);
 
 char	*get_next_line(int fd)
@@ -221,30 +172,12 @@ char	*get_next_line(int fd)
 		ft_lstadd_back(&list, file);
 	}
 	line = process(file);
-	// printf("[gnl]\t[rd=%d]\t'%s'\n", file->read, line);
-	// printf("[gnl-f]\t[rd=%d]\t'%s'\n", file->read, file->buffer);
+	printf("[gnl]\t[rd=%d]\t'%s'\n", file->read, line);
+	printf("[gnl-f]\t[rd=%d]\t'%s'\n", file->read, file->buffer);
 
 	if (!line && file->read == 0)
 		return (ft_lstremove(&list, file), line);
 	else if (file->read < 0)
 		return (ft_lstclear(&list, &free), free(list), NULL);
 	return (line);
-}
-
-// TODO: DELETE THIS LATER
-void	print_list(t_fd *list)
-{
-	t_fd *current = list;
-	if (!current)
-		printf("\n========\nNO FILE LEFT\n");
-	else
-	{
-		printf("\n========\nPRINT ALL FILES\n");
-		while (current != NULL)
-		{
-			printf("fd=%d\n", current->fd);
-			current = current->next;
-		}
-	}
-	printf("========\n\n");
 }
