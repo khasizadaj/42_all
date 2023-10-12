@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/07 17:07:29 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/12 20:43:39 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,53 +158,6 @@ char	*process(t_fd *f)
 	if (!line)
 		return (free(temp), NULL);
 	if (ft_strlen(line) == 0)
-		return (free(temp), free(line), NULL);
-	return (free(temp), flush_buffer(f), line);	
-}
-
-char	*clean_process(t_fd *f)
-{
-	char	*line;
-	char	*temp;
-
-	if (f->read < 0)
-		return (NULL);
-	line = malloc(1);
-	if (!line)
-		return (NULL);
-	line[0] = '\0';
-	if (f->start == 0)
-	{
-		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
-		f->start = 1;
-	}
-	while (!chr_in('\n', f->buffer) && f->read >= 0)
-	{
-		if (ft_strlen(line) == 0)
-		{
-			temp = line;
-			line = ft_strjoin_until(temp, f->buffer, '\n');
-			if (!line || ft_strlen(line))
-				return (flush_buffer(f), free(temp), free(line), NULL);
-			free(temp);
-		}
-		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
-		if (f->read == 0)
-			break ;
-		else if (f->read <0)
-			return (free(line), flush_buffer(f), NULL);
-		temp = line;
-		line = ft_strjoin_until(temp, f->buffer, '\n');
-		if (!line)
-			return (free(temp), NULL);
-		if (chr_in('\n', line))
-			return (free(temp), flush_buffer(f), line);	
-	}
-	temp = line;
-	line = ft_strjoin_until(temp, f->buffer, '\n');
-	if (!line)
-		return (free(temp), NULL);
-	if (ft_strlen(line) == 0 && f->read == 0)
 		return (free(temp), free(line), NULL);
 	return (free(temp), flush_buffer(f), line);	
 }
