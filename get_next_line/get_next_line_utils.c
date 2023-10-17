@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/12 20:55:12 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:24:07 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_fd	*ft_lstnew(int fd)
 	while(++i < BUFFER_SIZE)
 		(node->buffer)[i] = (unsigned char) '\0';
 	node->buffer[BUFFER_SIZE] = '\0';
-	node->read = 0;
+	node->rd = 0;
 	node->start = 0;
 	node->fd = fd;
 	node->next = NULL;

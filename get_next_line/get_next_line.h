@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:57 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/06 15:07:34 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 19:24:14 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_fd
 	int			fd;
 	char		*buffer;
 	struct s_fd	*next;
-	int			read;
+	int			rd;
 	int			start;
 }	t_fd;
 
