@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/12 20:43:39 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:04:01 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ read from a file descriptor.
 
 char	*ft_strjoin_until(const char *s1, const char *s2, char until);
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *s, char until)
 {
 	size_t	i;
 
 	if (!s)
 		return (0);
-
 	i = 0;
 	while (s[i])
 	{
-		i++;
+		if (s[i++] == until)
+			break ;
 	}
 	return (i);
 }
@@ -45,9 +45,8 @@ char	*ft_strjoin_until(const char *s1, const char *s2, char until)
 	char	*joined;
 	int		i;
 
-	len_1 = ft_strlen(s1);
-	// FIXME: I allocate more, I need to find length until new line
-	len_2 = ft_strlen(s2);
+	len_1 = ft_strlen(s1, '\0');
+	len_2 = ft_strlen(s2, '\n');
 	joined = malloc(sizeof(char) * (len_1 + len_2 + 1));
 	if (joined == NULL)
 		return (NULL);
@@ -115,16 +114,16 @@ char	*process(t_fd *f)
 		return (NULL);
 	line = malloc(1);
 	if (!line)
-		return (NULL);
+		return ("\0\0");
 	line[0] = '\0';
 	// printf("[pr-0]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-	if (ft_strlen(f->buffer) > 0)
+	if (ft_strlen(f->buffer, '\0') > 0)
 	{
 		temp = line;
 		line = ft_strjoin_until(temp, f->buffer, '\n');
 		// printf("[pr-0]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
 		if (!line)
-			return (free(temp), NULL);
+			return (free(temp), "\0\0");
 		free(temp);
 		flush_buffer(f);
 	}
@@ -133,9 +132,9 @@ char	*process(t_fd *f)
 		// printf("[pr-1]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
 		f->read = read(f->fd, f->buffer, BUFFER_SIZE);
 		// printf("[pr-1]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
-		if (f->read == 0 && ft_strlen(line) > 0)
+		if (f->read == 0 && ft_strlen(line, '\0') > 0)
 			return (line);
-		else if (f->read == 0 && ft_strlen(line) == 0 && ft_strlen(f->buffer) == 0)
+		else if (f->read == 0 && ft_strlen(line, '\0') == 0 && ft_strlen(f->buffer, '\0') == 0)
 			return (free(line), NULL);
 		else if (f->read == -1)
 			return (free(line), NULL);
@@ -143,7 +142,7 @@ char	*process(t_fd *f)
 		line = ft_strjoin_until(temp, f->buffer, '\n');
 		// printf("[pr-2]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
 		if (!line)
-			return (free(temp), NULL);
+			return (free(temp), "\0\0");
 		free(temp);
 		flush_buffer(f);
 	}
@@ -156,9 +155,7 @@ char	*process(t_fd *f)
 	// printf("[pr-3]\t[rd=%d]\t'%s'\n", f->read, f->buffer);
 	// printf("[pr-3]\t[l=%ld]\t'%s'\n", ft_strlen(line), line);
 	if (!line)
-		return (free(temp), NULL);
-	if (ft_strlen(line) == 0)
-		return (free(temp), free(line), NULL);
+		return (free(temp), "\0\0");
 	return (free(temp), flush_buffer(f), line);	
 }
 
@@ -188,8 +185,11 @@ char	*get_next_line(int fd)
 
 	if (!line && file->read == 0)
 		return (ft_lstremove(&list, file), line);
-	else if (file->read < 0)
+	else if ((!line && file->read < 0) || (line && line[0] == '\0' && line[1] == '\0')) // added memory allocation guarding clause for line
+	{
+		// printf("LINE: %sl", line);
 		return (ft_lstclear(&list, &free), free(list), NULL);
+	}
 	return (line);
 }
 
