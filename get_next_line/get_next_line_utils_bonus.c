@@ -6,7 +6,7 @@
 /*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/17 21:13:18 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2023/10/17 21:15:59 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ t_fd	*lstget_or_create(t_fd **lst, int fd)
 		(current->buffer)[i] = (unsigned char) '\0';
 	current->buffer[BUFFER_SIZE] = '\0';
 	current->rd = 0;
-	current->start = 0;
 	current->fd = fd;
 	current->next = NULL;
 	ft_lstadd_back(lst, current);

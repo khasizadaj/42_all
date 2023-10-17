@@ -6,7 +6,7 @@
 /*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:57 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/17 20:58:47 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2023/10/17 21:16:20 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_fd
 	char		*buffer;
 	struct s_fd	*next;
 	int			rd;
-	int			start;
 }	t_fd;
 
 char    *get_next_line(int fd);
