@@ -6,7 +6,7 @@
 /*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/17 20:18:04 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2023/10/17 21:12:26 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,6 @@ size_t	ft_strlen(const char *s, char until)
 			break ;
 	}
 	return (i);
-}
-
-char	*ft_strjoin_until(const char *s1, const char *s2, char until)
-{
-	int		len_1;
-	int		len_2;
-	char	*joined;
-	int		i;
-
-	len_1 = ft_strlen(s1, '\0');
-	len_2 = ft_strlen(s2, '\n');
-	joined = malloc(sizeof(char) * (len_1 + len_2 + 1));
-	if (joined == NULL)
-		return (NULL);
-	i = -1;
-	while (s1[++i] != '\0')
-	{
-		joined[i] = s1[i];
-	}
-	i = 0;
-	while (s2[i] != '\0')
-	{
-		joined[len_1 + i] = s2[i];
-		if (s2[i++] == until)
-			break ;
-	}
-	joined[len_1 + i] = '\0';
-	return (joined);
 }
 
 int	chr_in(char c, char const *str)
@@ -95,7 +67,7 @@ void	flush_buffer(t_fd *file)
 		file->buffer[j] = '\0';
 }
 
-char *transfer(char *line, t_fd *f)
+char	*transfer(char *line, t_fd *f)
 {
 	char	*temp;
 
@@ -112,8 +84,6 @@ char	*process(t_fd *f)
 {
 	char	*line;
 
-	if (f->rd < 0)
-		return (NULL);
 	line = malloc(1);
 	if (!line)
 		return ("\0\0");
@@ -151,14 +121,11 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (ft_lstclear(&list, &free), NULL);
-	file = lstget(&list, fd);
+	file = lstget_or_create(&list, fd);
 	if (!file)
-	{
-		file = ft_lstnew(fd);
-		if (!file)
-			return (ft_lstclear(&list, &free), free(file), NULL);
-		ft_lstadd_back(&list, file);
-	}
+		return (ft_lstclear(&list, &free), free(file), NULL);
+	if (file->rd < 0)
+		return (NULL);
 	line = process(file);
 	if (!line && file->rd == 0)
 		return (ft_lstremove(&list, file), line);
