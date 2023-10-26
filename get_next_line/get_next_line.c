@@ -6,7 +6,7 @@
 /*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/17 21:12:26 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2023/10/26 22:51:06 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*process(t_fd *f)
 		if (!line)
 			return ("\0\0");
 	}
-	while (!chr_in('\n', line) && !chr_in('\n', f->buffer))
+	while (!chr_in('\n', line))
 	{
 		f->rd = read(f->fd, f->buffer, BUFFER_SIZE);
 		if (f->rd == 0 && ft_strlen(line, '\0') > 0)
@@ -105,11 +105,6 @@ char	*process(t_fd *f)
 		if (!line)
 			return ("\0\0");
 	}
-	if (chr_in('\n', line))
-		return (line);
-	line = transfer(line, f);
-	if (!line)
-		return ("\0\0");
 	return (line);
 }
 

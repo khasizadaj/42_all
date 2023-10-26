@@ -6,7 +6,7 @@
 /*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:57 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/17 21:16:20 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2023/10/26 22:52:33 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_fd
 	int			rd;
 }	t_fd;
 
-char    *get_next_line(int fd);
+char	*get_next_line(int fd);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_lstadd_back(t_fd **lst, t_fd *new);
 void	ft_lstclear(t_fd **lst, void (*del)(void *));
