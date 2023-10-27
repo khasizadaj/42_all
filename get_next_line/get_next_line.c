@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/27 15:43:57 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/27 16:01:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ char	*process(t_fd *f)
 
 	line = malloc(1);
 	if (!line)
-		return ("\0\0");
+		return (NULL);
 	line[0] = '\0';
 	if (ft_strlen(f->buffer, '\0') > 0)
 	{
 		line = transfer(line, f);
 		if (!line)
-			return ("\0\0");
+			return (NULL);
 	}
 	while (!chr_in('\n', line))
 	{
@@ -65,7 +65,7 @@ char	*process(t_fd *f)
 			return (free(line), NULL);
 		line = transfer(line, f);
 		if (!line)
-			return ("\0\0");
+			return (NULL);
 	}
 	return (line);
 }
@@ -96,8 +96,7 @@ char	*get_next_line(int fd)
 	line = process(file);
 	if (!line && file->rd == 0)
 		return (ft_clear(&file), line);
-	else if ((!line && file->rd < 0)
-		|| (line && line[0] == '\0' && line[1] == '\0'))
+	else if (!line)
 		return (ft_clear(&file), NULL);
 	return (line);
 }
