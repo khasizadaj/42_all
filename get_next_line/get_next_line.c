@@ -3,52 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/26 22:51:06 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2023/10/27 15:43:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-
- == GET NEXT LINE
-
-This project is about programming a function that returns a line
-read from a file descriptor.
-
-*/
-
 #include "get_next_line.h"
-
-size_t	ft_strlen(const char *s, char until)
-{
-	size_t	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i++] == until)
-			break ;
-	}
-	return (i);
-}
-
-int	chr_in(char c, char const *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 void	flush_buffer(t_fd *file)
 {
@@ -108,24 +70,34 @@ char	*process(t_fd *f)
 	return (line);
 }
 
+/*
+
+Static file used here is treated as list of files
+and it's open for extension. However, there can be
+one file at a time.
+
+*/
+
 char	*get_next_line(int fd)
 {
-	static t_fd	*list = NULL;
-	t_fd		*file;
+	static t_fd	*file = NULL;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
-		return (ft_lstclear(&list, &free), NULL);
-	file = lstget_or_create(&list, fd);
+		return (ft_clear(&file), NULL);
 	if (!file)
-		return (ft_lstclear(&list, &free), free(file), NULL);
+	{
+		file = ft_lstnew(fd);
+		if (!file)
+			return (NULL);
+	}
 	if (file->rd < 0)
 		return (NULL);
 	line = process(file);
 	if (!line && file->rd == 0)
-		return (ft_lstremove(&list, file), line);
+		return (ft_clear(&file), line);
 	else if ((!line && file->rd < 0)
 		|| (line && line[0] == '\0' && line[1] == '\0'))
-		return (ft_lstclear(&list, &free), free(list), NULL);
+		return (ft_clear(&file), NULL);
 	return (line);
 }

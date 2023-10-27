@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:57 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/26 22:52:33 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2023/10/27 15:44:33 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,9 @@ typedef struct s_fd
 }	t_fd;
 
 char	*get_next_line(int fd);
-void	*ft_calloc(size_t nmemb, size_t size);
-void	ft_lstadd_back(t_fd **lst, t_fd *new);
-void	ft_lstclear(t_fd **lst, void (*del)(void *));
-t_fd	*lstget(t_fd **lst, int fd);
 t_fd	*ft_lstnew(int fd);
-void	ft_lstremove(t_fd **lst, t_fd *to_be_removed);
-t_fd	*lstget_or_create(t_fd **lst, int fd);
+void	ft_clear(t_fd **to_be_removed);
+int		chr_in(char c, char const *str);
 char	*ft_strjoin_until(const char *s1, const char *s2, char until);
 size_t	ft_strlen(const char *s, char until);
 

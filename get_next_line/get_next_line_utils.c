@@ -3,109 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:54 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/17 21:16:06 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2023/10/27 15:45:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_lstadd_back(t_fd **lst, t_fd *new)
+t_fd	*ft_lstnew(int fd)
 {
-	t_fd	*last;
-
-	if (lst == NULL || new == NULL)
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	if (lst == NULL)
-		return ;
-	last = *lst;
-	while (last->next != NULL)
-	{
-		last = last->next;
-	}
-	last->next = new;
-}
-
-void	ft_lstclear(t_fd **lst, void (*del)(void *))
-{
-	t_fd	*head;
-	t_fd	*temp;
-
-	if (lst == NULL || *lst == NULL)
-		return ;
-	head = *lst;
-	temp = *lst;
-	while (head->next != NULL)
-	{
-		temp = head->next;
-		del(head->buffer);
-		free(head);
-		head = temp;
-	}
-	del(head->buffer);
-	free(head);
-	*lst = NULL;
-	return ;
-}
-
-t_fd	*lstget_or_create(t_fd **lst, int fd)
-{
-	t_fd	*current;
+	t_fd	*node;
 	int		i;
 
-	current = *lst;
-	while (current != NULL)
-	{
-		if (current->fd == fd)
-			return (current);
-		current = current->next;
-	}
-	current = malloc(sizeof(t_fd));
-	if (!current)
+	node = malloc(sizeof(t_fd));
+	if (!node)
 		return (NULL);
-	current->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!current->buffer)
-		return (free(current), NULL);
+	node->buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!node->buffer)
+		return (free(node), NULL);
 	i = -1;
 	while (++i < BUFFER_SIZE)
-		(current->buffer)[i] = (unsigned char) '\0';
-	current->buffer[BUFFER_SIZE] = '\0';
-	current->rd = 0;
-	current->fd = fd;
-	current->next = NULL;
-	ft_lstadd_back(lst, current);
-	return (current);
+		(node->buffer)[i] = (unsigned char) '\0';
+	node->buffer[BUFFER_SIZE] = '\0';
+	node->rd = 0;
+	node->fd = fd;
+	node->next = NULL;
+	return (node);
 }
 
-void	ft_lstremove(t_fd **lst, t_fd *to_be_removed)
+void	ft_clear(t_fd **to_be_removed)
 {
-	t_fd	*current;
-
-	if (!lst || !*lst || !to_be_removed)
+	if (!*to_be_removed)
 		return ;
-	if (*lst == to_be_removed)
-	{
-		*lst = to_be_removed->next;
-		free(to_be_removed->buffer);
-		free(to_be_removed);
-		return ;
-	}
-	current = *lst;
-	while (current->next && current->next != to_be_removed)
-		current = current->next;
-	if (current->next)
-	{
-		current->next = current->next->next;
-		free(to_be_removed->buffer);
-		free(to_be_removed);
-	}
+	free((*to_be_removed)->buffer);
+	free(*to_be_removed);
+	*to_be_removed = NULL;
 }
 
 char	*ft_strjoin_until(const char *s1, const char *s2, char until)
@@ -134,4 +68,33 @@ char	*ft_strjoin_until(const char *s1, const char *s2, char until)
 	}
 	joined[len_1 + i] = '\0';
 	return (joined);
+}
+
+size_t	ft_strlen(const char *s, char until)
+{
+	size_t	i;
+
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i++] == until)
+			break ;
+	}
+	return (i);
+}
+
+int	chr_in(char c, char const *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }
