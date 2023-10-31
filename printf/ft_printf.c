@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:43:16 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/04 16:25:47 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/31 16:53:23 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	dispatch(char type, void *arg)
 void	format(va_list args, const char *input, int *count)
 {
 	int		i;
-	void *	arg;
+	void	*arg;
 
 	i = 0;
 	arg = NULL;

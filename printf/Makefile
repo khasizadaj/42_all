@@ -5,7 +5,7 @@ LIBFT_PATH = ./libft
 LIBFT_NAME = libft.a
 
 SRCS := ft_printf.c ft_nbr_to_hex.c ft_hex.c ft_nbrtoa.c \
-	ft_nbrlen.c ft_put.c ft_strjoin_on_steroids.c
+	ft_nbrlen.c ft_put.c
 
 OBJS := $(SRCS:%.c=%.o)
 
