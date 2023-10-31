@@ -5,3 +5,5 @@
 - choose OS
 - choose distribution
 - add ISO file for created VM
+
+https://github.com/pasqualerossi/Born2BeRoot-Guide
