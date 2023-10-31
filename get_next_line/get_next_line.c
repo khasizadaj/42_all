@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2023/10/30 16:04:06 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/31 16:36:36 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*get_next_line(int fd)
 	static t_fd	*file = NULL;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
 		return (ft_clear(&file), NULL);
 	if (!file)
 	{
@@ -91,8 +91,6 @@ char	*get_next_line(int fd)
 		if (!file)
 			return (NULL);
 	}
-	if (file->rd < 0)
-		return (NULL);
 	line = process(file);
 	if (!line && file->rd == 0)
 		return (ft_clear(&file), line);
