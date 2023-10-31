@@ -26,7 +26,7 @@ re: fclean all
 
 clean:
 	@${MAKE} clean -C ./libft --no-print-directory
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	@${MAKE} clean -C ./libft --no-print-directory
