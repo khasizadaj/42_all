@@ -29,5 +29,5 @@ clean:
 	rm -f $(OBJS)
 
 fclean: clean
-	@${MAKE} clean -C ./libft --no-print-directory
+	@${MAKE} fclean -C ./libft --no-print-directory
 	rm -f $(NAME)
