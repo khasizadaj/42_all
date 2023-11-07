@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:34:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/09/05 01:06:20 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:42:50 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,33 @@ int	count_digits(int n)
 		count++;
 		n = n / 10;
 	}
+	if (n < 0)
+		count++;
 	return (count);
+}
+
+char	*allocate_memory(int n)
+{
+	int		size;
+	char	*str;
+
+	size = count_digits(n);
+	if (n < 0)
+		size++;
+	str = malloc(sizeof(char) * size + 1);
+	if (str == NULL)
+		return (NULL);
+	return (str);
+}
+
+int	get_size(int n)
+{
+	int	size;
+
+	size = count_digits(n);
+	if (n < 0)
+		size++;
+	return (size);
 }
 
 char	*ft_itoa(int n)
@@ -75,25 +101,26 @@ char	*ft_itoa(int n)
 	char			*str;
 	int				size;
 	long long		big_number;
+	int				i;
 
-	big_number = n;
-	size = count_digits(n);
-	if (big_number < 0)
-		size++;
-	str = malloc(sizeof(char) * size);
+	size = get_size(n);
+	str = malloc(sizeof(char) * size + 1);
 	if (str == NULL)
 		return (NULL);
+	big_number = n;
 	if (big_number < 0)
-	{
-		big_number *= -1;
 		str[0] = '-';
-	}
-	while (--size >= 0)
+	if (big_number < 0)
+		big_number *= -1;
+	i = 0;
+	while (size - i - 1 >= 0)
 	{
-		if (size == 0 && str[0] == '-')
+		if (size - i - 1 == 0 && str[0] == '-')
 			break ;
-		str[size] = big_number % 10 + '0';
+		str[size - i - 1] = big_number % 10 + '0';
 		big_number = big_number / 10;
+		i++;
 	}
+	str[size] = '\0';
 	return (str);
 }
