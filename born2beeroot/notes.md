@@ -47,3 +47,5 @@ https://github.com/pasqualerossi/Born2BeRoot-Guide
 - `apt` vs `apt-get`
     - https://aws.amazon.com/compare/the-difference-between-apt-and-apt-get/
 
+- getting manual page for `libpam-pwquality` password policy
+    - man pwquality.conf
