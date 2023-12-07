@@ -44,4 +44,6 @@ https://github.com/pasqualerossi/Born2BeRoot-Guide
 - `{username}  	ALL=(ALL) ALL` - inside `sudoers`
 	- can be accessed via `sudo visudo`
 	- this line allows that user to run any command on any machine as any other user (including as the root user) using sudo. This is a very powerful privilege and should be granted with care, as it essentially gives the user complete control over the system.
-- 
+- `apt` vs `apt-get`
+    - https://aws.amazon.com/compare/the-difference-between-apt-and-apt-get/
+
