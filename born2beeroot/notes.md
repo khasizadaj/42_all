@@ -1,3 +1,25 @@
+# Notes
+
+- What is ISO Image?
+    - An ISO image for a virtual machine is like a digital copy of a DVD that you can use on your computer. Instead of putting a DVD into a physical DVD player, you can use this digital copy to set up a new virtual computer inside your real computer. It's like having a DVD that you can use over and over again without needing the physical disc.
+
+- What is partition?
+- What is LVM?
+- What is GRB boot loader?
+- What is `sudo visudo` used for?
+    - Why this was needed `jkhasiza  ALL=(ALL) ALL`?
+--- 
+
+```bash
+# login as root user; will prompt root user pass
+su -
+
+# add user to the group
+usermod -aG {user_group} {username}
+# e.g.: usermod -aG sudo jkhasiza
+```
+
+---
 
 - get iso file
 - set location for created VMs
