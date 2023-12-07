@@ -39,8 +39,13 @@ https://github.com/pasqualerossi/Born2BeRoot-Guide
 
 - `getent`
 	- `getent` is a command-line utility available on Unix and Linux systems. It is used to fetch entries from databases supported by the Name Service Switch (NSS) libraries, which are configured in /etc/nsswitch.conf. These databases can include, but are not limited to, users (`passwd`), groups (`group`), and hosts (`hosts`).
-
+- `sudo adduser {username}`
+- `chage -l {username}`
+    - `chage` is used to change password expiration date
+    - above command just is used to get account aging information
 - `usermod -aG {username} {group_name}`
+- `sudo groupadd {group_name}`
+    - create new group
 - `{username}  	ALL=(ALL) ALL` - inside `sudoers`
 	- can be accessed via `sudo visudo`
 	- this line allows that user to run any command on any machine as any other user (including as the root user) using sudo. This is a very powerful privilege and should be granted with care, as it essentially gives the user complete control over the system.
