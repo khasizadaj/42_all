@@ -30,10 +30,12 @@ usermod -aG {user_group} {username}
 
 https://github.com/pasqualerossi/Born2BeRoot-Guide
 
-## NOtes
+## Notes
 
 - `/etc/ssh/sshd_config` should be updated to allow certain ports be accesible by users via ssh connection
-
+- `/etc/login.defs` => Configuration control definitions for the login package.
+- `/etc/pam.d/common-password` => password-related modules common to all services
+- `lsb_release -a` => to check OS
 
 ## Useful stuff
 
