@@ -36,6 +36,7 @@ https://github.com/pasqualerossi/Born2BeRoot-Guide
 - `/etc/login.defs` => Configuration control definitions for the login package.
 - `/etc/pam.d/common-password` => password-related modules common to all services
 - `lsb_release -a` => to check OS
+- `dpkg -l` => command to see installed packages
 
 ## Useful stuff
 
