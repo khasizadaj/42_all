@@ -37,5 +37,41 @@ Your goal? Write a program in C called push_swap which calculates and displays o
 * Allowed functions: `read, write, malloc, free, exit`
 * Libft authorized: `yes`
 * Other instructioins:
-	- 
+	- Instructions must be separated by a `\n` and nothing else.
+	- The program must display the smallest list of instructions possible to sort the stack, the smallest number being at the top
 	- The first argument should be at the top of the stack (be careful about the order)
+	- If no parameters are specified, the program must not display anything and give the prompt back.
+	- In case of error, it must display `Error` followed by a `\n` on the standard error. Errors include for example:
+		* some arguments aren’t integers
+		* some arguments are bigger than an integer
+		* some arguments are duplicate
+
+### Sample output
+
+```bash
+$ ./push_swap 2 1 3 6 5 8
+sa
+pb
+pb
+pb
+sa
+pa
+pa
+pa
+```
+
+```bash
+$ ./push_swap 0 one 2 3
+Error
+$
+```
+
+```bash
+$ ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
+6
+```
+
+## References
+
+- [Project](https://projects.intra.42.fr/projects/42cursus-push_swap)
+- [Subject](https://cdn.intra.42.fr/pdf/pdf/111156/en.subject.pdf) - (Retrieved @ 15.12.2023)
