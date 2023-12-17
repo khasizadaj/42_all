@@ -1,12 +1,15 @@
 NAME = push_swap
 
 SRC_DIR = src
-UTILS_DIR = utils
+UTILS_DIR = src/utils
 ALG_DIR = alg
 TEST_DIR = test
 LIBFT_DIR = ./${SRC_DIR}/libft
 
-SRCS =	${SRC_DIR}/main.c
+SRCS =	${SRC_DIR}/main.c \
+		${UTILS_DIR}/reverse_rotate.c \
+		${UTILS_DIR}/rotate.c \
+		${UTILS_DIR}/swap.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -21,7 +24,7 @@ ${NAME}: ${OBJS}
 	@${CC} ${CFLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
 
 clean: 
-	@${MAKE} -C ${LIBFT_DIR} --no-print-directory fclean
+	@${MAKE} -C ${LIBFT_DIR} --no-print-directory clean
 	@${RM} ${OBJS}
 
 fclean: clean

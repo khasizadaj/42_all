@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_instructions.c                             :+:      :+:    :+:   */
+/*   rotate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:56:43 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/16 22:30:22 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/17 20:15:56 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
-#include <stdio.h>
 
-int	reverse(t_number **stack)
+int	rotate(t_number **stack)
 {
     t_number	*tmp;
 	t_number	*head;
@@ -32,20 +31,20 @@ int	reverse(t_number **stack)
 	return (1);
 }
 
-void reverse_a(t_number **stack)
+void rotate_a(t_number **stack)
 {
 	char *message;
 
 	message = "ra";
-    if (reverse(stack) == 1)
+    if (rotate(stack) == 1)
 		ft_printf("%s\n", message);
 }
 
-void reverse_b(t_number **stack)
+void rotate_b(t_number **stack)
 {
 	char *message;
 
 	message = "rb";
-    if (reverse(stack) == 1)
+    if (rotate(stack) == 1)
 		ft_printf("%s\n", message);
 }

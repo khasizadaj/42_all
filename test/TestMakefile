@@ -1,15 +1,23 @@
 NAME = test_push_swap
 
 SRC_DIR = src
-UTILS_DIR = utils
-ALG_DIR = alg
+UTILS_DIR = src/utils
+ALG_DIR = src/alg
 TEST_DIR = test
 LIBFT_DIR = ./${SRC_DIR}/libft
 
-SRCS =	${SRC_DIR}/${UTILS_DIR}/reverse_instructions.c ${SRC_DIR}/${UTILS_DIR}/swap_instructions.c 
+SRCS =	${UTILS_DIR}/rotate.c \
+		${UTILS_DIR}/swap.c \
+		${UTILS_DIR}/reverse_rotate.c
+
 OBJS = ${SRCS:.c=.o}
 
-TEST_SRCS =	${TEST_DIR}/main.c
+TEST_SRCS =	${TEST_DIR}/main.c \
+			${TEST_DIR}/test_push.c \
+			${TEST_DIR}/test_swap.c \
+			${TEST_DIR}/test_rotate.c \
+			${TEST_DIR}/test_reverse_rotate.c
+
 TEST_OBJS = ${TEST_SRCS:.c=.o}
 
 CC = cc
@@ -23,7 +31,6 @@ ${NAME}: ${TEST_OBJS} ${OBJS}
 	@${CC} ${CFLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT_DIR}/libft.a -o ${NAME}
 
 %.o: %.c
-	echo ${OBJS} 
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

@@ -1,4 +1,4 @@
-#include "../include/push_swap.h"
+#include "./test.h"
 
 void print_list(t_number *stack)
 {
@@ -10,138 +10,41 @@ void print_list(t_number *stack)
     printf("NULL\n");
 }
 
-void test_reverse_a_with_multiple_numbers()
+
+void print_lists(t_number *stack_a, t_number *stack_b)
 {
-    t_number *node1 = malloc(sizeof(t_number));
-    t_number *node2 = malloc(sizeof(t_number));
-    t_number *node3 = malloc(sizeof(t_number));
-    t_number *node4 = malloc(sizeof(t_number));
-    
-    node1->number = 1;
-    node1->next = node2;
-    
-    node2->number = 2;
-    node2->next = node3;
-    
-    node3->number = 3;
-    node3->next = node4;
-
-    node4->number = 4;
-    node4->next = NULL;
-
-
-    printf("Before reverse_a:\n");
-    print_list(node1);
-
-    reverse_a(&node1);
-
-    printf("After reverse_a:\n");
-    print_list(node1);
-
-    if (node1->number == 2 && node1->next->number == 3 && node1->next->next->next->number == 1)
+	int	i;
+	ft_printf(" #\t| A\t| B\t|\n");
+	ft_printf("--------◘-------◘--------\n");
+	i = 0;
+	while (stack_a != NULL || stack_b != NULL)
     {
-        printf("PASS: reverse_a test passed!\n\n");
+        printf(" %d\t|", i);
+		if (stack_a)
+		{
+	        printf(" %d\t|", stack_a->number);
+			stack_a = stack_a->next;
+		}
+		else
+	        printf("\t|");
+		if (stack_b)
+	    {
+		    printf(" %d\t|\n", stack_b->number);
+			stack_b = stack_b->next;
+		}
+		else
+	        printf("\t|\n");
+		i++;
     }
-    else
-    {
-        printf("FAIL: reverse_a test failed!\n\n");
-    }
-}
-
-void test_reverse_a_with_3_numbers()
-{
-    t_number *node1 = malloc(sizeof(t_number));
-    t_number *node2 = malloc(sizeof(t_number));
-    t_number *node3 = malloc(sizeof(t_number));
-    
-    node1->number = 1;
-    node1->next = node2;
-    
-    node2->number = 2;
-    node2->next = node3;
-    
-    node3->number = 3;
-    node3->next = NULL;
-
-
-    printf("Before reverse_a:\n");
-    print_list(node1);
-
-    reverse_a(&node1);
-
-    printf("After reverse_a:\n");
-    print_list(node1);
-
-    if (node1->number == 2 && node1->next->number == 3 && node1->next->next->number == 1)
-    {
-        printf("PASS: reverse_a test passed!\n\n");
-    }
-    else
-    {
-        printf("FAIL: reverse_a test failed!\n\n");
-    }
-}
-
-void test_swap_a_with_1_number()
-{
-    t_number *node1 = malloc(sizeof(t_number));
-    
-    node1->number = 1;
-    node1->next = NULL;
-    
-
-    printf("Before swap_a:\n");
-    print_list(node1);
-
-    swap_a(&node1);
-
-    printf("After swap_a:\n");
-    print_list(node1);
-
-    {
-        printf("PASS: swap_a test passed!\n\n");
-    }
-    else
-    {
-        printf("FAIL: swap_a test failed!\n\n");
-    }
-}
-
-void test_swap_a_with_2_numbers()
-{
-    t_number *node1 = malloc(sizeof(t_number));
-    t_number *node2 = malloc(sizeof(t_number));
-    
-    node1->number = 1;
-    node1->next = node2;
-    
-    node2->number = 2;
-    node2->next = NULL;
-
-    printf("Before swap_a:\n");
-    print_list(node1);
-
-    swap_a(&node1);
-
-    printf("After swap_a:\n");
-    print_list(node1);
-
-    if (node1->number == 2 && node1->next->number == 1)
-    {
-        printf("PASS: swap_a test passed!\n\n");
-    }
-    else
-    {
-        printf("FAIL: swap_a test failed!\n\n");
-    }
+	ft_printf("¯¯¯¯¯¯¯¯°¯¯¯¯¯¯¯°¯¯¯¯¯¯¯¯\n", 0x2605);
 }
 
 int main(void)
 {
-	test_swap_a_with_2_numbers();
-	test_swap_a_with_1_number();
-	test_reverse_a_with_3_numbers();
-	test_reverse_a_with_multiple_numbers();
+	// test_swap();
+	test_push();
+	// test_rotate();
+	// test_reverse_rotate();
 
     return (0);
 }
