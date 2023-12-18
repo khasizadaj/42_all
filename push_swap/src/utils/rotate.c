@@ -14,37 +14,37 @@
 
 int	rotate(t_number **stack)
 {
-    t_number	*tmp;
+	t_number	*tmp;
 	t_number	*head;
 
-    if (!(*stack) || !((*stack)->next))
-        return (0);
-    tmp = (*stack)->next;
-    head = (*stack);
+	if (!(*stack) || !((*stack)->next))
+		return (0);
+	tmp = (*stack)->next;
+	head = (*stack);
 	while ((*stack)->next)
 	{
 		*stack = (*stack)->next;
 	}
 	(*stack)->next = head;
-    (*stack)->next->next = NULL;
-    *stack = tmp;
+	(*stack)->next->next = NULL;
+	*stack = tmp;
 	return (1);
 }
 
-void rotate_a(t_number **stack)
+void	rotate_a(t_number **stack)
 {
-	char *message;
+	char	*message;
 
 	message = "ra";
-    if (rotate(stack) == 1)
+	if (rotate(stack) == 1)
 		ft_printf("%s\n", message);
 }
 
-void rotate_b(t_number **stack)
+void	rotate_b(t_number **stack)
 {
-	char *message;
+	char	*message;
 
 	message = "rb";
-    if (rotate(stack) == 1)
+	if (rotate(stack) == 1)
 		ft_printf("%s\n", message);
 }

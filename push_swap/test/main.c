@@ -14,6 +14,8 @@ void print_list(t_number *stack)
 void print_lists(t_number *stack_a, t_number *stack_b)
 {
 	int	i;
+
+	ft_printf("--------:-------:--------\n", 0x2605);
 	ft_printf(" #\t| A\t| B\t|\n");
 	ft_printf("--------◘-------◘--------\n");
 	i = 0;
@@ -41,10 +43,10 @@ void print_lists(t_number *stack_a, t_number *stack_b)
 
 int main(void)
 {
-	// test_swap();
+	test_swap();
+	test_rotate();
+	test_reverse_rotate();
 	test_push();
-	// test_rotate();
-	// test_reverse_rotate();
 
     return (0);
 }

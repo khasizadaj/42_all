@@ -8,6 +8,7 @@ LIBFT_DIR = ./${SRC_DIR}/libft
 
 SRCS =	${UTILS_DIR}/rotate.c \
 		${UTILS_DIR}/swap.c \
+		${UTILS_DIR}/push.c \
 		${UTILS_DIR}/reverse_rotate.c
 
 OBJS = ${SRCS:.c=.o}
@@ -36,6 +37,7 @@ ${NAME}: ${TEST_OBJS} ${OBJS}
 clean:
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory fclean
 	@${RM} ${OBJS}
+	@${RM} ${TEST_OBJS}
 
 fclean: clean
 	@${RM} -f ${NAME}

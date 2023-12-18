@@ -1,44 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 19:56:43 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/18 19:31:04 by jkhasiza         ###   ########.fr       */
+/*   Created: 2023/12/18 18:53:38 by jkhasiza          #+#    #+#             */
+/*   Updated: 2023/12/18 19:31:14 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int	swap(t_number **stack)
+void	push_a(t_number **stack_a, t_number **stack_b)
 {
-	t_number	*tmp;
+	t_number	*first_b;
 
-	if (!(*stack) || !((*stack)->next))
-		return (0);
-	tmp = (*stack)->next;
-	(*stack)->next = tmp->next;
-	tmp->next = *stack;
-	*stack = tmp;
-	return (1);
+	first_b = (*stack_b);
+	*stack_b = first_b->next;
+	first_b->next = (*stack_a);
+	*stack_a = first_b;
+	ft_printf("pa\n");
 }
 
-void	swap_a(t_number **stack)
+void	push_b(t_number **stack_a, t_number **stack_b)
 {
-	char	*message;
+	t_number	*first_a;
 
-	message = "sa";
-	if (swap(stack) == 1)
-		ft_printf("%s\n", message);
-}
-
-void	swap_b(t_number **stack)
-{
-	char	*message;
-
-	message = "sb";
-	if (swap(stack) == 1)
-		ft_printf("%s\n", message);
+	first_a = (*stack_a);
+	*stack_a = first_a->next;
+	first_a->next = (*stack_b);
+	*stack_b = first_a;
+	ft_printf("pb\n");
 }

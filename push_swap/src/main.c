@@ -6,13 +6,13 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/16 19:19:28 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:26:53 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	main (void)
+int	main(void)
 {
 	ft_printf("Hello %s!", "Javid2");
 	return (0);

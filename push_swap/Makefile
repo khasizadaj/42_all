@@ -4,12 +4,13 @@ SRC_DIR = src
 UTILS_DIR = src/utils
 ALG_DIR = alg
 TEST_DIR = test
-LIBFT_DIR = ./${SRC_DIR}/libft
+LIBFT_DIR = src/libft
 
 SRCS =	${SRC_DIR}/main.c \
 		${UTILS_DIR}/reverse_rotate.c \
 		${UTILS_DIR}/rotate.c \
-		${UTILS_DIR}/swap.c
+		${UTILS_DIR}/swap.c \
+		${UTILS_DIR}/push.c
 
 OBJS = ${SRCS:.c=.o}
 

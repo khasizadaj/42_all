@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/17 20:17:08 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/18 19:15:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ void	rotate_b(t_number **stack);
 int		reverse_rotate(t_number **stack);
 void	reverse_rotate_a(t_number **stack);
 void	reverse_rotate_b(t_number **stack);
+void	push_a(t_number **stack_a, t_number **stack_b);
+void	push_b(t_number **stack_a, t_number **stack_b);
 
 #endif
