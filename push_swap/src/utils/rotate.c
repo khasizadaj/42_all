@@ -48,3 +48,12 @@ void	rotate_b(t_number **stack)
 	if (rotate(stack) == 1)
 		ft_printf("%s\n", message);
 }
+
+void rotate_both(t_number **stack_a, t_number **stack_b)
+{
+	char	*message;
+
+	message = "rr";
+	if (rotate(stack_a) == 1 && rotate(stack_b) == 1)
+		ft_printf("%s\n", message);
+}

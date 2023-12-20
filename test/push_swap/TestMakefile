@@ -9,7 +9,8 @@ LIBFT_DIR = ./${SRC_DIR}/libft
 SRCS =	${UTILS_DIR}/rotate.c \
 		${UTILS_DIR}/swap.c \
 		${UTILS_DIR}/push.c \
-		${UTILS_DIR}/reverse_rotate.c
+		${UTILS_DIR}/reverse_rotate.c \
+		${ALG_DIR}/algorithm.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -17,7 +18,8 @@ TEST_SRCS =	${TEST_DIR}/main.c \
 			${TEST_DIR}/test_push.c \
 			${TEST_DIR}/test_swap.c \
 			${TEST_DIR}/test_rotate.c \
-			${TEST_DIR}/test_reverse_rotate.c
+			${TEST_DIR}/test_reverse_rotate.c \
+			${TEST_DIR}/test_algorithm.c
 
 TEST_OBJS = ${TEST_SRCS:.c=.o}
 
@@ -27,7 +29,13 @@ CFLAGS = -Wall -Wextra -Werror -I ./include
 
 all: ${NAME}
 
-${NAME}: ${TEST_OBJS} ${OBJS}
+${NAME}: compile
+	./${NAME} | grep -E "PASS|FAIL"
+
+debug: compile
+	./${NAME}
+
+compile: ${TEST_OBJS} ${OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
 	@${CC} ${CFLAGS} ${OBJS} ${TEST_OBJS} ${LIBFT_DIR}/libft.a -o ${NAME}
 

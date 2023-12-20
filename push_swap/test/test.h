@@ -9,5 +9,6 @@ void	test_swap(void);
 void	test_push(void);
 void	test_rotate(void);
 void	test_reverse_rotate(void);
+void	test_algorithm(void);
 
 #endif

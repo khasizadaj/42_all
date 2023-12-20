@@ -72,8 +72,55 @@ void test_rotate_a_with_3_numbers()
     }
 }
 
+void test_rotate_both()
+{
+    t_number *STACK_A = malloc(sizeof(t_number));
+    t_number *node2 = malloc(sizeof(t_number));
+    t_number *node3 = malloc(sizeof(t_number));
+    t_number *STACK_B = malloc(sizeof(t_number));
+    t_number *node5 = malloc(sizeof(t_number));
+    t_number *node6 = malloc(sizeof(t_number));
+    
+    STACK_A->number = 1;
+    STACK_A->next = node2;
+    
+    node2->number = 2;
+    node2->next = node3;
+    
+    node3->number = 3;
+    node3->next = NULL;
+
+    STACK_B->number = 4;
+    STACK_B->next = node5;
+
+    node5->number = 5;
+    node5->next = node6;
+
+    node6->number = 6;
+    node6->next = NULL;
+
+    printf("\nBefore rotate_both:\n\n");
+    print_lists(STACK_A, STACK_B);
+
+    rotate_both(&STACK_A, &STACK_B);
+
+	printf("After rotate_both:\n\n");
+    print_lists(STACK_A, STACK_B);
+
+    if (STACK_A->number == 2 && STACK_A->next->next->number == 1 
+		&& STACK_B->number == 5 && STACK_B->next->next->number == 4)
+    {
+        printf("PASS: rotate_both test passed!\n\n");
+    }
+    else
+    {
+        printf("FAIL: rotate_both test failed!\n\n");
+    }
+}
+
 void test_rotate(void)
 {
 	test_rotate_a_with_3_numbers();
 	test_rotate_a_with_multiple_numbers();
+	test_rotate_both();
 }

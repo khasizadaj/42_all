@@ -154,8 +154,8 @@ void test_push_a_stack_becomes_empty()
 
 void	test_push(void)
 {
-	// test_push_b();
-	// test_push_b_becomes_empty();
+	test_push_b();
+	test_push_b_stack_becomes_empty();
 	test_push_a();
 	test_push_a_stack_becomes_empty();
 }

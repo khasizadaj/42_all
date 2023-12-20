@@ -43,10 +43,11 @@ void print_lists(t_number *stack_a, t_number *stack_b)
 
 int main(void)
 {
-	test_swap();
-	test_rotate();
-	test_reverse_rotate();
-	test_push();
+	// test_swap();
+	// test_rotate();
+	// test_reverse_rotate();
+	// test_push();
+	test_algorithm();
 
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/18 19:26:53 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/20 22:47:54 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 int	main(void)
 {
 	ft_printf("Hello %s!", "Javid2");
+	// free(steps);
 	return (0);
 }
