@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/20 22:40:16 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/23 01:42:03 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void	reverse_rotate_both(t_number **stack_a, t_number **stack_b);
 void	push_a(t_number **stack_a, t_number **stack_b);
 void	push_b(t_number **stack_a, t_number **stack_b);
 int		*get_cheapest(t_list *from, t_list *to);
+lli		get_location_to_move(lli val, t_list *to);
+void	print_steps(int *steps, int size);
 
 #endif

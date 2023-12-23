@@ -11,6 +11,7 @@ SRCS =	${SRC_DIR}/main.c \
 		${UTILS_DIR}/rotate.c \
 		${UTILS_DIR}/swap.c \
 		${UTILS_DIR}/push.c
+		${UTILS_DIR}/debug.c
 
 OBJS = ${SRCS:.c=.o}
 

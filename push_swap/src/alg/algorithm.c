@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/20 23:11:09 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/23 01:59:26 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /* 
 
@@ -24,69 +22,137 @@
 	- 3 : ra
 	- 4 : rb
 	- 5 : rr
-	- 6 : pa
-	- 7 : pb
-	- 8 : rra
-	- 9 : rrb
-	- 10 : rrr
+	- 6 : rra
+	- 7 : rrb
+	- 8 : rrr
+	- 9 : pa
+	- 10 : pb
 
 	We'll represent potential steps to reach destination using
 	array. Every spot refers to certain step and whenever that
 	step is taken, spot value will be Updated to '1' from its
 	initial value of '0'.
 
-	steps = [0, 0, 0]
-              1x sa                   1x ra   
-	         [1, 1], [0, 0], [0, 0], [0, 0]]
-			  1x pa          1x rra
-
+	steps = [ 0 0 0 0 0 0 1 1 0 0 1]
+              sa    ra    rra   pa
 	It would take 4 steps for given number to reach 
 	its destination.
 
 */
 
-void	get_steps_4_a(int lookup, int *steps, t_list *from)
+void	get_steps_to_top_b(int lookup, int *steps, t_list *stack)
+{
+	int size;
+
+	size = ft_lstsize(stack);
+	// printf("Lookup: %d\n", lookup);
+
+	if (lookup != 0 && size % 2 == 0 && lookup + 1 >= size / 2 + 1)
+	{
+		steps[7] = size - lookup;
+		return ;
+	}
+	if (lookup != 0 && size % 2 == 1 && lookup + 1 > size / 2 + 1)
+	{
+		steps[7] = size - lookup;
+		return ;
+	}
+	else if (lookup != 0)
+	{
+		steps[4] = lookup;
+		return ;
+	}
+}
+
+void	get_steps_to_top_a(int lookup, int *steps, t_list *stack)
 {
 	int size_a;
 
-	size_a = ft_lstsize(from);
-	if (lookup != 0 && lookup + 1 > size_a / 2 + 1)
-		steps[8] = size_a - lookup;
+	size_a = ft_lstsize(stack);
+	if (lookup != 0 && size_a % 2 == 0 && lookup + 1 >= size_a / 2 + 1)
+	{
+		steps[6] = size_a - lookup;
+		return ;
+	}
+	if (lookup != 0 && size_a % 2 == 1 && lookup + 1 > size_a / 2 + 1)
+	{
+		steps[6] = size_a - lookup;
+		return ;
+	}
 	else if (lookup != 0)
+	{
 		steps[3] = lookup;
+		return ;
+	}
 }
 
-void get_steps_4_b(lli val, int *steps, t_list *to)
-{
-	t_list	**tmp;
-	int		i;
+lli get_largest(t_list *stack) {
+    t_list *tmp;
+    lli		i;
+    lli		max;
 
+    if (!stack)
+		return (-1);
 	i = 0;
-	tmp = &to;
-	while (*tmp) {
-		if (!(*tmp)->next)
-			break ;			
-		if ((lli) (*tmp)->content > val)
-			break ;
+    tmp = stack;
+	max = (lli)tmp->content;
+    while (tmp) {
+        if ((lli)tmp->content >= max)
+            max = (lli)tmp->content;
+        tmp = tmp->next;
 		i++;
-		tmp = &((*tmp)->next);
-	}
-	if (val < (lli) ft_lstlast(to)->content)
-		i = 0;
+    }
+    return max;
+}
+
+/*
+	This function return the position that moved element
+	should be in. If returned value is 1, it means that
+	moved element will be in that position, or it should
+	be on top of current element on index 1. 
+*/
+lli	get_location_to_move(lli val, t_list *to)
+{
+	t_list	*tmp;
+	lli		i;
+	lli		location;
+	lli		smallest;
+
+    tmp = to;
+    i = 0;
+	smallest = get_largest(to);
+	location = 0;
+	if (val > smallest && smallest == (lli)tmp->content)
+		return (0);
+    while (tmp) {
+        if ((lli)tmp->content<=smallest && val < (lli)tmp->content) 
+		{
+            smallest = (lli)tmp->content;
+			location = i + 1;
+		}
+		if (val > smallest && val > (lli)tmp->content && val > (lli)tmp->next->content)
+			return (i + 1);
+        tmp = tmp->next;
+        i++;
+    }
+	if (location == ft_lstsize(to))
+		return (0);
+	return (location);
 }
 
 void get_steps(int lookup, lli val, int *steps, t_list *from, t_list *to)
 {
+	lli location;
+
 	// MAYBE SWAP CAN HAPPEN IF AVERAGE IS SMALL
-	get_steps_4_a(lookup, steps, from);
-	get_steps_4_b(val, steps, to);
+	get_steps_to_top_a(lookup, steps, from);
+	location = get_location_to_move(val, to);
+	printf("Location to move: %lld\n", location);
+	get_steps_to_top_b(location, steps, to);
+	steps[10] += 1;
 
-	printf("SIZE_A:\t%d\n", ft_lstsize(from));
-	printf("SIZE_B:\t%d\n", ft_lstsize(to));
-	printf("LOOKUP:\t%d\n", lookup);
-	printf("ST[3]:\t%d\n", steps[3]);
-	printf("ST[8]:\t%d\n", steps[8]);
-
+	printf("VAL:\t%lld\n", val);
+	print_steps(steps, 11);
 }
 
 void	reset_steps(int *steps)
@@ -120,8 +186,6 @@ int *get_cheapest(t_list *from, t_list *to)
 		reset_steps(steps);
 		printf("\n=====\n\n");
 		i++;
-	}
-	
-	
+	}	
 	return steps;
 }

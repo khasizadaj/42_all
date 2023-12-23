@@ -1,17 +1,16 @@
 #include "./test.h"
 
-void print_list(t_number *stack)
+void print_list(t_list *stack)
 {
     while (stack != NULL)
     {
-        printf("%d -> ", stack->number);
+        printf("%lld -> ", (lli) stack->content);
         stack = stack->next;
     }
     printf("NULL\n");
 }
 
-
-void print_lists(t_number *stack_a, t_number *stack_b)
+void print_lists(t_list *stack_a, t_list *stack_b)
 {
 	int	i;
 
@@ -24,14 +23,14 @@ void print_lists(t_number *stack_a, t_number *stack_b)
         printf(" %d\t|", i);
 		if (stack_a)
 		{
-	        printf(" %d\t|", stack_a->number);
+	        printf("%lld\t|", (lli) stack_a->content);
 			stack_a = stack_a->next;
 		}
 		else
 	        printf("\t|");
 		if (stack_b)
 	    {
-		    printf(" %d\t|\n", stack_b->number);
+		    printf(" %lld\t|\n", (lli) stack_b->content);
 			stack_b = stack_b->next;
 		}
 		else
