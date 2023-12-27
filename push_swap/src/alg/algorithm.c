@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/27 22:01:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/27 22:07:38 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int	calculate_cost(int *steps)
 
 	i = -1;
 	result = 0;
-	while (++i STEP_SIZE)
+	while (++i < STEP_SIZE)
 		result += steps[i];
 
 	return result;
