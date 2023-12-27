@@ -2,33 +2,33 @@
 
 void test_rotate_a_with_multiple_numbers()
 {
-    t_number *node1 = malloc(sizeof(t_number));
-    t_number *node2 = malloc(sizeof(t_number));
-    t_number *node3 = malloc(sizeof(t_number));
-    t_number *node4 = malloc(sizeof(t_number));
+    t_list *node_A = malloc(sizeof(t_list));
+    t_list *node2 = malloc(sizeof(t_list));
+    t_list *node3 = malloc(sizeof(t_list));
+    t_list *node4 = malloc(sizeof(t_list));
     
-    node1->number = 1;
-    node1->next = node2;
+    node_A->content = (void *) 1;
+    node_A->next = node2;
     
-    node2->number = 2;
+    node2->content = (void *) 2;
     node2->next = node3;
     
-    node3->number = 3;
+    node3->content = (void *) 3;
     node3->next = node4;
 
-    node4->number = 4;
+    node4->content = (void *) 4;
     node4->next = NULL;
 
 
     printf("Before roate_a:\n");
-    print_list(node1);
+    print_list(node_A);
 
-    rotate_a(&node1);
+    rotate_a(&node_A);
 
     printf("After roate_a:\n");
-    print_list(node1);
+    print_list(node_A);
 
-    if (node1->number == 2 && node1->next->number == 3 && node1->next->next->next->number == 1)
+    if ((lli) node_A->content == 2 && (lli) node_A->next->content == 3 && (lli) node_A->next->next->next->content == 1)
     {
         printf("PASS: roate_a test passed!\n\n");
     }
@@ -36,33 +36,35 @@ void test_rotate_a_with_multiple_numbers()
     {
         printf("FAIL: roate_a test failed!\n\n");
     }
+
+	ft_lstclear_no_content(&node_A);
 }
 
 void test_rotate_a_with_3_numbers()
 {
-    t_number *node1 = malloc(sizeof(t_number));
-    t_number *node2 = malloc(sizeof(t_number));
-    t_number *node3 = malloc(sizeof(t_number));
+    t_list *node_A = malloc(sizeof(t_list));
+    t_list *node2 = malloc(sizeof(t_list));
+    t_list *node3 = malloc(sizeof(t_list));
     
-    node1->number = 1;
-    node1->next = node2;
+    node_A->content = (void *) 1;
+    node_A->next = node2;
     
-    node2->number = 2;
+    node2->content = (void *) 2;
     node2->next = node3;
     
-    node3->number = 3;
+    node3->content = (void *) 3;
     node3->next = NULL;
 
 
     printf("Before roate_a:\n");
-    print_list(node1);
+    print_list(node_A);
 
-    rotate_a(&node1);
+    rotate_a(&node_A);
 
     printf("After roate_a:\n");
-    print_list(node1);
+    print_list(node_A);
 
-    if (node1->number == 2 && node1->next->number == 3 && node1->next->next->number == 1)
+    if ((lli) node_A->content == 2 && (lli) node_A->next->content == 3 && (lli) node_A->next->next->content == 1)
     {
         printf("PASS: roate_a test passed!\n\n");
     }
@@ -70,45 +72,47 @@ void test_rotate_a_with_3_numbers()
     {
         printf("FAIL: roate_a test failed!\n\n");
     }
+
+	ft_lstclear_no_content(&node_A);
 }
 
 void test_rotate_both()
 {
-    t_number *STACK_A = malloc(sizeof(t_number));
-    t_number *node2 = malloc(sizeof(t_number));
-    t_number *node3 = malloc(sizeof(t_number));
-    t_number *STACK_B = malloc(sizeof(t_number));
-    t_number *node5 = malloc(sizeof(t_number));
-    t_number *node6 = malloc(sizeof(t_number));
+    t_list *node_A = malloc(sizeof(t_list));
+    t_list *node2 = malloc(sizeof(t_list));
+    t_list *node3 = malloc(sizeof(t_list));
+    t_list *node_B = malloc(sizeof(t_list));
+    t_list *node5 = malloc(sizeof(t_list));
+    t_list *node6 = malloc(sizeof(t_list));
     
-    STACK_A->number = 1;
-    STACK_A->next = node2;
+    node_A->content = (void *) 1;
+    node_A->next = node2;
     
-    node2->number = 2;
+    node2->content = (void *) 2;
     node2->next = node3;
     
-    node3->number = 3;
+    node3->content = (void *) 3;
     node3->next = NULL;
 
-    STACK_B->number = 4;
-    STACK_B->next = node5;
+    node_B->content = (void *) 4;
+    node_B->next = node5;
 
-    node5->number = 5;
+    node5->content = (void *) 5;
     node5->next = node6;
 
-    node6->number = 6;
+    node6->content = (void *) 6;
     node6->next = NULL;
 
     printf("\nBefore rotate_both:\n\n");
-    print_lists(STACK_A, STACK_B);
+    print_lists(node_A, node_B);
 
-    rotate_both(&STACK_A, &STACK_B);
+    rotate_both(&node_A, &node_B);
 
 	printf("After rotate_both:\n\n");
-    print_lists(STACK_A, STACK_B);
+    print_lists(node_A, node_B);
 
-    if (STACK_A->number == 2 && STACK_A->next->next->number == 1 
-		&& STACK_B->number == 5 && STACK_B->next->next->number == 4)
+    if ((lli) node_A->content == 2 && (lli) node_A->next->next->content == 1 
+		&& (lli) node_B->content == 5 && (lli) node_B->next->next->content == 4)
     {
         printf("PASS: rotate_both test passed!\n\n");
     }
@@ -116,6 +120,9 @@ void test_rotate_both()
     {
         printf("FAIL: rotate_both test failed!\n\n");
     }
+
+	ft_lstclear_no_content(&node_A);
+	ft_lstclear_no_content(&node_B);
 }
 
 void test_rotate(void)

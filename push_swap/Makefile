@@ -10,8 +10,10 @@ SRCS =	${SRC_DIR}/main.c \
 		${UTILS_DIR}/reverse_rotate.c \
 		${UTILS_DIR}/rotate.c \
 		${UTILS_DIR}/swap.c \
-		${UTILS_DIR}/push.c
-		${UTILS_DIR}/debug.c
+		${UTILS_DIR}/push.c \
+		${UTILS_DIR}/debug.c \
+		${ALG_DIR}/algorithm.c \
+		${ALG_DIR}/apply.c
 
 OBJS = ${SRCS:.c=.o}
 

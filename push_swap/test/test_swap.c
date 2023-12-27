@@ -2,20 +2,20 @@
 
 void test_swap_a_with_1_number()
 {
-    t_number *node1 = malloc(sizeof(t_number));
+    t_list *node_A = malloc(sizeof(t_list));
     
-    node1->number = 1;
-    node1->next = NULL;
+    node_A->content = (void *) 1;
+    node_A->next = NULL;
     
 
     printf("Before swap_a:\n");
-    print_list(node1);
+    print_list(node_A);
 
-    swap_a(&node1);
+    swap_a(&node_A);
 
     printf("After swap_a:\n");
-    print_list(node1);
-    if (node1->number == 1 && node1->next == NULL)
+    print_list(node_A);
+    if ((lli) node_A->content == 1 && node_A->next == NULL)
     {
         printf("PASS: swap_a test passed!\n\n");
     }
@@ -23,28 +23,30 @@ void test_swap_a_with_1_number()
     {
         printf("FAIL: swap_a test failed!\n\n");
     }
+
+	ft_lstclear_no_content(&node_A);
 }
 
 void test_swap_a_with_2_numbers()
 {
-    t_number *node1 = malloc(sizeof(t_number));
-    t_number *node2 = malloc(sizeof(t_number));
+    t_list *node_A = malloc(sizeof(t_list));
+    t_list *node2 = malloc(sizeof(t_list));
     
-    node1->number = 1;
-    node1->next = node2;
+    node_A->content = (void *) 1;
+    node_A->next = node2;
     
-    node2->number = 2;
+    node2->content = (void *) 2;
     node2->next = NULL;
 
     printf("Before swap_a:\n");
-    print_list(node1);
+    print_list(node_A);
 
-    swap_a(&node1);
+    swap_a(&node_A);
 
     printf("After swap_a:\n");
-    print_list(node1);
+    print_list(node_A);
 
-    if (node1->number == 2 && node1->next->number == 1)
+    if ((lli) node_A->content == 2 && (lli) node_A->next->content == 1)
     {
         printf("PASS: swap_a test passed!\n\n");
     }
@@ -52,6 +54,8 @@ void test_swap_a_with_2_numbers()
     {
         printf("FAIL: swap_a test failed!\n\n");
     }
+
+	ft_lstclear_no_content(&node_A);
 }
 
 void	test_swap(void)
