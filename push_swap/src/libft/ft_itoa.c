@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:34:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/10/02 21:42:50 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:16:52 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 ** returns "-2147483648" (minimum value of int)
 */
 
+#include "libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -104,7 +105,7 @@ char	*ft_itoa(int n)
 	int				i;
 
 	size = get_size(n);
-	str = malloc(sizeof(char) * size + 1);
+	str = ft_calloc(size + 1, sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	big_number = n;

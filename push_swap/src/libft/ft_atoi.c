@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:17:35 by codespace         #+#    #+#             */
-/*   Updated: 2023/09/22 17:07:33 by codespace        ###   ########.fr       */
+/*   Updated: 2023/12/28 18:26:42 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,34 @@ int	ft_isspace(int c)
 
 int	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	sign;
-	int	n;
+	int			i;
+	int			sign;
+	long int	n;
+
+	i = 0;
+	sign = 1;
+	while (ft_isspace(nptr[i]))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
+	}
+	n = 0;
+	while (ft_isdigit(nptr[i]) > 0)
+	{
+		n = n * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (n * sign);
+}
+
+long int	ft_atoi_li(const char *nptr)
+{
+	int				i;
+	int				sign;
+	long long int	n;
 
 	i = 0;
 	sign = 1;

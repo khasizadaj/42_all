@@ -4,7 +4,7 @@ void print_list(t_list *stack)
 {
     while (stack != NULL)
     {
-        printf("%lld -> ", (lli) stack->content);
+        printf("%d -> ", *(int *)(stack->content));
         stack = stack->next;
     }
     printf("NULL\n");
@@ -46,7 +46,8 @@ int main(void)
 	// test_rotate();
 	// test_reverse_rotate();
 	// test_push();
-	test_algorithm();
+	// test_algorithm();
+	test_stack_helper();
 
     return (0);
 }

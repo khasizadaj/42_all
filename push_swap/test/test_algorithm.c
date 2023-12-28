@@ -306,8 +306,8 @@ void	test_get_location_first_is_biggest()
 
 void	test_algorithm(void)
 {
-	// test_get_cheapest();
+	test_get_cheapest();
 	test_apply();
-	// test_get_location_first_is_biggest();
-	// test_get_location_4_b();
+	test_get_location_first_is_biggest();
+	test_get_location_4_b();
 }

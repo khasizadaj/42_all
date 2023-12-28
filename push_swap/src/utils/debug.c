@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:39:17 by jkhasizada        #+#    #+#             */
-/*   Updated: 2023/12/27 18:32:28 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:09:27 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,32 @@ void print_steps(int *steps, int size)
 			ft_printf(" ");
     }
     ft_printf("]\n");
+}
+
+void	print_str_array(char **input)
+{
+	int	i;
+
+	if (!input)
+	{
+		ft_printf("Input is empty.");
+		return ;
+	}
+	i = -1;
+	while (input[++i])
+		ft_printf("input[%d]=\"%s\"\n", i, input[i]);
+}
+
+void	print_int_array(int *input)
+{
+	int	i;
+
+	if (!input)
+	{
+		ft_printf("Input is empty.");
+		return ;
+	}
+	i = -1;
+	while (input[++i])
+		ft_printf("input[%d]=\"%d\"\n", i, input[i]);
 }

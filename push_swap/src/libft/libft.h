@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2023/12/27 20:17:18 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:46:44 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <fcntl.h>
 # include <stdarg.h>
 
+# include "gnl/get_next_line.h"
+
+# define MAX_INT 2147483647
+# define MIN_INT -2147483648
+# define MAX_LONG_INT 9223372036854775807
+# define MIN_LONG_INT -9223372036854775808
+
 typedef struct s_list
 {
 	void			*content;
@@ -27,8 +34,9 @@ typedef struct s_list
 }	t_list;
 
 int				ft_atoi(const char *nptr);
+long int		ft_atoi_li(const char *nptr);
 void			ft_bzero(void *s, size_t n);
-int				ft_isalnum(int c);
+int				ft_isalnget_next_lineum(int c);
 int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
@@ -46,6 +54,7 @@ void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 char			**ft_split(char const *s, char c);
+int				*ft_split_convert_i(char const *s, char c);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strchr(const char *s, int c);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
@@ -87,5 +96,7 @@ int				get_length_p(unsigned long long n);
 int				get_length(char type, void *arg);
 void			ft_putuint(unsigned int n, int fd);
 void			ft_putmemory(void *arg);
+
+char			*get_next_line(int fd);
 
 #endif

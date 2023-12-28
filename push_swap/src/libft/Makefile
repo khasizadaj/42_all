@@ -45,7 +45,9 @@ SRCS := ft_bzero.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
 	ft_lstmap.c \
-	ft_printf.c ft_nbr_to_hex.c ft_hex.c ft_nbrtoa.c ft_nbrlen.c ft_put.c
+	ft_printf.c ft_nbr_to_hex.c ft_hex.c ft_nbrtoa.c ft_nbrlen.c ft_put.c \
+	gnl/get_next_line_utils.c \
+	gnl/get_next_line.c
 
 OBJS := $(SRCS:%.c=%.o)
 

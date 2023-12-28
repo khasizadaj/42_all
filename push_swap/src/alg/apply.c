@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/27 22:04:56 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:09:01 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	apply_push(int *steps, t_list **stack_a, t_list **stack_b)
 	i = -1;
 	while (++i < steps[PUSH_B])
 		push_b(stack_a, stack_b);
-	i = -1;
 }
 
 void	apply_swap(int *steps, t_list **stack_a, t_list **stack_b)

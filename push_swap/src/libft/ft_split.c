@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:46:14 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/09/26 17:17:59 by codespace        ###   ########.fr       */
+/*   Updated: 2023/12/28 22:52:50 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	length_of_next(int i, char const *s, char c)
 	return (end_of_next - i);
 }
 
-void	free_result(int i, char **result)
+void	free_result(int i, void **result)
 {
 	int	j;
 
@@ -75,7 +75,7 @@ char	**ft_split(char const *s, char c)
 		{
 			result[curr_word] = ft_substr(s, i, length_of_next(i, s, c));
 			if (result[curr_word] == NULL)
-				return (free_result(curr_word, result), NULL);
+				return (free_result(curr_word, (void *) result), NULL);
 			curr_word++;
 			i += length_of_next(i, s, c);
 		}
@@ -85,3 +85,31 @@ char	**ft_split(char const *s, char c)
 	result[curr_word] = NULL;
 	return (result);
 }
+
+// int	*ft_split_convert_i(char const *s, char c)
+// {
+// 	int		*result;
+// 	unsigned int	i;
+// 	int				curr_word;
+// 	char			*num_string;
+
+// 	result = ft_calloc(count_words(s, c), sizeof(int));
+// 	if (result == NULL)
+// 		return (NULL);
+// 	i = -1;
+// 	curr_word = 0;
+// 	while (s[++i])
+// 	{
+// 		if (s[i] != c)
+// 		{
+// 			num_string = ft_substr(s, i, length_of_next(i, s, c));
+// 			if (num_string == NULL)
+// 				return (free(result), NULL);
+// 			result[curr_word] = ft_atoi(num_string);
+// 			free(num_string);
+// 			curr_word++;
+// 			i += length_of_next(i, s, c);
+// 		}
+// 	}
+// 	return (result);
+// }
