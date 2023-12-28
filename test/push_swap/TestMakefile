@@ -1,8 +1,8 @@
 NAME = test_push_swap
 
 SRC_DIR = src
-UTILS_DIR = src/utils
-ALG_DIR = src/alg
+UTILS_DIR = ./${SRC_DIR}/utils
+ALG_DIR = ./${SRC_DIR}/alg
 TEST_DIR = test
 LIBFT_DIR = ./${SRC_DIR}/libft
 
@@ -11,12 +11,14 @@ SRCS =	${UTILS_DIR}/rotate.c \
 		${UTILS_DIR}/push.c \
 		${UTILS_DIR}/debug.c \
 		${UTILS_DIR}/reverse_rotate.c \
+		${UTILS_DIR}/stack_helper.c \
 		${ALG_DIR}/algorithm.c \
 		${ALG_DIR}/apply.c
 
 OBJS = ${SRCS:.c=.o}
 
 TEST_SRCS =	${TEST_DIR}/main.c \
+			${TEST_DIR}/test_stack_helper.c \
 			${TEST_DIR}/test_push.c \
 			${TEST_DIR}/test_swap.c \
 			${TEST_DIR}/test_rotate.c \
@@ -27,7 +29,7 @@ TEST_OBJS = ${TEST_SRCS:.c=.o}
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I ./include
+CFLAGS = -Wall -Wextra -Werror -I ./include -g
 
 all: ${NAME}
 
