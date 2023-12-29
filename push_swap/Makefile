@@ -2,7 +2,7 @@ NAME = push_swap
 
 SRC_DIR = src
 UTILS_DIR = src/utils
-ALG_DIR = alg
+ALG_DIR = src/alg
 TEST_DIR = test
 LIBFT_DIR = src/libft
 
@@ -12,6 +12,7 @@ SRCS =	${SRC_DIR}/main.c \
 		${UTILS_DIR}/swap.c \
 		${UTILS_DIR}/push.c \
 		${UTILS_DIR}/debug.c \
+		${UTILS_DIR}/stack_helper.c \
 		${ALG_DIR}/algorithm.c \
 		${ALG_DIR}/apply.c
 
@@ -19,7 +20,7 @@ OBJS = ${SRCS:.c=.o}
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I ./include
+CFLAGS = -Wall -Wextra -Werror -I ./include -g
 
 all: ${NAME}
 

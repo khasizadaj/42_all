@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:39:17 by jkhasizada        #+#    #+#             */
-/*   Updated: 2023/12/27 18:32:28 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2023/12/29 22:08:06 by jkhasizada       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,14 @@ void print_steps(int *steps, int size)
 			ft_printf(" ");
     }
     ft_printf("]\n");
+}
+
+void print_stack(t_number *stack)
+{
+    while (stack != NULL)
+    {
+        ft_printf("%d -> ", stack->number);
+        stack = stack->next;
+    }
+    printf("NULL\n");
 }
