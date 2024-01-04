@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	data->size = 5;
 	data->stack_a = NULL;
 	
+	// TODO Validate input
 	generate_stack(data, argc, argv);
 	print_stack(data->stack_a);
 	ft_stackclear(&data->stack_a);

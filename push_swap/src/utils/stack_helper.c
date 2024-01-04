@@ -67,23 +67,55 @@ void	free_numbers(t_data *data, char **numbers)
 	free(numbers);
 }
 
+int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
+{
+	int	i;
+	int	size;
+
+	size = 0;
+	if (argc == 2)
+	{
+        *raw_numbers = ft_split(argv[1], ' ');
+
+        // Check if *raw_numbers is NULL (not !raw_numbers)
+        if (!*raw_numbers)
+            return -1;
+
+        i = -1;
+        while ((*raw_numbers)[++i])
+        {
+            size++;
+        }
+	}
+	else
+	{
+		*raw_numbers = argv;
+		size = argc - 1;
+	}
+	return (size);
+}
+/*
+	TODO Check if we can get rid of data->size and make it temporary.
+*/
 void	generate_stack(t_data *data, int argc, char **argv)
 {
 	char	**raw_numbers;
 	int		i;
+	int		end_index;
 	t_number	*new_elem;
 
 	i = 0;
+	raw_numbers = NULL;
+	data->size = get_raw_numbers(&raw_numbers, argc, argv);
+	if (data->size == -1)
+		return ;
+	end_index = data->size + 1;
 	if (argc == 2)
 	{
-		raw_numbers = ft_split(argv[1], ' ');
-		if (!raw_numbers)
-			return ;
 		i = -1;
+		end_index = data->size;
 	}
-	else
-		raw_numbers = argv;
-	while (++i <= data->size)
+	while (++i < end_index)
 	{
 		new_elem = ft_stacknew(ft_atoi(raw_numbers[i]));
 		if (!new_elem)
