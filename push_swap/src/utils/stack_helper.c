@@ -77,9 +77,9 @@ void	generate_stack(t_data *data, int argc, char **argv)
 	if (argc == 2)
 	{
 		raw_numbers = ft_split(argv[1], ' ');
-		i = -1;
 		if (!raw_numbers)
 			return ;
+		i = -1;
 	}
 	else
 		raw_numbers = argv;
