@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/05 17:12:41 by jkhasiza         ###   ########.fr       */
+/*   Created: 2024/01/05 16:56:35 by codespace         #+#    #+#             */
+/*   Updated: 2024/01/05 17:14:42 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-int	main(int argc, char **argv)
+void exit_for(int reason)
 {
-	t_data *data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	data->size = 5;
-	data->stack_a = NULL;
-	
-	if (!validate_input(argc, argv))
-	{
-		free(data);
-		exit_for(INVALID_INPUT);
-	}
-	generate_stack(data, argc, argv);
-	// print_stack(data->stack_a);
-	ft_stackclear(&data->stack_a);
-	free(data);
-	return (0);
+    if (reason == INVALID_INPUT)
+        ft_printf("Input is not valid.");
+    exit(reason);
 }

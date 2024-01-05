@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2023/12/27 20:17:18 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:13:58 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <ctype.h>
 # include <fcntl.h>
 # include <stdarg.h>
+
+# define bool int
+# define true 1 
+# define false 0
 
 typedef struct s_list
 {
