@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/06 13:16:41 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/06 13:23:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_data *data = malloc(sizeof(t_data));
+	t_data	*data = malloc(sizeof(t_data));
+
 	if (!data)
 		return (1);
 	data->size = 5;
