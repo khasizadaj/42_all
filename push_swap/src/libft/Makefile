@@ -13,6 +13,7 @@ SRCS := ft_bzero.c \
 	ft_memcmp.c \
 	ft_memcpy.c \
 	ft_arrcpy.c \
+	ft_strarr.c \
 	ft_memmove.c \
 	ft_memchr.c \
 	ft_memset.c \

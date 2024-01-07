@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_helper.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2023/12/29 22:55:49 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2024/01/05 17:14:48 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	ft_stackclear(t_number **stack)
 	}
 }
 
-void	free_numbers(t_data *data, char **numbers)
+void	free_numbers(int size, char **numbers)
 {
 	int	i;
 
 	i = -1;
-	while (++i < data->size)
+	while (++i < size)
 	{
 		free(numbers[i]);
 	}
@@ -99,9 +99,8 @@ int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
 */
 void	generate_stack(t_data *data, int argc, char **argv)
 {
-	char	**raw_numbers;
-	int		i;
-	int		end_index;
+	char		**raw_numbers;
+	int			i;
 	t_number	*new_elem;
 
 	i = 0;
@@ -109,13 +108,9 @@ void	generate_stack(t_data *data, int argc, char **argv)
 	data->size = get_raw_numbers(&raw_numbers, argc, argv);
 	if (data->size == -1)
 		return ;
-	end_index = data->size + 1;
 	if (argc == 2)
-	{
 		i = -1;
-		end_index = data->size;
-	}
-	while (++i < end_index)
+	while (raw_numbers[++i])
 	{
 		new_elem = ft_stacknew(ft_atoi(raw_numbers[i]));
 		if (!new_elem)
@@ -123,5 +118,5 @@ void	generate_stack(t_data *data, int argc, char **argv)
 		ft_stackadd_back(&(data->stack_a), new_elem);
 	}
 	if (argc == 2)
-		free_numbers(data, raw_numbers);
+		free_numbers(data->size, raw_numbers);
 }

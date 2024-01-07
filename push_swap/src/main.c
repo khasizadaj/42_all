@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/29 22:57:29 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2024/01/06 13:23:54 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 int	main(int argc, char **argv)
 {
-	t_data *data = malloc(sizeof(t_data));
+	t_data	*data = malloc(sizeof(t_data));
+
 	if (!data)
 		return (1);
 	data->size = 5;
-	data->stack_a = NULL;
-	
-	// TODO Validate input
+	data->stack_a = NULL;	
+	data->stack_b = NULL;
+	if (!validate_input(argc, argv))
+	{
+		free(data);
+		exit_for(INVALID_INPUT);
+	}
 	generate_stack(data, argc, argv);
 	print_stack(data->stack_a);
 	ft_stackclear(&data->stack_a);

@@ -7,13 +7,14 @@ TEST_DIR = test
 LIBFT_DIR = src/libft
 
 SRCS =	${SRC_DIR}/main.c \
+		${UTILS_DIR}/debug.c \
+		${UTILS_DIR}/error.c \
+		${UTILS_DIR}/push.c \
 		${UTILS_DIR}/reverse_rotate.c \
 		${UTILS_DIR}/rotate.c \
 		${UTILS_DIR}/swap.c \
-		${UTILS_DIR}/push.c \
-		${UTILS_DIR}/debug.c \
 		${UTILS_DIR}/stack_helper.c \
-		${ALG_DIR}/algorithm.c \
+		${UTILS_DIR}/validate.c \
 		${ALG_DIR}/apply.c
 
 OBJS = ${SRCS:.c=.o}

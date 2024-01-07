@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2023/12/27 20:17:18 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:17:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <fcntl.h>
 # include <stdarg.h>
 
+# define bool int
+# define true 1 
+# define false 0
+
 typedef struct s_list
 {
 	void			*content;
@@ -27,6 +31,7 @@ typedef struct s_list
 }	t_list;
 
 int				ft_atoi(const char *nptr);
+long long		ft_atoi_lli(const char *nptr);
 void			ft_bzero(void *s, size_t n);
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
@@ -39,6 +44,7 @@ void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 void			*ft_int_arrcpy(int *dest, const int *src, size_t n);
+bool			ft_strarr_has(char *mem, char **arr);
 void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_putchar_fd(char c, int fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/29 22:52:55 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2024/01/05 17:13:24 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 
 # include "../src/libft/libft.h"
 
-#define STEP_SIZE 11
-#define SWAP_A 0
-#define SWAP_B 1
-#define SWAP_BOTH 2
+# define INVALID_INPUT 1
 
-#define ROTATE_A 3
-#define ROTATE_B 4
-#define ROTATE_BOTH 5
+# define STEP_SIZE 11
+# define SWAP_A 0
+# define SWAP_B 1
+# define SWAP_BOTH 2
 
-#define REVROT_A 6
-#define REVROT_B 7
-#define REVROT_BOTH 8
+# define ROTATE_A 3
+# define ROTATE_B 4
+# define ROTATE_BOTH 5
 
-#define PUSH_A 9
-#define PUSH_B 10
+# define REVROT_A 6
+# define REVROT_B 7
+# define REVROT_BOTH 8
+
+# define PUSH_A 9
+# define PUSH_B 10
 
 typedef struct s_number
 {
@@ -64,8 +66,17 @@ void	push_a(t_list **stack_a, t_list **stack_b);
 void	push_b(t_list **stack_a, t_list **stack_b);
 int		*get_cheapest(t_list *from, t_list *to);
 lli		get_location_to_move(lli val, t_list *to);
+void	ft_stackclear(t_number **stack);
+
+/* UTILS */
+int		validate_input(int argc, char **argv);
 void	print_steps(int *steps, int size);
 void	print_stack(t_number *stack);
-void	ft_stackclear(t_number **stack);
+void	print_raw_numbers(char **raw_numbers);
+int		get_raw_numbers(char ***raw_numbers, int argc, char **argv);
+void	free_numbers(int size, char **numbers);
+
+
+void	exit_for(int reason);
 
 #endif
