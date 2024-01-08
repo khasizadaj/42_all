@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/08 16:59:00 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:09:22 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ void	ft_stackadd_back(t_number **stack, t_number *new_elem)
 	while (last->next)
 		last = last->next;
 	last->next = new_elem;
+}
+
+int	ft_stacksize(t_number *lst)
+{
+	int			count;
+	t_number	*temp;
+
+	if (lst == NULL)
+		return (0);
+	count = 1;
+	temp = lst;
+	while (temp->next != NULL)
+	{
+		temp = temp->next;
+		count++;
+	}
+	return (count);
 }
 
 void	ft_stackclear(t_number **stack)
