@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/05 17:13:24 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:01:35 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef long long int lli;
 
 void	generate_stack(t_data *data, int argc, char **argv);
 void	apply(int *steps, t_list **stack_a, t_list **stack_b);
+void	sort(t_data *data);
 int		swap(t_list **stack);
 void	swap_a(t_list **stack);
 void	swap_b(t_list **stack);
@@ -76,6 +77,10 @@ void	print_raw_numbers(char **raw_numbers);
 int		get_raw_numbers(char ***raw_numbers, int argc, char **argv);
 void	free_numbers(int size, char **numbers);
 
+/* STACK UTILS */
+t_number	*ft_stacknew(int number);
+void		ft_stackadd_back(t_number **stack, t_number *new_elem);
+void		ft_stackclear(t_number **stack);
 
 void	exit_for(int reason);
 
