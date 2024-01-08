@@ -6,16 +6,16 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 19:28:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/27 19:43:24 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:13:42 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int	reverse_rotate(t_list **stack)
+int	reverse_rotate(t_number **stack)
 {
-	t_list	*before_last;
-	t_list	*last;
+	t_number	*before_last;
+	t_number	*last;
 
 	if (!(*stack) || !((*stack)->next))
 		return (0);
@@ -32,7 +32,7 @@ int	reverse_rotate(t_list **stack)
 	return (1);
 }
 
-void	reverse_rotate_a(t_list **stack)
+void	reverse_rotate_a(t_number **stack)
 {
 	char	*message;
 
@@ -41,7 +41,7 @@ void	reverse_rotate_a(t_list **stack)
 		ft_printf("%s\n", message);
 }
 
-void	reverse_rotate_b(t_list **stack)
+void	reverse_rotate_b(t_number **stack)
 {
 	char	*message;
 
@@ -50,7 +50,7 @@ void	reverse_rotate_b(t_list **stack)
 		ft_printf("%s\n", message);
 }
 
-void reverse_rotate_both(t_list **stack_a, t_list **stack_b)
+void reverse_rotate_both(t_number **stack_a, t_number **stack_b)
 {
 	char	*message;
 

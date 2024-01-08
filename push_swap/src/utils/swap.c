@@ -6,15 +6,15 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:56:43 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/27 20:54:40 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:13:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-int	swap(t_list **stack)
+int	swap(t_number **stack)
 {
-	t_list	*tmp;
+	t_number	*tmp;
 
 	if (!(*stack) || !((*stack)->next))
 		return (0);
@@ -25,7 +25,7 @@ int	swap(t_list **stack)
 	return (1);
 }
 
-void	swap_a(t_list **stack)
+void	swap_a(t_number **stack)
 {
 	char	*message;
 
@@ -34,7 +34,7 @@ void	swap_a(t_list **stack)
 		ft_printf("%s\n", message);
 }
 
-void	swap_b(t_list **stack)
+void	swap_b(t_number **stack)
 {
 	char	*message;
 
@@ -43,7 +43,7 @@ void	swap_b(t_list **stack)
 		ft_printf("%s\n", message);
 }
 
-void swap_both(t_list **stack_a, t_list **stack_b)
+void swap_both(t_number **stack_a, t_number **stack_b)
 {
 	char	*message;
 
