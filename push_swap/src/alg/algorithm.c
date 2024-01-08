@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/27 22:07:38 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:33:43 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@
 
 */
 
-void	get_steps_to_top_b(int lookup, int *steps, t_list *stack)
+void	get_steps_to_top_b(int lookup, int *steps, t_number *stack)
 {
 	int size;
 
-	size = ft_lstsize(stack);
-	// printf("Lookup: %d\n", lookup);
-
+	size = ft_stacksize(stack);
 	if (lookup != 0 && size % 2 == 0 && lookup + 1 >= size / 2 + 1)
 	{
 		steps[7] = size - lookup;
@@ -64,11 +62,11 @@ void	get_steps_to_top_b(int lookup, int *steps, t_list *stack)
 	}
 }
 
-void	get_steps_to_top_a(int lookup, int *steps, t_list *stack)
+void	get_steps_to_top_a(int lookup, int *steps, t_number *stack)
 {
 	int size_a;
 
-	size_a = ft_lstsize(stack);
+	size_a = ft_stacksize(stack);
 	if (lookup != 0 && size_a % 2 == 0 && lookup + 1 >= size_a / 2 + 1)
 	{
 		steps[6] = size_a - lookup;
@@ -86,8 +84,8 @@ void	get_steps_to_top_a(int lookup, int *steps, t_list *stack)
 	}
 }
 
-lli get_largest(t_list *stack) {
-    t_list *tmp;
+lli get_largest(t_number *stack) {
+    t_number *tmp;
     lli		i;
     lli		max;
 
@@ -95,10 +93,10 @@ lli get_largest(t_list *stack) {
 		return (-1);
 	i = 0;
     tmp = stack;
-	max = (lli)tmp->content;
+	max = tmp->number;
     while (tmp) {
-        if ((lli)tmp->content >= max)
-            max = (lli)tmp->content;
+        if (tmp->number >= max)
+            max = tmp->number;
         tmp = tmp->next;
 		i++;
     }
@@ -111,9 +109,9 @@ lli get_largest(t_list *stack) {
 	moved element will be in that position, or it should
 	be on top of current element on index 1. 
 */
-lli	get_location_to_move(lli val, t_list *to)
+lli	get_location_to_move(lli val, t_number *to)
 {
-	t_list	*tmp;
+	t_number	*tmp;
 	lli		i;
 	lli		location;
 	lli		smallest;
@@ -122,25 +120,25 @@ lli	get_location_to_move(lli val, t_list *to)
     i = 0;
 	smallest = get_largest(to);
 	location = 0;
-	if (val > smallest && smallest == (lli)tmp->content)
+	if (val > smallest && smallest == tmp->number)
 		return (0);
     while (tmp) {
-        if ((lli)tmp->content<=smallest && val < (lli)tmp->content) 
+        if (tmp->number<=smallest && val < tmp->number) 
 		{
-            smallest = (lli)tmp->content;
+            smallest = tmp->number;
 			location = i + 1;
 		}
-		if (val > smallest && val > (lli)tmp->content && val > (lli)tmp->next->content)
+		if (val > smallest && val > tmp->number && val > tmp->next->number)
 			return (i + 1);
         tmp = tmp->next;
         i++;
     }
-	if (location == ft_lstsize(to))
+	if (location == ft_stacksize(to))
 		return (0);
 	return (location);
 }
 
-void get_steps_to_b(int lookup, lli val, int *steps, t_list *from, t_list *to)
+void get_steps_to_b(int lookup, lli val, int *steps, t_number *from, t_number *to)
 {
 	lli location;
 
@@ -191,12 +189,12 @@ int *get_initial_steps(int fill_value)
 	return steps;
 }
 
-int *get_cheapest(t_list *from, t_list *to)
+int *get_cheapest(t_number *from, t_number *to)
 {
 	int 	*steps;
 	int 	*cheapest;
 	int		i;
-	t_list	**tmp;
+	t_number	**tmp;
 
 	if (!from || !to)
 		return (NULL);
@@ -210,7 +208,7 @@ int *get_cheapest(t_list *from, t_list *to)
 	tmp = &from;
 	while(*tmp)
 	{
-		get_steps_to_b(i, (lli) (*tmp)->content, steps, from, to);
+		get_steps_to_b(i,  (*tmp)->number, steps, from, to);
 		if (calculate_cost(steps) < calculate_cost(cheapest))
 			ft_int_arrcpy(cheapest, steps, STEP_SIZE);
 		tmp = &((*tmp)->next);

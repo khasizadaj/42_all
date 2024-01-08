@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/08 17:02:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:33:04 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 	generate_stack(data, argc, argv);
 	sort(data);
 	ft_stackclear(&data->stack_a);
+	ft_stackclear(&data->stack_b);
 	free(data);
 	return (0);
 }

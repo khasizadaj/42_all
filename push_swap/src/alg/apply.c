@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/08 17:13:20 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:35:05 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	apply_push(int *steps, t_number **stack_a, t_number **stack_b)
 	int	i;
 
 	i = -1;
-	print_steps(steps, 11);
 	while (++i < steps[PUSH_A])
 		push_a(stack_a, stack_b);
 	i = -1;

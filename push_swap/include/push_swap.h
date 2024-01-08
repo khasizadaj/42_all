@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/08 17:01:35 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:12:42 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,24 @@ typedef struct s_data
 typedef long long int lli;
 
 void	generate_stack(t_data *data, int argc, char **argv);
-void	apply(int *steps, t_list **stack_a, t_list **stack_b);
+void	apply(int *steps, t_number **stack_a, t_number **stack_b);
 void	sort(t_data *data);
-int		swap(t_list **stack);
-void	swap_a(t_list **stack);
-void	swap_b(t_list **stack);
-void	swap_both(t_list **stack_a, t_list **stack_b);
-int		rotate(t_list **stack);
-void	rotate_a(t_list **stack);
-void	rotate_b(t_list **stack);
-void	rotate_both(t_list **stack_a, t_list **stack_b);
-int		reverse_rotate(t_list **stack);
-void	reverse_rotate_a(t_list **stack);
-void	reverse_rotate_b(t_list **stack);
-void	reverse_rotate_both(t_list **stack_a, t_list **stack_b);
-void	push_a(t_list **stack_a, t_list **stack_b);
-void	push_b(t_list **stack_a, t_list **stack_b);
-int		*get_cheapest(t_list *from, t_list *to);
-lli		get_location_to_move(lli val, t_list *to);
+int		swap(t_number **stack);
+void	swap_a(t_number **stack);
+void	swap_b(t_number **stack);
+void	swap_both(t_number **stack_a, t_number **stack_b);
+int		rotate(t_number **stack);
+void	rotate_a(t_number **stack);
+void	rotate_b(t_number **stack);
+void	rotate_both(t_number **stack_a, t_number **stack_b);
+int		reverse_rotate(t_number **stack);
+void	reverse_rotate_a(t_number **stack);
+void	reverse_rotate_b(t_number **stack);
+void	reverse_rotate_both(t_number **stack_a, t_number **stack_b);
+void	push_a(t_number **stack_a, t_number **stack_b);
+void	push_b(t_number **stack_a, t_number **stack_b);
+int		*get_cheapest(t_number *from, t_number *to);
+lli		get_location_to_move(lli val, t_number *to);
 void	ft_stackclear(t_number **stack);
 
 /* UTILS */
@@ -81,6 +81,7 @@ void	free_numbers(int size, char **numbers);
 t_number	*ft_stacknew(int number);
 void		ft_stackadd_back(t_number **stack, t_number *new_elem);
 void		ft_stackclear(t_number **stack);
+int			ft_stacksize(t_number *lst);
 
 void	exit_for(int reason);
 
