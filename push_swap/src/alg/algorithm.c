@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/08 17:33:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:27:39 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@
 	its destination.
 
 */
+
+int *get_initial_steps(int fill_value)
+{
+	int	*steps;
+	int	i;	
+
+	steps = ft_calloc(STEP_SIZE, sizeof(int));
+	if (!steps)
+		return (NULL);
+	i = -1;
+	while (++i < STEP_SIZE)
+		steps[i] = fill_value;
+	return steps;
+}
 
 void	get_steps_to_top_b(int lookup, int *steps, t_number *stack)
 {
@@ -138,16 +152,21 @@ lli	get_location_to_move(lli val, t_number *to)
 	return (location);
 }
 
-void get_steps_to_b(int lookup, lli val, int *steps, t_number *from, t_number *to)
+int	*get_steps_to_b(int lookup, lli val, t_number *from, t_number *to)
 {
 	lli location;
+	int	*steps;
 
+	steps = get_initial_steps(0);
+	if (!steps)
+		return (NULL);
 	// MAYBE SWAP CAN HAPPEN IF AVERAGE IS SMALL
 	get_steps_to_top_a(lookup, steps, from);
 	location = get_location_to_move(val, to);
 	get_steps_to_top_b(location, steps, to);
 	// TODO Optimisation missing
 	steps[10] += 1;
+	return (steps);
 }
 
 void	reset_steps(int *steps)
@@ -175,20 +194,6 @@ int	calculate_cost(int *steps)
 	return result;
 }
 
-int *get_initial_steps(int fill_value)
-{
-	int	*steps;
-	int	i;	
-
-	steps = ft_calloc(STEP_SIZE, sizeof(int));
-	if (!steps)
-		return (NULL);
-	i = -1;
-	while (++i < STEP_SIZE)
-		steps[i] = fill_value;
-	return steps;
-}
-
 int *get_cheapest(t_number *from, t_number *to)
 {
 	int 	*steps;
@@ -198,23 +203,22 @@ int *get_cheapest(t_number *from, t_number *to)
 
 	if (!from || !to)
 		return (NULL);
-	steps = get_initial_steps(0);
-	if (!steps)
-		return (NULL);
 	cheapest = get_initial_steps(2147483646);
 	if (!cheapest)
-		return (free(steps), NULL);
+		return (NULL);
 	i = 0;
 	tmp = &from;
 	while(*tmp)
 	{
-		get_steps_to_b(i,  (*tmp)->number, steps, from, to);
+		steps = get_steps_to_b(i,  (*tmp)->number, from, to);
+		if (!steps)
+			return (NULL);
 		if (calculate_cost(steps) < calculate_cost(cheapest))
 			ft_int_arrcpy(cheapest, steps, STEP_SIZE);
 		tmp = &((*tmp)->next);
-		reset_steps(steps);
+		// reset_steps(steps);
 		i++;
+		free(steps);
 	}
-	free(steps);
 	return cheapest;
 }
