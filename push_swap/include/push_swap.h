@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/08 17:12:42 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:20:00 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	reverse_rotate_b(t_number **stack);
 void	reverse_rotate_both(t_number **stack_a, t_number **stack_b);
 void	push_a(t_number **stack_a, t_number **stack_b);
 void	push_b(t_number **stack_a, t_number **stack_b);
-int		*get_cheapest(t_number *from, t_number *to);
+int		*get_cheapest(t_number *from, t_number *to, bool reverse);
 lli		get_location_to_move(lli val, t_number *to);
 void	ft_stackclear(t_number **stack);
 

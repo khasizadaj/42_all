@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/09 13:27:39 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:41:51 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,47 +54,60 @@ int *get_initial_steps(int fill_value)
 	return steps;
 }
 
-void	get_steps_to_top_b(int lookup, int *steps, t_number *stack)
+void	get_steps_to_top_to(int lookup, int *steps, t_number *stack, char direction)
 {
 	int size;
 
 	size = ft_stacksize(stack);
 	if (lookup != 0 && size % 2 == 0 && lookup + 1 >= size / 2 + 1)
 	{
-		steps[7] = size - lookup;
-		return ;
+		if (direction == 'a')
+			steps[REVROT_A] = size - lookup;
+		else if (direction == 'b')
+			steps[REVROT_B] = size - lookup;
 	}
-	if (lookup != 0 && size % 2 == 1 && lookup + 1 > size / 2 + 1)
+	else if (lookup != 0 && size % 2 == 1 && lookup + 1 > size / 2 + 1)
 	{
-		steps[7] = size - lookup;
-		return ;
+		if (direction == 'a')
+			steps[REVROT_A] = size - lookup;
+		else if (direction == 'b')
+			steps[REVROT_B] = size - lookup;
 	}
 	else if (lookup != 0)
 	{
-		steps[4] = lookup;
-		return ;
+	
+		if (direction == 'a')
+			steps[ROTATE_A] = lookup;
+		else if (direction == 'b')
+			steps[ROTATE_B] = lookup;
 	}
 }
 
-void	get_steps_to_top_a(int lookup, int *steps, t_number *stack)
+void	get_steps_to_top_at_from(int lookup, int *steps, t_number *stack, char direction)
 {
 	int size_a;
 
 	size_a = ft_stacksize(stack);
 	if (lookup != 0 && size_a % 2 == 0 && lookup + 1 >= size_a / 2 + 1)
 	{
-		steps[6] = size_a - lookup;
-		return ;
+		if (direction == 'a')
+			steps[REVROT_B] = size_a - lookup;
+		else if (direction == 'b')
+			steps[REVROT_A] = size_a - lookup;
 	}
-	if (lookup != 0 && size_a % 2 == 1 && lookup + 1 > size_a / 2 + 1)
+	else if (lookup != 0 && size_a % 2 == 1 && lookup + 1 > size_a / 2 + 1)
 	{
-		steps[6] = size_a - lookup;
-		return ;
+		if (direction == 'a')
+			steps[REVROT_B] = size_a - lookup;
+		else if (direction == 'b')
+			steps[REVROT_A] = size_a - lookup;
 	}
 	else if (lookup != 0)
 	{
-		steps[3] = lookup;
-		return ;
+		if (direction == 'a')
+			steps[ROTATE_B] = lookup;
+		else if (direction == 'b')
+			steps[ROTATE_A] = lookup;
 	}
 }
 
@@ -117,13 +130,33 @@ lli get_largest(t_number *stack) {
     return max;
 }
 
+lli	get_smallest(t_number *stack) {
+    t_number *tmp;
+    lli		i;
+    lli		min;
+
+	// TODO Fix return value... it shouldn't be -1
+    if (!stack)
+		return (-1);
+	i = 0;
+    tmp = stack;
+	min = tmp->number;
+    while (tmp) {
+        if (tmp->number <= min)
+            min = tmp->number;
+        tmp = tmp->next;
+		i++;
+    }
+    return min;
+}
+
 /*
 	This function return the position that moved element
 	should be in. If returned value is 1, it means that
 	moved element will be in that position, or it should
 	be on top of current element on index 1. 
 */
-lli	get_location_to_move(lli val, t_number *to)
+lli	get_location_to_move_reverse(lli val, t_number *to)
 {
 	t_number	*tmp;
 	lli		i;
@@ -152,7 +185,36 @@ lli	get_location_to_move(lli val, t_number *to)
 	return (location);
 }
 
-int	*get_steps_to_b(int lookup, lli val, t_number *from, t_number *to)
+lli	get_location_to_move(lli val, t_number *to)
+{
+	t_number	*tmp;
+	lli		i;
+	lli		location;
+	lli		biggest;
+
+    tmp = to;
+    i = 0;
+	biggest = get_smallest(to);
+	location = 0;
+	if (val < biggest && biggest == tmp->number)
+		return (0);
+    while (tmp) {
+        if (tmp->number>=biggest && val > tmp->number) 
+		{
+            biggest = tmp->number;
+			location = i + 1;
+		}
+		if (val < biggest && val < tmp->number && val < tmp->next->number)
+			return (i + 1);
+        tmp = tmp->next;
+        i++;
+    }
+	if (location == ft_stacksize(to))
+		return (0);
+	return (location);
+}
+
+int	*get_steps_to_b(int lookup, lli val, t_number *from, t_number *to, bool reverse)
 {
 	lli location;
 	int	*steps;
@@ -161,11 +223,21 @@ int	*get_steps_to_b(int lookup, lli val, t_number *from, t_number *to)
 	if (!steps)
 		return (NULL);
 	// MAYBE SWAP CAN HAPPEN IF AVERAGE IS SMALL
-	get_steps_to_top_a(lookup, steps, from);
-	location = get_location_to_move(val, to);
-	get_steps_to_top_b(location, steps, to);
+	if (reverse)
+	{
+		get_steps_to_top_at_from(lookup, steps, from, 'b');
+		location = get_location_to_move_reverse(val, to);
+		get_steps_to_top_to(location, steps, to, 'b');
+		steps[PUSH_B] += 1;
+	}
+	else
+	{
+		get_steps_to_top_at_from(lookup, steps, from, 'a');
+	 	location = get_location_to_move(val, to);
+		get_steps_to_top_to(location, steps, to, 'a');
+		steps[PUSH_A] += 1;
+	}
 	// TODO Optimisation missing
-	steps[10] += 1;
 	return (steps);
 }
 
@@ -194,7 +266,7 @@ int	calculate_cost(int *steps)
 	return result;
 }
 
-int *get_cheapest(t_number *from, t_number *to)
+int *get_cheapest(t_number *from, t_number *to, bool reverse)
 {
 	int 	*steps;
 	int 	*cheapest;
@@ -210,7 +282,7 @@ int *get_cheapest(t_number *from, t_number *to)
 	tmp = &from;
 	while(*tmp)
 	{
-		steps = get_steps_to_b(i,  (*tmp)->number, from, to);
+		steps = get_steps_to_b(i,  (*tmp)->number, from, to, reverse);
 		if (!steps)
 			return (NULL);
 		if (calculate_cost(steps) < calculate_cost(cheapest))

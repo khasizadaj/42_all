@@ -6,12 +6,11 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/08 17:35:05 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:19:44 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
-#include <stdio.h>
 
 void	apply_push(int *steps, t_number **stack_a, t_number **stack_b)
 {
