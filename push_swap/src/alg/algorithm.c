@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/09 17:41:51 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:43:54 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int *get_initial_steps(int fill_value)
 	return steps;
 }
 
-void	get_steps_to_top_to(int lookup, int *steps, t_number *stack, char direction)
+void	get_steps_to_top_at_to(int lookup, int *steps, t_number *stack, char direction)
 {
 	int size;
 
@@ -128,6 +128,26 @@ lli get_largest(t_number *stack) {
 		i++;
     }
     return max;
+}
+
+lli	get_smallest(t_number *stack) {
+    t_number *tmp;
+    lli		i;
+    lli		min;
+
+	// TODO Fix return value... it shouldn't be -1
+    if (!stack)
+		return (-1);
+	i = 0;
+    tmp = stack;
+	min = tmp->number;
+    while (tmp) {
+        if (tmp->number <= min)
+            min = tmp->number;
+        tmp = tmp->next;
+		i++;
+    }
+    return min;
 }
 
 lli	get_smallest(t_number *stack) {
@@ -227,14 +247,14 @@ int	*get_steps_to_b(int lookup, lli val, t_number *from, t_number *to, bool reve
 	{
 		get_steps_to_top_at_from(lookup, steps, from, 'b');
 		location = get_location_to_move_reverse(val, to);
-		get_steps_to_top_to(location, steps, to, 'b');
+		get_steps_to_top_at_to(location, steps, to, 'b');
 		steps[PUSH_B] += 1;
 	}
 	else
 	{
 		get_steps_to_top_at_from(lookup, steps, from, 'a');
 	 	location = get_location_to_move(val, to);
-		get_steps_to_top_to(location, steps, to, 'a');
+		get_steps_to_top_at_to(location, steps, to, 'a');
 		steps[PUSH_A] += 1;
 	}
 	// TODO Optimisation missing

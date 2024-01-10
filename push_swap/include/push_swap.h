@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/09 14:20:00 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:18:04 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,15 @@ void	reverse_rotate_b(t_number **stack);
 void	reverse_rotate_both(t_number **stack_a, t_number **stack_b);
 void	push_a(t_number **stack_a, t_number **stack_b);
 void	push_b(t_number **stack_a, t_number **stack_b);
+
+/* ALGORITHM */
 int		*get_cheapest(t_number *from, t_number *to, bool reverse);
+lli		get_smallest(t_number *stack);
+lli		get_biggest(t_number *stack);
+int		*get_initial_steps(int fill_value);
 lli		get_location_to_move(lli val, t_number *to);
-void	ft_stackclear(t_number **stack);
+void	get_steps_to_top_at_to(int lookup, int *steps, t_number *stack, char direction);
+void	get_steps_to_top_at_from(int lookup, int *steps, t_number *stack, char direction);
 
 /* UTILS */
 int		validate_input(int argc, char **argv);
