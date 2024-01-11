@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:49:56 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/10 18:42:48 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:35:28 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	bring_smallest_to_top(t_number **stack)
     }
 	if (i == 0)
 		return ;
-	get_steps_to_top_at_to(i, steps, *stack, 'b');
+	get_steps_to_top_at_to(i, steps, *stack, 'a');
 	apply(steps, stack, stack);
 	free(steps);
 }
@@ -85,17 +85,20 @@ void	sort(t_data *data)
 	}
 	sort_simple(&data->stack_a);
 	// print_stack(data->stack_a);
+	// print_stack(data->stack_b);
+	// ft_printf("Reverse\n");
 	while (ft_stacksize(data->stack_b) > 0)
 	{
 		steps = get_cheapest(data->stack_b, data->stack_a, false);
 		if (!steps)
 			return ;
 		apply(steps, &data->stack_a, &data->stack_b);
+		// print_steps(steps, 11);
 		// print_stack(data->stack_a);
 		// print_stack(data->stack_b);
 		free(steps);
 	}
 	bring_smallest_to_top(&data->stack_a);
-	print_stack(data->stack_a);
-	print_stack(data->stack_b);
+	// print_stack(data->stack_a);
+	// print_stack(data->stack_b);
 }

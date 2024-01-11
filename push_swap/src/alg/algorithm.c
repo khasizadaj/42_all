@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/10 18:43:54 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:11:27 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,33 @@ int *get_initial_steps(int fill_value)
 	while (++i < STEP_SIZE)
 		steps[i] = fill_value;
 	return steps;
+}
+
+void optimize(int *steps)
+{
+    int	minCount;
+
+    if (steps[SWAP_A] < steps[SWAP_B])
+        minCount = steps[SWAP_A];
+    else
+        minCount = steps[SWAP_B];
+    steps[SWAP_A] -= minCount;
+    steps[SWAP_B] -= minCount;
+    steps[SWAP_BOTH] += minCount;
+    if (steps[ROTATE_A] < steps[ROTATE_B])
+        minCount = steps[ROTATE_A];
+    else
+        minCount = steps[ROTATE_B];
+    steps[ROTATE_A] -= minCount;
+    steps[ROTATE_B] -= minCount;
+    steps[ROTATE_BOTH] += minCount;
+    if (steps[REVROT_A] < steps[REVROT_B])
+        minCount = steps[REVROT_A];
+    else
+        minCount = steps[REVROT_B];
+    steps[REVROT_A] -= minCount;
+    steps[REVROT_B] -= minCount;
+    steps[REVROT_BOTH] += minCount;
 }
 
 void	get_steps_to_top_at_to(int lookup, int *steps, t_number *stack, char direction)
@@ -150,31 +177,12 @@ lli	get_smallest(t_number *stack) {
     return min;
 }
 
-lli	get_smallest(t_number *stack) {
-    t_number *tmp;
-    lli		i;
-    lli		min;
-
-	// TODO Fix return value... it shouldn't be -1
-    if (!stack)
-		return (-1);
-	i = 0;
-    tmp = stack;
-	min = tmp->number;
-    while (tmp) {
-        if (tmp->number <= min)
-            min = tmp->number;
-        tmp = tmp->next;
-		i++;
-    }
-    return min;
-}
-
 /*
-	This function return the position that moved element
-	should be in. If returned value is 1, it means that
-	moved element will be in that position, or it should
-	be on top of current element on index 1. 
+	Finds the insert position for 'val' in a circular linked list 'to', 
+	which is sorted in descending order. The function identifies the 
+	position right after the smallest value that is bigger than 'val'. 
+	It also handles cases where the list's minimum value is followed by 
+	its maximum due to its circular nature.
 */
 lli	get_location_to_move_reverse(lli val, t_number *to)
 {
@@ -205,26 +213,33 @@ lli	get_location_to_move_reverse(lli val, t_number *to)
 	return (location);
 }
 
+/*
+	Finds the insert position for 'val' in a circular linked list 'to', 
+	which is sorted in ascending order. The function identifies the 
+	position right after the largest value that is smaller than 'val'. 
+	It also handles cases where the list's maximum value is followed by 
+	its minimum due to its circular nature.
+*/
 lli	get_location_to_move(lli val, t_number *to)
 {
 	t_number	*tmp;
 	lli		i;
 	lli		location;
-	lli		biggest;
+	lli		smallest;
 
     tmp = to;
     i = 0;
-	biggest = get_smallest(to);
+	smallest = get_smallest(to);
 	location = 0;
-	if (val < biggest && biggest == tmp->number)
+	if (val < smallest && smallest == tmp->number)
 		return (0);
     while (tmp) {
-        if (tmp->number>=biggest && val > tmp->number) 
+        if (tmp->number > smallest && val > tmp->number) 
 		{
-            biggest = tmp->number;
+            smallest = tmp->number;
 			location = i + 1;
 		}
-		if (val < biggest && val < tmp->number && val < tmp->next->number)
+		if (val < smallest && tmp->next && val < tmp->number && tmp->number > tmp->next->number)
 			return (i + 1);
         tmp = tmp->next;
         i++;
@@ -234,7 +249,7 @@ lli	get_location_to_move(lli val, t_number *to)
 	return (location);
 }
 
-int	*get_steps_to_b(int lookup, lli val, t_number *from, t_number *to, bool reverse)
+int	*get_steps_to_move(int lookup, lli val, t_number *from, t_number *to, bool reverse)
 {
 	lli location;
 	int	*steps;
@@ -257,7 +272,7 @@ int	*get_steps_to_b(int lookup, lli val, t_number *from, t_number *to, bool reve
 		get_steps_to_top_at_to(location, steps, to, 'a');
 		steps[PUSH_A] += 1;
 	}
-	// TODO Optimisation missing
+	optimize(steps);
 	return (steps);
 }
 
@@ -302,7 +317,7 @@ int *get_cheapest(t_number *from, t_number *to, bool reverse)
 	tmp = &from;
 	while(*tmp)
 	{
-		steps = get_steps_to_b(i,  (*tmp)->number, from, to, reverse);
+		steps = get_steps_to_move(i,  (*tmp)->number, from, to, reverse);
 		if (!steps)
 			return (NULL);
 		if (calculate_cost(steps) < calculate_cost(cheapest))
