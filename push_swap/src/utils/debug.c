@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:39:17 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/05 17:12:48 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/12 21:18:16 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void print_stack(t_number *stack)
         ft_printf("%d -> ", stack->number);
         stack = stack->next;
     }
-    printf("NULL\n");
+    ft_printf("NULL\n");
 }
 
 void print_raw_numbers(char **raw_numbers)
@@ -56,5 +56,5 @@ void print_raw_numbers(char **raw_numbers)
     i = -1;
     while (raw_numbers[++i])
         ft_printf("%s -> ", raw_numbers[i]);
-    printf("NULL\n");
+    ft_printf("NULL\n");
 }

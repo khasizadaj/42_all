@@ -6,11 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/11 18:11:27 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/12 21:48:40 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include <iso646.h>
 
 /* 
 
@@ -197,13 +198,15 @@ lli	get_location_to_move_reverse(lli val, t_number *to)
 	location = 0;
 	if (val > smallest && smallest == tmp->number)
 		return (0);
-    while (tmp) {
-        if (tmp->number<=smallest && val < tmp->number) 
+    while (tmp)
+	{
+		if (tmp->number<=smallest && val < tmp->number) 
 		{
             smallest = tmp->number;
 			location = i + 1;
 		}
-		if (val > smallest && val > tmp->number && val > tmp->next->number)
+		else if (val > smallest && tmp->next && val > tmp->number &&
+			tmp->number < tmp->next->number)
 			return (i + 1);
         tmp = tmp->next;
         i++;
@@ -233,13 +236,14 @@ lli	get_location_to_move(lli val, t_number *to)
 	location = 0;
 	if (val < smallest && smallest == tmp->number)
 		return (0);
-    while (tmp) {
-        if (tmp->number > smallest && val > tmp->number) 
+    while (tmp)
+	{
+		if (tmp->number>=smallest && val > tmp->number) 
 		{
             smallest = tmp->number;
 			location = i + 1;
 		}
-		if (val < smallest && tmp->next && val < tmp->number && tmp->number > tmp->next->number)
+		else if (val < smallest && tmp->next && val < tmp->number && tmp->number > tmp->next->number)
 			return (i + 1);
         tmp = tmp->next;
         i++;
