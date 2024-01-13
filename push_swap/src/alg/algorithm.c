@@ -6,13 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/13 22:40:50 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 22:42:32 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 #include "alg.h"
-#include <unistd.h>
 
 /*
 	Function returns largest number in the stack.
