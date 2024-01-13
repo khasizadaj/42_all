@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 19:31:57 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/13 21:09:49 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 21:27:48 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,33 +103,31 @@ void	get_steps_to_top_at_from(int lookup, int *steps, t_number *stack,
 	that is bigger than 'val'. It also handles cases where the list's
 	minimum value is followed by its maximum due to its circular nature.
 */
-lli	get_location_to_move_reverse(lli val, t_number *to)
+lli	get_location_to_move_reverse(lli val, t_number *stack)
 {
-	t_number	*tmp;
 	lli			i;
 	lli			location;
 	lli			smallest;
 
-	tmp = to;
 	i = 0;
-	smallest = get_largest(to);
+	smallest = get_largest(stack);
 	location = 0;
-	if (val > smallest && smallest == tmp->number)
+	if (val > smallest && smallest == stack->number)
 		return (0);
-	while (tmp)
+	while (stack)
 	{
-		if (tmp->number <= smallest && val < tmp->number)
+		if (stack->number <= smallest && val < stack->number)
 		{
-			smallest = tmp->number;
+			smallest = stack->number;
 			location = i + 1;
 		}
-		else if (val > smallest && tmp->next && val > tmp->number
-			&& tmp->number < tmp->next->number)
+		else if (val > smallest && stack->next && val > stack->number
+			&& stack->number < stack->next->number)
 			return (i + 1);
-		tmp = tmp->next;
+		stack = stack->next;
 		i++;
 	}
-	if (location == ft_stacksize(to))
+	if (location == ft_stacksize(stack))
 		return (0);
 	return (location);
 }
@@ -144,28 +142,26 @@ lli	get_location_to_move_reverse(lli val, t_number *to)
 */
 lli	get_location_to_move(lli val, t_number *to)
 {
-	t_number	*tmp;
 	lli			i;
 	lli			location;
-	lli			smallest;
+	lli			largest;
 
-	tmp = to;
 	i = 0;
-	smallest = get_smallest(to);
+	largest = get_smallest(to);
 	location = 0;
-	if (val < smallest && smallest == tmp->number)
+	if (val < largest && largest == to->number)
 		return (0);
-	while (tmp)
+	while (to)
 	{
-		if (tmp->number >= smallest && val > tmp->number)
+		if (to->number >= largest && val > to->number)
 		{
-			smallest = tmp->number;
+			largest = to->number;
 			location = i + 1;
 		}
-		else if (val < smallest && tmp->next && val < tmp->number
-			&& tmp->number > tmp->next->number)
+		else if (val < largest && to->next && val < to->number
+			&& to->number > to->next->number)
 			return (i + 1);
-		tmp = tmp->next;
+		to = to->next;
 		i++;
 	}
 	if (location == ft_stacksize(to))
