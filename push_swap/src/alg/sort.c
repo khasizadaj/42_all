@@ -6,11 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:49:56 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/13 18:56:29 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 20:02:32 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include "alg.h"
 
 /* 
 Handles stack with 3 three items.
@@ -23,26 +24,27 @@ These are already sorted (no action needed):
 => 1 - 2 - 3
 => 2 - 3 - 1
 */
-void	sort_simple(t_number **stack) {
-    int	first;
+void	sort_simple(t_number **stack)
+{
+	int	first;
 	int	second;
 	int	third;
 
-    first = (*stack)->number;
-    second = (*stack)->next->number;
-    third = (*stack)->next->next->number;
-    if (first > second && second < third && first < third)
-        swap_a(stack);
-    else if (first < second && second > third && first < third) 
-        swap_a(stack);
-    else if (first > second && second > third && first > third)
-	    swap_a(stack);
+	first = (*stack)->number;
+	second = (*stack)->next->number;
+	third = (*stack)->next->next->number;
+	if (first > second && second < third && first < third)
+		swap_a(stack);
+	else if (first < second && second > third && first < third)
+		swap_a(stack);
+	else if (first > second && second > third && first > third)
+		swap_a(stack);
 }
 
 // TODO What to do if sort steps fail
 void	bring_smallest_to_top(t_number **stack)
 {
-	int	val;
+	int			val;
 	int			*steps;
 	t_number	*tmp;
 	int			i;
@@ -53,12 +55,13 @@ void	bring_smallest_to_top(t_number **stack)
 	val = get_smallest(*stack);
 	tmp = *stack;
 	i = 0;
-    while (tmp) {
-        if (tmp->number == val)
+	while (tmp)
+	{
+		if (tmp->number == val)
 			break ;
-        tmp = tmp->next;
+		tmp = tmp->next;
 		i++;
-    }
+	}
 	if (i == 0)
 		return ;
 	get_steps_to_top_at_to(i, steps, *stack, 'a');
@@ -71,7 +74,7 @@ void	sort(t_data *data)
 	int	*steps;
 
 	push_b(&data->stack_a, &data->stack_b);
-	push_b(&data->stack_a, &data->stack_b);	
+	push_b(&data->stack_a, &data->stack_b);
 	while (ft_stacksize(data->stack_a) > 3)
 	{
 		steps = get_cheapest(data->stack_a, data->stack_b, true);

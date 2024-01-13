@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/13 18:56:12 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 19:58:58 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef long long int lli;
 
 void	generate_stack(t_data *data, int argc, char **argv);
 void	apply(int *steps, t_number **stack_a, t_number **stack_b);
-void	sort(t_data *data);
 int		swap(t_number **stack);
 void	swap_a(t_number **stack);
 void	swap_b(t_number **stack);
@@ -67,13 +66,7 @@ void	push_a(t_number **stack_a, t_number **stack_b);
 void	push_b(t_number **stack_a, t_number **stack_b);
 
 /* ALGORITHM */
-int		*get_cheapest(t_number *from, t_number *to, bool reverse);
-lli		get_smallest(t_number *stack);
-lli		get_biggest(t_number *stack);
-int		*initialize_steps(int fill_value);
-lli		get_location_to_move(lli val, t_number *to);
-void	get_steps_to_top_at_to(int lookup, int *steps, t_number *stack, char direction);
-void	get_steps_to_top_at_from(int lookup, int *steps, t_number *stack, char direction);
+void	sort(t_data *data);
 
 /* UTILS */
 int		validate_input(int argc, char **argv);
