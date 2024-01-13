@@ -6,21 +6,26 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/13 20:12:51 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 22:40:50 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 #include "alg.h"
+#include <unistd.h>
 
+/*
+	Function returns largest number in the stack.
+
+	Note: It doesn't handle NULL values, you should protect this function
+	in outer scope.
+*/
 lli	get_largest(t_number *stack)
 {
 	t_number	*tmp;
 	lli			i;
 	lli			max;
 
-	if (!stack)
-		return (-1);
 	i = 0;
 	tmp = stack;
 	max = tmp->number;
@@ -34,15 +39,18 @@ lli	get_largest(t_number *stack)
 	return (max);
 }
 
+/*
+	Function returns smallest number in the stack.
+
+	Note: It doesn't handle NULL values, you should protect this function
+	in outer scope.
+*/
 lli	get_smallest(t_number *stack)
 {
 	t_number	*tmp;
 	lli			i;
 	lli			min;
 
-	// TODO Fix return value... it shouldn't be -1
-	if (!stack)
-		return (-1);
 	i = 0;
 	tmp = stack;
 	min = tmp->number;
@@ -60,26 +68,26 @@ lli	get_smallest(t_number *stack)
 	Function calculates the needed steps for given number to be moved
 	to the correct position from given stack `from` to given stack `to`.  
 */
-int	*get_steps_to_move(int lookup, lli val, t_number *from, t_number *to,
-	bool reverse)
+int	*get_steps_to_move(lli val, t_number *from, t_number *to, bool reverse)
 {
 	lli	location;
 	int	*steps;
+	int	index_of_val;
 
-	// TODO Too many variables
 	steps = initialize_steps(0);
 	if (!steps)
 		return (NULL);
+	index_of_val = ft_stackindex(&from, val);
 	if (reverse)
 	{
-		get_steps_to_top_at_from(lookup, steps, from, 'b');
+		get_steps_to_top_at_from(index_of_val, steps, from, 'b');
 		location = get_location_to_move_reverse(val, to);
 		get_steps_to_top_at_to(location, steps, to, 'b');
 		steps[PUSH_B] += 1;
 	}
 	else
 	{
-		get_steps_to_top_at_from(lookup, steps, from, 'a');
+		get_steps_to_top_at_from(index_of_val, steps, from, 'a');
 		location = get_location_to_move(val, to);
 		get_steps_to_top_at_to(location, steps, to, 'a');
 		steps[PUSH_A] += 1;
@@ -104,7 +112,7 @@ int	*get_cheapest(t_number *from, t_number *to, bool reverse)
 	tmp = &from;
 	while (*tmp)
 	{
-		steps = get_steps_to_move(i, (*tmp)->number, from, to, reverse);
+		steps = get_steps_to_move((*tmp)->number, from, to, reverse);
 		if (!steps)
 			return (NULL);
 		if (calculate_cost(steps) < calculate_cost(cheapest))

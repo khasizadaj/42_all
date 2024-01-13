@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/13 19:31:57 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/13 21:27:48 by jkhasiza         ###   ########.fr       */
+/*   Created: 2024/01/13 22:34:28 by jkhasiza          #+#    #+#             */
+/*   Updated: 2024/01/13 22:35:27 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,22 @@ void	get_steps_to_top_at_to(int lookup, int *steps, t_number *stack,
 	int	size;
 
 	size = ft_stacksize(stack);
-	if (lookup != 0 && size % 2 == 0 && lookup + 1 >= size / 2 + 1)
+	if (lookup <= 0)
+		return ;
+	if (direction == 'a')
 	{
-		if (direction == 'a')
+		if ((size % 2 == 0 && lookup + 1 >= size / 2 + 1)
+			|| (size % 2 == 1 && lookup + 1 > size / 2 + 1))
 			steps[REVROT_A] = size - lookup;
-		else if (direction == 'b')
-			steps[REVROT_B] = size - lookup;
-	}
-	else if (lookup != 0 && size % 2 == 1 && lookup + 1 > size / 2 + 1)
-	{
-		if (direction == 'a')
-			steps[REVROT_A] = size - lookup;
-		else if (direction == 'b')
-			steps[REVROT_B] = size - lookup;
-	}
-	else if (lookup != 0)
-	{
-		if (direction == 'a')
+		else
 			steps[ROTATE_A] = lookup;
-		else if (direction == 'b')
+	}
+	else if (direction == 'b')
+	{
+		if ((size % 2 == 0 && lookup + 1 >= size / 2 + 1)
+			|| (size % 2 == 1 && lookup + 1 > size / 2 + 1))
+			steps[REVROT_B] = size - lookup;
+		else
 			steps[ROTATE_B] = lookup;
 	}
 }
@@ -69,28 +66,25 @@ void	get_steps_to_top_at_to(int lookup, int *steps, t_number *stack,
 void	get_steps_to_top_at_from(int lookup, int *steps, t_number *stack,
 	char direction)
 {
-	int	size_a;
+	int	size;
 
-	size_a = ft_stacksize(stack);
-	if (lookup != 0 && size_a % 2 == 0 && lookup + 1 >= size_a / 2 + 1)
+	size = ft_stacksize(stack);
+	if (lookup <= 0)
+		return ;
+	if (direction == 'a')
 	{
-		if (direction == 'a')
-			steps[REVROT_B] = size_a - lookup;
-		else if (direction == 'b')
-			steps[REVROT_A] = size_a - lookup;
-	}
-	else if (lookup != 0 && size_a % 2 == 1 && lookup + 1 > size_a / 2 + 1)
-	{
-		if (direction == 'a')
-			steps[REVROT_B] = size_a - lookup;
-		else if (direction == 'b')
-			steps[REVROT_A] = size_a - lookup;
-	}
-	else if (lookup != 0)
-	{
-		if (direction == 'a')
+		if ((size % 2 == 0 && lookup + 1 >= size / 2 + 1)
+			|| (size % 2 == 1 && lookup + 1 > size / 2 + 1))
+			steps[REVROT_B] = size - lookup;
+		else
 			steps[ROTATE_B] = lookup;
-		else if (direction == 'b')
+	}
+	else if (direction == 'b')
+	{
+		if ((size % 2 == 0 && lookup + 1 >= size / 2 + 1)
+			|| (size % 2 == 1 && lookup + 1 > size / 2 + 1))
+			steps[REVROT_A] = size - lookup;
+		else
 			steps[ROTATE_A] = lookup;
 	}
 }

@@ -6,11 +6,37 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/08 17:09:22 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 22:31:01 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+
+int	ft_stackindex(t_number **stack, int lookup_value)
+{
+	int			i;
+	bool		found;
+	t_number	*tmp;
+
+	if (!stack || !(*stack))
+		return (-1);
+	tmp = *stack;
+	found = false;
+	i = 0;
+	while (tmp && !found)
+	{
+		if (lookup_value == tmp->number)
+		{
+			found = true;
+			break ;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	if (!found)
+		return (-1);
+	return (i);
+}
 
 t_number	*ft_stacknew(int number)
 {
