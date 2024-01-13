@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:49:56 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/12 21:49:55 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:56:29 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	bring_smallest_to_top(t_number **stack)
 	t_number	*tmp;
 	int			i;
 
-	steps = get_initial_steps(0);
+	steps = initialize_steps(0);
 	if (!steps)
 		return ;
 	val = get_smallest(*stack);

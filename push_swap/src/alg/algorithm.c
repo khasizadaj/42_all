@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/13 18:30:54 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:54:17 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 */
 
-int *get_initial_steps(int fill_value)
+int *initialize_steps(int fill_value)
 {
 	int	*steps;
 	int	i;	
@@ -55,7 +55,7 @@ int *get_initial_steps(int fill_value)
 	return steps;
 }
 
-void optimize(int *steps)
+void optimize_rotations(int *steps)
 {
     int	minCount;
 
@@ -82,6 +82,18 @@ void optimize(int *steps)
     steps[REVROT_BOTH] += minCount;
 }
 
+/*
+	Updates `steps` array with steps rotation steps needed for integer
+	at index of `lookup` in the stack to reach the top of the stack
+	at the destionation.
+
+	`direction` switch is necessary for knowing which stack should be
+	rotated as `steps` array contains information for both stacks. If
+	`direction` is equal to "a", that means we are moving an integer
+	at index of `lookup` from `stack_b` to `stack_a`. An then,
+	this function adds calculated rotation for the destination
+	which is `stack_a`.
+*/
 void	get_steps_to_top_at_to(int lookup, int *steps, t_number *stack, char direction)
 {
 	int size;
@@ -111,6 +123,18 @@ void	get_steps_to_top_at_to(int lookup, int *steps, t_number *stack, char direct
 	}
 }
 
+/*
+	Updates `steps` array with steps rotation steps needed for integer
+	at index of `lookup` in the stack to reach the top of the stack
+	at the origin.
+
+	`direction` switch is necessary for knowing which stack should be
+	rotated as `steps` array contains information for both stacks. If
+	`direction` is equal to "a", that means we are moving an integer
+	at index of `lookup` from `stack_b` to `stack_a`. An then,
+	this function adds calculated rotation for the origin which is
+	`stack_b`.
+*/
 void	get_steps_to_top_at_from(int lookup, int *steps, t_number *stack, char direction)
 {
 	int size_a;
@@ -180,10 +204,11 @@ lli	get_smallest(t_number *stack) {
 
 /*
 	Finds the insert position for 'val' in a circular linked list 'to', 
-	which is sorted in descending order. The function identifies the 
-	position right after the smallest value that is bigger than 'val'. 
-	It also handles cases where the list's minimum value is followed by 
-	its maximum due to its circular nature.
+	which is sorted in descending order. 
+	
+	The function identifies the position right after the smallest value
+	that is bigger than 'val'. It also handles cases where the list's
+	minimum value is followed by its maximum due to its circular nature.
 */
 lli	get_location_to_move_reverse(lli val, t_number *to)
 {
@@ -218,10 +243,11 @@ lli	get_location_to_move_reverse(lli val, t_number *to)
 
 /*
 	Finds the insert position for 'val' in a circular linked list 'to', 
-	which is sorted in ascending order. The function identifies the 
-	position right after the largest value that is smaller than 'val'. 
-	It also handles cases where the list's maximum value is followed by 
-	its minimum due to its circular nature.
+	which is sorted in ascending order.
+	
+	The function identifies the position right after the largest value
+	that is smaller than 'val'. It also handles cases where the list's
+	maximum value is followed by its minimum due to its circular nature.
 */
 lli	get_location_to_move(lli val, t_number *to)
 {
@@ -253,15 +279,18 @@ lli	get_location_to_move(lli val, t_number *to)
 	return (location);
 }
 
+/*
+	Function calculates the needed steps for given number to be moved
+	to the correct position from given stack `from` to given stack `to`.  
+*/
 int	*get_steps_to_move(int lookup, lli val, t_number *from, t_number *to, bool reverse)
 {
 	lli location;
 	int	*steps;
 
-	steps = get_initial_steps(0);
+	steps = initialize_steps(0);
 	if (!steps)
 		return (NULL);
-	// MAYBE SWAP CAN HAPPEN IF AVERAGE IS SMALL
 	if (reverse)
 	{
 		get_steps_to_top_at_from(lookup, steps, from, 'b');
@@ -276,7 +305,7 @@ int	*get_steps_to_move(int lookup, lli val, t_number *from, t_number *to, bool r
 		get_steps_to_top_at_to(location, steps, to, 'a');
 		steps[PUSH_A] += 1;
 	}
-	optimize(steps);
+	optimize_rotations(steps);
 	return (steps);
 }
 
@@ -302,7 +331,7 @@ int *get_cheapest(t_number *from, t_number *to, bool reverse)
 
 	if (!from || !to)
 		return (NULL);
-	cheapest = get_initial_steps(2147483646);
+	cheapest = initialize_steps(2147483646);
 	if (!cheapest)
 		return (NULL);
 	i = 0;
