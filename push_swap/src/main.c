@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/06 13:23:54 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/08 17:33:04 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ int	main(int argc, char **argv)
 		exit_for(INVALID_INPUT);
 	}
 	generate_stack(data, argc, argv);
-	print_stack(data->stack_a);
+	sort(data);
 	ft_stackclear(&data->stack_a);
+	ft_stackclear(&data->stack_b);
 	free(data);
 	return (0);
 }

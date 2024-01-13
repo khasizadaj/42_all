@@ -6,217 +6,119 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2023/12/27 22:07:38 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/13 22:42:32 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
+#include "alg.h"
 
-/* 
+/*
+	Function returns largest number in the stack.
 
-	STEP MAPPING
-
-	- 0 : sa
-	- 1 : sb
-	- 2 : ss
-	- 3 : ra
-	- 4 : rb
-	- 5 : rr
-	- 6 : rra
-	- 7 : rrb
-	- 8 : rrr
-	- 9 : pa
-	- 10 : pb
-
-	We'll represent potential steps to reach destination using
-	array. Every spot refers to certain step and whenever that
-	step is taken, spot value will be Updated to '1' from its
-	initial value of '0'.
-
-	steps = [ 0 0 0 0 0 0 1 1 0 0 1]
-              sa    ra    rra   pa
-	It would take 4 steps for given number to reach 
-	its destination.
-
+	Note: It doesn't handle NULL values, you should protect this function
+	in outer scope.
 */
-
-void	get_steps_to_top_b(int lookup, int *steps, t_list *stack)
+lli	get_largest(t_number *stack)
 {
-	int size;
+	t_number	*tmp;
+	lli			i;
+	lli			max;
 
-	size = ft_lstsize(stack);
-	// printf("Lookup: %d\n", lookup);
-
-	if (lookup != 0 && size % 2 == 0 && lookup + 1 >= size / 2 + 1)
-	{
-		steps[7] = size - lookup;
-		return ;
-	}
-	if (lookup != 0 && size % 2 == 1 && lookup + 1 > size / 2 + 1)
-	{
-		steps[7] = size - lookup;
-		return ;
-	}
-	else if (lookup != 0)
-	{
-		steps[4] = lookup;
-		return ;
-	}
-}
-
-void	get_steps_to_top_a(int lookup, int *steps, t_list *stack)
-{
-	int size_a;
-
-	size_a = ft_lstsize(stack);
-	if (lookup != 0 && size_a % 2 == 0 && lookup + 1 >= size_a / 2 + 1)
-	{
-		steps[6] = size_a - lookup;
-		return ;
-	}
-	if (lookup != 0 && size_a % 2 == 1 && lookup + 1 > size_a / 2 + 1)
-	{
-		steps[6] = size_a - lookup;
-		return ;
-	}
-	else if (lookup != 0)
-	{
-		steps[3] = lookup;
-		return ;
-	}
-}
-
-lli get_largest(t_list *stack) {
-    t_list *tmp;
-    lli		i;
-    lli		max;
-
-    if (!stack)
-		return (-1);
 	i = 0;
-    tmp = stack;
-	max = (lli)tmp->content;
-    while (tmp) {
-        if ((lli)tmp->content >= max)
-            max = (lli)tmp->content;
-        tmp = tmp->next;
+	tmp = stack;
+	max = tmp->number;
+	while (tmp)
+	{
+		if (tmp->number >= max)
+			max = tmp->number;
+		tmp = tmp->next;
 		i++;
-    }
-    return max;
+	}
+	return (max);
 }
 
 /*
-	This function return the position that moved element
-	should be in. If returned value is 1, it means that
-	moved element will be in that position, or it should
-	be on top of current element on index 1. 
+	Function returns smallest number in the stack.
+
+	Note: It doesn't handle NULL values, you should protect this function
+	in outer scope.
 */
-lli	get_location_to_move(lli val, t_list *to)
+lli	get_smallest(t_number *stack)
 {
-	t_list	*tmp;
-	lli		i;
-	lli		location;
-	lli		smallest;
-
-    tmp = to;
-    i = 0;
-	smallest = get_largest(to);
-	location = 0;
-	if (val > smallest && smallest == (lli)tmp->content)
-		return (0);
-    while (tmp) {
-        if ((lli)tmp->content<=smallest && val < (lli)tmp->content) 
-		{
-            smallest = (lli)tmp->content;
-			location = i + 1;
-		}
-		if (val > smallest && val > (lli)tmp->content && val > (lli)tmp->next->content)
-			return (i + 1);
-        tmp = tmp->next;
-        i++;
-    }
-	if (location == ft_lstsize(to))
-		return (0);
-	return (location);
-}
-
-void get_steps_to_b(int lookup, lli val, int *steps, t_list *from, t_list *to)
-{
-	lli location;
-
-	// MAYBE SWAP CAN HAPPEN IF AVERAGE IS SMALL
-	get_steps_to_top_a(lookup, steps, from);
-	location = get_location_to_move(val, to);
-	get_steps_to_top_b(location, steps, to);
-	// TODO Optimisation missing
-	steps[10] += 1;
-}
-
-void	reset_steps(int *steps)
-{
-	int	i;
+	t_number	*tmp;
+	lli			i;
+	lli			min;
 
 	i = 0;
-	while (i < STEP_SIZE) {
-		steps[i] = 0; 
+	tmp = stack;
+	min = tmp->number;
+	while (tmp)
+	{
+		if (tmp->number <= min)
+			min = tmp->number;
+		tmp = tmp->next;
 		i++;
 	}
+	return (min);
 }
 
-
-int	calculate_cost(int *steps)
+/*
+	Function calculates the needed steps for given number to be moved
+	to the correct position from given stack `from` to given stack `to`.  
+*/
+int	*get_steps_to_move(lli val, t_number *from, t_number *to, bool reverse)
 {
-	int	result;
-	int	i;
-
-	i = -1;
-	result = 0;
-	while (++i < STEP_SIZE)
-		result += steps[i];
-
-	return result;
-}
-
-int *get_initial_steps(int fill_value)
-{
+	lli	location;
 	int	*steps;
-	int	i;	
+	int	index_of_val;
 
-	steps = ft_calloc(STEP_SIZE, sizeof(int));
+	steps = initialize_steps(0);
 	if (!steps)
 		return (NULL);
-	i = -1;
-	while (++i < STEP_SIZE)
-		steps[i] = fill_value;
-	return steps;
+	index_of_val = ft_stackindex(&from, val);
+	if (reverse)
+	{
+		get_steps_to_top_at_from(index_of_val, steps, from, 'b');
+		location = get_location_to_move_reverse(val, to);
+		get_steps_to_top_at_to(location, steps, to, 'b');
+		steps[PUSH_B] += 1;
+	}
+	else
+	{
+		get_steps_to_top_at_from(index_of_val, steps, from, 'a');
+		location = get_location_to_move(val, to);
+		get_steps_to_top_at_to(location, steps, to, 'a');
+		steps[PUSH_A] += 1;
+	}
+	optimize(steps);
+	return (steps);
 }
 
-int *get_cheapest(t_list *from, t_list *to)
+int	*get_cheapest(t_number *from, t_number *to, bool reverse)
 {
-	int 	*steps;
-	int 	*cheapest;
-	int		i;
-	t_list	**tmp;
+	int			*steps;
+	int			*cheapest;
+	int			i;
+	t_number	**tmp;
 
 	if (!from || !to)
 		return (NULL);
-	steps = get_initial_steps(0);
-	if (!steps)
-		return (NULL);
-	cheapest = get_initial_steps(2147483646);
+	cheapest = initialize_steps(2147483646);
 	if (!cheapest)
-		return (free(steps), NULL);
+		return (NULL);
 	i = 0;
 	tmp = &from;
-	while(*tmp)
+	while (*tmp)
 	{
-		get_steps_to_b(i, (lli) (*tmp)->content, steps, from, to);
+		steps = get_steps_to_move((*tmp)->number, from, to, reverse);
+		if (!steps)
+			return (NULL);
 		if (calculate_cost(steps) < calculate_cost(cheapest))
 			ft_int_arrcpy(cheapest, steps, STEP_SIZE);
 		tmp = &((*tmp)->next);
-		reset_steps(steps);
 		i++;
+		free(steps);
 	}
-	free(steps);
-	return cheapest;
+	return (cheapest);
 }

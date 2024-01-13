@@ -13,9 +13,14 @@ SRCS =	${SRC_DIR}/main.c \
 		${UTILS_DIR}/reverse_rotate.c \
 		${UTILS_DIR}/rotate.c \
 		${UTILS_DIR}/swap.c \
+		${UTILS_DIR}/stack.c \
 		${UTILS_DIR}/stack_helper.c \
 		${UTILS_DIR}/validate.c \
-		${ALG_DIR}/apply.c
+		${ALG_DIR}/apply.c \
+		${ALG_DIR}/sort.c \
+		${ALG_DIR}/algorithm.c \
+		${ALG_DIR}/steps.c \
+		${ALG_DIR}/algorithm_helper.c
 
 OBJS = ${SRCS:.c=.o}
 
