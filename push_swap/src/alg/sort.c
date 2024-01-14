@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:49:56 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/13 20:02:32 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:35:47 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	sort(t_data *data)
 	push_b(&data->stack_a, &data->stack_b);
 	while (ft_stacksize(data->stack_a) > 3)
 	{
-		steps = get_cheapest(data->stack_a, data->stack_b, true);
+		steps = get_cheapest(data->stack_a, data->stack_b, TRUE);
 		if (!steps)
 			return ;
 		apply(steps, &data->stack_a, &data->stack_b);
@@ -86,7 +86,7 @@ void	sort(t_data *data)
 	sort_simple(&data->stack_a);
 	while (ft_stacksize(data->stack_b) > 0)
 	{
-		steps = get_cheapest(data->stack_b, data->stack_a, false);
+		steps = get_cheapest(data->stack_b, data->stack_a, FALSE);
 		if (!steps)
 			return ;
 		apply(steps, &data->stack_a, &data->stack_b);

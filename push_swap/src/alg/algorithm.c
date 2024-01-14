@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/13 22:42:32 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:33:28 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ lli	get_smallest(t_number *stack)
 	Function calculates the needed steps for given number to be moved
 	to the correct position from given stack `from` to given stack `to`.  
 */
-int	*get_steps_to_move(lli val, t_number *from, t_number *to, bool reverse)
+int	*get_steps_to_move(lli val, t_number *from, t_number *to, t_bool reverse)
 {
 	lli	location;
 	int	*steps;
@@ -95,7 +95,7 @@ int	*get_steps_to_move(lli val, t_number *from, t_number *to, bool reverse)
 	return (steps);
 }
 
-int	*get_cheapest(t_number *from, t_number *to, bool reverse)
+int	*get_cheapest(t_number *from, t_number *to, t_bool reverse)
 {
 	int			*steps;
 	int			*cheapest;

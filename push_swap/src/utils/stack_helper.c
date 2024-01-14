@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/14 13:23:35 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:35:47 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 int	ft_stackindex(t_number **stack, int lookup_value)
 {
 	int			i;
-	bool		found;
+	t_bool		found;
 	t_number	*tmp;
 
 	if (!stack || !(*stack))
 		return (-1);
 	tmp = *stack;
-	found = false;
+	found = FALSE;
 	i = 0;
 	while (tmp && !found)
 	{
 		if (lookup_value == tmp->number)
 		{
-			found = true;
+			found = TRUE;
 			break ;
 		}
 		tmp = tmp->next;

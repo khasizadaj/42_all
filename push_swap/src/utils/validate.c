@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:19:00 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/07 14:25:20 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/14 13:35:47 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-bool	validate_4_digits(char **raw_numbers, int start)
+t_bool	validate_4_digits(char **raw_numbers, int start)
 {
 	int	col;
 	int	row;
@@ -24,13 +24,13 @@ bool	validate_4_digits(char **raw_numbers, int start)
 		if (raw_numbers[row][0] == '-' || raw_numbers[row][0] == '+')
 			col++;
 		while (raw_numbers[row][++col])
-			if (ft_isdigit(raw_numbers[row][col]) == false)
-				return (false);
+			if (ft_isdigit(raw_numbers[row][col]) == FALSE)
+				return (FALSE);
 	}
-	return (true);
+	return (TRUE);
 }
 
-bool	validate_4_duplicates(char **raw_numbers, int start)
+t_bool	validate_4_duplicates(char **raw_numbers, int start)
 {
 	int	row;
 
@@ -38,31 +38,31 @@ bool	validate_4_duplicates(char **raw_numbers, int start)
 	while (raw_numbers[++row])
 	{
 		if (ft_strarr_has(raw_numbers[row], &raw_numbers[row + 1]))
-			return (false);
+			return (FALSE);
 	}
-	return (true);
+	return (TRUE);
 }
 
-bool	validate_4_overflow(char **raw_numbers, int start)
+t_bool	validate_4_overflow(char **raw_numbers, int start)
 {
 	int		row;
 	char	*curr;
-	bool	has_sign;
+	t_bool	has_sign;
 
 	row = start;
 	while (raw_numbers[++row])
 	{
 		curr = raw_numbers[row];
-		has_sign = false;
+		has_sign = FALSE;
 		if (curr[0] == '-' || curr[0] == '+')
-			has_sign = true;
+			has_sign = TRUE;
 		if ((!has_sign && ft_strlen(raw_numbers[row]) > 10)
 			|| (has_sign && ft_strlen(raw_numbers[row]) > 11))
-			return (false);
+			return (FALSE);
 		if (ft_atoi_lli(curr) > 2147483647 || ft_atoi_lli(curr) < -2147483648)
-			return (false);
+			return (FALSE);
 	}
-	return (true);
+	return (TRUE);
 }
 
 int	validate_input(int argc, char **argv)
@@ -70,7 +70,7 @@ int	validate_input(int argc, char **argv)
 	int		size;
 	char	**raw_numbers;
 	int		start;
-	bool	result;
+	t_bool	result;
 
 	size = get_raw_numbers(&raw_numbers, argc, argv);
 	if (size == -1)
@@ -78,11 +78,11 @@ int	validate_input(int argc, char **argv)
 	start = 0;
 	if (argc == 2)
 		start = -1;
-	result = true;
+	result = TRUE;
 	if (!validate_4_digits(raw_numbers, start)
 		|| !validate_4_duplicates(raw_numbers, start)
 		|| !validate_4_overflow(raw_numbers, start))
-		result = false;
+		result = FALSE;
 	if (argc == 2)
 		free_numbers(size, raw_numbers);
 	return (result);
