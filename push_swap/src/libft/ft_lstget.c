@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstget.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkhasizada <jkhasizada@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 00:00:34 by jkhasizada        #+#    #+#             */
-/*   Updated: 2023/12/23 00:07:15 by jkhasizada       ###   ########.fr       */
+/*   Updated: 2024/01/14 13:38:49 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_list	*ft_lstget(t_list **lst, int index)
 	if (lst == NULL)
 		return (NULL);
 	i = 0;
-	result = lst;
+	result = *lst;
 	while (!result)
 	{
 		if (i == index)
