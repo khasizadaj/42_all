@@ -6,15 +6,49 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/08 16:56:05 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:24:19 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-/*
-	TODO Check if we can get rid of data->size and make it temporary.
-*/
+void	free_numbers(int size, char **numbers)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size)
+	{
+		free(numbers[i]);
+	}
+	free(numbers);
+}
+
+int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
+{
+	int	i;
+	int	size;
+
+	size = 0;
+	if (argc == 2)
+	{
+		*raw_numbers = ft_split(argv[1], ' ');
+		if (!*raw_numbers)
+			return (-1);
+		i = -1;
+		while ((*raw_numbers)[++i])
+		{
+			size++;
+		}
+	}
+	else
+	{
+		*raw_numbers = argv;
+		size = argc - 1;
+	}
+	return (size);
+}
+
 void	generate_stack(t_data *data, int argc, char **argv)
 {
 	char		**raw_numbers;

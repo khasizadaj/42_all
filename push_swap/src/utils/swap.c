@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 19:56:43 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/08 17:13:45 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:09:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	swap_b(t_number **stack)
 		ft_printf("%s\n", message);
 }
 
-void swap_both(t_number **stack_a, t_number **stack_b)
+void	swap_both(t_number **stack_a, t_number **stack_b)
 {
 	char	*message;
 

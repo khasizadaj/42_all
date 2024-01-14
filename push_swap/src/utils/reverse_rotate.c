@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 19:28:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/11 18:33:22 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:18:48 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	reverse_rotate_b(t_number **stack)
 		ft_printf("%s\n", message);
 }
 
-void reverse_rotate_both(t_number **stack_a, t_number **stack_b)
+void	reverse_rotate_both(t_number **stack_a, t_number **stack_b)
 {
 	char	*message;
 

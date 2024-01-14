@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/13 22:31:01 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:23:35 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_number	*ft_stacknew(int number)
 
 void	ft_stackadd_back(t_number **stack, t_number *new_elem)
 {
-	t_number *last;
+	t_number	*last;
 
 	if (!stack || !new_elem)
 		return ;
@@ -96,42 +96,4 @@ void	ft_stackclear(t_number **stack)
 		free(*stack);
 		*stack = temp;
 	}
-}
-
-void	free_numbers(int size, char **numbers)
-{
-	int	i;
-
-	i = -1;
-	while (++i < size)
-	{
-		free(numbers[i]);
-	}
-	free(numbers);
-}
-
-int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
-{
-	int	i;
-	int	size;
-
-	size = 0;
-	if (argc == 2)
-	{
-        *raw_numbers = ft_split(argv[1], ' ');
-        if (!*raw_numbers)
-            return -1;
-
-        i = -1;
-        while ((*raw_numbers)[++i])
-        {
-            size++;
-        }
-	}
-	else
-	{
-		*raw_numbers = argv;
-		size = argc - 1;
-	}
-	return (size);
 }
