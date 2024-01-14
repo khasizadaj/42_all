@@ -49,7 +49,7 @@ void	rotate_b(t_number **stack)
 		ft_printf("%s\n", message);
 }
 
-void rotate_both(t_number **stack_a, t_number **stack_b)
+void	rotate_both(t_number **stack_a, t_number **stack_b)
 {
 	char	*message;
 
