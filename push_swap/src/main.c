@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/15 18:05:29 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:06:33 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (1);
-	data->size = 5;
 	data->stack_a = NULL;
 	data->stack_b = NULL;
 	generate_stack(data, argc, argv);
