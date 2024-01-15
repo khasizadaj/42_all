@@ -41,7 +41,7 @@ do
     else
         echo -e "\033[31m$output\033[0m"
     fi
-
+ 
     if [ $WITH_STEPS -eq 1 ]; then
         STEP_COUNT=$(./push_swap $ARG | wc -l)
         echo -e "== STEPS: $STEP_COUNT\n"    

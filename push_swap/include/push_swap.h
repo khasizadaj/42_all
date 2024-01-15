@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/15 18:03:37 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:26:27 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 
 # define INVALID_INPUT 1
 # define NO_INPUT 2
+
+# define SORT_SUCCESS 123
+# define SORT_FAILURE 321
 
 # define STEP_SIZE 11
 # define SWAP_A 0
@@ -67,7 +70,7 @@ void	push_a(t_number **stack_a, t_number **stack_b);
 void	push_b(t_number **stack_a, t_number **stack_b);
 
 /* ALGORITHM */
-void	sort(t_data *data);
+void		sort(t_data *data);
 
 /* UTILS */
 int		validate_input(int argc, char **argv);
