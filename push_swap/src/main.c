@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/14 13:41:24 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:01:52 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
+	if (argc < 2)
+		exit_for(NO_INPUT);
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (1);
