@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:19:00 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/14 13:35:47 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:48:16 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ t_bool	validate_4_digits(char **raw_numbers, int start)
 		col = -1;
 		if (raw_numbers[row][0] == '-' || raw_numbers[row][0] == '+')
 			col++;
-		while (raw_numbers[row][++col])
-			if (ft_isdigit(raw_numbers[row][col]) == FALSE)
-				return (FALSE);
+		while (ft_isint(raw_numbers[row]) == FALSE)
+			return (FALSE);
 	}
 	return (TRUE);
 }

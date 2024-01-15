@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/14 13:24:19 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:51:35 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,19 @@ void	free_numbers(int size, char **numbers)
 	free(numbers);
 }
 
+/*
+	Function returns the size of the stack and sets the raw_numbers
+	parameter to either argv or a split of argv[1] by spaces.
+
+	If the function returns -1, it means there was an error. Either
+	there was non integer values or there was a malloc error.
+*/
 int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
 {
-	int	i;
-	int	size;
+	int		i;
+	t_bool	has_noninteger;
 
-	size = 0;
+	has_noninteger = FALSE;
 	if (argc == 2)
 	{
 		*raw_numbers = ft_split(argv[1], ' ');
@@ -38,15 +45,18 @@ int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
 		i = -1;
 		while ((*raw_numbers)[++i])
 		{
-			size++;
+			if (ft_isint((*raw_numbers)[i]) == FALSE)
+				has_noninteger = TRUE;
 		}
+		if (has_noninteger == TRUE)
+			return (free_numbers(i + 1, *raw_numbers), -1);
 	}
 	else
 	{
 		*raw_numbers = argv;
-		size = argc - 1;
+		i = argc - 1;
 	}
-	return (size);
+	return (i);
 }
 
 void	generate_stack(t_data *data, int argc, char **argv)
