@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:19:00 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/15 17:48:16 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:31:47 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,15 @@ t_bool	validate_4_overflow(char **raw_numbers, int start)
 	return (TRUE);
 }
 
-int	validate_input(int argc, char **argv)
+/*
+	Function validates input for having only digits, without
+	any duplication and without any number that is over integer
+	limits.
+
+	Function considers one argument with array of integers or
+	multiple arguments with single integer.
+*/
+t_bool	validate_input(int argc, char **argv)
 {
 	int		size;
 	char	**raw_numbers;
@@ -73,7 +81,7 @@ int	validate_input(int argc, char **argv)
 
 	size = get_raw_numbers(&raw_numbers, argc, argv);
 	if (size == -1)
-		return (0);
+		return (FALSE);
 	start = 0;
 	if (argc == 2)
 		start = -1;
