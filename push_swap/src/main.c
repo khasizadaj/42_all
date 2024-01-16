@@ -6,11 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/16 17:22:49 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:22:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include "libft/libft.h"
 
 int	main(int argc, char **argv)
 {
@@ -26,6 +27,8 @@ int	main(int argc, char **argv)
 	data->stack_a = NULL;
 	data->stack_b = NULL;
 	generate_stack(data, argc, argv);
+	if (!validate_stack_4_duplicates(&data->stack_a))
+		exit_for(INVALID_INPUT);
 	sort(data);
 	ft_stackclear(&data->stack_a);
 	ft_stackclear(&data->stack_b);

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:19:00 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/16 17:31:47 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:22:40 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,18 @@ t_bool	validate_4_digits(char **raw_numbers, int start)
 	return (TRUE);
 }
 
-t_bool	validate_4_duplicates(char **raw_numbers, int start)
+t_bool	validate_stack_4_duplicates(t_number **stack)
 {
-	int	row;
+	t_number	*tmp;
 
-	row = start;
-	while (raw_numbers[++row])
+	if (!stack || !(*stack))
+		return (FALSE);
+	tmp = *stack;
+	while (tmp)
 	{
-		if (ft_strarr_has(raw_numbers[row], &raw_numbers[row + 1]))
+		if (tmp->next && ft_stackindex(&tmp->next, tmp->number) != -1)
 			return (FALSE);
+		tmp = tmp->next;
 	}
 	return (TRUE);
 }
@@ -87,7 +90,6 @@ t_bool	validate_input(int argc, char **argv)
 		start = -1;
 	result = TRUE;
 	if (!validate_4_digits(raw_numbers, start)
-		|| !validate_4_duplicates(raw_numbers, start)
 		|| !validate_4_overflow(raw_numbers, start))
 		result = FALSE;
 	if (argc == 2)
