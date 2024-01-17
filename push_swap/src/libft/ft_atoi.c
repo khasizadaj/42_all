@@ -46,7 +46,7 @@ int	ft_atoi(const char *nptr)
 	return (n * sign);
 }
 
-long long int	ft_atoi_lli(const char *nptr)
+long long int	ft_atoi_t_lli(const char *nptr)
 {
 	int				i;
 	int				sign;

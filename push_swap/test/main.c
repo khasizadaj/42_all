@@ -4,7 +4,7 @@ void print_list(t_list *stack)
 {
     while (stack != NULL)
     {
-        printf("%lld -> ", (lli) stack->content);
+        printf("%lld -> ", stack->content);
         stack = stack->next;
     }
     printf("NULL\n");
@@ -23,14 +23,14 @@ void print_lists(t_list *stack_a, t_list *stack_b)
         printf(" %d\t|", i);
 		if (stack_a)
 		{
-	        printf("%lld\t|", (lli) stack_a->content);
+	        printf("%lld\t|", stack_a->content);
 			stack_a = stack_a->next;
 		}
 		else
 	        printf("\t|");
 		if (stack_b)
 	    {
-		    printf(" %lld\t|\n", (lli) stack_b->content);
+		    printf(" %lld\t|\n", stack_b->content);
 			stack_b = stack_b->next;
 		}
 		else

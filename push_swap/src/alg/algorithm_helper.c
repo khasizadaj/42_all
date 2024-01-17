@@ -97,11 +97,11 @@ void	get_steps_to_top_at_from(int lookup, int *steps, t_number *stack,
 	that is bigger than 'val'. It also handles cases where the list's
 	minimum value is followed by its maximum due to its circular nature.
 */
-lli	get_location_to_move_reverse(lli val, t_number *stack)
+t_lli	get_location_to_move_reverse(t_lli val, t_number *stack)
 {
-	lli			i;
-	lli			location;
-	lli			smallest;
+	t_lli			i;
+	t_lli			location;
+	t_lli			smallest;
 
 	i = 0;
 	smallest = get_largest(stack);
@@ -134,11 +134,11 @@ lli	get_location_to_move_reverse(lli val, t_number *stack)
 	that is smaller than 'val'. It also handles cases where the list's
 	maximum value is followed by its minimum due to its circular nature.
 */
-lli	get_location_to_move(lli val, t_number *to)
+t_lli	get_location_to_move(t_lli val, t_number *to)
 {
-	lli			i;
-	lli			location;
-	lli			largest;
+	t_lli			i;
+	t_lli			location;
+	t_lli			largest;
 
 	i = 0;
 	largest = get_smallest(to);

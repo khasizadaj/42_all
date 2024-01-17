@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <stdarg.h>
 
+typedef long long int t_lli;
 typedef int	t_bool;
 
 # define TRUE 1 

@@ -47,39 +47,37 @@ typedef struct s_data
 {
 	int			size;
 	t_number	*stack_a;	
-	t_number	*stack_b;	
+	t_number	*stack_b;
 }	t_data;
 
-typedef long long int lli;
-
-void	generate_stack(t_data *data, int argc, char **argv);
-void	apply(int *steps, t_number **stack_a, t_number **stack_b);
-int		swap(t_number **stack);
-void	swap_a(t_number **stack);
-void	swap_b(t_number **stack);
-void	swap_both(t_number **stack_a, t_number **stack_b);
-int		rotate(t_number **stack);
-void	rotate_a(t_number **stack);
-void	rotate_b(t_number **stack);
-void	rotate_both(t_number **stack_a, t_number **stack_b);
-int		reverse_rotate(t_number **stack);
-void	reverse_rotate_a(t_number **stack);
-void	reverse_rotate_b(t_number **stack);
-void	reverse_rotate_both(t_number **stack_a, t_number **stack_b);
-void	push_a(t_number **stack_a, t_number **stack_b);
-void	push_b(t_number **stack_a, t_number **stack_b);
+void		generate_stack(t_data *data, int argc, char **argv);
+void		apply(int *steps, t_number **stack_a, t_number **stack_b);
+int			swap(t_number **stack);
+void		swap_a(t_number **stack);
+void		swap_b(t_number **stack);
+void		swap_both(t_number **stack_a, t_number **stack_b);
+int			rotate(t_number **stack);
+void		rotate_a(t_number **stack);
+void		rotate_b(t_number **stack);
+void		rotate_both(t_number **stack_a, t_number **stack_b);
+int			reverse_rotate(t_number **stack);
+void		reverse_rotate_a(t_number **stack);
+void		reverse_rotate_b(t_number **stack);
+void		reverse_rotate_both(t_number **stack_a, t_number **stack_b);
+void		push_a(t_number **stack_a, t_number **stack_b);
+void		push_b(t_number **stack_a, t_number **stack_b);
 
 /* ALGORITHM */
 void		sort(t_data *data);
 
 /* UTILS */
-t_bool	validate_input(int argc, char **argv);
-t_bool	validate_stack_4_duplicates(t_number **stack);
-void	print_steps(int *steps, int size);
-void	print_stack(t_number *stack);
-void	print_raw_numbers(char **raw_numbers);
-int		get_raw_numbers(char ***raw_numbers, int argc, char **argv);
-void	free_numbers(int size, char **numbers);
+t_bool		validate_input(int argc, char **argv);
+t_bool		validate_stack_4_duplicates(t_number **stack);
+void		print_steps(int *steps, int size);
+void		print_stack(t_number *stack);
+void		print_raw_numbers(char **raw_numbers);
+int			get_raw_numbers(char ***raw_numbers, int argc, char **argv);
+void		free_numbers(int size, char **numbers);
 
 /* STACK UTILS */
 t_number	*ft_stacknew(int number);

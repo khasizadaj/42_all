@@ -19,11 +19,11 @@
 	Note: It doesn't handle NULL values, you should protect this function
 	in outer scope.
 */
-lli	get_largest(t_number *stack)
+t_lli	get_largest(t_number *stack)
 {
 	t_number	*tmp;
-	lli			i;
-	lli			max;
+	t_lli			i;
+	t_lli			max;
 
 	i = 0;
 	tmp = stack;
@@ -44,11 +44,11 @@ lli	get_largest(t_number *stack)
 	Note: It doesn't handle NULL values, you should protect this function
 	in outer scope.
 */
-lli	get_smallest(t_number *stack)
+t_lli	get_smallest(t_number *stack)
 {
 	t_number	*tmp;
-	lli			i;
-	lli			min;
+	t_lli			i;
+	t_lli			min;
 
 	i = 0;
 	tmp = stack;
@@ -67,9 +67,9 @@ lli	get_smallest(t_number *stack)
 	Function calculates the needed steps for given number to be moved
 	to the correct position from given stack `from` to given stack `to`.  
 */
-int	*get_steps_to_move(lli val, t_number *from, t_number *to, t_bool reverse)
+int	*get_steps_to_move(t_lli val, t_number *from, t_number *to, t_bool reverse)
 {
-	lli	location;
+	t_lli	location;
 	int	*steps;
 	int	index_of_val;
 
