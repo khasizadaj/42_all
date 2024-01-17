@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/16 18:19:51 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:17:03 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ void		ft_stackclear(t_number **stack);
 int			ft_stacksize(t_number *lst);
 int			ft_stackindex(t_number **stack, int lookup_value);
 
-void	exit_for(int reason);
+void		exit_for(int reason);
 
 #endif

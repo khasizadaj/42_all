@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/14 13:33:28 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:19:50 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 */
 t_lli	get_largest(t_number *stack)
 {
-	t_number	*tmp;
+	t_number		*tmp;
 	t_lli			i;
 	t_lli			max;
 
@@ -46,7 +46,7 @@ t_lli	get_largest(t_number *stack)
 */
 t_lli	get_smallest(t_number *stack)
 {
-	t_number	*tmp;
+	t_number		*tmp;
 	t_lli			i;
 	t_lli			min;
 
@@ -70,8 +70,8 @@ t_lli	get_smallest(t_number *stack)
 int	*get_steps_to_move(t_lli val, t_number *from, t_number *to, t_bool reverse)
 {
 	t_lli	location;
-	int	*steps;
-	int	index_of_val;
+	int		*steps;
+	int		index_of_val;
 
 	steps = initialize_steps(0);
 	if (!steps)

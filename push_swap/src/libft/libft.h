@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/15 17:27:53 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:17:58 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <fcntl.h>
 # include <stdarg.h>
 
-typedef long long int t_lli;
-typedef int	t_bool;
+typedef long long int	t_lli;
+typedef int				t_bool;
 
 # define TRUE 1 
 # define FALSE 0
