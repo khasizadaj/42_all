@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:22:09 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/15 17:51:06 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:13:28 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ t_bool	ft_isint(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (FALSE);
+	if (ft_strlen(str) == 0)
+		return (FALSE);
 	i = 0;
 	while (str[i])
 	{

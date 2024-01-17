@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/15 17:51:35 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:27:30 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	free_numbers(int size, char **numbers)
 
 	If the function returns -1, it means there was an error. Either
 	there was non integer values or there was a malloc error.
+
+	It can also catch the time that argv[1] is empty string. As ft_split
+	still returns array with 1 empty string, fucntion considers this as
+	an error as well.
 */
 int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
 {
@@ -48,7 +52,7 @@ int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
 			if (ft_isint((*raw_numbers)[i]) == FALSE)
 				has_noninteger = TRUE;
 		}
-		if (has_noninteger == TRUE)
+		if (has_noninteger == TRUE || !(*raw_numbers)[0])
 			return (free_numbers(i + 1, *raw_numbers), -1);
 	}
 	else

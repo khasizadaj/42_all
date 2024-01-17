@@ -6,91 +6,76 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:49:56 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/14 13:35:47 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:26:46 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 #include "alg.h"
 
-/* 
-Handles stack with 3 three items.
-=> 2 - 1 - 3
-=> 1 - 3 - 2
-=> 3 - 2 - 1
-
-These are already sorted (no action needed):
-=> 3 - 1 - 2
-=> 1 - 2 - 3
-=> 2 - 3 - 1
-*/
-void	sort_simple(t_number **stack)
-{
-	int	first;
-	int	second;
-	int	third;
-
-	first = (*stack)->number;
-	second = (*stack)->next->number;
-	third = (*stack)->next->next->number;
-	if (first > second && second < third && first < third)
-		swap_a(stack);
-	else if (first < second && second > third && first < third)
-		swap_a(stack);
-	else if (first > second && second > third && first > third)
-		swap_a(stack);
-}
-
-// TODO What to do if sort steps fail
 void	bring_smallest_to_top(t_number **stack)
 {
 	int			val;
 	int			*steps;
-	t_number	*tmp;
 	int			i;
 
+	val = get_smallest(*stack);
+	i = ft_stackindex(stack, val);
+	if (i == 0 || i == -1)
+		return ;
 	steps = initialize_steps(0);
 	if (!steps)
-		return ;
-	val = get_smallest(*stack);
-	tmp = *stack;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->number == val)
-			break ;
-		tmp = tmp->next;
-		i++;
-	}
-	if (i == 0)
 		return ;
 	get_steps_to_top_at_to(i, steps, *stack, 'a');
 	apply(steps, stack, stack);
 	free(steps);
 }
 
-void	sort(t_data *data)
+int	sort_to_b(t_data *data)
 {
 	int	*steps;
 
-	push_b(&data->stack_a, &data->stack_b);
-	push_b(&data->stack_a, &data->stack_b);
 	while (ft_stacksize(data->stack_a) > 3)
 	{
 		steps = get_cheapest(data->stack_a, data->stack_b, TRUE);
 		if (!steps)
-			return ;
+			return (SORT_FAILURE);
 		apply(steps, &data->stack_a, &data->stack_b);
 		free(steps);
 	}
-	sort_simple(&data->stack_a);
+	return (SORT_SUCCESS);
+}
+
+int	sort_to_a(t_data *data)
+{
+	int	*steps;
+
 	while (ft_stacksize(data->stack_b) > 0)
 	{
 		steps = get_cheapest(data->stack_b, data->stack_a, FALSE);
 		if (!steps)
-			return ;
+			return (SORT_FAILURE);
 		apply(steps, &data->stack_a, &data->stack_b);
 		free(steps);
 	}
+	return (SORT_SUCCESS);
+}
+
+void	sort(t_data *data)
+{
+	if (!data)
+		return ;
+	if (ft_stacksize(data->stack_a) <= 4)
+	{
+		sort_simple(&data->stack_a, &data->stack_b);
+		return ;
+	}
+	push_b(&data->stack_a, &data->stack_b);
+	push_b(&data->stack_a, &data->stack_b);
+	if (sort_to_b(data) == SORT_FAILURE)
+		return ;
+	sort_simple(&data->stack_a, &data->stack_b);
+	if (sort_to_a(data) == SORT_FAILURE)
+		return ;
 	bring_smallest_to_top(&data->stack_a);
 }

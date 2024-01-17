@@ -18,6 +18,7 @@ SRCS =	${SRC_DIR}/main.c \
 		${UTILS_DIR}/validate.c \
 		${ALG_DIR}/apply.c \
 		${ALG_DIR}/sort.c \
+		${ALG_DIR}/sort_simple.c \
 		${ALG_DIR}/algorithm.c \
 		${ALG_DIR}/steps.c \
 		${ALG_DIR}/algorithm_helper.c
