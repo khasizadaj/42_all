@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:19:00 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/16 18:22:40 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:44:35 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,23 @@ t_bool	validate_4_overflow(char **raw_numbers, int start)
 	int		row;
 	char	*curr;
 	t_bool	has_sign;
+	int		i;
 
 	row = start;
 	while (raw_numbers[++row])
 	{
-		curr = raw_numbers[row];
 		has_sign = FALSE;
-		if (curr[0] == '-' || curr[0] == '+')
+		curr = raw_numbers[row];
+		i = 0;
+		if (curr[i] == '-' || curr[i] == '+')
+		{
 			has_sign = TRUE;
-		if ((!has_sign && ft_strlen(raw_numbers[row]) > 10)
-			|| (has_sign && ft_strlen(raw_numbers[row]) > 11))
+			i++;
+		}
+		while (curr[i] == '0')
+			i++;
+		if ((!has_sign && ft_strlen(&(raw_numbers[row][i])) > 10)
+			|| (has_sign && ft_strlen(&(raw_numbers[row][i])) > 11))
 			return (FALSE);
 		if (ft_atoi_lli(curr) > 2147483647 || ft_atoi_lli(curr) < -2147483648)
 			return (FALSE);
