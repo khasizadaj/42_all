@@ -1,7 +1,34 @@
 #!/bin/bash
 
-if [ "$#" -lt 4 ]; then
-    echo "Usage: $0 start_range end_range repeat_count [-debug] [-with_steps]"
+DEBUG_MODE=0
+STEPS=0
+
+# Initialize an array for positional arguments
+POSITIONAL=()
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -d|--debug)
+            DEBUG_MODE=1
+            shift # Remove --debug or -d from processing
+            ;;
+        -s|--steps)
+            STEPS=1
+            shift # Remove --steps or -s from processing
+            ;;
+        *) # Handle positional arguments
+            POSITIONAL+=("$1") # Add to positional arguments array
+            shift # Move to next argument
+            ;;
+    esac
+done
+
+# Restore positional parameters
+set -- "${POSITIONAL[@]}"
+
+if [ ${#POSITIONAL[@]} -lt 4 ]; then
+    echo "Error: At least 4 positional arguments are required."
+    echo "Usage: $0 start_range end_range count repeat_count [--debug] [--steps]"
     exit 1
 fi
 
@@ -9,23 +36,6 @@ START_RANGE=$1
 END_RANGE=$2
 COUNT=$3
 REPEATS=$4
-
-DEBUG_MODE=0
-WITH_STEPS=0
-if [ "$#" -eq 5 ]; then
-    if [ "$5" == "-debug" ]; then
-        DEBUG_MODE=1
-    fi
-    if [ "$5" == "-with_steps" ]; then
-        WITH_STEPS=1
-    fi
-fi
-
-if [ "$#" -eq 6 ]; then
-    if [ "$6" == "-with_steps" ]; then
-        WITH_STEPS=1
-    fi
-fi
 
 make
 
@@ -42,7 +52,7 @@ do
         echo -e "\033[31m$output\033[0m"
     fi
  
-    if [ $WITH_STEPS -eq 1 ]; then
+    if [ $STEPS -eq 1 ]; then
         STEP_COUNT=$(./push_swap $ARG | wc -l)
         echo -e "== STEPS: $STEP_COUNT\n"    
     fi

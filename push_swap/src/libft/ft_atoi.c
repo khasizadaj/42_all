@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:17:35 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/14 13:39:08 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:14:56 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int	ft_atoi(const char *nptr)
 	return (n * sign);
 }
 
-long long int	ft_atoi_t_lli(const char *nptr)
+t_lli	ft_atoi_t_lli(const char *nptr)
 {
-	int				i;
-	int				sign;
-	long long int	n;
+	int		i;
+	int		sign;
+	t_lli	n;
 
 	i = 0;
 	sign = 1;
