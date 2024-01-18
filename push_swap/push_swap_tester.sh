@@ -1,24 +1,23 @@
 #!/bin/bash
 
+POSITIONAL=()
+
 DEBUG_MODE=0
 STEPS=0
-
-# Initialize an array for positional arguments
-POSITIONAL=()
 
 while [[ $# -gt 0 ]]; do
     case $1 in
         -d|--debug)
             DEBUG_MODE=1
-            shift # Remove --debug or -d from processing
+            shift
             ;;
         -s|--steps)
             STEPS=1
-            shift # Remove --steps or -s from processing
+            shift
             ;;
-        *) # Handle positional arguments
-            POSITIONAL+=("$1") # Add to positional arguments array
-            shift # Move to next argument
+        *)
+            POSITIONAL+=("$1")
+            shift
             ;;
     esac
 done
@@ -52,11 +51,13 @@ do
         echo -e "\033[31m$output\033[0m"
     fi
  
+    # Print the number of steps it took to sort the stack
     if [ $STEPS -eq 1 ]; then
         STEP_COUNT=$(./push_swap $ARG | wc -l)
         echo -e "== STEPS: $STEP_COUNT\n"    
     fi
     
+    # Print the generated list of numbers
 	if [ $DEBUG_MODE -eq 1 ]; then
     	echo -e "\nARG=\"$ARG\"\n"
 	fi
