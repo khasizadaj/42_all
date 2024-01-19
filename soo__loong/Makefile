@@ -35,6 +35,7 @@ clean:
 	@${RM} ${OBJS}
 
 fclean: clean
+	@${MAKE} -C ${LIBFT_DIR} --no-print-directory fclean
 	@${RM} -f ${NAME}
 
 re: fclean all
