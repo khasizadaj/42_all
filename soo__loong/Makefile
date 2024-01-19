@@ -1,11 +1,14 @@
 NAME = so_long
 
 SRC_DIR = src
-LIBFT_DIR = src/libft
+UTILS_DIR = ${SRC_DIR}/utils
+LIBFT_DIR = ${SRC_DIR}/libft
 
-SRCS =	${SRC_DIR}/main.c
+SRCS =	${SRC_DIR}/main.c \
+		${UTILS_DIR}/error.c
 
 OBJS = ${SRCS:.c=.o}
+LIBFT_OBJS = $(wildcard $(LIBFT_DIR)/*.o)
 
 CC = cc
 
@@ -13,11 +16,14 @@ CFLAGS = -Wall -Wextra -Werror -I ./include
 
 all: ${NAME}
 
-${NAME}: ${OBJS}
+run: ${NAME}
+	./${NAME} ./maps/basic.ber
+
+${NAME}: ${OBJS} ${LIBFT_OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
 	@${CC} ${CFLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
 
-debug: ${OBJS}
+debug: ${OBJS} ${LIBFT_OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
 	@${CC} ${CFLAGS} -g ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
 
@@ -29,6 +35,7 @@ clean:
 	@${RM} ${OBJS}
 
 fclean: clean
+	@${MAKE} -C ${LIBFT_DIR} --no-print-directory fclean
 	@${RM} -f ${NAME}
 
 re: fclean all

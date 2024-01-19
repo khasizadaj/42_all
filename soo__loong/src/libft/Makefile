@@ -24,6 +24,7 @@ SRCS := ft_bzero.c \
 	ft_putnbr_fd.c \
 	ft_split.c \
 	ft_strchr.c \
+	ft_str.c \
 	ft_strdup.c \
 	ft_striteri.c \
 	ft_strjoin.c \
