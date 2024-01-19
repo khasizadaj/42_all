@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/18 21:25:39 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:45:04 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_list			*ft_lstget(t_list **lst, int index);
 
 int				chr_in(char c, char const *str);
 t_bool			ft_str_has(char *str, char *lookup);
+t_bool			ft_str_endswith(char *str, char *lookup);
 int				ft_printf(const char *input, ...);
 char			*u_to_hex(unsigned int n, int lowercase);
 char			*llu_to_hex(unsigned long long n, int lowercase);

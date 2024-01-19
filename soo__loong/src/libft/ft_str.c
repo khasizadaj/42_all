@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_has.c                                       :+:      :+:    :+:   */
+/*   ft_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:42:11 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/18 22:08:39 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:53:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,26 @@ t_bool	ft_str_has(char *str, char *lookup)
 		if (lookup[x_2] == '\0')
 			return (TRUE);
 	}
+	return (FALSE);
+}
+
+t_bool	ft_str_endswith(char *str, char *lookup)
+{
+	int	x_1;
+	int	x_2;
+
+	x_1 = ft_strlen(str) - ft_strlen(lookup);
+	ft_printf("x_1: %d\n", x_1);
+	x_2 = -1;
+	while (lookup[++x_2])
+	{
+		ft_printf("- %c\n", str[x_1 + x_2]);
+		if (str[x_1 + x_2] != lookup[x_2])
+		{
+			break ;
+		}
+	}
+	if (lookup[x_2] == '\0')
+		return (TRUE);
 	return (FALSE);
 }
