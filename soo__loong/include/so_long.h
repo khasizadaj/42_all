@@ -6,12 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/18 21:29:05 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:55:56 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SOLONG_H
-# define SOLONG_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # include "../src/libft/libft.h"
 
