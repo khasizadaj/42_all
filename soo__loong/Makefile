@@ -5,7 +5,8 @@ UTILS_DIR = ${SRC_DIR}/utils
 LIBFT_DIR = ${SRC_DIR}/libft
 
 SRCS =	${SRC_DIR}/main.c \
-		${UTILS_DIR}/error.c
+		${UTILS_DIR}/error.c \
+		${UTILS_DIR}/draw.c
 
 OBJS = ${SRCS:.c=.o}
 LIBFT_OBJS = $(wildcard $(LIBFT_DIR)/*.o)
@@ -13,6 +14,7 @@ LIBFT_OBJS = $(wildcard $(LIBFT_DIR)/*.o)
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -I ./include 
+MLX_FLAGS = -lmlx -lXext -lX11
 
 all: ${NAME}
 
@@ -21,7 +23,7 @@ run: ${NAME}
 
 ${NAME}: ${OBJS} ${LIBFT_OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
-	@${CC} ${CFLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
+	@${CC} ${CFLAGS} ${MLX_FLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
 
 debug: ${OBJS} ${LIBFT_OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
@@ -39,5 +41,8 @@ fclean: clean
 	@${RM} -f ${NAME}
 
 re: fclean all
-	
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 .PHONY: all clean fclean re debug valgrind
