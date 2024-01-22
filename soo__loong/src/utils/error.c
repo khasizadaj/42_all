@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:01:31 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/19 20:56:14 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/22 22:31:36 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ void	exit_for(int reason)
 		ft_printf(INVALID_MAP_MSG_WRONG_WALLS);
 	else if (reason == INVALID_MAP_WRONG_FILE_TYPE)
 		ft_printf(INVALID_MAP_MSG_WRONG_FILE_TYPE);
-	exit(1);
+	else if (reason == PROGRAM_HALTED_WITH_ESCAPE)
+		ft_printf(PROGRAM_HALTED_MSG_WITH_ESCAPE);
+
+	exit(reason);
 }

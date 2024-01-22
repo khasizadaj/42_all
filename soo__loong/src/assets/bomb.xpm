@@ -1,5 +1,5 @@
 /* XPM */
-static char *bomb1705954686[] = {
+static char *bomb[] = {
 /* columns rows colors chars-per-pixel */
 "36 36 57 1 ",
 "  c #3C381E",

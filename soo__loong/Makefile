@@ -13,7 +13,7 @@ LIBFT_OBJS = $(wildcard $(LIBFT_DIR)/*.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I ./include 
+CFLAGS = -Wall -Wextra -Werror -I ./include
 MLX_FLAGS = -lmlx -lXext -lX11
 
 all: ${NAME}
@@ -27,10 +27,10 @@ ${NAME}: ${OBJS} ${LIBFT_OBJS}
 
 debug: ${OBJS} ${LIBFT_OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
-	@${CC} ${CFLAGS} -g ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
+	@${CC} ${CFLAGS} -g ${MLX_FLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
 
 valgrind: debug
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME}
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} .ber
 
 clean: 
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory clean

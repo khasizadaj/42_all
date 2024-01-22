@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/19 23:19:35 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/22 22:28:44 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,21 @@
 # include "../src/libft/libft.h"
 # include <mlx.h>
 
+typedef struct s_tile
+{
+	void			*img;
+	char			type;
+	struct s_tile	*next;
+}	t_tile;
+
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
 	int		width;
 	int		height;
+	int		side_length;
+	t_tile	*map;
 }	t_data;
 
 # define HEIGHT 600
@@ -31,6 +40,8 @@ typedef struct s_data
 
 # define MAP_EXTENSION ".ber"
 
+# define PROGRAM_HALTED_WITH_ESCAPE 300
+# define PROGRAM_HALTED_MSG_WITH_ESCAPE "Escaped this hell!"
 # define MEMORY_ERR 9999
 # define UNKNOWN_ERR 9998
 # define INVALID_MAP_NO_MAP 2000
