@@ -5,15 +5,18 @@ UTILS_DIR = ${SRC_DIR}/utils
 LIBFT_DIR = ${SRC_DIR}/libft
 
 SRCS =	${SRC_DIR}/main.c \
+		${UTILS_DIR}/asset.c \
+		${UTILS_DIR}/draw.c \
 		${UTILS_DIR}/error.c \
-		${UTILS_DIR}/draw.c
+		${UTILS_DIR}/hook.c \
+		${UTILS_DIR}/tile.c
 
 OBJS = ${SRCS:.c=.o}
 LIBFT_OBJS = $(wildcard $(LIBFT_DIR)/*.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I ./include
+CFLAGS = -Wall -Wextra -Werror -I ./include -g
 MLX_FLAGS = -lmlx -lXext -lX11
 
 all: ${NAME}

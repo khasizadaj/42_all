@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 21:39:42 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/23 20:55:19 by jkhasiza         ###   ########.fr       */
+/*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
+/*   Updated: 2024/01/23 18:54:50 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-t_tile	*draw_tile(t_data *data, int x, int y, char type)
+char	*asset_factory(char type)
 {
-	t_tile	*tile;
-
-	tile = tile_new(data, type);
-	if (!tile)
-		return (NULL);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, x, y);
-	tile_add_back(&(data->tile), tile);
-	return (tile);
+	if (type == '1')
+		return (A_WALL_O);
+	else if (type == 'C')
+		return (A_COIN);
+	else if (type == 'E')
+		return (A_EXIT);
+	else if (type == 'P')
+		return (A_PLAYER_R);
+	return (A_FLOOR);
 }
