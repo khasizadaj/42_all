@@ -8,6 +8,7 @@ SRCS =	${SRC_DIR}/main.c \
 		${UTILS_DIR}/asset.c \
 		${UTILS_DIR}/draw.c \
 		${UTILS_DIR}/error.c \
+		${UTILS_DIR}/game.c \
 		${UTILS_DIR}/hook.c \
 		${UTILS_DIR}/tile.c
 

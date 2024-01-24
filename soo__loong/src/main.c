@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/23 23:55:47 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:09:55 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 void	init_data(t_data *data)
 {
+	data->x_tile_count = 5;
+	data->y_tile_count = 4;
 	data->height = HEIGHT;
 	data->width = WIDTH;
 	data->side_length = SIDE_LENGTH;
+	data->player_pos = 0;
 	data->tile = NULL;
 	data->win = NULL;
 	data->mlx = NULL;
@@ -50,6 +53,8 @@ void	init_map(t_data *data, char *filename)
 			x = 0;
 			y += 72;
 		}
+		if (str_map[i] == 'P')
+			data->player_pos = i + 1;
 		tile = draw_tile(data, x, y, str_map[i]);
 		if (!tile)
 			exit_gracefully(data, MEMORY_ERR);
