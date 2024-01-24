@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/24 20:08:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:10:44 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_tile
 	void			*img;
 	char			type;
 	struct s_tile	*next;
+	int				id;
 }	t_tile;
 
 typedef struct s_data

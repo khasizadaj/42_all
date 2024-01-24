@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/23 23:35:06 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:10:59 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_tile	*tile_new(t_data *data, char type)
 	if (!img)
 		return (free(tile), NULL);
 	tile->img = img;
+	tile->id = 0;
 	tile->next = NULL;
 	return (tile);
 }
@@ -39,12 +40,14 @@ void	tile_add_back(t_tile **tile_list, t_tile *new_tile)
 	if (!(*tile_list))
 	{
 		*tile_list = new_tile;
+		new_tile->id = 1; 
 		return ;
 	}
 	last = *tile_list;
 	while (last->next)
 		last = last->next;
 	last->next = new_tile;
+	new_tile->id = last->id + 1;
 }
 
 void	free_tile(t_data *data)

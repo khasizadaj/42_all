@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/24 22:00:06 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:33:26 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 
 int	is_wall(t_data *data, int curr_pos)
 {
-	t_tile	*curr_tile;
+	t_tile	**curr_tile;
 	int		i;
 	
 	i = 1;
-	curr_tile = data->tile;
-	if (curr_tile && curr_pos != i)
+	curr_tile = &data->tile;
+	while (*curr_tile)
+	{
+		if ((*curr_tile)->id == curr_pos)
+			break ;
+		curr_tile = &(*curr_tile)->next;
 		i++;
-	ft_printf("Type: %c pos=%d\n", curr_tile->type, i);
-	if (curr_tile->type == '0')
+	}
+	if ((*curr_tile)->type == '1')
+	{
+		ft_printf("This can be wall! type=%c", (*curr_tile)->type);
 		return (TRUE);
+	}
 	return FALSE;
 }
 
@@ -51,7 +58,7 @@ int	get_x(t_data *data)
 {
 	int	x;
 
-	x = (data->player_pos % data->x_tile_count - 1) * 72;
+	x = (data->player_pos % data->x_tile_count - 1) * 72 + 1;
 	ft_printf("X:%d\n", x);
 	return x;
 }
@@ -60,7 +67,7 @@ int		get_y(t_data *data)
 {
 	int	x;
 
-	x = (data->player_pos / data->x_tile_count) * 72;
+	x = (data->player_pos / data->x_tile_count) * 72 + 1;
 	ft_printf("Y:%d\n", x);
 	return x;
 }
