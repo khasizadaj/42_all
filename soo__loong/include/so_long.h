@@ -51,6 +51,15 @@ typedef struct s_tile
 	int				id;
 }	t_tile;
 
+typedef struct s_assets
+{
+	void	*exit;
+	void	*player;
+	void	*floor;
+	void	*coin;
+	void	*wall;
+}	t_assets;
+
 typedef struct s_data
 {
 	void	*mlx;
@@ -63,8 +72,10 @@ typedef struct s_data
 	int		y_tile_count;
 	int		collected;
 	int		total_coins;
+	t_tile	*assets;
 	t_tile	*tile;
 }	t_data;
+
 
 # define KEY_RELEASE 3
 # define KEY_RELEASE_MASK 1L
@@ -138,5 +149,6 @@ void	add_hooks(t_data *data);
 /*                                                                            */
 /* ************************************************************************** */
 void	free_tile(t_data *data);
+void	free_assets(t_data *data);
 
 #endif

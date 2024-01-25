@@ -6,11 +6,30 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 03:36:51 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 04:42:16 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+#include "libft/libft.h"
+
+void	init_assets(t_data *data)
+{
+	char	*str_map;
+	int		i;
+	t_tile	*tile;
+
+	i = -1;
+	str_map = "1E0CP";
+	while (str_map[++i])
+	{
+		tile = tile_new(data, str_map[i]);
+		ft_printf("%c type\n", tile->type);
+		if (!tile)
+			exit_gracefully(data, MEMORY_ERR);
+		tile_add_back(&data->assets, tile);
+	}
+}
 
 void	init_data(t_data *data)
 {
@@ -25,9 +44,11 @@ void	init_data(t_data *data)
 	data->tile = NULL;
 	data->win = NULL;
 	data->mlx = NULL;
+	data->assets = NULL;
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		exit_gracefully(data, MEMORY_ERR);
+	init_assets(data);
 	data->win = mlx_new_window(data->mlx, data->width, 
 		data->height, PROGRAM_NAME);
 	if (!data->win)

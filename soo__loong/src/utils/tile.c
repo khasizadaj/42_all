@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 03:11:04 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 04:44:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,24 @@ void	free_tile(t_data *data)
     if (!data || !data->tile)
         return;
     current = data->tile;
+    while (current)
+    {
+        next = current->next;
+        mlx_destroy_image(data->mlx, current->img);
+        free(current);
+        current = next;
+    }
+}
+
+void	free_assets(t_data *data)
+{
+    t_tile *current;
+    t_tile *next;
+
+    if (!data || !data->assets)
+		return;
+
+	current = data->assets;
     while (current)
     {
         next = current->next;
