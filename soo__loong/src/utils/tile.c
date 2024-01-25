@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:23:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:57:59 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,20 @@ t_tile	*tile_get(t_tile **tile, int index)
 		curr_tile = &(*curr_tile)->next;
 	}
 	return (*curr_tile);
+}
+
+void	*tile_get_by_type(t_tile **tile, char type)
+{
+	t_tile	*curr_tile;
+
+	curr_tile = *tile;
+	while (curr_tile)
+	{
+		if (curr_tile->type == type)
+			break ;
+		curr_tile = curr_tile->next;
+	}
+	return (curr_tile->img);
 }
 
 void	free_tile(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:23:14 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:57:30 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	*asset_get_by_type(t_tile **assets, char type)
 			break ;
 		curr_tile = curr_tile->next;
 	}
-	// if (!(*curr_tile) && (*curr_tile)->type != type)
-	// 	return (NULL);
 	return (curr_tile->img);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:23:08 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:23:41 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ void	init_data(t_data *data)
 	data->x_tile_count = 8;
 	data->y_tile_count = 7;
 	data->collected = 0;
-	data->total_coins = 2;
+	data->total_coins = 5;
 	data->height = HEIGHT;
 	data->width = WIDTH;
 	data->side_length = SIDE_LENGTH;
 	data->player_pos = 0;
+	data->exit = 0;
 	data->tile = NULL;
 	data->win = NULL;
 	data->mlx = NULL;
@@ -77,6 +78,19 @@ void	init_map(t_data *data, char *filename)
 		}
 		if (str_map[i] == 'P')
 			data->player_pos = i + 1;
+		else if (str_map[i] == 'E')
+		{
+			tile = tile_new(data, 'E', TRUE);
+			if (!tile)
+				exit_gracefully(data, MEMORY_ERR);
+			tile_add_back(&data->tile, tile);
+			data->exit = 38;
+			mlx_put_image_to_window(data->mlx, data->win,
+				asset_get_by_type(&data->assets, '1'), x, y);
+			i++;
+			x += 72;
+			continue ;
+		}
 		tile = draw_tile(data, x, y, str_map[i]);		
 		if (!tile)
 			exit_gracefully(data, MEMORY_ERR);

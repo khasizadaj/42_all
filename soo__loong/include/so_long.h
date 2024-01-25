@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:21:02 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:03:06 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	int		height;
 	int		side_length;
 	int		player_pos;
+	int		exit;
 	int		x_tile_count;
 	int		y_tile_count;
 	int		collected;
@@ -136,6 +137,7 @@ t_tile	*draw_tile(t_data *data, int x, int y, char type);
 void	tile_add_back(t_tile **tile_list, t_tile *new_tile);
 t_tile	*tile_new(t_data *data, char type, t_bool is_loaded);
 t_tile	*tile_get(t_tile **tile, int index);
+void	*tile_get_by_type(t_tile **tile, char type);
 void	move(t_data *data, int keycode);
 
 /* ************************************************************************** */
