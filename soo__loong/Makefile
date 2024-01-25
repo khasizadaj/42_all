@@ -27,11 +27,11 @@ run: ${NAME}
 
 ${NAME}: ${OBJS} ${LIBFT_OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
-	@${CC} ${CFLAGS} ${MLX_FLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
+	@${CC} ${CFLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME} ${MLX_FLAGS} 
 
 debug: ${OBJS} ${LIBFT_OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
-	@${CC} ${CFLAGS} -g ${MLX_FLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME}
+	@${CC} ${CFLAGS} -g ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME} ${MLX_FLAGS}
 
 valgrind: debug
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} .ber

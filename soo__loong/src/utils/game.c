@@ -6,32 +6,21 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/24 22:33:26 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 03:17:25 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
-#include <mlx.h>
 
 int	is_wall(t_data *data, int curr_pos)
 {
-	t_tile	**curr_tile;
-	int		i;
+	t_tile	*curr_tile;
 	
-	i = 1;
-	curr_tile = &data->tile;
-	while (*curr_tile)
-	{
-		if ((*curr_tile)->id == curr_pos)
-			break ;
-		curr_tile = &(*curr_tile)->next;
-		i++;
-	}
-	if ((*curr_tile)->type == '1')
-	{
-		ft_printf("This can be wall! type=%c", (*curr_tile)->type);
+	curr_tile = tile_get(&data->tile, curr_pos);
+	if (!curr_tile)
+		exit_gracefully(data, UNKNOWN_ERR);
+	if (curr_tile->type == '1')
 		return (TRUE);
-	}
 	return FALSE;
 }
 
@@ -48,7 +37,6 @@ int	calculate_next_position(t_data *data, int keycode)
 		curr_pos = data->player_pos - 1;
 	else if (keycode == K_RIGHT)
 		curr_pos = data->player_pos + 1;
-	ft_printf("curr_pos %d\n", curr_pos);
 	if (is_wall(data, curr_pos))
 		return 0;
 	return (curr_pos);
@@ -87,7 +75,6 @@ void	move(t_data *data, int keycode)
 	mlx_destroy_image(data->mlx, tile->img);
 	free(tile);
 
-	// TODO Draw with already existing player
 	data->player_pos = next_pos;
 	ft_printf("player_pos %d\n", data->player_pos);
 	tile = tile_new(data, 'P');

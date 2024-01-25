@@ -119,6 +119,7 @@ void	exit_gracefully(t_data *data, int reason);
 t_tile	*draw_tile(t_data *data, int x, int y, char type);
 void	tile_add_back(t_tile **tile_list, t_tile *new_tile);
 t_tile	*tile_new(t_data *data, char type);
+t_tile	*tile_get(t_tile **tile, int index);
 void	move(t_data *data, int keycode);
 
 /* ************************************************************************** */

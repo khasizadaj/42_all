@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/24 22:10:59 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 03:11:04 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ void	tile_add_back(t_tile **tile_list, t_tile *new_tile)
 		last = last->next;
 	last->next = new_tile;
 	new_tile->id = last->id + 1;
+}
+
+t_tile	*tile_get(t_tile **tile, int index)
+{
+	t_tile	**curr_tile;
+
+	curr_tile = tile;
+	while (*curr_tile)
+	{
+		if ((*curr_tile)->id == index)
+			break ;
+		curr_tile = &(*curr_tile)->next;
+	}
+	return (*curr_tile);
 }
 
 void	free_tile(t_data *data)
