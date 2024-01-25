@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 03:38:45 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:23:34 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,18 @@ int	perform_action(t_data *data, t_tile *tile)
 void	move(t_data *data, int keycode)
 {
 	t_tile	*next_tile;
-	t_tile	*tile;
+	// t_tile	*tile;
 
 	next_tile = get_next_tile(data, keycode);
 	if (!perform_action(data, next_tile))
 		return ;
-
-	tile = tile_new(data, '0');
-	if (!tile)
-		exit_gracefully(data, MEMORY_ERR);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, get_x(data), get_y(data));
-	mlx_destroy_image(data->mlx, tile->img);
-	free(tile);
-
+	void *img = asset_get_by_type(&data->assets, '0');
+	if (!img)
+		exit_gracefully(data, UNKNOWN_ERR);
+	mlx_put_image_to_window(data->mlx, data->win, img, get_x(data), get_y(data));
 	data->player_pos = next_tile->id;
-	tile = tile_new(data, 'P');
-	if (!tile)
-		exit_gracefully(data, MEMORY_ERR);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, get_x(data), get_y(data));
-	mlx_destroy_image(data->mlx, tile->img);
-	free(tile);
+	img = asset_get_by_type(&data->assets, 'P');
+	if (!img)
+		exit_gracefully(data, UNKNOWN_ERR);
+	mlx_put_image_to_window(data->mlx, data->win, img, get_x(data), get_y(data));
 }

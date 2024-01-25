@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 03:36:34 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:21:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,6 @@
 
 # include "../src/libft/libft.h"
 # include <mlx.h>
-
-/* ************************************************************************** */
-/*                                                                            */
-/*	    ASSETS                                                                */
-/*                                                                            */
-/* ************************************************************************** */
-# define A_PLAYER_R "assets/player-right.xpm"
-# define A_PLAYER_L "assets/player-left.xpm"
-# define A_EXIT "assets/exit.xpm"
-# define A_FLOOR "assets/floor.xpm"
-# define A_COIN "assets/coin.xpm"
-# define A_WALL_O "assets/wall-inside.xpm"
-
-# define A_WALL_L "assets/wall-left.xpm"
-# define A_WALL_R "assets/wall-right.xpm"
-# define A_WALL_T "assets/wall-top.xpm"
-# define A_WALL_B "assets/wall-bottom.xpm"
-# define A_WALL_BL "assets/wall-bottom-left.xpm"
-# define A_WALL_BR "assets/wall-bottom-right.xpm"
-# define A_WALL_TL "assets/wall-top-left.xpm"
-# define A_WALL_TR "assets/wall-top-right.xpm"
-# define A_BOMB "assets/bomb.xpm"
-# define A_DIAMOND "assets/diamond.xpm"
-# define A_VILLAIN_R "assets/villain-right.xpm"
-# define A_VILLAIN_L "assets/villain-right.xpm"
-
-char	*asset_factory(char type);
 
 typedef struct s_tile
 {
@@ -75,6 +48,36 @@ typedef struct s_data
 	t_tile	*assets;
 	t_tile	*tile;
 }	t_data;
+
+/* ************************************************************************** */
+/*                                                                            */
+/*	    ASSETS                                                                */
+/*                                                                            */
+/* ************************************************************************** */
+# define A_PLAYER_R "assets/player-right.xpm"
+# define A_PLAYER_L "assets/player-left.xpm"
+# define A_EXIT "assets/exit.xpm"
+# define A_FLOOR "assets/floor.xpm"
+# define A_COIN "assets/coin.xpm"
+# define A_WALL_O "assets/wall-inside.xpm"
+
+# define A_WALL_L "assets/wall-left.xpm"
+# define A_WALL_R "assets/wall-right.xpm"
+# define A_WALL_T "assets/wall-top.xpm"
+# define A_WALL_B "assets/wall-bottom.xpm"
+# define A_WALL_BL "assets/wall-bottom-left.xpm"
+# define A_WALL_BR "assets/wall-bottom-right.xpm"
+# define A_WALL_TL "assets/wall-top-left.xpm"
+# define A_WALL_TR "assets/wall-top-right.xpm"
+# define A_BOMB "assets/bomb.xpm"
+# define A_DIAMOND "assets/diamond.xpm"
+# define A_VILLAIN_R "assets/villain-right.xpm"
+# define A_VILLAIN_L "assets/villain-right.xpm"
+
+t_tile	*asset_factory(t_data *data, char type);
+void	*asset_get_by_type(t_tile **assets, char type);
+char	*asset_path_factory(char type);
+
 
 
 # define KEY_RELEASE 3
@@ -131,7 +134,7 @@ void	exit_for(int reason);
 void	exit_gracefully(t_data *data, int reason);
 t_tile	*draw_tile(t_data *data, int x, int y, char type);
 void	tile_add_back(t_tile **tile_list, t_tile *new_tile);
-t_tile	*tile_new(t_data *data, char type);
+t_tile	*tile_new(t_data *data, char type, t_bool is_loaded);
 t_tile	*tile_get(t_tile **tile, int index);
 void	move(t_data *data, int keycode);
 
@@ -150,5 +153,8 @@ void	add_hooks(t_data *data);
 /* ************************************************************************** */
 void	free_tile(t_data *data);
 void	free_assets(t_data *data);
+
+#define MAP_LVL_1 "111111C0P11C0E111111"
+#define MAP_LVL_2 "111111111C000P111C000011100000C11C000E111C00001111111111"
 
 #endif

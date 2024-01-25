@@ -6,12 +6,13 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 04:42:16 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:23:08 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 #include "libft/libft.h"
+#include <mlx.h>
 
 void	init_assets(t_data *data)
 {
@@ -23,8 +24,7 @@ void	init_assets(t_data *data)
 	str_map = "1E0CP";
 	while (str_map[++i])
 	{
-		tile = tile_new(data, str_map[i]);
-		ft_printf("%c type\n", tile->type);
+		tile = tile_new(data, str_map[i], FALSE);
 		if (!tile)
 			exit_gracefully(data, MEMORY_ERR);
 		tile_add_back(&data->assets, tile);
@@ -33,8 +33,8 @@ void	init_assets(t_data *data)
 
 void	init_data(t_data *data)
 {
-	data->x_tile_count = 5;
-	data->y_tile_count = 4;
+	data->x_tile_count = 8;
+	data->y_tile_count = 7;
 	data->collected = 0;
 	data->total_coins = 2;
 	data->height = HEIGHT;
@@ -48,11 +48,11 @@ void	init_data(t_data *data)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		exit_gracefully(data, MEMORY_ERR);
-	init_assets(data);
 	data->win = mlx_new_window(data->mlx, data->width, 
 		data->height, PROGRAM_NAME);
 	if (!data->win)
 		exit_gracefully(data, MEMORY_ERR);
+	init_assets(data);
 }
 
 void	init_map(t_data *data, char *filename)
@@ -64,22 +64,23 @@ void	init_map(t_data *data, char *filename)
 	int		y;
 
 	ft_printf("%s\n", filename);
-	str_map = "111111C0P11C0E111111";
+	str_map = MAP_LVL_2;
 	i = 0;
 	x = 0;
 	y = 0;
 	while (str_map[i])
 	{
-		if (i % 5 == 0 && i != 0)
+		if (i % data->x_tile_count == 0 && i != 0)
 		{
 			x = 0;
 			y += 72;
 		}
 		if (str_map[i] == 'P')
 			data->player_pos = i + 1;
-		tile = draw_tile(data, x, y, str_map[i]);
+		tile = draw_tile(data, x, y, str_map[i]);		
 		if (!tile)
 			exit_gracefully(data, MEMORY_ERR);
+
 		i++;
 		x += 72;
 	}
