@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/24 22:10:44 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 03:36:34 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_data
 	int		player_pos;
 	int		x_tile_count;
 	int		y_tile_count;
+	int		collected;
+	int		total_coins;
 	t_tile	*tile;
 }	t_data;
 

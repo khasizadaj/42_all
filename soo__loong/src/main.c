@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 03:12:11 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 03:36:51 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	init_data(t_data *data)
 {
 	data->x_tile_count = 5;
 	data->y_tile_count = 4;
+	data->collected = 0;
+	data->total_coins = 2;
 	data->height = HEIGHT;
 	data->width = WIDTH;
 	data->side_length = SIDE_LENGTH;
