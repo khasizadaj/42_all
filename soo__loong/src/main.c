@@ -6,13 +6,11 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 21:23:41 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/26 22:48:50 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-#include "libft/libft.h"
-#include <mlx.h>
 
 void	init_assets(t_data *data)
 {
@@ -21,7 +19,7 @@ void	init_assets(t_data *data)
 	t_tile	*tile;
 
 	i = -1;
-	str_map = "1E0CP";
+	str_map = ALLOWED_CHARACTERS;
 	while (str_map[++i])
 	{
 		tile = tile_new(data, str_map[i], FALSE);
