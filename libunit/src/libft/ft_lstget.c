@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_lstget.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 21:39:42 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:23:25 by jkhasiza         ###   ########.fr       */
+/*   Created: 2023/12/23 00:00:34 by jkhasizada        #+#    #+#             */
+/*   Updated: 2024/01/14 13:38:49 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/so_long.h"
+#include "libft.h"
 
-t_tile	*draw_tile(t_data *data, int x, int y, char type)
+t_list	*ft_lstget(t_list **lst, int index)
 {
-	t_tile	*tile;
+	t_list	*result;
+	int		i;
 
-	tile = tile_new(data, type, TRUE);
-	if (!tile)
+	if (lst == NULL)
 		return (NULL);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, x, y);
-	tile_add_back(&(data->tile), tile);
-	return (tile);
+	i = 0;
+	result = *lst;
+	while (!result)
+	{
+		if (i == index)
+			return (result);
+		i++;
+		result = result->next;
+	}
+	return (NULL);
 }

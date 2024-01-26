@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 21:39:42 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:23:25 by jkhasiza         ###   ########.fr       */
+/*   Created: 2024/01/15 17:22:09 by jkhasiza          #+#    #+#             */
+/*   Updated: 2024/01/16 17:13:28 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/so_long.h"
+#include "libft.h"
 
-t_tile	*draw_tile(t_data *data, int x, int y, char type)
+t_bool	ft_isint(char *str)
 {
-	t_tile	*tile;
+	int	i;
 
-	tile = tile_new(data, type, TRUE);
-	if (!tile)
-		return (NULL);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, x, y);
-	tile_add_back(&(data->tile), tile);
-	return (tile);
+	if (!str)
+		return (FALSE);
+	if (ft_strlen(str) == 0)
+		return (FALSE);
+	i = 0;
+	while (str[i])
+	{
+		if (i == 0 && (str[i] == '-' || str[i] == '+'))
+			i++;
+		if (ft_isdigit(str[i]) == FALSE)
+			return (FALSE);
+		i++;
+	}
+	if (ft_strlen(str) == 1 && (str[0] == '-' || str[0] == '+'))
+		return (FALSE);
+	return (TRUE);
 }

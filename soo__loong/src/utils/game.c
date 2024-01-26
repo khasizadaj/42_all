@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 03:38:45 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:25:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,62 +32,56 @@ t_tile	*get_next_tile(t_data *data, int keycode)
 	return (tile);
 }
 
-int	get_x(t_data *data)
+int	get_x(int position, int x_tile_count)
 {
 	int	x;
 
-	x = (data->player_pos % data->x_tile_count - 1) * 72 + 1;
+	x = (position % x_tile_count - 1) * 72;
 	return x;
 }
 
-int		get_y(t_data *data)
+int		get_y(int position, int x_tile_count)
 {
 	int	x;
 
-	x = (data->player_pos / data->x_tile_count) * 72 + 1;
+	x = (position / x_tile_count) * 72;
 	return x;
 }
 
 int	perform_action(t_data *data, t_tile *tile)
 {
-	if (tile->type == '1')
-		return (0);
-	else if (tile->type == 'C')
+	if (tile->type == 'C')
 	{
 		tile->type = '0';
 		data->collected++;
 		ft_printf("Collected money!!! I have %d coins.\n", data->collected);
-	}
-	else if (tile->type == 'E')
-	{
-		ft_printf("I am on exit!\n");
 		if (data->collected == data->total_coins)
-			ft_printf("I can exit.\n");
-	} 
+		{
+			ft_printf("Exit is open @ %d!\n", data->exit);
+			mlx_put_image_to_window(data->mlx, data->win,
+				asset_get_by_type(&data->assets, 'E'), get_x(data->exit, data->x_tile_count), get_y(data->exit, data->x_tile_count));
+		}	
+	}
+	else if (tile->type == 'E' && data->collected == data->total_coins)
+	{
+		exit_gracefully(data, UNKNOWN_ERR);
+	}
+	else if (tile->type == '1' || tile->type == 'E')
+		return (0);
 	return 1;
 }
 
 void	move(t_data *data, int keycode)
 {
 	t_tile	*next_tile;
-	t_tile	*tile;
+	void	*img;
 
 	next_tile = get_next_tile(data, keycode);
 	if (!perform_action(data, next_tile))
 		return ;
-
-	tile = tile_new(data, '0');
-	if (!tile)
-		exit_gracefully(data, MEMORY_ERR);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, get_x(data), get_y(data));
-	mlx_destroy_image(data->mlx, tile->img);
-	free(tile);
-
+	img = asset_get_by_type(&data->assets, '0');
+	mlx_put_image_to_window(data->mlx, data->win, img, get_x(data->player_pos, data->x_tile_count), get_y(data->player_pos, data->x_tile_count));
 	data->player_pos = next_tile->id;
-	tile = tile_new(data, 'P');
-	if (!tile)
-		exit_gracefully(data, MEMORY_ERR);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, get_x(data), get_y(data));
-	mlx_destroy_image(data->mlx, tile->img);
-	free(tile);
+	img = asset_get_by_type(&data->assets, 'P');
+	mlx_put_image_to_window(data->mlx, data->win, img, get_x(data->player_pos, data->x_tile_count), get_y(data->player_pos, data->x_tile_count));
 }

@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 21:39:42 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:23:25 by jkhasiza         ###   ########.fr       */
+/*   Created: 2023/09/16 20:14:48 by codespace         #+#    #+#             */
+/*   Updated: 2023/12/16 18:56:51 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/so_long.h"
+#include "libft.h"
 
-t_tile	*draw_tile(t_data *data, int x, int y, char type)
+void	ft_lstadd_front(t_list **lst, t_list *new_elem)
 {
-	t_tile	*tile;
-
-	tile = tile_new(data, type, TRUE);
-	if (!tile)
-		return (NULL);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, x, y);
-	tile_add_back(&(data->tile), tile);
-	return (tile);
+	new_elem->next = *lst;
+	*lst = new_elem;
 }

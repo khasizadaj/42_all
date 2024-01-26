@@ -6,13 +6,13 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 04:44:02 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:57:59 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-t_tile	*tile_new(t_data *data, char type)
+t_tile	*tile_new(t_data *data, char type, t_bool is_loaded)
 {
 	t_tile	*tile;
 	void	*img;
@@ -21,8 +21,14 @@ t_tile	*tile_new(t_data *data, char type)
 	if (!tile)
 		return (NULL);
 	tile->type = type;
-	img = mlx_xpm_file_to_image(data->mlx, asset_factory(type), 
-		&data->side_length, &data->side_length);
+	if (!is_loaded)
+	{
+		img = asset_factory(data, type);
+	}
+	else
+	{
+	 	img = asset_get_by_type(&data->assets, type);	
+	}
 	if (!img)
 		return (free(tile), NULL);
 	tile->img = img;
@@ -64,6 +70,20 @@ t_tile	*tile_get(t_tile **tile, int index)
 	return (*curr_tile);
 }
 
+void	*tile_get_by_type(t_tile **tile, char type)
+{
+	t_tile	*curr_tile;
+
+	curr_tile = *tile;
+	while (curr_tile)
+	{
+		if (curr_tile->type == type)
+			break ;
+		curr_tile = curr_tile->next;
+	}
+	return (curr_tile->img);
+}
+
 void	free_tile(t_data *data)
 {
     t_tile *current;
@@ -75,7 +95,6 @@ void	free_tile(t_data *data)
     while (current)
     {
         next = current->next;
-        mlx_destroy_image(data->mlx, current->img);
         free(current);
         current = next;
     }

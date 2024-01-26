@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 21:39:42 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:23:25 by jkhasiza         ###   ########.fr       */
+/*   Created: 2024/01/26 22:07:02 by jkhasiza          #+#    #+#             */
+/*   Updated: 2024/01/26 22:42:40 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/so_long.h"
+# include "../../libunit/include/libunit.h"
+# include "map_validation/map_validation.h"
 
-t_tile	*draw_tile(t_data *data, int x, int y, char type)
+int	main(void)
 {
-	t_tile	*tile;
+	t_passed	res;
 
-	tile = tile_new(data, type, TRUE);
-	if (!tile)
-		return (NULL);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, x, y);
-	tile_add_back(&(data->tile), tile);
-	return (tile);
+	res.passed = 0;
+	res.total = 0;
+	map_validation_launcher(&res);
+	if (res.total == 0)
+		return (ft_printf("No tests were launched\n"), 0);
+	ft_printf("\n%d/%d tests checked\n", res.passed, res.total);
+	if (res.passed == res.total)
+		return (OK);
+	return (KO);
 }

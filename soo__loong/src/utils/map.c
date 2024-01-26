@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 21:39:42 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:23:25 by jkhasiza         ###   ########.fr       */
+/*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
+/*   Updated: 2024/01/26 23:13:08 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-t_tile	*draw_tile(t_data *data, int x, int y, char type)
+int	is_valid_line(char *line, int expected_size)
 {
-	t_tile	*tile;
+	int	i;
 
-	tile = tile_new(data, type, TRUE);
-	if (!tile)
-		return (NULL);
-	mlx_put_image_to_window(data->mlx, data->win, tile->img, x, y);
-	tile_add_back(&(data->tile), tile);
-	return (tile);
+	if ((int) ft_strlen(line) != expected_size)
+		return (FALSE);
+	i = -1;
+	while (line[++i])
+	{
+		if (chr_in(line[i], ALLOWED_CHARACTERS) == 0)
+			return (FALSE);
+	}
+	return (TRUE);
 }

@@ -1,24 +1,26 @@
-NAME = so_long
+NAME 		=	so_long
 
-SRC_DIR = src
-UTILS_DIR = ${SRC_DIR}/utils
-LIBFT_DIR = ${SRC_DIR}/libft
+CC 			=	cc
+CFLAGS		=	-Wall -Wextra -Werror -I ./include -g
 
-SRCS =	${SRC_DIR}/main.c \
-		${UTILS_DIR}/asset.c \
-		${UTILS_DIR}/draw.c \
-		${UTILS_DIR}/error.c \
-		${UTILS_DIR}/game.c \
-		${UTILS_DIR}/hook.c \
-		${UTILS_DIR}/tile.c
+SRC_DIR 	=	src
+UTILS_DIR 	=	${SRC_DIR}/utils
+LIBFT_DIR 	=	${SRC_DIR}/libft
+LIBFT		=	${SRC_DIR}/libft/libft.a
 
-OBJS = ${SRCS:.c=.o}
-LIBFT_OBJS = $(wildcard $(LIBFT_DIR)/*.o)
+SRCS 		=	${SRC_DIR}/main.c \
+				${UTILS_DIR}/asset.c \
+				${UTILS_DIR}/draw.c \
+				${UTILS_DIR}/error.c \
+				${UTILS_DIR}/game.c \
+				${UTILS_DIR}/hook.c \
+				${UTILS_DIR}/tile.c
 
-CC = cc
+OBJS 		=	${SRCS:.c=.o}
+LIBFT_OBJS	=	$(wildcard $(LIBFT_DIR)/*.o)
 
-CFLAGS = -Wall -Wextra -Werror -I ./include -g
-MLX_FLAGS = -lmlx -lXext -lX11
+MLX_FLAGS	=	-lmlx -lXext -lX11
+
 
 all: ${NAME}
 
@@ -27,11 +29,7 @@ run: ${NAME}
 
 ${NAME}: ${OBJS} ${LIBFT_OBJS}
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
-	@${CC} ${CFLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME} ${MLX_FLAGS} 
-
-debug: ${OBJS} ${LIBFT_OBJS}
-	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
-	@${CC} ${CFLAGS} -g ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME} ${MLX_FLAGS}
+	@${CC} ${CFLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME} ${MLX_FLAGS}
 
 valgrind: debug
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} .ber
