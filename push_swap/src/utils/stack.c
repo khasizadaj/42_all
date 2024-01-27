@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/16 17:27:30 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:50:06 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ void	generate_stack(t_data *data, int argc, char **argv)
 	{
 		new_elem = ft_stacknew(ft_atoi(raw_numbers[i]));
 		if (!new_elem)
+		{
+			if (argc == 2)
+				free_numbers(data->size, raw_numbers);
 			return ;
+		}
 		ft_stackadd_back(&(data->stack_a), new_elem);
 	}
 	if (argc == 2)
