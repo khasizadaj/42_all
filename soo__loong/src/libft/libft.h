@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/19 20:45:04 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/27 22:39:19 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include <ctype.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include "get_next_line.h"
 
 typedef long long int	t_lli;
 typedef int				t_bool;

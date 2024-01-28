@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/26 23:19:39 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/27 21:58:56 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "../src/libft/libft.h"
-# include <mlx.h>
+// # include <mlx.h>
 
 typedef struct s_tile
 {
@@ -165,7 +165,9 @@ void	free_assets(t_data *data);
 /*	    MAP VALIDATION                                                        */
 /*                                                                            */
 /* ************************************************************************** */
-int	is_valid_line(char *line, int expected_size);
+int		is_valid_line(char *line, int expected_size);
+char	*get_map(char *filename);
+
 
 # define ALLOWED_CHARACTERS "1E0CP"
 

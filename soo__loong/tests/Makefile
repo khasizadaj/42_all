@@ -16,7 +16,8 @@ T_VALIDATION_DIR	= map_validation
 
 SRCS	= \
 	${T_VALIDATION_DIR}/00_launcher.c \
-	${T_VALIDATION_DIR}/01_map_validation.c \
+	${T_VALIDATION_DIR}/01_is_valid_line.c \
+	${T_VALIDATION_DIR}/02_get_map.c \
 	main.c
 
 OBJS	= $(SRCS:.c=.o)
@@ -26,7 +27,9 @@ OBJS	= $(SRCS:.c=.o)
 ###############################################################################
 
 SO_LONG_SRCS = \
-	../src/utils/map.c
+	../src/utils/map.c \
+	../src/libft/get_next_line.c \
+	../src/libft/get_next_line_utils.c
 
 OBJS	+= $(SO_LONG_SRCS:.c=.o)
 
