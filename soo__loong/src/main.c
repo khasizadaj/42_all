@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/26 22:48:50 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/28 03:59:43 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ void	init_assets(t_data *data)
 
 void	init_data(t_data *data)
 {
-	data->x_tile_count = 8;
-	data->y_tile_count = 7;
+	data->x_count = 0;
+	data->y_count = 0;
 	data->collected = 0;
-	data->total_coins = 5;
-	data->height = HEIGHT;
-	data->width = WIDTH;
+	data->height = 0;
+	data->width = 0;
 	data->side_length = SIDE_LENGTH;
 	data->player_pos = 0;
 	data->exit = 0;
@@ -44,6 +43,13 @@ void	init_data(t_data *data)
 	data->win = NULL;
 	data->mlx = NULL;
 	data->assets = NULL;
+}
+
+void	enhance_data(t_data *data, char *map_str)
+{
+	data->height = data->y_count * data->side_length + 72;
+	data->width = data->x_count * data->side_length;
+	data->total_coins = ft_count_char(map_str, 'C');
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		exit_gracefully(data, MEMORY_ERR);
@@ -54,42 +60,39 @@ void	init_data(t_data *data)
 	init_assets(data);
 }
 
-void	init_map(t_data *data, char *filename)
+void	init_map(t_data *data, char *map_str)
 {
 	t_tile	*tile;
-	char	*str_map;
 	int		i;
 	int		x;
 	int		y;
 
-	ft_printf("%s\n", filename);
-	str_map = MAP_LVL_2;
 	i = 0;
 	x = 0;
-	y = 0;
-	while (str_map[i])
+	y = 72;
+	while (map_str[i])
 	{
-		if (i % data->x_tile_count == 0 && i != 0)
+		if (i % data->x_count == 0 && i != 0)
 		{
 			x = 0;
 			y += 72;
 		}
-		if (str_map[i] == 'P')
+		if (map_str[i] == 'P')
 			data->player_pos = i + 1;
-		else if (str_map[i] == 'E')
+		else if (map_str[i] == 'E')
 		{
 			tile = tile_new(data, 'E', TRUE);
 			if (!tile)
 				exit_gracefully(data, MEMORY_ERR);
 			tile_add_back(&data->tile, tile);
-			data->exit = 38;
+			data->exit = tile->id;
 			mlx_put_image_to_window(data->mlx, data->win,
 				asset_get_by_type(&data->assets, '1'), x, y);
 			i++;
 			x += 72;
 			continue ;
 		}
-		tile = draw_tile(data, x, y, str_map[i]);		
+		tile = draw_tile(data, x, y, map_str[i]);		
 		if (!tile)
 			exit_gracefully(data, MEMORY_ERR);
 
@@ -101,14 +104,18 @@ void	init_map(t_data *data, char *filename)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	char	*map_str;
 
 	if (argc != 2)
 		exit_for(INVALID_MAP_NO_MAP);
 	if (!ft_str_endswith(argv[1], MAP_EXTENSION))
 		exit_for(INVALID_MAP_WRONG_FILE_TYPE);
 	init_data(&data);
-	// TODO REad from file and pass string to `init_map` instead.
-	init_map(&data, argv[1]);
+	map_str = get_map(argv[1], &data.x_count, &data.y_count);
+	if (!map_str || is_valid_map(&data, map_str)  != 0)
+		exit_gracefully(&data, is_valid_map(&data, map_str));
+	enhance_data(&data, map_str);
+	init_map(&data, map_str);
 	if (!data.tile)
 		exit_gracefully(&data, MEMORY_ERR);
 	mlx_hook(data.win, 2, 1L, 

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/27 21:58:56 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/28 04:00:58 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "../src/libft/libft.h"
-// # include <mlx.h>
+# include <mlx.h>
 
 typedef struct s_tile
 {
@@ -42,8 +42,9 @@ typedef struct s_data
 	int		side_length;
 	int		player_pos;
 	int		exit;
-	int		x_tile_count;
-	int		y_tile_count;
+	int		exit_code;
+	int		x_count;
+	int		y_count;
 	int		collected;
 	int		total_coins;
 	t_tile	*assets;
@@ -108,11 +109,18 @@ char	*asset_path_factory(char type);
 # define PROGRAM_NAME "DND"
 # define MAP_EXTENSION ".ber"
 
+# define END_GAME 0
 # define PROGRAM_HALTED_WITH_ESCAPE 300
 # define PROGRAM_HALTED_MSG_WITH_ESCAPE "Escaped this hell!\n"
 # define MEMORY_ERR 9999
 # define MEMORY_ERR_MSG "Error\n -- Memory allocation failed.\n"
+# define SCREEN_SIZE_ERR 1001
+# define SCREEN_SIZE_MSG "Error\n -- Cannot generate this map because of screen size limit.\n"
 # define UNKNOWN_ERR 9998
+# define INVALID_MAP 2005
+# define INVALID_MAP_MSG "Error\n -- Map is invalid.\n"
+# define INVALID_MAP_INCORRECT_COMPONENT 2000
+# define INVALID_MAP_MSG_INCORRECT_COMPONENT "Error\n -- Incorrect component.\n"
 # define INVALID_MAP_NO_MAP 2000
 # define INVALID_MAP_MSG_NO_MAP "Error\n -- Map is not provided.\n"
 # define INVALID_MAP_WRONG_FILE_TYPE 2001
@@ -165,9 +173,9 @@ void	free_assets(t_data *data);
 /*	    MAP VALIDATION                                                        */
 /*                                                                            */
 /* ************************************************************************** */
+char	*get_map(char *filename, int *x_tile_count, int *y_tile_count);
 int		is_valid_line(char *line, int expected_size);
-char	*get_map(char *filename);
-
+int		is_valid_map(t_data *data, char *map);
 
 # define ALLOWED_CHARACTERS "1E0CP"
 

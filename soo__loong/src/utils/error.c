@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:01:31 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 04:43:51 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/28 03:34:31 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,11 @@ void	exit_for(int reason)
 		ft_printf(PROGRAM_HALTED_MSG_WITH_ESCAPE);
 	else if (reason == MEMORY_ERR)
 		ft_printf(MEMORY_ERR_MSG);
+	else if (reason == INVALID_MAP)
+		ft_printf(INVALID_MAP_MSG);
+	else if (reason == INVALID_MAP_INCORRECT_COMPONENT)
+		ft_printf(INVALID_MAP_MSG_INCORRECT_COMPONENT);
+	else if (reason == SCREEN_SIZE_ERR)
+		ft_printf(SCREEN_SIZE_MSG);
 	exit(reason);
 }

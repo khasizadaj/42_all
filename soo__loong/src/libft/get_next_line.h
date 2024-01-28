@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:29:57 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/28 00:16:28 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/28 01:33:30 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_fd
 	int			rd;
 }	t_fd;
 
-int	get_next_line(int fd, char **line, bool include_newline);
+int		get_next_line(int fd, char **line, bool include_newline);
 t_fd	*ft_newfd(int fd);
 void	ft_clear(t_fd **to_be_removed);
 int		chr_in(char c, char const *str);
