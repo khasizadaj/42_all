@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:21:30 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/29 20:43:41 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:55:40 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ void	map_validation_launcher(t_passed *statuses)
 		"No valid path to exit.", &test_map_has_no_valid_path);
 	testlist_load(&routine, "is_valid_map",
 		"No valid path to collect all.", &test_map_has_no_valid_path_cannot_collect_all);
+	testlist_load(&routine, "is_valid_map",
+		"Invalid path with complex map.", &test_map_has_no_valid_path_complex);	
+	testlist_load(&routine, "is_valid_map",
+		"Valid path with simple map.", &test_map_has_valid_path_simple);
+	testlist_load(&routine, "is_valid_map",
+		"Valid path with complex map.", &test_map_has_valid_path_complex);	
 	testlist_run(&routine, statuses);
 	testlist_clear(&routine);
 }

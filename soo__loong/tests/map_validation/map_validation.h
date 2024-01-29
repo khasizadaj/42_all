@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:07:49 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/29 20:39:02 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:55:21 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	test_map_is_not_rectangle(void);
 // VALID PATH
 int	test_map_has_no_valid_path(void);
 int	test_map_has_no_valid_path_cannot_collect_all(void);
+int	test_map_has_valid_path_simple(void);
+int	test_map_has_valid_path_complex(void);
+int	test_map_has_no_valid_path_complex(void);
 
 
 #endif

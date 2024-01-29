@@ -6,11 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/29 20:32:47 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:57:46 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
+#include <stdbool.h>
 
 /**
  * Checks if a line has allowed characters in the expected length.
@@ -105,4 +106,37 @@ char	*get_map(char *filename, int *x_tile_count, int *y_tile_count)
 		return (close(fd), NULL);
 	close(fd);
 	return (result);
+}
+
+void	flood(int position, int x_count, char *map, char new)
+{
+	if (chr_in(map[position - 1], "-1"))
+		return ;
+	if (position > (int) ft_strlen(map) || position < 0)
+		return ;
+
+	map[position - 1] = new;
+	flood(position + 1, x_count, map, new);
+	flood(position - 1, x_count, map, new);
+	flood(position + x_count, x_count, map, new);
+	flood(position - x_count, x_count, map, new);
+}
+
+bool	has_valid_path(t_data *data, char *map)
+{
+	int	x;
+	int	y;
+	int	start;
+	char	*temp;
+
+	x = data->x_count;
+	y = data->y_count;
+	start = data->player_pos;
+	temp = ft_strdup(map);
+	if (!temp)
+		return (MEMORY_ERR);
+	flood(start, data->x_count, temp, '-');
+	if (chr_in('E', temp) || chr_in('C', temp))
+		return (false);
+	return (true);
 }

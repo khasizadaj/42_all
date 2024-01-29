@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 04:00:58 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:57:10 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "../src/libft/libft.h"
+# include <stdbool.h>
 # include <mlx.h>
 
 typedef struct s_tile
@@ -176,6 +177,7 @@ void	free_assets(t_data *data);
 char	*get_map(char *filename, int *x_tile_count, int *y_tile_count);
 int		is_valid_line(char *line, int expected_size);
 int		is_valid_map(t_data *data, char *map);
+bool	has_valid_path(t_data *data, char *map);
 
 # define ALLOWED_CHARACTERS "1E0CP"
 

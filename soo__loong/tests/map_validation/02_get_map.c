@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:36:16 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/29 20:40:04 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:57:23 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,12 +193,15 @@ int	test_map_has_no_valid_path(void)
 {
 	char	*filename;
 	char	*map;
-	int		x_tile_count;
-	int		y_tile_count;
+	t_data	data;
 
+
+	data.x_count = 3;
+	data.y_count = 6;
+	data.player_pos = 5;
 	filename = "./maps/invalid_exit_not_reachable.ber";
-	map = get_map(filename, &x_tile_count, &y_tile_count);
-	if (map == NULL)
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (has_valid_path(&data, map) != TRUE)
 		return (0);
 	else
 	 	return (-1);
@@ -208,14 +211,70 @@ int	test_map_has_no_valid_path_cannot_collect_all(void)
 {
 	char	*filename;
 	char	*map;
-	int		x_tile_count;
-	int		y_tile_count;
+	t_data	data;
 
+
+	data.x_count = 3;
+	data.y_count = 6;
+	data.player_pos = 5;
 	filename = "./maps/invalid_cannot_collect_all.ber";
-	map = get_map(filename, &x_tile_count, &y_tile_count);
-	if (map == NULL)
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (has_valid_path(&data, map) != TRUE)
 		return (0);
 	else
 	 	return (-1);
 }
 
+int	test_map_has_no_valid_path_complex(void)
+{
+	char	*filename;
+	char	*map;
+	t_data	data;
+
+
+	data.x_count = 8;
+	data.y_count = 8;
+	data.player_pos = 27;
+	filename = "./maps/invalid_path_complex.ber";
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (has_valid_path(&data, map) != TRUE)
+		return (0);
+	else
+	 	return (-1);
+}
+
+int	test_map_has_valid_path_simple(void)
+{
+	char	*filename;
+	char	*map;
+	t_data	data;
+
+
+	data.x_count = 5;
+	data.y_count = 5;
+	data.player_pos = 12;
+	filename = "./maps/valid_path_simple.ber";
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (has_valid_path(&data, map) == TRUE)
+		return (0);
+	else
+	 	return (-1);
+}
+
+int	test_map_has_valid_path_complex(void)
+{
+	char	*filename;
+	char	*map;
+	t_data	data;
+
+
+	data.x_count = 8;
+	data.y_count = 8;
+	data.player_pos = 27;
+	filename = "./maps/valid_path_complex.ber";
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (has_valid_path(&data, map) == TRUE)
+		return (0);
+	else
+	 	return (-1);
+}
