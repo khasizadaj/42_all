@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:21:30 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 00:42:02 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:43:41 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,27 @@ void	map_validation_launcher(t_passed *statuses)
 	testlist_load(&routine, "get_map",
 		"File doesn't exist.", &test_file_name_dont_exist);
 	testlist_load(&routine, "get_map",
-		"File for map looks good for 4x4!", &test_map_is_valid_4x4);
+		"File has valid lines for 4x4!", &test_map_has_valid_lines_4x4);
 	testlist_load(&routine, "get_map",
-		"File for map looks good for 5x5!", &test_map_is_valid_5x5);
+		"File has valid lines for 5x5!", &test_map_has_valid_lines_5x5);
 	testlist_load(&routine, "get_map",
 		"Invalid character in first line", &test_map_has_invalid_first_line);
 	testlist_load(&routine, "get_map",
 		"Invalid character other lines", &test_map_has_invalid_body);
+	testlist_load(&routine, "is_valid_map",
+		"Map is missing wall (one corner).", &test_map_has_missing_wall);
+	testlist_load(&routine, "is_valid_map",
+		"Map is missing wall (on side).", &test_map_has_missing_wall_on_sides);
+	testlist_load(&routine, "is_valid_map",
+		"Map has many players.", &test_map_has_many_players);
+	testlist_load(&routine, "is_valid_map",
+		"Map has many exits.", &test_map_has_many_exits);
+	testlist_load(&routine, "is_valid_map",
+		"Map is not rectangle.", &test_map_is_not_rectangle);
+	testlist_load(&routine, "is_valid_map",
+		"No valid path to exit.", &test_map_has_no_valid_path);
+	testlist_load(&routine, "is_valid_map",
+		"No valid path to collect all.", &test_map_has_no_valid_path_cannot_collect_all);
 	testlist_run(&routine, statuses);
 	testlist_clear(&routine);
 }

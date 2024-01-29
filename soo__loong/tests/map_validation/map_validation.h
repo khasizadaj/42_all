@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:07:49 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 00:41:38 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:39:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,21 @@ int     test_line_is_null(void);
 
 // GET MAP
 int test_file_name_dont_exist(void);
-int	test_map_is_valid_4x4(void);
-int test_map_is_valid_5x5(void);
+int	test_map_has_valid_lines_4x4(void);
+int	test_map_has_valid_lines_5x5(void);
 int	test_map_has_invalid_first_line(void);
 int	test_map_has_invalid_body(void);
+
+// IS VALID MAP
+int	test_map_has_missing_wall(void);
+int	test_map_has_missing_wall_on_sides(void);
+int	test_map_has_many_exits(void);
+int	test_map_has_many_players(void);
+int	test_map_is_not_rectangle(void);
+
+// VALID PATH
+int	test_map_has_no_valid_path(void);
+int	test_map_has_no_valid_path_cannot_collect_all(void);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:36:16 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 01:24:01 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:40:04 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	test_file_name_dont_exist(void)
 	 	return (-1);
 }
 
-int	test_map_is_valid_4x4(void)
+int	test_map_has_valid_lines_4x4(void)
 {
 	char *filename;
 	char *map;
@@ -46,10 +46,10 @@ int	test_map_is_valid_4x4(void)
 	 	return (-1);
 }
 
-int	test_map_is_valid_5x5(void)
+int	test_map_has_valid_lines_5x5(void)
 {
-	char *filename;
-	char *map;
+	char	*filename;
+	char	*map;
 	int		x_tile_count;
 	int		y_tile_count;
 
@@ -81,8 +81,8 @@ int	test_map_has_invalid_first_line(void)
 
 int	test_map_has_invalid_body(void)
 {
-	char *filename;
-	char *map;
+	char	*filename;
+	char	*map;
 	int		x_tile_count;
 	int		y_tile_count;
 
@@ -93,3 +93,129 @@ int	test_map_has_invalid_body(void)
 	else
 	 	return (-1);
 }
+
+int	test_map_has_missing_wall(void)
+{
+	char	*filename;
+	char	*map;
+	t_data	data;
+
+	filename = "./maps/invalid_missing_wall.ber";
+	data.x_count = 0;
+	data.y_count = 0;
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (is_valid_map(&data , map) == INVALID_MAP_WRONG_WALLS)
+	{
+		free(map);
+		return (0);
+	}
+	else
+	 	return (-1);
+}
+
+int	test_map_has_missing_wall_on_sides(void)
+{
+	char	*filename;
+	char	*map;
+	t_data	data;
+
+	filename = "./maps/invalid_missing_wall_2.ber";
+	data.x_count = 0;
+	data.y_count = 0;
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (is_valid_map(&data , map) == INVALID_MAP_WRONG_WALLS)
+	{
+		free(map);
+		return (0);
+	}
+	else
+	 	return (-1);
+}
+
+int	test_map_has_many_exits(void)
+{
+	char	*filename;
+	char	*map;
+	t_data	data;
+
+	filename = "./maps/invalid_many_exits.ber";
+	data.x_count = 0;
+	data.y_count = 0;
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (is_valid_map(&data , map) == INVALID_MAP_INCORRECT_COMPONENT)
+	{
+		free(map);
+		return (0);
+	}
+	else
+	 	return (-1);
+}
+
+int	test_map_has_many_players(void)
+{
+	char	*filename;
+	char	*map;
+	t_data	data;
+
+	filename = "./maps/invalid_many_players.ber";
+	data.x_count = 0;
+	data.y_count = 0;
+	map = get_map(filename, &data.x_count, &data.y_count);
+	if (is_valid_map(&data , map) == INVALID_MAP_INCORRECT_COMPONENT)
+	{
+		free(map);
+		return (0);
+	}
+	else
+	 	return (-1);
+}
+/*
+	At this point this is already handled, but this function can handle
+	or invalidate if map is not rectangular.
+*/
+int	test_map_is_not_rectangle(void)
+{
+	char	*map;
+	t_data	data;
+
+	data.x_count = 3;
+	data.y_count = 5;
+	map = "1111C1E11P1111";
+	if (is_valid_map(&data , map) == INVALID_MAP_NOT_RECTANGLE)
+	{
+		return (0);
+	}
+	else
+	 	return (-1);
+}
+
+int	test_map_has_no_valid_path(void)
+{
+	char	*filename;
+	char	*map;
+	int		x_tile_count;
+	int		y_tile_count;
+
+	filename = "./maps/invalid_exit_not_reachable.ber";
+	map = get_map(filename, &x_tile_count, &y_tile_count);
+	if (map == NULL)
+		return (0);
+	else
+	 	return (-1);
+}
+
+int	test_map_has_no_valid_path_cannot_collect_all(void)
+{
+	char	*filename;
+	char	*map;
+	int		x_tile_count;
+	int		y_tile_count;
+
+	filename = "./maps/invalid_cannot_collect_all.ber";
+	map = get_map(filename, &x_tile_count, &y_tile_count);
+	if (map == NULL)
+		return (0);
+	else
+	 	return (-1);
+}
+
