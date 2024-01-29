@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 03:57:00 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:32:47 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,18 @@ int	is_valid_map(t_data *data, char *map)
 	if (data->x_count > 1920 / SIDE_LENGTH
 		|| data->y_count > 1080 / SIDE_LENGTH)
 		return (SCREEN_SIZE_ERR);
-	if (ft_count_char(map, 'P') != 1 || ft_count_char(map, 'E') != 1)
+	if (ft_count_char(map, 'P') != 1 || ft_count_char(map, 'E') != 1
+		|| ft_count_char(map, 'C') < 1)
 		return (INVALID_MAP_INCORRECT_COMPONENT);
+	if ((int) ft_strlen(map) != data->x_count * data->y_count)
+		return (INVALID_MAP_NOT_RECTANGLE);
 	i = data->y_count;
 	while (i > 0)
 	{
-		ft_printf("Started loop\n");
 		if ((i == 1 || i == data->y_count)
 			&& ft_count_nchar(map, '1', data->x_count) != data->x_count)
 			return (INVALID_MAP_WRONG_WALLS);
-		else if (ft_count_char(map, '1') >= 2
-			&& map[0] != '1' && map[data->x_count - 1] != '1')
+		else if (map[0] != '1' || map[data->x_count - 1] != '1')
 			return (INVALID_MAP_WRONG_WALLS);
 		map += data->x_count;
 		i--;
