@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 02:12:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 02:47:38 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:59:32 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int ft_count_nchar(const char *str, char ch, int n)
 
     while (*str && n-- > 0)
     {
-        ft_printf("N%d\n", n);
         if (*str == ch)
             count++;
         str++;
