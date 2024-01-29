@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/19 20:45:04 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/01/28 02:44:42 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdbool.h>
 # include <ctype.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include "get_next_line.h"
 
 typedef long long int	t_lli;
 typedef int				t_bool;
@@ -83,6 +85,8 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void*));
 t_list			*ft_lstget(t_list **lst, int index);
 
 int				chr_in(char c, char const *str);
+int				ft_count_char(const char *str, char ch);
+int				ft_count_nchar(const char *str, char ch, int n);
 t_bool			ft_str_has(char *str, char *lookup);
 t_bool			ft_str_endswith(char *str, char *lookup);
 int				ft_printf(const char *input, ...);
@@ -98,5 +102,7 @@ int				get_length_p(unsigned long long n);
 int				get_length(char type, void *arg);
 void			ft_putuint(unsigned int n, int fd);
 void			ft_putmemory(void *arg);
+
+int				get_next_line(int fd, char **line, bool include_newline);
 
 #endif
