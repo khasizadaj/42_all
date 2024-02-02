@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/29 21:57:46 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/02 23:34:53 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,29 @@ int	is_valid_map(t_data *data, char *map)
 {
 	int	i;
 
-	if (data->x_count > 1920 / SIDE_LENGTH
-		|| data->y_count > 1080 / SIDE_LENGTH)
-		return (SCREEN_SIZE_ERR);
-	if (ft_count_char(map, 'P') != 1 || ft_count_char(map, 'E') != 1
+	if (data->x_count > 1920 / SIDE_LENGTH || data->y_count > 1080 / SIDE_LENGTH)
+		data->exit_code = SCREEN_SIZE_ERR;
+	else if (ft_count_char(map, 'P') != 1 || ft_count_char(map, 'E') != 1
 		|| ft_count_char(map, 'C') < 1)
-		return (INVALID_MAP_INCORRECT_COMPONENT);
-	if ((int) ft_strlen(map) != data->x_count * data->y_count)
-		return (INVALID_MAP_NOT_RECTANGLE);
+		data->exit_code = INVALID_MAP_INCORRECT_COMPONENT;
+	else if ((int) ft_strlen(map) != data->x_count * data->y_count)
+		data->exit_code = INVALID_MAP_NOT_RECTANGLE;
+	if (data->exit_code != 0)
+		return (data->exit_code);
 	i = data->y_count;
 	while (i > 0)
 	{
 		if ((i == 1 || i == data->y_count)
 			&& ft_count_nchar(map, '1', data->x_count) != data->x_count)
-			return (INVALID_MAP_WRONG_WALLS);
+			data->exit_code = INVALID_MAP_WRONG_WALLS;
 		else if (map[0] != '1' || map[data->x_count - 1] != '1')
-			return (INVALID_MAP_WRONG_WALLS);
+			data->exit_code = INVALID_MAP_WRONG_WALLS;
+		if (data->exit_code != 0)
+			return (data->exit_code);
 		map += data->x_count;
 		i--;
 	}
-	return (0);
+	return (data->exit_code);
 }
 
 char	*get_map_content(int fd, int *x_tile_count, int *y_tile_count)
@@ -110,12 +113,12 @@ char	*get_map(char *filename, int *x_tile_count, int *y_tile_count)
 
 void	flood(int position, int x_count, char *map, char new)
 {
-	if (chr_in(map[position - 1], "-1"))
-		return ;
 	if (position > (int) ft_strlen(map) || position < 0)
 		return ;
+	if (chr_in(map[position], "1-"))
+		return ;
 
-	map[position - 1] = new;
+	map[position] = new;
 	flood(position + 1, x_count, map, new);
 	flood(position - 1, x_count, map, new);
 	flood(position + x_count, x_count, map, new);
@@ -131,12 +134,17 @@ bool	has_valid_path(t_data *data, char *map)
 
 	x = data->x_count;
 	y = data->y_count;
-	start = data->player_pos;
+	start = 0;
+	while (map[start] != 'P')
+		start++;
 	temp = ft_strdup(map);
 	if (!temp)
 		return (MEMORY_ERR);
 	flood(start, data->x_count, temp, '-');
 	if (chr_in('E', temp) || chr_in('C', temp))
+	{
+		data->exit_code = INVALID_MAP_NO_VALID_PATH;
 		return (false);
+	}
 	return (true);
 }

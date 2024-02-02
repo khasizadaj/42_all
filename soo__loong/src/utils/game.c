@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 03:51:15 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:54:11 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	perform_action(t_data *data, t_tile *tile)
 	{
 		exit_gracefully(data, END_GAME);
 	}
-	else if (tile->type == '1' || tile->type == 'E')
+	else if (tile->type == '1')
 		return (0);
 	return 1;
 }

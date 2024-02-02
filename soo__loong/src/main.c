@@ -6,11 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 03:59:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/02 23:31:03 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+#include "libft/libft.h"
 
 void	init_assets(t_data *data)
 {
@@ -37,8 +38,9 @@ void	init_data(t_data *data)
 	data->height = 0;
 	data->width = 0;
 	data->side_length = SIDE_LENGTH;
-	data->player_pos = 0;
+	data->player_pos = -1;
 	data->exit = 0;
+	data->exit_code = 0;
 	data->tile = NULL;
 	data->win = NULL;
 	data->mlx = NULL;
@@ -87,7 +89,7 @@ void	init_map(t_data *data, char *map_str)
 			tile_add_back(&data->tile, tile);
 			data->exit = tile->id;
 			mlx_put_image_to_window(data->mlx, data->win,
-				asset_get_by_type(&data->assets, '1'), x, y);
+				asset_get_by_type(&data->assets, '0'), x, y);
 			i++;
 			x += 72;
 			continue ;
@@ -112,8 +114,9 @@ int	main(int argc, char **argv)
 		exit_for(INVALID_MAP_WRONG_FILE_TYPE);
 	init_data(&data);
 	map_str = get_map(argv[1], &data.x_count, &data.y_count);
-	if (!map_str || is_valid_map(&data, map_str)  != 0)
-		exit_gracefully(&data, is_valid_map(&data, map_str));
+	if (!map_str || is_valid_map(&data, map_str) != 0
+		|| has_valid_path(&data, map_str) == false)
+		exit_gracefully(&data, data.exit_code);
 	enhance_data(&data, map_str);
 	init_map(&data, map_str);
 	if (!data.tile)
