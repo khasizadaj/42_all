@@ -6,77 +6,50 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/02 23:34:53 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:48:36 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 #include <stdbool.h>
 
-/**
- * Checks if a line has allowed characters in the expected length.
- *
- * @param line           The line to be checked.
- * @param expected_size  The expected size of the line. If -1, size doesn't
- *							matter.
- *
- * @return               Returns TRUE if the line is valid, FALSE otherwise.
- */
-int	is_valid_line(char *line, int expected_size)
+static void	free_get_next_line(int fd, char **line)
 {
-	int	i;
-
-	if (!line)
-		return (FALSE);
-	if (expected_size != -1 && (int) ft_strlen(line) != expected_size)
-		return (FALSE);
-	i = -1;
-	while (line[++i])
+	while (*line)
 	{
-		if (chr_in(line[i], ALLOWED_CHARACTERS) == 0)
-			return (FALSE);
+		free(*line);
+		get_next_line(fd, line, false);
 	}
-	return (TRUE);
 }
 
-int	is_valid_map(t_data *data, char *map)
+static void	transfer_map(int fd, int *x_tile_count, char **result, char **line)
 {
-	int	i;
+	char	*temp;
 
-	if (data->x_count > 1920 / SIDE_LENGTH || data->y_count > 1080 / SIDE_LENGTH)
-		data->exit_code = SCREEN_SIZE_ERR;
-	else if (ft_count_char(map, 'P') != 1 || ft_count_char(map, 'E') != 1
-		|| ft_count_char(map, 'C') < 1)
-		data->exit_code = INVALID_MAP_INCORRECT_COMPONENT;
-	else if ((int) ft_strlen(map) != data->x_count * data->y_count)
-		data->exit_code = INVALID_MAP_NOT_RECTANGLE;
-	if (data->exit_code != 0)
-		return (data->exit_code);
-	i = data->y_count;
-	while (i > 0)
+	if (!*result || !*line)
+		return ;
+	temp = *result;
+	*result = ft_strjoin(temp, *line);
+	if (!*result || !is_valid_line(*line, *x_tile_count))
 	{
-		if ((i == 1 || i == data->y_count)
-			&& ft_count_nchar(map, '1', data->x_count) != data->x_count)
-			data->exit_code = INVALID_MAP_WRONG_WALLS;
-		else if (map[0] != '1' || map[data->x_count - 1] != '1')
-			data->exit_code = INVALID_MAP_WRONG_WALLS;
-		if (data->exit_code != 0)
-			return (data->exit_code);
-		map += data->x_count;
-		i--;
+		if (*result)
+		{
+			free(*result);
+			*result = NULL;
+		}
+		return (close(fd), free_get_next_line(fd, line), free(temp));
 	}
-	return (data->exit_code);
+	free(temp);
 }
 
 char	*get_map_content(int fd, int *x_tile_count, int *y_tile_count)
 {
 	char	*line;
 	char	*result;
-	char	*temp;
 
 	*x_tile_count = get_next_line(fd, &line, false);
 	if ((*x_tile_count <= 0) || (line && !is_valid_line(line, -1)))
-		return (close(fd), NULL);
+		return (close(fd), free_get_next_line(fd, &line), NULL);
 	result = ft_strdup(line);
 	if (!result)
 		return (close(fd), free(line), NULL);
@@ -87,16 +60,16 @@ char	*get_map_content(int fd, int *x_tile_count, int *y_tile_count)
 			return (close(fd), free(result), NULL);
 		if (!line)
 			break ;
-		temp = result;
-		result = ft_strjoin(temp, line);
-		if (!result || !is_valid_line(line, *x_tile_count))
-			return (close(fd), free(temp), free(result), free(line), NULL);
+		transfer_map(fd, x_tile_count, &result, &line);
+		if (!result)
+			return (close(fd), NULL);
 	}
 	*y_tile_count = ft_strlen(result) / *x_tile_count;
-	return (result);
+	return (close(fd), result);
 }
 
-char	*get_map(char *filename, int *x_tile_count, int *y_tile_count)
+char	*get_map(t_data *data, char *filename, int *x_tile_count,
+	int *y_tile_count)
 {
 	int		fd;
 	char	*result;
@@ -106,45 +79,10 @@ char	*get_map(char *filename, int *x_tile_count, int *y_tile_count)
 		return (NULL);
 	result = get_map_content(fd, x_tile_count, y_tile_count);
 	if (!result)
+	{
+		data->exit_code = INVALID_MAP;
 		return (close(fd), NULL);
+	}
 	close(fd);
 	return (result);
-}
-
-void	flood(int position, int x_count, char *map, char new)
-{
-	if (position > (int) ft_strlen(map) || position < 0)
-		return ;
-	if (chr_in(map[position], "1-"))
-		return ;
-
-	map[position] = new;
-	flood(position + 1, x_count, map, new);
-	flood(position - 1, x_count, map, new);
-	flood(position + x_count, x_count, map, new);
-	flood(position - x_count, x_count, map, new);
-}
-
-bool	has_valid_path(t_data *data, char *map)
-{
-	int	x;
-	int	y;
-	int	start;
-	char	*temp;
-
-	x = data->x_count;
-	y = data->y_count;
-	start = 0;
-	while (map[start] != 'P')
-		start++;
-	temp = ft_strdup(map);
-	if (!temp)
-		return (MEMORY_ERR);
-	flood(start, data->x_count, temp, '-');
-	if (chr_in('E', temp) || chr_in('C', temp))
-	{
-		data->exit_code = INVALID_MAP_NO_VALID_PATH;
-		return (false);
-	}
-	return (true);
 }

@@ -6,12 +6,11 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/02 23:31:03 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:50:37 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-#include "libft/libft.h"
 
 void	init_assets(t_data *data)
 {
@@ -37,9 +36,9 @@ void	init_data(t_data *data)
 	data->collected = 0;
 	data->height = 0;
 	data->width = 0;
-	data->side_length = SIDE_LENGTH;
+	data->side_length = SIDE_LEN;
 	data->player_pos = -1;
-	data->exit = 0;
+	data->exit = 1;
 	data->exit_code = 0;
 	data->tile = NULL;
 	data->win = NULL;
@@ -113,10 +112,13 @@ int	main(int argc, char **argv)
 	if (!ft_str_endswith(argv[1], MAP_EXTENSION))
 		exit_for(INVALID_MAP_WRONG_FILE_TYPE);
 	init_data(&data);
-	map_str = get_map(argv[1], &data.x_count, &data.y_count);
+	map_str = get_map(&data, argv[1], &data.x_count, &data.y_count);
 	if (!map_str || is_valid_map(&data, map_str) != 0
 		|| has_valid_path(&data, map_str) == false)
+	{
+		free(map_str);	
 		exit_gracefully(&data, data.exit_code);
+	}
 	enhance_data(&data, map_str);
 	init_map(&data, map_str);
 	if (!data.tile)
