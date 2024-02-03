@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:19:00 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/18 14:44:35 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 00:42:49 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 t_bool	validate_4_digits(char **raw_numbers, int start)
 {
-	int	col;
 	int	row;
 
 	row = start;
 	while (raw_numbers[++row])
 	{
-		col = -1;
-		if (raw_numbers[row][0] == '-' || raw_numbers[row][0] == '+')
-			col++;
-		while (ft_isint(raw_numbers[row]) == FALSE)
+		if (ft_str_isdigit(raw_numbers[row]) == false)
 			return (FALSE);
 	}
 	return (TRUE);
@@ -45,33 +41,28 @@ t_bool	validate_stack_4_duplicates(t_number **stack)
 	return (TRUE);
 }
 
-t_bool	validate_4_overflow(char **raw_numbers, int start)
+t_bool	validate_4_overflow(char **nums, int start)
 {
 	int		row;
 	char	*curr;
-	t_bool	has_sign;
 	int		i;
 
 	row = start;
-	while (raw_numbers[++row])
+	while (nums[++row])
 	{
-		has_sign = FALSE;
-		curr = raw_numbers[row];
+		curr = nums[row];
 		i = 0;
-		if (curr[i] == '-' || curr[i] == '+')
-		{
-			has_sign = TRUE;
+		while (curr[i] == ' ')
 			i++;
-		}
+		if (curr[i] == '-' || curr[i] == '+')
+			i++;
 		while (curr[i] == '0')
 			i++;
-		if ((!has_sign && ft_strlen(&(raw_numbers[row][i])) > 10)
-			|| (has_sign && ft_strlen(&(raw_numbers[row][i])) > 11))
-			return (FALSE);
-		if (ft_atoi_lli(curr) > 2147483647 || ft_atoi_lli(curr) < -2147483648)
-			return (FALSE);
+		if (ft_strlen(&(nums[row][i])) > 11 || ft_atoi_lli(curr) > INT_MAX
+			|| ft_atoi_lli(curr) < INT_MIN)
+			return (false);
 	}
-	return (TRUE);
+	return (true);
 }
 
 /*

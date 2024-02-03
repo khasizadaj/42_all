@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:47:39 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/18 14:14:19 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 00:26:58 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <ctype.h>
@@ -25,6 +26,8 @@ typedef int				t_bool;
 
 # define TRUE 1 
 # define FALSE 0
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 typedef struct s_list
 {
@@ -40,7 +43,8 @@ int				ft_isalpha(int c);
 int				ft_isascii(int c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
-t_bool			ft_isint(char *str);
+int				ft_isspace(int c);
+bool			ft_str_isdigit(char *str);
 void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_itoa(int n);
 void			*ft_memchr(const void *s, int c, size_t n);
