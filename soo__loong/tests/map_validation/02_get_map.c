@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:36:16 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/29 21:57:23 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:41:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int	test_file_name_dont_exist(void)
 	char	*filename;
 	int		x_tile_count;
 	int		y_tile_count;
+	t_data	data;
 
+	data.exit_code = 0;
 	filename = "random_file_name.ber";
 	x_tile_count = 0;
 	y_tile_count = 0;
-	if (get_map(filename, &x_tile_count, &y_tile_count) == NULL
+	if (get_map(&data, filename, &x_tile_count, &y_tile_count) == NULL
 		&& x_tile_count == 0 && y_tile_count == 0)
 		return (0);
 	else
@@ -34,9 +36,11 @@ int	test_map_has_valid_lines_4x4(void)
 	char *map;
 	int		x_tile_count;
 	int		y_tile_count;
+	t_data	data;
 
+	data.exit_code = 0;
 	filename = "./maps/valid_4x4.ber";
-	map = get_map(filename, &x_tile_count, &y_tile_count);
+	map = get_map(&data, filename, &x_tile_count, &y_tile_count);
 	if (map == NULL)
 		return (-1);
 	if (ft_strlen(map) == 16 && is_valid_line(map, -1) == TRUE
@@ -52,9 +56,11 @@ int	test_map_has_valid_lines_5x5(void)
 	char	*map;
 	int		x_tile_count;
 	int		y_tile_count;
+	t_data	data;
 
+	data.exit_code = 0;
 	filename = "./maps/valid_5x5.ber";
-	map = get_map(filename, &x_tile_count, &y_tile_count);
+	map = get_map(&data, filename, &x_tile_count, &y_tile_count);
 	if (map == NULL)
 		return (-1);
 	if (ft_strlen(map) == 25 && is_valid_line(map, -1) == TRUE
@@ -70,9 +76,11 @@ int	test_map_has_invalid_first_line(void)
 	char	*map;
 	int		x_tile_count;
 	int		y_tile_count;
+	t_data	data;
 
+	data.exit_code = 0;
 	filename = "./maps/invalid_first_line_5x5.ber.ber";
-	map = get_map(filename, &x_tile_count, &y_tile_count);
+	map = get_map(&data, filename, &x_tile_count, &y_tile_count);
 	if (map == NULL)
 		return (0);
 	else
@@ -85,9 +93,11 @@ int	test_map_has_invalid_body(void)
 	char	*map;
 	int		x_tile_count;
 	int		y_tile_count;
+	t_data	data;
 
+	data.exit_code = 0;
 	filename = "./maps/invalid_body_5x5.ber";
-	map = get_map(filename, &x_tile_count, &y_tile_count);
+	map = get_map(&data, filename, &x_tile_count, &y_tile_count);
 	if (map == NULL)
 		return (0);
 	else
@@ -103,7 +113,7 @@ int	test_map_has_missing_wall(void)
 	filename = "./maps/invalid_missing_wall.ber";
 	data.x_count = 0;
 	data.y_count = 0;
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (is_valid_map(&data , map) == INVALID_MAP_WRONG_WALLS)
 	{
 		free(map);
@@ -122,7 +132,7 @@ int	test_map_has_missing_wall_on_sides(void)
 	filename = "./maps/invalid_missing_wall_2.ber";
 	data.x_count = 0;
 	data.y_count = 0;
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (is_valid_map(&data , map) == INVALID_MAP_WRONG_WALLS)
 	{
 		free(map);
@@ -141,7 +151,7 @@ int	test_map_has_many_exits(void)
 	filename = "./maps/invalid_many_exits.ber";
 	data.x_count = 0;
 	data.y_count = 0;
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (is_valid_map(&data , map) == INVALID_MAP_INCORRECT_COMPONENT)
 	{
 		free(map);
@@ -160,7 +170,7 @@ int	test_map_has_many_players(void)
 	filename = "./maps/invalid_many_players.ber";
 	data.x_count = 0;
 	data.y_count = 0;
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (is_valid_map(&data , map) == INVALID_MAP_INCORRECT_COMPONENT)
 	{
 		free(map);
@@ -200,7 +210,7 @@ int	test_map_has_no_valid_path(void)
 	data.y_count = 6;
 	data.player_pos = 5;
 	filename = "./maps/invalid_exit_not_reachable.ber";
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (has_valid_path(&data, map) != TRUE)
 		return (0);
 	else
@@ -218,7 +228,7 @@ int	test_map_has_no_valid_path_cannot_collect_all(void)
 	data.y_count = 6;
 	data.player_pos = 5;
 	filename = "./maps/invalid_cannot_collect_all.ber";
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (has_valid_path(&data, map) != TRUE)
 		return (0);
 	else
@@ -236,7 +246,7 @@ int	test_map_has_no_valid_path_complex(void)
 	data.y_count = 8;
 	data.player_pos = 27;
 	filename = "./maps/invalid_path_complex.ber";
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (has_valid_path(&data, map) != TRUE)
 		return (0);
 	else
@@ -254,7 +264,7 @@ int	test_map_has_valid_path_simple(void)
 	data.y_count = 5;
 	data.player_pos = 12;
 	filename = "./maps/valid_path_simple.ber";
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (has_valid_path(&data, map) == TRUE)
 		return (0);
 	else
@@ -272,7 +282,7 @@ int	test_map_has_valid_path_complex(void)
 	data.y_count = 8;
 	data.player_pos = 27;
 	filename = "./maps/valid_path_complex.ber";
-	map = get_map(filename, &data.x_count, &data.y_count);
+	map = get_map(&data, filename, &data.x_count, &data.y_count);
 	if (has_valid_path(&data, map) == TRUE)
 		return (0);
 	else

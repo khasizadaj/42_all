@@ -28,6 +28,7 @@ OBJS	= $(SRCS:.c=.o)
 
 SO_LONG_SRCS = \
 	../src/utils/map.c \
+	../src/utils/validate_map.c \
 	../src/libft/get_next_line.c \
 	../src/libft/get_next_line_utils.c \
 	../src/libft/ft_count_char.c

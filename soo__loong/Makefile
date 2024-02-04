@@ -14,6 +14,7 @@ SRCS 		=	${SRC_DIR}/main.c \
 				${UTILS_DIR}/error.c \
 				${UTILS_DIR}/game.c \
 				${UTILS_DIR}/map.c \
+				${UTILS_DIR}/validate_map.c \
 				${UTILS_DIR}/hook.c \
 				${UTILS_DIR}/tile.c
 
@@ -33,7 +34,7 @@ ${NAME}: ${OBJS} ${LIBFT_OBJS}
 	@${CC} ${CFLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME} ${MLX_FLAGS}
 
 valgrind: debug
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} .ber
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} maps/invalid_non_rectangle.ber
 
 clean: 
 	@${MAKE} -C ${LIBFT_DIR} --no-print-directory clean

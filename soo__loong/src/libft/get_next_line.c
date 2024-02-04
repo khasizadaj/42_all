@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:08:27 by codespace         #+#    #+#             */
-/*   Updated: 2024/01/28 03:07:55 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 18:46:27 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	get_next_line(int fd, char **line, bool include_newline)
 	{
 		line_no_newline = ft_substr(*line, 0, ft_strlen(*line) - 1);
 		if (!line_no_newline)
-			return (ft_clear(&file), free(line), -1);
+			return (ft_clear(&file), -1);
 		free(*line);
 		*line = line_no_newline;
 	}

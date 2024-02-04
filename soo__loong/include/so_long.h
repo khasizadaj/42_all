@@ -103,7 +103,7 @@ char	*asset_path_factory(char type);
 
 # define HEIGHT 600
 # define WIDTH 600
-# define SIDE_LENGTH 72
+# define SIDE_LEN 72
 
 # define WHITE 0xfafafa
 
@@ -174,7 +174,8 @@ void	free_assets(t_data *data);
 /*	    MAP VALIDATION                                                        */
 /*                                                                            */
 /* ************************************************************************** */
-char	*get_map(char *filename, int *x_tile_count, int *y_tile_count);
+char	*get_map(t_data *data, char *filename, int *x_tile_count,
+					int *y_tile_count);
 int		is_valid_line(char *line, int expected_size);
 int		is_valid_map(t_data *data, char *map);
 bool	has_valid_path(t_data *data, char *map);

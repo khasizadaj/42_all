@@ -6,13 +6,13 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 03:59:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:06:20 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	init_assets(t_data *data)
+bool	init_assets(t_data *data)
 {
 	char	*str_map;
 	int		i;
@@ -24,9 +24,10 @@ void	init_assets(t_data *data)
 	{
 		tile = tile_new(data, str_map[i], FALSE);
 		if (!tile)
-			exit_gracefully(data, MEMORY_ERR);
+			return false;
 		tile_add_back(&data->assets, tile);
 	}
+	return (true);
 }
 
 void	init_data(t_data *data)
@@ -36,9 +37,10 @@ void	init_data(t_data *data)
 	data->collected = 0;
 	data->height = 0;
 	data->width = 0;
-	data->side_length = SIDE_LENGTH;
-	data->player_pos = 0;
-	data->exit = 0;
+	data->side_length = SIDE_LEN;
+	data->player_pos = -1;
+	data->exit = 1;
+	data->exit_code = 0;
 	data->tile = NULL;
 	data->win = NULL;
 	data->mlx = NULL;
@@ -47,6 +49,16 @@ void	init_data(t_data *data)
 
 void	enhance_data(t_data *data, char *map_str)
 {
+	int	i;
+
+	i = -1;
+	while (map_str[++i])
+	{
+		if (map_str[i] == 'P')
+			data->player_pos = i + 1;	
+		if (map_str[i] == 'E')
+			data->exit = i + 1;	
+	}
 	data->height = data->y_count * data->side_length + 72;
 	data->width = data->x_count * data->side_length;
 	data->total_coins = ft_count_char(map_str, 'C');
@@ -57,7 +69,11 @@ void	enhance_data(t_data *data, char *map_str)
 		data->height, PROGRAM_NAME);
 	if (!data->win)
 		exit_gracefully(data, MEMORY_ERR);
-	init_assets(data);
+	if (!init_assets(data))
+	{
+		free(map_str);
+		exit_gracefully(data, MEMORY_ERR);
+	}
 }
 
 void	init_map(t_data *data, char *map_str)
@@ -77,28 +93,25 @@ void	init_map(t_data *data, char *map_str)
 			x = 0;
 			y += 72;
 		}
-		if (map_str[i] == 'P')
-			data->player_pos = i + 1;
 		else if (map_str[i] == 'E')
 		{
 			tile = tile_new(data, 'E', TRUE);
 			if (!tile)
-				exit_gracefully(data, MEMORY_ERR);
+				return (free(map_str), exit_gracefully(data, MEMORY_ERR));
 			tile_add_back(&data->tile, tile);
-			data->exit = tile->id;
 			mlx_put_image_to_window(data->mlx, data->win,
-				asset_get_by_type(&data->assets, '1'), x, y);
+				asset_get_by_type(&data->assets, '0'), x, y);
 			i++;
 			x += 72;
 			continue ;
 		}
-		tile = draw_tile(data, x, y, map_str[i]);		
+		tile = draw_tile(data, x, y, map_str[i]);
 		if (!tile)
-			exit_gracefully(data, MEMORY_ERR);
-
+			return (free(map_str), exit_gracefully(data, MEMORY_ERR));
 		i++;
 		x += 72;
 	}
+	free(map_str);
 }
 
 int	main(int argc, char **argv)
@@ -111,13 +124,15 @@ int	main(int argc, char **argv)
 	if (!ft_str_endswith(argv[1], MAP_EXTENSION))
 		exit_for(INVALID_MAP_WRONG_FILE_TYPE);
 	init_data(&data);
-	map_str = get_map(argv[1], &data.x_count, &data.y_count);
-	if (!map_str || is_valid_map(&data, map_str)  != 0)
-		exit_gracefully(&data, is_valid_map(&data, map_str));
+	map_str = get_map(&data, argv[1], &data.x_count, &data.y_count);
+	if (!map_str || is_valid_map(&data, map_str) != 0
+		|| has_valid_path(&data, map_str) == false)
+	{
+		free(map_str);	
+		exit_gracefully(&data, data.exit_code);
+	}
 	enhance_data(&data, map_str);
 	init_map(&data, map_str);
-	if (!data.tile)
-		exit_gracefully(&data, MEMORY_ERR);
 	mlx_hook(data.win, 2, 1L, 
 		key_hook, &data);
 	mlx_loop(data.mlx);
