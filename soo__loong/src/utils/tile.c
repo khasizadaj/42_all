@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:57:59 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 19:16:28 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@ t_tile	*tile_new(t_data *data, char type, t_bool is_loaded)
 	t_tile	*tile;
 	void	*img;
 
-	tile = ft_calloc(sizeof(t_tile), 1);
-	if (!tile)
-		return (NULL);
-	tile->type = type;
 	if (!is_loaded)
 	{
 		img = asset_factory(data, type);
+		if (!img)
+			return (NULL);
 	}
 	else
 	{
 	 	img = asset_get_by_type(&data->assets, type);	
 	}
+	tile = malloc(sizeof(t_tile));
+	if (!tile)
+		return (NULL);
+	tile->type = type;
 	if (!img)
 		return (free(tile), NULL);
 	tile->img = img;
