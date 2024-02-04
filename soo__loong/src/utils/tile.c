@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 19:16:28 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 23:01:30 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_tile	*tile_new(t_data *data, char type, t_bool is_loaded)
 	}
 	else
 	{
-	 	img = asset_get_by_type(&data->assets, type);	
+		img = asset_get_by_type(&data->assets, type);
 	}
 	tile = malloc(sizeof(t_tile));
 	if (!tile)
@@ -48,7 +48,7 @@ void	tile_add_back(t_tile **tile_list, t_tile *new_tile)
 	if (!(*tile_list))
 	{
 		*tile_list = new_tile;
-		new_tile->id = 1; 
+		new_tile->id = 1;
 		return ;
 	}
 	last = *tile_list;
@@ -84,38 +84,4 @@ void	*tile_get_by_type(t_tile **tile, char type)
 		curr_tile = curr_tile->next;
 	}
 	return (curr_tile->img);
-}
-
-void	free_tile(t_data *data)
-{
-    t_tile *current;
-    t_tile *next;
-
-    if (!data || !data->tile)
-        return;
-    current = data->tile;
-    while (current)
-    {
-        next = current->next;
-        free(current);
-        current = next;
-    }
-}
-
-void	free_assets(t_data *data)
-{
-    t_tile *current;
-    t_tile *next;
-
-    if (!data || !data->assets)
-		return;
-
-	current = data->assets;
-    while (current)
-    {
-        next = current->next;
-        mlx_destroy_image(data->mlx, current->img);
-        free(current);
-        current = next;
-    }
 }
