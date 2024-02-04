@@ -6,12 +6,52 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 18:48:27 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:17:33 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
-#include <stdbool.h>
+
+void	init_map(t_data *data, char *map_str)
+{
+	t_tile	*tile;
+	int		i;
+	int		x;
+	int		y;
+
+	i = 0;
+	x = 0;
+	y = 72;
+	while (map_str[i])
+	{
+		if (i % data->x_count == 0 && i != 0)
+		{
+			x = 0;
+			y += 72;
+		}
+		if (map_str[i] == 'P')
+			data->player_pos = i + 1;
+		else if (map_str[i] == 'E')
+		{
+			tile = tile_new(data, 'E', TRUE);
+			if (!tile)
+				exit_gracefully(data, MEMORY_ERR);
+			tile_add_back(&data->tile, tile);
+			data->exit = tile->id;
+			mlx_put_image_to_window(data->mlx, data->win,
+				asset_get_by_type(&data->assets, '1'), x, y);
+			i++;
+			x += 72;
+			continue ;
+		}
+		tile = draw_tile(data, x, y, map_str[i]);		
+		if (!tile)
+			exit_gracefully(data, MEMORY_ERR);
+
+		i++;
+		x += 72;
+	}
+}
 
 static void	free_get_next_line(int fd, char **line)
 {

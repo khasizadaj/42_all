@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 21:06:20 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:17:22 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,44 +74,6 @@ void	enhance_data(t_data *data, char *map_str)
 		free(map_str);
 		exit_gracefully(data, MEMORY_ERR);
 	}
-}
-
-void	init_map(t_data *data, char *map_str)
-{
-	t_tile	*tile;
-	int		i;
-	int		x;
-	int		y;
-
-	i = 0;
-	x = 0;
-	y = 72;
-	while (map_str[i])
-	{
-		if (i % data->x_count == 0 && i != 0)
-		{
-			x = 0;
-			y += 72;
-		}
-		else if (map_str[i] == 'E')
-		{
-			tile = tile_new(data, 'E', TRUE);
-			if (!tile)
-				return (free(map_str), exit_gracefully(data, MEMORY_ERR));
-			tile_add_back(&data->tile, tile);
-			mlx_put_image_to_window(data->mlx, data->win,
-				asset_get_by_type(&data->assets, '0'), x, y);
-			i++;
-			x += 72;
-			continue ;
-		}
-		tile = draw_tile(data, x, y, map_str[i]);
-		if (!tile)
-			return (free(map_str), exit_gracefully(data, MEMORY_ERR));
-		i++;
-		x += 72;
-	}
-	free(map_str);
 }
 
 int	main(int argc, char **argv)
