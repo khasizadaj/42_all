@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 19:50:41 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:06:20 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ void	init_data(t_data *data)
 
 void	enhance_data(t_data *data, char *map_str)
 {
+	int	i;
+
+	i = -1;
+	while (map_str[++i])
+	{
+		if (map_str[i] == 'P')
+			data->player_pos = i + 1;	
+		if (map_str[i] == 'E')
+			data->exit = i + 1;	
+	}
 	data->height = data->y_count * data->side_length + 72;
 	data->width = data->x_count * data->side_length;
 	data->total_coins = ft_count_char(map_str, 'C');
@@ -83,28 +93,25 @@ void	init_map(t_data *data, char *map_str)
 			x = 0;
 			y += 72;
 		}
-		if (map_str[i] == 'P')
-			data->player_pos = i + 1;
 		else if (map_str[i] == 'E')
 		{
 			tile = tile_new(data, 'E', TRUE);
 			if (!tile)
-				exit_gracefully(data, MEMORY_ERR);
+				return (free(map_str), exit_gracefully(data, MEMORY_ERR));
 			tile_add_back(&data->tile, tile);
-			data->exit = tile->id;
 			mlx_put_image_to_window(data->mlx, data->win,
 				asset_get_by_type(&data->assets, '0'), x, y);
 			i++;
 			x += 72;
 			continue ;
 		}
-		tile = draw_tile(data, x, y, map_str[i]);		
+		tile = draw_tile(data, x, y, map_str[i]);
 		if (!tile)
-			exit_gracefully(data, MEMORY_ERR);
-
+			return (free(map_str), exit_gracefully(data, MEMORY_ERR));
 		i++;
 		x += 72;
 	}
+	free(map_str);
 }
 
 int	main(int argc, char **argv)
@@ -126,8 +133,6 @@ int	main(int argc, char **argv)
 	}
 	enhance_data(&data, map_str);
 	init_map(&data, map_str);
-	if (!data.tile)
-		exit_gracefully(&data, MEMORY_ERR);
 	mlx_hook(data.win, 2, 1L, 
 		key_hook, &data);
 	mlx_loop(data.mlx);
