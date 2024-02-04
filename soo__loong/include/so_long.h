@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 21:17:38 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:38:49 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,12 +142,15 @@ t_bool	draw_board_border(t_data *data, int padding, int border_width);
 /* ************************************************************************** */
 void	exit_for(int reason);
 void	exit_gracefully(t_data *data, int reason);
+t_tile	*draw(t_data *data, int x, int y, char type);
 t_tile	*draw_tile(t_data *data, int x, int y, char type);
+t_tile	*draw_exit(t_data *data, int x, int y);
 void	tile_add_back(t_tile **tile_list, t_tile *new_tile);
 t_tile	*tile_new(t_data *data, char type, t_bool is_loaded);
 t_tile	*tile_get(t_tile **tile, int index);
 void	*tile_get_by_type(t_tile **tile, char type);
 void	move(t_data *data, int keycode);
+void	free_get_next_line(int fd, char **line);
 
 /* ************************************************************************** */
 /*                                                                            */

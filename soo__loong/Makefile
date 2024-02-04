@@ -12,6 +12,7 @@ SRCS 		=	${SRC_DIR}/main.c \
 				${UTILS_DIR}/asset.c \
 				${UTILS_DIR}/draw.c \
 				${UTILS_DIR}/error.c \
+				${UTILS_DIR}/freer.c \
 				${UTILS_DIR}/game.c \
 				${UTILS_DIR}/map.c \
 				${UTILS_DIR}/validate_map.c \
