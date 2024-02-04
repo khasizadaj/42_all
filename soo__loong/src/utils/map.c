@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/03 12:48:36 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 18:48:27 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ char	*get_map_content(int fd, int *x_tile_count, int *y_tile_count)
 		return (close(fd), free_get_next_line(fd, &line), NULL);
 	result = ft_strdup(line);
 	if (!result)
-		return (close(fd), free(line), NULL);
+		return (close(fd), free_get_next_line(fd, &line), NULL);
 	while (line)
 	{
 		free(line);
 		if (get_next_line(fd, &line, false) == -1)
-			return (close(fd), free(result), NULL);
+			return (close(fd), free(result), free(line), NULL);
 		if (!line)
 			break ;
 		transfer_map(fd, x_tile_count, &result, &line);
