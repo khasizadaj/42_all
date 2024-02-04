@@ -6,13 +6,13 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/03 12:50:37 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 19:50:41 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	init_assets(t_data *data)
+bool	init_assets(t_data *data)
 {
 	char	*str_map;
 	int		i;
@@ -24,9 +24,10 @@ void	init_assets(t_data *data)
 	{
 		tile = tile_new(data, str_map[i], FALSE);
 		if (!tile)
-			exit_gracefully(data, MEMORY_ERR);
+			return false;
 		tile_add_back(&data->assets, tile);
 	}
+	return (true);
 }
 
 void	init_data(t_data *data)
@@ -58,7 +59,11 @@ void	enhance_data(t_data *data, char *map_str)
 		data->height, PROGRAM_NAME);
 	if (!data->win)
 		exit_gracefully(data, MEMORY_ERR);
-	init_assets(data);
+	if (!init_assets(data))
+	{
+		free(map_str);
+		exit_gracefully(data, MEMORY_ERR);
+	}
 }
 
 void	init_map(t_data *data, char *map_str)
