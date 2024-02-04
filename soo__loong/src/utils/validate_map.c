@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:12:09 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/03 12:48:52 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 18:56:51 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ bool	has_valid_path(t_data *data, char *map)
 		start++;
 	temp = ft_strdup(map);
 	if (!temp)
-		return (MEMORY_ERR);
+	{
+		data->exit_code = MEMORY_ERR;
+		return (false);
+	}
 	flood(start, data->x_count, temp, '-');
 	if (chr_in('E', temp) || chr_in('C', temp))
 	{
