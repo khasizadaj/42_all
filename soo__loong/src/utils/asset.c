@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/25 20:57:30 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 23:03:10 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ void	*asset_get_by_type(t_tile **assets, char type)
 t_tile	*asset_factory(t_data *data, char type)
 {
 	t_tile	*asset;
-	
-	asset = mlx_xpm_file_to_image(data->mlx, asset_path_factory(type), 
-		&data->side_length, &data->side_length);
+
+	asset = mlx_xpm_file_to_image(data->mlx, asset_path_factory(type),
+			&data->side_length, &data->side_length);
 	if (!asset)
 		return (NULL);
 	return (asset);
 }
-
 
 char	*asset_path_factory(char type)
 {
