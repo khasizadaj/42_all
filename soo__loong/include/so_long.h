@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 21:38:49 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:42:25 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 	int		y_count;
 	int		collected;
 	int		total_coins;
+	int		move_count;
 	t_tile	*assets;
 	t_tile	*tile;
 }	t_data;

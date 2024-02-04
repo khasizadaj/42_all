@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/02 22:54:11 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:56:20 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ int	get_x(int position, int x_tile_count)
 	int	x;
 
 	x = (position % x_tile_count - 1) * 72;
-	return x;
+	return (x);
 }
 
-int		get_y(int position, int x_tile_count)
+int	get_y(int position, int x_tile_count)
 {
-	int	x;
+	int	y;
 
-	x = (position / x_tile_count) * 72 + 72;
-	return x;
+	y = (position / x_tile_count) * 72 + 72;
+	return (y);
 }
 
 int	perform_action(t_data *data, t_tile *tile)
@@ -54,13 +54,13 @@ int	perform_action(t_data *data, t_tile *tile)
 	{
 		tile->type = '0';
 		data->collected++;
-		ft_printf("Collected money!!! I have %d coins.\n", data->collected);
 		if (data->collected == data->total_coins)
 		{
-			ft_printf("Exit is open @ %d!\n", data->exit);
 			mlx_put_image_to_window(data->mlx, data->win,
-				asset_get_by_type(&data->assets, 'E'), get_x(data->exit, data->x_count), get_y(data->exit, data->x_count));
-		}	
+				asset_get_by_type(&data->assets, 'E'),
+				get_x(data->exit, data->x_count),
+				get_y(data->exit, data->x_count));
+		}
 	}
 	else if (tile->type == 'E' && data->collected == data->total_coins)
 	{
@@ -68,7 +68,9 @@ int	perform_action(t_data *data, t_tile *tile)
 	}
 	else if (tile->type == '1')
 		return (0);
-	return 1;
+	data->move_count++;
+	ft_printf("Curr move count: %d\n", data->move_count);
+	return (1);
 }
 
 void	move(t_data *data, int keycode)
@@ -80,8 +82,12 @@ void	move(t_data *data, int keycode)
 	if (!perform_action(data, next_tile))
 		return ;
 	img = asset_get_by_type(&data->assets, '0');
-	mlx_put_image_to_window(data->mlx, data->win, img, get_x(data->player_pos, data->x_count), get_y(data->player_pos, data->x_count));
+	mlx_put_image_to_window(data->mlx, data->win, img,
+		get_x(data->player_pos, data->x_count),
+		get_y(data->player_pos, data->x_count));
 	data->player_pos = next_tile->id;
 	img = asset_get_by_type(&data->assets, 'P');
-	mlx_put_image_to_window(data->mlx, data->win, img, get_x(data->player_pos, data->x_count), get_y(data->player_pos, data->x_count));
+	mlx_put_image_to_window(data->mlx, data->win, img,
+		get_x(data->player_pos, data->x_count),
+		get_y(data->player_pos, data->x_count));
 }

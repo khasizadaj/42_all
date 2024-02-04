@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 21:36:31 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:47:38 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	init_data(t_data *data)
 	data->win = NULL;
 	data->mlx = NULL;
 	data->assets = NULL;
+	data->move_count = 0;
 	return ;
 }
 
