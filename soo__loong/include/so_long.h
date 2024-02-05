@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 22:42:25 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:37:58 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ typedef struct s_data
 t_tile	*asset_factory(t_data *data, char type);
 void	*asset_get_by_type(t_tile **assets, char type);
 char	*asset_path_factory(char type);
-
-
+bool	init_assets(t_data *data);
 
 # define KEY_RELEASE 3
 # define KEY_RELEASE_MASK 1L
