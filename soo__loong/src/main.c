@@ -6,11 +6,18 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/05 18:38:01 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/05 21:46:48 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+	 	
+long long timeInMilliseconds(void) {
+    struct timeval tv;
+
+    gettimeofday(&tv,NULL);
+    return (((long long) tv.tv_sec) * 1000) + (tv.tv_usec / 1000);
+}
 
 void	init_data(t_data *data)
 {
@@ -28,6 +35,7 @@ void	init_data(t_data *data)
 	data->mlx = NULL;
 	data->assets = NULL;
 	data->move_count = 0;
+	data->start = timeInMilliseconds();
 	return ;
 }
 
@@ -60,6 +68,67 @@ void	enhance_data(t_data *data, char *map_str)
 	}
 }
 
+void	change_state(t_data *data, t_tile *tile)
+{
+	int	pos;
+
+	if (tile->type == 'P')
+		pos = data->player_pos;
+	else
+		pos = tile->id;
+	if (tile->state == 0)
+	{
+		mlx_put_image_to_window(data->mlx, data->win,
+				asset_get_by_type(&data->assets, ft_tolower(tile->type)),
+				get_x(pos, data->x_count), 
+				get_y(pos, data->x_count));
+		tile->state = 1;
+	}
+	else if (tile->state == 1)
+	{
+		mlx_put_image_to_window(data->mlx, data->win,
+				tile->img,
+				get_x(pos, data->x_count), 
+				get_y(pos, data->x_count));
+		tile->state = 0;
+	}	
+}
+
+int	draw_random(t_data *data)
+{
+	long long	now;
+	long long	diff;
+	t_tile		**curr_tile;
+
+	now = timeInMilliseconds();
+	curr_tile = &data->tile;
+	diff = now - data->start;
+	if (diff % 500 < 250)
+	{
+		while (*curr_tile)
+		{
+			while ((*curr_tile)->next && !chr_in((*curr_tile)->type, "PC"))
+				curr_tile = &(*curr_tile)->next;
+			if ((*curr_tile)->state != 0)
+				change_state(data, *curr_tile);
+			curr_tile = &(*curr_tile)->next;
+		}
+	}
+	else if (diff % 500 > 250)
+	{
+		while (*curr_tile)
+		{
+			while ((*curr_tile)->next && !chr_in((*curr_tile)->type, "PC"))
+				curr_tile = &(*curr_tile)->next;
+			if ((*curr_tile)->state != 1)
+				change_state(data, *curr_tile);
+			ft_printf("REDRAW; %c\n", (*curr_tile)->type);
+			curr_tile = &(*curr_tile)->next;
+		}
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -81,6 +150,7 @@ int	main(int argc, char **argv)
 	init_map(&data, map_str);
 	mlx_hook(data.win, 2, 1L,
 		key_hook, &data);
+	mlx_loop_hook(data.mlx, draw_random, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

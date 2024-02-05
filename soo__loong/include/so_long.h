@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/05 18:37:58 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/05 21:45:16 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 # include "../src/libft/libft.h"
 # include <stdbool.h>
 # include <mlx.h>
+# include <sys/time.h>
 
 typedef struct s_tile
 {
 	void			*img;
+	int				state;
 	char			type;
 	struct s_tile	*next;
 	int				id;
@@ -49,6 +51,7 @@ typedef struct s_data
 	int		collected;
 	int		total_coins;
 	int		move_count;
+	time_t	start;
 	t_tile	*assets;
 	t_tile	*tile;
 }	t_data;
@@ -62,7 +65,8 @@ typedef struct s_data
 # define A_PLAYER_L "assets/player-left.xpm"
 # define A_EXIT "assets/exit.xpm"
 # define A_FLOOR "assets/floor.xpm"
-# define A_COIN "assets/coin.xpm"
+# define A_COIN_L "assets/collectable-1.xpm"
+# define A_COIN_R "assets/collectable-1-flip.xpm"
 # define A_WALL_O "assets/wall-inside.xpm"
 
 # define A_WALL_L "assets/wall-left.xpm"
@@ -151,6 +155,8 @@ t_tile	*tile_get(t_tile **tile, int index);
 void	*tile_get_by_type(t_tile **tile, char type);
 void	move(t_data *data, int keycode);
 void	free_get_next_line(int fd, char **line);
+int		get_x(int position, int x_tile_count);
+int		get_y(int position, int x_tile_count);
 
 /* ************************************************************************** */
 /*                                                                            */
