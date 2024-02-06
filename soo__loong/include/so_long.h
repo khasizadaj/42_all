@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 21:14:56 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 23:42:15 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_data
 	int		x_count;
 	int		y_count;
 	int		collected;
+	int		is_attacking;
+	char	attacked_tile;
 	int		total_coins;
 	int		move_count;
 	time_t	start;
@@ -82,6 +84,12 @@ typedef struct s_data
 # define A_DIAMOND "assets/diamond.xpm"
 # define A_VILLAIN_R "assets/villain-right.xpm"
 # define A_VILLAIN_L "assets/villain-right.xpm"
+# define A_ATTACK_0 "assets/attack-0.xpm"
+# define A_ATTACK_1 "assets/attack-1.xpm"
+# define A_ATTACK_1_E "assets/attack-1-empty.xpm"
+# define A_ATTACK_2 "assets/attack-2.xpm"
+# define A_ATTACK_3 "assets/attack-3.xpm"
+# define A_ATTACK_4 "assets/attack-4.xpm"
 
 t_tile	*asset_factory(t_data *data, char type);
 void	*asset_get_by_type(t_tile **assets, char type);
@@ -96,6 +104,8 @@ bool	init_assets(t_data *data);
 /*	    KEYBOARD MACROS                                                       */
 /*                                                                            */
 /* ************************************************************************** */
+# define K_Q			113
+# define K_E			101
 # define K_UP			119
 # define K_DOWN			115
 # define K_LEFT			97
@@ -157,6 +167,7 @@ t_tile		*tile_new(t_data *data, char type, t_bool is_loaded);
 t_tile		*tile_get(t_tile **tile, int index);
 void		*tile_get_by_type(t_tile **tile, char type);
 void		move(t_data *data, int keycode);
+void		attack(t_data *data, int keycode);
 void		free_get_next_line(int fd, char **line);
 int			get_x(int position, int x_tile_count);
 int			get_y(int position, int x_tile_count);
@@ -198,7 +209,7 @@ int		is_valid_map(t_data *data, char *map);
 bool	has_valid_path(t_data *data, char *map);
 
 # define ALLOWED_CHARACTERS "1E0CPB"
-# define ANIMATED_CHARACTERS "PCB"
-# define ASSETS_TO_LOAD "1E0CcPpBb"
+# define ANIMATED_CHARACTERS "CB"
+# define ASSETS_TO_LOAD "1E0CcPpBb23#456"
 
 #endif

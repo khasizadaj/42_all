@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:04 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/24 20:09:51 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 23:16:20 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@ int	key_hook(int keycode, t_data *data)
 		move(data, K_LEFT);
 	else if (keycode == K_RIGHT || keycode == K_ARR_RIGHT)
 		move(data, K_RIGHT);
+	else if (keycode == K_RIGHT || keycode == K_ARR_RIGHT)
+		move(data, K_RIGHT);
+	else if (keycode == K_E || keycode == K_Q)
+		attack(data, keycode);
 	return (0);
 }

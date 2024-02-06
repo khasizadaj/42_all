@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 20:55:35 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 22:46:52 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,18 @@ char	*asset_path_factory(char type)
 		return (A_BOMB_U);
 	else if (type == 'b')
 		return (A_BOMB_D);
+	else if (type == '2')
+		return (A_ATTACK_0);
+	else if (type == '3')
+		return (A_ATTACK_1);
+	else if (type == '#')
+		return (A_ATTACK_1_E);
+	else if (type == '4')
+		return (A_ATTACK_2);
+	else if (type == '5')
+		return (A_ATTACK_3);
+	else if (type == '6')
+		return (A_ATTACK_4);
 	return (A_FLOOR);
 }
 

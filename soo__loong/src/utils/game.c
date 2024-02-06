@@ -6,11 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 21:00:23 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 23:16:44 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
+#include <unistd.h>
 
 t_tile	*get_next_tile(t_data *data, int keycode)
 {
@@ -48,7 +49,7 @@ int	get_y(int position, int x_tile_count)
 	return (y);
 }
 
-int	perform_action(t_data *data, t_tile *tile)
+int	perform_move(t_data *data, t_tile *tile)
 {
 	if (tile->type == 'C')
 	{
@@ -81,7 +82,7 @@ void	move(t_data *data, int keycode)
 	void	*img;
 
 	next_tile = get_next_tile(data, keycode);
-	if (!perform_action(data, next_tile))
+	if (!perform_move(data, next_tile))
 		return ;
 	img = asset_get_by_type(&data->assets, '0');
 	mlx_put_image_to_window(data->mlx, data->win, img,
@@ -92,4 +93,43 @@ void	move(t_data *data, int keycode)
 	mlx_put_image_to_window(data->mlx, data->win, img,
 		get_x(data->player_pos, data->x_count),
 		get_y(data->player_pos, data->x_count));
+}
+
+int	perform_attack(t_data *data, t_tile *next_tile)
+{
+	void	*img;
+
+	t_tile **assets = &data->assets;
+	while (*assets)
+	{
+		ft_printf("Asset %d: %c\n", (*assets)->id, (*assets)->type);
+		assets = &(*assets)->next;
+	} 
+	img = NULL;
+	if (next_tile->type == 'V')
+	{
+	}
+	else if (chr_in(next_tile->type, "1BCE") == 1)
+		return (0);
+	else
+	{
+		data->is_attacking = 1;
+		data->attacked_tile = '0';
+		ft_printf("Put next image\n");
+	}
+	ft_printf("Attacked: %d\n", data->move_count);
+	return (1);
+}
+
+void	attack(t_data *data, int keycode)
+{
+	t_tile	*next_tile;
+
+	next_tile = NULL;
+	if (keycode == K_E)
+		next_tile = get_next_tile(data, K_RIGHT);
+	else if (keycode == K_Q)
+		next_tile = get_next_tile(data, K_LEFT);
+	perform_attack(data, next_tile);
+	ft_printf("Attacked: %d\n", data->move_count);
 }

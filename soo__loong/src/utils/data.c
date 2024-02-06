@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:23:40 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 20:25:39 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 23:14:22 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	init_data(t_data *data)
 	data->mlx = NULL;
 	data->assets = NULL;
 	data->move_count = 0;
+	data->is_attacking = 0;
+	data->attacked_tile = 0;
 	data->start = time_in_milliseconds();
 	return ;
 }
