@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:12:09 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 18:56:51 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:03:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	flood(int position, int x_count, char *map, char new)
 {
 	if (position > (int) ft_strlen(map) || position < 0)
 		return ;
-	if (chr_in(map[position], "1-"))
+	if (chr_in(map[position], "1-B"))
 		return ;
 	map[position] = new;
 	flood(position + 1, x_count, map, new);

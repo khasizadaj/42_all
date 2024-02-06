@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 20:25:34 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:14:56 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ typedef struct s_data
 # define A_WALL_BR "assets/wall-bottom-right.xpm"
 # define A_WALL_TL "assets/wall-top-left.xpm"
 # define A_WALL_TR "assets/wall-top-right.xpm"
-# define A_BOMB "assets/bomb.xpm"
+# define A_BOMB_U "assets/bomb-up.xpm"
+# define A_BOMB_D "assets/bomb-down.xpm"
 # define A_DIAMOND "assets/diamond.xpm"
 # define A_VILLAIN_R "assets/villain-right.xpm"
 # define A_VILLAIN_L "assets/villain-right.xpm"
@@ -114,7 +115,9 @@ bool	init_assets(t_data *data);
 # define PROGRAM_NAME "DND"
 # define MAP_EXTENSION ".ber"
 
-# define END_GAME 0
+# define END_GAME_WIN 0
+# define END_GAME_YOU_ARE_DEAD 911
+# define END_GAME_MSG_YOU_ARE_DEAD "\nDon't step on unsteppable! You are DEAD.\n\n"
 # define PROGRAM_HALTED_WITH_ESCAPE 300
 # define PROGRAM_HALTED_MSG_WITH_ESCAPE "Escaped this hell!\n"
 # define MEMORY_ERR 9999
@@ -194,6 +197,8 @@ int		is_valid_line(char *line, int expected_size);
 int		is_valid_map(t_data *data, char *map);
 bool	has_valid_path(t_data *data, char *map);
 
-# define ALLOWED_CHARACTERS "1E0CP"
+# define ALLOWED_CHARACTERS "1E0CPB"
+# define ANIMATED_CHARACTERS "PCB"
+# define ASSETS_TO_LOAD "1E0CcPpBb"
 
 #endif

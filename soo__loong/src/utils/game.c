@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 22:56:20 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:00:23 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ int	perform_action(t_data *data, t_tile *tile)
 	}
 	else if (tile->type == 'E' && data->collected == data->total_coins)
 	{
-		exit_gracefully(data, END_GAME);
+		exit_gracefully(data, END_GAME_WIN);
 	}
+	else if (tile->type == 'B')
+		exit_gracefully(data, END_GAME_YOU_ARE_DEAD);
 	else if (tile->type == '1')
 		return (0);
 	data->move_count++;

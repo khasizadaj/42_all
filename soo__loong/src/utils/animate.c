@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:18:03 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 20:33:24 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:50:33 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	animate(t_data *data)
 		state = 1;
 	while (*curr_tile)
 	{
-		if (((*curr_tile)->next && chr_in((*curr_tile)->type, "PC"))
+		if (((*curr_tile)->next && chr_in((*curr_tile)->type, ANIMATED_CHARACTERS))
 			&& (*curr_tile)->state != state)
 			change_state(data, *curr_tile);
 		curr_tile = &(*curr_tile)->next;
