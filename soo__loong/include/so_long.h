@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/05 21:45:16 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:25:34 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,19 +144,23 @@ t_bool	draw_board_border(t_data *data, int padding, int border_width);
 /*	    UTILS                                                                 */
 /*                                                                            */
 /* ************************************************************************** */
-void	exit_for(int reason);
-void	exit_gracefully(t_data *data, int reason);
-t_tile	*draw(t_data *data, int x, int y, char type);
-t_tile	*draw_tile(t_data *data, int x, int y, char type);
-t_tile	*draw_exit(t_data *data, int x, int y);
-void	tile_add_back(t_tile **tile_list, t_tile *new_tile);
-t_tile	*tile_new(t_data *data, char type, t_bool is_loaded);
-t_tile	*tile_get(t_tile **tile, int index);
-void	*tile_get_by_type(t_tile **tile, char type);
-void	move(t_data *data, int keycode);
-void	free_get_next_line(int fd, char **line);
-int		get_x(int position, int x_tile_count);
-int		get_y(int position, int x_tile_count);
+void		exit_for(int reason);
+void		exit_gracefully(t_data *data, int reason);
+t_tile		*draw(t_data *data, int x, int y, char type);
+t_tile		*draw_tile(t_data *data, int x, int y, char type);
+t_tile		*draw_exit(t_data *data, int x, int y);
+void		tile_add_back(t_tile **tile_list, t_tile *new_tile);
+t_tile		*tile_new(t_data *data, char type, t_bool is_loaded);
+t_tile		*tile_get(t_tile **tile, int index);
+void		*tile_get_by_type(t_tile **tile, char type);
+void		move(t_data *data, int keycode);
+void		free_get_next_line(int fd, char **line);
+int			get_x(int position, int x_tile_count);
+int			get_y(int position, int x_tile_count);
+int			animate(t_data *data);
+long long	time_in_milliseconds(void);
+void		init_data(t_data *data);
+void		enhance_data(t_data *data, char *map_str);
 
 /* ************************************************************************** */
 /*                                                                            */

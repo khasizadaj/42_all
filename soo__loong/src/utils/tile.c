@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:44 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/05 21:18:05 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:22:48 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_tile	*tile_new(t_data *data, char type, t_bool is_loaded)
 	tile->type = type;
 	tile->img = img;
 	tile->id = 0;
+	tile->state = 0;
 	tile->next = NULL;
 	return (tile);
 }
