@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:01:31 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/28 03:34:31 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:59:27 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ void	exit_for(int reason)
 		ft_printf(INVALID_MAP_MSG_INCORRECT_COMPONENT);
 	else if (reason == SCREEN_SIZE_ERR)
 		ft_printf(SCREEN_SIZE_MSG);
+	else if (reason == END_GAME_YOU_ARE_DEAD)
+		ft_printf(END_GAME_MSG_YOU_ARE_DEAD);
 	exit(reason);
 }

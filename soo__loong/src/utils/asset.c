@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/05 21:45:23 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:55:35 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ char	*asset_path_factory(char type)
 		return (A_PLAYER_R);
 	else if (type == 'p')
 		return (A_PLAYER_L);
+	else if (type == 'B')
+		return (A_BOMB_U);
+	else if (type == 'b')
+		return (A_BOMB_D);
 	return (A_FLOOR);
 }
 
@@ -61,7 +65,7 @@ bool	init_assets(t_data *data)
 	t_tile	*tile;
 
 	i = -1;
-	str_map = "1E0CPpc";
+	str_map = ASSETS_TO_LOAD;
 	while (str_map[++i])
 	{
 		tile = tile_new(data, str_map[i], FALSE);
