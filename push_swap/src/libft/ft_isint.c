@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:22:09 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/07 16:34:37 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:21:05 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	ft_str_isdigit(char *str)
 			return (false);
 		i++;
 	}
-	if (i == 1 && (str[0] == '-' || str[0] == '+'))
+	if (ft_strlen(str) == 1 && ft_isdigit(str[0]) == 0)
 		return (false);
 	return (true);
 }
