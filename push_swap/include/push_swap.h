@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:54:35 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/17 19:17:03 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:24:05 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		sort(t_data *data);
 /* UTILS */
 t_bool		validate_input(int argc, char **argv);
 t_bool		validate_stack_4_duplicates(t_number **stack);
+t_bool		is_already_sorted(t_number **stack);
 void		print_steps(int *steps, int size);
 void		print_stack(t_number *stack);
 void		print_raw_numbers(char **raw_numbers);

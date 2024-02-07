@@ -6,11 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/03 23:47:13 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:26:14 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
@@ -27,6 +28,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!validate_stack_4_duplicates(&data.stack_a))
 		return (ft_stackclear(&data.stack_a), exit_for(INVALID_INPUT), 1);
+	if (is_already_sorted(&data.stack_a))
+		return (ft_stackclear(&data.stack_a), 0);
 	sort(&data);
 	ft_stackclear(&data.stack_a);
 	ft_stackclear(&data.stack_b);

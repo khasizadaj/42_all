@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 15:19:00 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/04 00:42:49 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:26:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,22 @@ t_bool	validate_stack_4_duplicates(t_number **stack)
 	while (tmp)
 	{
 		if (tmp->next && ft_stackindex(&tmp->next, tmp->number) != -1)
+			return (FALSE);
+		tmp = tmp->next;
+	}
+	return (TRUE);
+}
+
+t_bool	is_already_sorted(t_number **stack)
+{
+	t_number	*tmp;
+
+	if (!stack || !(*stack))
+		return (FALSE);
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->next && tmp->number > tmp->next->number)
 			return (FALSE);
 		tmp = tmp->next;
 	}
