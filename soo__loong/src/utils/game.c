@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 23:16:44 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:05:11 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,13 @@ int	perform_attack(t_data *data, t_tile *next_tile)
 {
 	void	*img;
 
-	t_tile **assets = &data->assets;
-	while (*assets)
-	{
-		ft_printf("Asset %d: %c\n", (*assets)->id, (*assets)->type);
-		assets = &(*assets)->next;
-	} 
 	img = NULL;
-	if (next_tile->type == 'V')
-	{
-	}
-	else if (chr_in(next_tile->type, "1BCE") == 1)
+	if (chr_in(next_tile->type, "1BCE") == 1)
 		return (0);
 	else
 	{
 		data->is_attacking = 1;
 		data->attacked_tile = '0';
-		ft_printf("Put next image\n");
 	}
 	ft_printf("Attacked: %d\n", data->move_count);
 	return (1);
