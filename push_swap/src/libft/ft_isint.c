@@ -6,30 +6,38 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:22:09 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/16 17:13:28 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:21:05 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool	ft_isint(char *str)
+/**
+ * Checks if a string contains only digits.
+ *
+ * @param str The string to be checked.
+ * @return TRUE if the string contains only digits, FALSE otherwise.
+ */
+bool	ft_str_isdigit(char *str)
 {
-	int	i;
+	int		i;
 
 	if (!str)
 		return (FALSE);
 	if (ft_strlen(str) == 0)
 		return (FALSE);
 	i = 0;
+	while (ft_isspace(str[i]) == true)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i])
 	{
-		if (i == 0 && (str[i] == '-' || str[i] == '+'))
-			i++;
-		if (ft_isdigit(str[i]) == FALSE)
-			return (FALSE);
+		if (ft_isdigit(str[i]) == 0)
+			return (false);
 		i++;
 	}
-	if (ft_strlen(str) == 1 && (str[0] == '-' || str[0] == '+'))
-		return (FALSE);
-	return (TRUE);
+	if (ft_strlen(str) == 1 && ft_isdigit(str[0]) == 0)
+		return (false);
+	return (true);
 }
