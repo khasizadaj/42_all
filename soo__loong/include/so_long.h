@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 23:42:15 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:47:30 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void	*asset_get_by_type(t_tile **assets, char type);
 char	*asset_path_factory(char type);
 bool	init_assets(t_data *data);
 
-# define KEY_RELEASE 3
-# define KEY_RELEASE_MASK 1L
+# define KEY_PRESS 3
+# define KEY_PRESS_MASK 1L<<1
 
 /* ************************************************************************** */
 /*                                                                            */

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:18:03 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/07 21:14:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:44:01 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,44 +39,6 @@ void	change_state(t_data *data, t_tile *tile)
 	}
 }
 
-int	animate_attack(t_data *data)
-{
-	t_tile		**img;
-	char		type;
-	static int	counter; 
-
-	type = '0';
-	ft_printf("tile: %c\n", data->attacked_tile);
-	if (data->attacked_tile == '0')
-	{
-		ft_printf("is attacking: %d\n", data->is_attacking);
-		while (1)
-		{
-			if (counter % 10000 + 9000 < 2500 + 9000)
-				type = '2';
-			else if (counter % 10000 + 9000 > 2500 + 9000 && counter % 10000 + 9000 < 5000 + 9000)
-				type = '#';
-			else if (counter % 10000 + 9000 > 5000 + 9000 && counter % 10000 + 9000 < 7500 + 9000)
-				type = '5';
-			else if (counter % 10000 + 9000 > 7500 + 9000 && counter % 10000 + 9000 < 9500 + 9000)
-				type = '6';
-			else if (counter % 10000 + 9000 > 9500 + 9000 && data->is_attacking == 1)
-			{
-				data->is_attacking = 0;
-				ft_printf("Finish animation\n");
-				break ;
-			}
-			img = asset_get_by_type(&data->assets, type);
-			mlx_put_image_to_window(data->mlx, data->win, img,
-				0,
-				0);
-			counter++;
-		}
-		counter = 0;
-	}
-	return (1);
-}
-
 int	animate(t_data *data)
 {
 	long long	now;
@@ -87,8 +49,6 @@ int	animate(t_data *data)
 	now = time_in_milliseconds();
 	curr_tile = &data->tile;
 	diff = now - data->start;
-	if (data->is_attacking)
-		animate_attack(data);
 	if (diff % 500 < 250)
 		state = 0;
 	else
