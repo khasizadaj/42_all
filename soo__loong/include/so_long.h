@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/07 21:47:30 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/10 14:10:11 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ typedef struct s_data
 	int		x_count;
 	int		y_count;
 	int		collected;
-	int		is_attacking;
-	char	attacked_tile;
+	char	*attack; // "10L" -> attacking to tile 0 on left
 	int		total_coins;
 	int		move_count;
 	time_t	start;
@@ -90,6 +89,12 @@ typedef struct s_data
 # define A_ATTACK_2 "assets/attack-2.xpm"
 # define A_ATTACK_3 "assets/attack-3.xpm"
 # define A_ATTACK_4 "assets/attack-4.xpm"
+# define A_ATTACK_0_L "assets/attack-0-left.xpm"
+# define A_ATTACK_1_L "assets/attack-1-left.xpm"
+# define A_ATTACK_1_E_L "assets/attack-1-empty-left.xpm"
+# define A_ATTACK_2_L "assets/attack-2-left.xpm"
+# define A_ATTACK_3_L "assets/attack-3-left.xpm"
+# define A_ATTACK_4_L "assets/attack-4-left.xpm"
 
 t_tile	*asset_factory(t_data *data, char type);
 void	*asset_get_by_type(t_tile **assets, char type);
@@ -119,6 +124,7 @@ bool	init_assets(t_data *data);
 # define HEIGHT 600
 # define WIDTH 600
 # define SIDE_LEN 72
+# define ATTACK_DURATION 250
 
 # define WHITE 0xfafafa
 
@@ -208,8 +214,8 @@ int		is_valid_line(char *line, int expected_size);
 int		is_valid_map(t_data *data, char *map);
 bool	has_valid_path(t_data *data, char *map);
 
-# define ALLOWED_CHARACTERS "1E0CPB"
+# define ALLOWED_CHARACTERS "1E0CPBV"
 # define ANIMATED_CHARACTERS "CB"
-# define ASSETS_TO_LOAD "1E0CcPpBb23#456"
+# define ASSETS_TO_LOAD "1E0CcPpBbVGgHhJjKkLlOo"
 
 #endif

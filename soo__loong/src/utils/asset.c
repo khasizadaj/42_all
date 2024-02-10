@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 22:46:52 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:50:19 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,32 @@ char	*asset_path_factory(char type)
 		return (A_BOMB_U);
 	else if (type == 'b')
 		return (A_BOMB_D);
-	else if (type == '2')
+	else if (type == 'G')
 		return (A_ATTACK_0);
-	else if (type == '3')
+	else if (type == 'g')
+		return (A_ATTACK_0_L);
+	else if (type == 'H')
 		return (A_ATTACK_1);
-	else if (type == '#')
+	else if (type == 'h')
+		return (A_ATTACK_1_L);
+	else if (type == 'O')
 		return (A_ATTACK_1_E);
-	else if (type == '4')
+	else if (type == 'o')
+		return (A_ATTACK_1_E_L);
+	else if (type == 'J')
 		return (A_ATTACK_2);
-	else if (type == '5')
+	else if (type == 'j')
+		return (A_ATTACK_2_L);
+	else if (type == 'K')
 		return (A_ATTACK_3);
-	else if (type == '6')
+	else if (type == 'k')
+		return (A_ATTACK_3_L);
+	else if (type == 'L')
 		return (A_ATTACK_4);
+	else if (type == 'l')
+		return (A_ATTACK_4_L);
+	else if (type == 'V')
+		return (A_VILLAIN_R);
 	return (A_FLOOR);
 }
 

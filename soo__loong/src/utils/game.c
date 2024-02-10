@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/07 21:46:52 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/10 14:07:01 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,55 +95,28 @@ void	move(t_data *data, int keycode)
 		get_y(data->player_pos, data->x_count));
 }
 
-void	animate_attack(t_data *data)
-{
-	t_tile		**img;
-	char		type;
-	static int	counter = 0; 
-
-	type = '0';
-	ft_printf("tile: %c\n", data->attacked_tile);
-	if (data->attacked_tile == '0')
-	{
-		ft_printf("is attacking: %d\n", data->is_attacking);
-		while (1)
-		{
-			if (counter % 20000 < 5000)
-				type = '2';
-			else if (counter % 20000 > 5000 && counter % 20000 < 10000)
-				type = '#';
-			else if (counter % 20000 > 10000 && counter % 20000 < 15000)
-				type = '5';
-			else if (counter % 20000 > 15000 && counter % 20000 < 19000)
-				type = '6';
-			else if (counter % 20000 > 19000 && data->is_attacking == 1)
-			{
-				data->is_attacking = 0;
-				ft_printf("Finish animation\n");
-				counter = 0;
-				break ;
-			}
-			img = asset_get_by_type(&data->assets, type);
-			mlx_put_image_to_window(data->mlx, data->win, img,
-				get_x(data->player_pos, data->x_count),
-				get_y(data->player_pos, data->x_count));
-			counter += 2;
-		}
-	}
-}
-
-int	perform_attack(t_data *data, t_tile *next_tile)
+int	perform_attack(t_data *data, t_tile *next_tile, char direction)
 {
 	void	*img;
 
+	ft_printf("Start the attack on: %d\n", next_tile->id);
 	img = NULL;
 	if (chr_in(next_tile->type, "1BCE") == 1)
 		return (0);
+	else if (next_tile->type == 'V')
+	{
+		if (direction == 'R')
+			data->attack = "1VR";
+		else if (direction == 'L')
+			data->attack = "1VL";
+		next_tile->type = '0';
+	}
 	else
 	{
-		data->is_attacking = 1;
-		data->attacked_tile = '0';
-		animate_attack(data);
+		if (direction == 'R')
+			data->attack = "10R";
+		else if (direction == 'L')
+			data->attack = "10L";
 	}
 	ft_printf("Attacked: %d\n", next_tile->id);
 	return (1);
@@ -152,12 +125,20 @@ int	perform_attack(t_data *data, t_tile *next_tile)
 void	attack(t_data *data, int keycode)
 {
 	t_tile	*next_tile;
+	char 	direction;
 
 	next_tile = NULL;
+	direction = 'R';
 	if (keycode == K_E)
+	{
 		next_tile = get_next_tile(data, K_RIGHT);
+		direction = 'R';
+	}
 	else if (keycode == K_Q)
+	{
 		next_tile = get_next_tile(data, K_LEFT);
-	perform_attack(data, next_tile);
+		direction = 'L';
+	}
+	perform_attack(data, next_tile, direction);
 	ft_printf("Attacked: %d\n", data->move_count);
 }
