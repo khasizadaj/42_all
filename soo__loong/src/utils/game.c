@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 17:06:44 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:12:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,55 +32,6 @@ t_tile	*get_next_tile(t_data *data, int keycode)
 	return (tile);
 }
 
-int	get_x(int position, int x_tile_count)
-{
-	int	x;
-
-	x = (position % x_tile_count - 1) * 72;
-	return (x);
-}
-
-int	get_y(int position, int x_tile_count)
-{
-	int	y;
-
-	y = (position / x_tile_count) * 72 + 72;
-	return (y);
-}
-
-void update_collected_coins(t_data *data)
-{
-	data->collected++;
-	if (data->collected == data->total_coins)
-	{
-		mlx_put_image_to_window(data->mlx, data->win,
-			asset_get_by_type(&data->assets, 'E'),
-			get_x(data->exit, data->x_count),
-			get_y(data->exit, data->x_count));
-	}
-}
-
-
-int	perform_move(t_data *data, t_tile *tile)
-{
-	if (tile->type == 'C')
-	{
-		tile->type = '0';
-		update_collected_coins(data);
-	}
-	else if (tile->type == 'E' && data->collected == data->total_coins)
-	{
-		exit_gracefully(data, END_GAME_WIN);
-	}
-	else if (tile->type == 'B')
-		exit_gracefully(data, END_GAME_YOU_ARE_DEAD);
-	else if (tile->type == '1')
-		return (0);
-	data->move_count++;
-	ft_printf("Curr move count: %d\n", data->move_count);
-	return (1);
-}
-
 void	move(t_data *data, int keycode)
 {
 	t_tile	*next_tile;
@@ -100,39 +51,10 @@ void	move(t_data *data, int keycode)
 		get_y(data->player_pos, data->x_count));
 }
 
-int	perform_attack(t_data *data, t_tile *next_tile, char direction)
-{
-	if (chr_in(next_tile->type, "1E") == 1)
-		return (0);
-	else if (next_tile->type == 'V')
-	{
-		if (direction == 'R')
-			data->attack = "1VR";
-		else if (direction == 'L')
-			data->attack = "1VL";
-		next_tile->type = '0';
-	}
-	else
-	{
-		if (direction == 'R')
-			data->attack = "10R";
-		else if (direction == 'L')
-			data->attack = "10L";
-		if (next_tile->type != '0')
-		{
-			if (next_tile->type == 'C')
-				update_collected_coins(data);
-			next_tile->type = '0';		
-		}
-	}
-	ft_printf("Attacked: %d\n", next_tile->id);
-	return (1);
-}
-
 void	attack(t_data *data, int keycode)
 {
 	t_tile	*next_tile;
-	char 	direction;
+	char	direction;
 
 	direction = 'R';
 	next_tile = get_next_tile(data, keycode);
@@ -140,6 +62,6 @@ void	attack(t_data *data, int keycode)
 		direction = 'R';
 	else if (keycode == K_Q)
 		direction = 'L';
-	perform_attack(data, next_tile, direction);
-	ft_printf("Attacked: %d\n", data->move_count);
+	if (!perform_attack(data, next_tile, direction))
+		return ;
 }
