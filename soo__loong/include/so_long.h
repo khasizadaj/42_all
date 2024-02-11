@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/10 14:10:11 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:24:33 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,32 @@ typedef struct s_data
 /*	    ASSETS                                                                */
 /*                                                                            */
 /* ************************************************************************** */
+typedef enum s_asset
+{
+	PLAYER_R = 'P',
+	EXIT = 'E',
+	FLOOR = '0',
+	COIN_R = 'C',
+	COIN_L = 'c',
+	WALL = '1',
+	BOMB_U = 'B',
+	BOMB_D = 'b',
+	VILLAIN_R = 'V',
+	VILLAIN_L = 'v',
+	ATTACK_0 = 'G',
+	ATTACK_0_L = 'g',
+	ATTACK_1 = 'H',
+	ATTACK_1_L = 'h',
+	ATTACK_1_E = 'O',
+	ATTACK_1_E_L = 'o',
+	ATTACK_2 = 'J',
+	ATTACK_2_L = 'j',
+	ATTACK_3 = 'K',
+	ATTACK_3_L = 'k',
+	ATTACK_4 = 'L',
+	ATTACK_4_L = 'l',
+}	t_asset;
+
 # define A_PLAYER_R "assets/player-right.xpm"
 # define A_PLAYER_L "assets/player-left.xpm"
 # define A_EXIT "assets/exit.xpm"
@@ -69,7 +95,6 @@ typedef struct s_data
 # define A_COIN_L "assets/collectable-1.xpm"
 # define A_COIN_R "assets/collectable-1-flip.xpm"
 # define A_WALL_O "assets/wall-inside.xpm"
-
 # define A_WALL_L "assets/wall-left.xpm"
 # define A_WALL_R "assets/wall-right.xpm"
 # define A_WALL_T "assets/wall-top.xpm"
@@ -82,7 +107,8 @@ typedef struct s_data
 # define A_BOMB_D "assets/bomb-down.xpm"
 # define A_DIAMOND "assets/diamond.xpm"
 # define A_VILLAIN_R "assets/villain-right.xpm"
-# define A_VILLAIN_L "assets/villain-right.xpm"
+# define A_VILLAIN_L "assets/villain-left.xpm"
+
 # define A_ATTACK_0 "assets/attack-0.xpm"
 # define A_ATTACK_1 "assets/attack-1.xpm"
 # define A_ATTACK_1_E "assets/attack-1-empty.xpm"
@@ -124,7 +150,6 @@ bool	init_assets(t_data *data);
 # define HEIGHT 600
 # define WIDTH 600
 # define SIDE_LEN 72
-# define ATTACK_DURATION 250
 
 # define WHITE 0xfafafa
 
@@ -178,9 +203,14 @@ void		free_get_next_line(int fd, char **line);
 int			get_x(int position, int x_tile_count);
 int			get_y(int position, int x_tile_count);
 int			animate(t_data *data);
+char		get_attack_frame_empty(long long diff);
+char		get_attack_frame_villain(long long diff);
+void		change_state(t_data *data, t_tile *tile);
 long long	time_in_milliseconds(void);
 void		init_data(t_data *data);
 void		enhance_data(t_data *data, char *map_str);
+int			perform_attack(t_data *data, t_tile *next_tile, char direction);
+int			perform_move(t_data *data, t_tile *tile);
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -215,7 +245,7 @@ int		is_valid_map(t_data *data, char *map);
 bool	has_valid_path(t_data *data, char *map);
 
 # define ALLOWED_CHARACTERS "1E0CPBV"
-# define ANIMATED_CHARACTERS "CB"
-# define ASSETS_TO_LOAD "1E0CcPpBbVGgHhJjKkLlOo"
+# define ANIMATED_CHARACTERS "CBV"
+# define ASSETS_TO_LOAD "1E0CcPBbVvGgHhJjKkLlOo"
 
 #endif
