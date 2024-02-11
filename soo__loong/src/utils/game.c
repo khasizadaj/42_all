@@ -48,19 +48,28 @@ int	get_y(int position, int x_tile_count)
 	return (y);
 }
 
+void update_collected_coins(t_data *data)
+{
+	if (tile->type == 'C')
+	{
+		tile->type = '0';
+	data->collected++;
+	if (data->collected == data->total_coins)
+	{
+		mlx_put_image_to_window(data->mlx, data->win,
+			asset_get_by_type(&data->assets, 'E'),
+			get_x(data->exit, data->x_count),
+			get_y(data->exit, data->x_count));
+	}
+}
+
+
 int	perform_move(t_data *data, t_tile *tile)
 {
 	if (tile->type == 'C')
 	{
 		tile->type = '0';
-		data->collected++;
-		if (data->collected == data->total_coins)
-		{
-			mlx_put_image_to_window(data->mlx, data->win,
-				asset_get_by_type(&data->assets, 'E'),
-				get_x(data->exit, data->x_count),
-				get_y(data->exit, data->x_count));
-		}
+		update_collected_coins(data);
 	}
 	else if (tile->type == 'E' && data->collected == data->total_coins)
 	{
