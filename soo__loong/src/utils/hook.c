@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:04 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 23:16:20 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:52:29 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	key_hook(int keycode, t_data *data)
 {
-	if (keycode == 65307)
+	if (data->attack[0] == '1' && keycode != K_ESC)
+		return (0);
+	if (keycode == K_ESC)
 		exit_gracefully(data, PROGRAM_HALTED_WITH_ESCAPE);
 	else if (keycode == K_UP || keycode == K_ARR_UP)
 		move(data, K_UP);
