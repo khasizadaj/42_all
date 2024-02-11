@@ -6,12 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/07 21:47:24 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:51:28 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-	 	
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
