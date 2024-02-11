@@ -6,12 +6,12 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 20:33:11 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:51:28 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-	 	
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	}
 	enhance_data(&data, map_str);
 	init_map(&data, map_str);
-	mlx_hook(data.win, 2, 1L,
+	mlx_hook(data.win, KEY_PRESS, KEY_PRESS_MASK,
 		key_hook, &data);
 	mlx_loop_hook(data.mlx, animate, &data);
 	mlx_loop(data.mlx);

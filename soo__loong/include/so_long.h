@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 21:14:56 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:24:33 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data
 	int		x_count;
 	int		y_count;
 	int		collected;
+	char	*attack; // "10L" -> attacking to tile 0 on left
 	int		total_coins;
 	int		move_count;
 	time_t	start;
@@ -61,6 +62,32 @@ typedef struct s_data
 /*	    ASSETS                                                                */
 /*                                                                            */
 /* ************************************************************************** */
+typedef enum s_asset
+{
+	PLAYER_R = 'P',
+	EXIT = 'E',
+	FLOOR = '0',
+	COIN_R = 'C',
+	COIN_L = 'c',
+	WALL = '1',
+	BOMB_U = 'B',
+	BOMB_D = 'b',
+	VILLAIN_R = 'V',
+	VILLAIN_L = 'v',
+	ATTACK_0 = 'G',
+	ATTACK_0_L = 'g',
+	ATTACK_1 = 'H',
+	ATTACK_1_L = 'h',
+	ATTACK_1_E = 'O',
+	ATTACK_1_E_L = 'o',
+	ATTACK_2 = 'J',
+	ATTACK_2_L = 'j',
+	ATTACK_3 = 'K',
+	ATTACK_3_L = 'k',
+	ATTACK_4 = 'L',
+	ATTACK_4_L = 'l',
+}	t_asset;
+
 # define A_PLAYER_R "assets/player-right.xpm"
 # define A_PLAYER_L "assets/player-left.xpm"
 # define A_EXIT "assets/exit.xpm"
@@ -68,7 +95,6 @@ typedef struct s_data
 # define A_COIN_L "assets/collectable-1.xpm"
 # define A_COIN_R "assets/collectable-1-flip.xpm"
 # define A_WALL_O "assets/wall-inside.xpm"
-
 # define A_WALL_L "assets/wall-left.xpm"
 # define A_WALL_R "assets/wall-right.xpm"
 # define A_WALL_T "assets/wall-top.xpm"
@@ -81,21 +107,36 @@ typedef struct s_data
 # define A_BOMB_D "assets/bomb-down.xpm"
 # define A_DIAMOND "assets/diamond.xpm"
 # define A_VILLAIN_R "assets/villain-right.xpm"
-# define A_VILLAIN_L "assets/villain-right.xpm"
+# define A_VILLAIN_L "assets/villain-left.xpm"
+
+# define A_ATTACK_0 "assets/attack-0.xpm"
+# define A_ATTACK_1 "assets/attack-1.xpm"
+# define A_ATTACK_1_E "assets/attack-1-empty.xpm"
+# define A_ATTACK_2 "assets/attack-2.xpm"
+# define A_ATTACK_3 "assets/attack-3.xpm"
+# define A_ATTACK_4 "assets/attack-4.xpm"
+# define A_ATTACK_0_L "assets/attack-0-left.xpm"
+# define A_ATTACK_1_L "assets/attack-1-left.xpm"
+# define A_ATTACK_1_E_L "assets/attack-1-empty-left.xpm"
+# define A_ATTACK_2_L "assets/attack-2-left.xpm"
+# define A_ATTACK_3_L "assets/attack-3-left.xpm"
+# define A_ATTACK_4_L "assets/attack-4-left.xpm"
 
 t_tile	*asset_factory(t_data *data, char type);
 void	*asset_get_by_type(t_tile **assets, char type);
 char	*asset_path_factory(char type);
 bool	init_assets(t_data *data);
 
-# define KEY_RELEASE 3
-# define KEY_RELEASE_MASK 1L
+# define KEY_PRESS 3
+# define KEY_PRESS_MASK 1L<<1
 
 /* ************************************************************************** */
 /*                                                                            */
 /*	    KEYBOARD MACROS                                                       */
 /*                                                                            */
 /* ************************************************************************** */
+# define K_Q			113
+# define K_E			101
 # define K_UP			119
 # define K_DOWN			115
 # define K_LEFT			97
@@ -157,13 +198,19 @@ t_tile		*tile_new(t_data *data, char type, t_bool is_loaded);
 t_tile		*tile_get(t_tile **tile, int index);
 void		*tile_get_by_type(t_tile **tile, char type);
 void		move(t_data *data, int keycode);
+void		attack(t_data *data, int keycode);
 void		free_get_next_line(int fd, char **line);
 int			get_x(int position, int x_tile_count);
 int			get_y(int position, int x_tile_count);
 int			animate(t_data *data);
+char		get_attack_frame_empty(long long diff);
+char		get_attack_frame_villain(long long diff);
+void		change_state(t_data *data, t_tile *tile);
 long long	time_in_milliseconds(void);
 void		init_data(t_data *data);
 void		enhance_data(t_data *data, char *map_str);
+int			perform_attack(t_data *data, t_tile *next_tile, char direction);
+int			perform_move(t_data *data, t_tile *tile);
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -197,8 +244,8 @@ int		is_valid_line(char *line, int expected_size);
 int		is_valid_map(t_data *data, char *map);
 bool	has_valid_path(t_data *data, char *map);
 
-# define ALLOWED_CHARACTERS "1E0CPB"
-# define ANIMATED_CHARACTERS "PCB"
-# define ASSETS_TO_LOAD "1E0CcPpBb"
+# define ALLOWED_CHARACTERS "1E0CPBV"
+# define ANIMATED_CHARACTERS "CBV"
+# define ASSETS_TO_LOAD "1E0CcPBbVvGgHhJjKkLlOo"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 20:55:35 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 18:16:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,31 @@ t_tile	*asset_factory(t_data *data, char type)
 
 char	*asset_path_factory(char type)
 {
-	if (type == '1')
-		return (A_WALL_O);
-	else if (type == 'C')
-		return (A_COIN_R);
-	else if (type == 'c')
-		return (A_COIN_L);
-	else if (type == 'E')
-		return (A_EXIT);
-	else if (type == 'P')
-		return (A_PLAYER_R);
-	else if (type == 'p')
-		return (A_PLAYER_L);
-	else if (type == 'B')
-		return (A_BOMB_U);
-	else if (type == 'b')
-		return (A_BOMB_D);
-	return (A_FLOOR);
+	char	*pathes[255];
+
+	pathes[FLOOR] = A_FLOOR;
+	pathes[WALL] = A_WALL_O;
+	pathes[COIN_L] = A_COIN_L;
+	pathes[COIN_R] = A_COIN_R;
+	pathes[PLAYER_R] = A_PLAYER_R;
+	pathes[EXIT] = A_EXIT;
+	pathes[BOMB_U] = A_BOMB_U;
+	pathes[BOMB_D] = A_BOMB_D;
+	pathes[ATTACK_0] = A_ATTACK_0;
+	pathes[ATTACK_0_L] = A_ATTACK_0_L;
+	pathes[ATTACK_1] = A_ATTACK_1;
+	pathes[ATTACK_1_L] = A_ATTACK_1_L;
+	pathes[ATTACK_1_E] = A_ATTACK_1_E;
+	pathes[ATTACK_1_E_L] = A_ATTACK_1_E_L;
+	pathes[ATTACK_2] = A_ATTACK_2;
+	pathes[ATTACK_2_L] = A_ATTACK_2_L;
+	pathes[ATTACK_3] = A_ATTACK_3;
+	pathes[ATTACK_3_L] = A_ATTACK_3_L;
+	pathes[ATTACK_4] = A_ATTACK_4;
+	pathes[ATTACK_4_L] = A_ATTACK_4_L;
+	pathes[VILLAIN_R] = A_VILLAIN_R;
+	pathes[VILLAIN_L] = A_VILLAIN_L;
+	return (pathes[(int) type]);
 }
 
 bool	init_assets(t_data *data)
