@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 16:53:02 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:06:44 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_tile	*get_next_tile(t_data *data, int keycode)
 		curr_pos = data->player_pos + data->x_count;
 	else if (keycode == K_UP)
 		curr_pos = data->player_pos - data->x_count;
-	else if (keycode == K_LEFT)
+	else if (keycode == K_LEFT || keycode == K_Q)
 		curr_pos = data->player_pos - 1;
-	else if (keycode == K_RIGHT)
+	else if (keycode == K_RIGHT || keycode == K_E)
 		curr_pos = data->player_pos + 1;
 	tile = tile_get(&data->tile, curr_pos);
 	if (!tile)
@@ -50,9 +50,6 @@ int	get_y(int position, int x_tile_count)
 
 void update_collected_coins(t_data *data)
 {
-	if (tile->type == 'C')
-	{
-		tile->type = '0';
 	data->collected++;
 	if (data->collected == data->total_coins)
 	{
@@ -105,8 +102,7 @@ void	move(t_data *data, int keycode)
 
 int	perform_attack(t_data *data, t_tile *next_tile, char direction)
 {
-	ft_printf("Start the attack on: %d\n", next_tile->id);
-	if (chr_in(next_tile->type, "1BCE") == 1)
+	if (chr_in(next_tile->type, "1E") == 1)
 		return (0);
 	else if (next_tile->type == 'V')
 	{
@@ -122,6 +118,12 @@ int	perform_attack(t_data *data, t_tile *next_tile, char direction)
 			data->attack = "10R";
 		else if (direction == 'L')
 			data->attack = "10L";
+		if (next_tile->type != '0')
+		{
+			if (next_tile->type == 'C')
+				update_collected_coins(data);
+			next_tile->type = '0';		
+		}
 	}
 	ft_printf("Attacked: %d\n", next_tile->id);
 	return (1);
@@ -132,18 +134,12 @@ void	attack(t_data *data, int keycode)
 	t_tile	*next_tile;
 	char 	direction;
 
-	next_tile = NULL;
 	direction = 'R';
+	next_tile = get_next_tile(data, keycode);
 	if (keycode == K_E)
-	{
-		next_tile = get_next_tile(data, K_RIGHT);
 		direction = 'R';
-	}
 	else if (keycode == K_Q)
-	{
-		next_tile = get_next_tile(data, K_LEFT);
 		direction = 'L';
-	}
 	perform_attack(data, next_tile, direction);
 	ft_printf("Attacked: %d\n", data->move_count);
 }
