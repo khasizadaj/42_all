@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 19:32:10 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:37:44 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ bool	init_assets(t_data *data);
 # define SCREEN_SIZE_ERR 1001
 # define SCREEN_SIZE_MSG "Error\n -- Cannot generate this map because of screen size limit.\n"
 # define UNKNOWN_ERR 9998
+# define UNKNOWN_ERR_MSG "Error\n -- Game ended because of unknown error.\n"
 # define INVALID_MAP 2005
 # define INVALID_MAP_MSG "Error\n -- Map is invalid.\n"
 # define INVALID_MAP_INCORRECT_COMPONENT 2000
