@@ -6,12 +6,11 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/10 14:07:01 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:53:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
-#include <unistd.h>
 
 t_tile	*get_next_tile(t_data *data, int keycode)
 {
@@ -97,10 +96,7 @@ void	move(t_data *data, int keycode)
 
 int	perform_attack(t_data *data, t_tile *next_tile, char direction)
 {
-	void	*img;
-
 	ft_printf("Start the attack on: %d\n", next_tile->id);
-	img = NULL;
 	if (chr_in(next_tile->type, "1BCE") == 1)
 		return (0);
 	else if (next_tile->type == 'V')
