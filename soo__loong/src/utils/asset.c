@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 18:16:02 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:33:03 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*asset_path_factory(char type)
 	pathes[COIN_L] = A_COIN_L;
 	pathes[COIN_R] = A_COIN_R;
 	pathes[PLAYER_R] = A_PLAYER_R;
+	pathes[PLAYER_L] = A_PLAYER_L;
 	pathes[EXIT] = A_EXIT;
 	pathes[BOMB_U] = A_BOMB_U;
 	pathes[BOMB_D] = A_BOMB_D;
@@ -62,7 +63,6 @@ char	*asset_path_factory(char type)
 	pathes[ATTACK_4] = A_ATTACK_4;
 	pathes[ATTACK_4_L] = A_ATTACK_4_L;
 	pathes[VILLAIN_R] = A_VILLAIN_R;
-	pathes[VILLAIN_L] = A_VILLAIN_L;
 	return (pathes[(int) type]);
 }
 

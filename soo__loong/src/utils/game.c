@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 17:12:45 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:29:23 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	move(t_data *data, int keycode)
 {
 	t_tile	*next_tile;
 	void	*img;
+	char 	type;
 
 	next_tile = get_next_tile(data, keycode);
 	if (!perform_move(data, next_tile))
@@ -45,7 +46,10 @@ void	move(t_data *data, int keycode)
 		get_x(data->player_pos, data->x_count),
 		get_y(data->player_pos, data->x_count));
 	data->player_pos = next_tile->id;
-	img = asset_get_by_type(&data->assets, 'P');
+	type = 'P';
+	if (keycode == K_LEFT)
+		type = 'p';
+	img = asset_get_by_type(&data->assets, type);
 	mlx_put_image_to_window(data->mlx, data->win, img,
 		get_x(data->player_pos, data->x_count),
 		get_y(data->player_pos, data->x_count));

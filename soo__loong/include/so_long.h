@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 18:24:33 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:32:10 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_data
 typedef enum s_asset
 {
 	PLAYER_R = 'P',
+	PLAYER_L = 'p',
 	EXIT = 'E',
 	FLOOR = '0',
 	COIN_R = 'C',
@@ -245,7 +246,7 @@ int		is_valid_map(t_data *data, char *map);
 bool	has_valid_path(t_data *data, char *map);
 
 # define ALLOWED_CHARACTERS "1E0CPBV"
-# define ANIMATED_CHARACTERS "CBV"
-# define ASSETS_TO_LOAD "1E0CcPBbVvGgHhJjKkLlOo"
+# define ANIMATED_CHARACTERS "CB"
+# define ASSETS_TO_LOAD "1E0CcPpBbVGgHhJjKkLlOo"
 
 #endif
