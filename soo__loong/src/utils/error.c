@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:01:31 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 19:37:17 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:42:26 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	exit_for(int reason)
 	else if (reason == END_GAME_YOU_ARE_DEAD)
 		ft_printf(END_GAME_MSG_YOU_ARE_DEAD);
 	else if (reason == UNKNOWN_ERR)
-		ft_printf(UNKNOWN_ERR_MSG);;
+		ft_printf(UNKNOWN_ERR_MSG);
 	exit(reason);
 }

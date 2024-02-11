@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 19:29:23 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:42:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	move(t_data *data, int keycode)
 {
 	t_tile	*next_tile;
 	void	*img;
-	char 	type;
+	char	type;
 
 	next_tile = get_next_tile(data, keycode);
 	if (!perform_move(data, next_tile))

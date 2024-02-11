@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 19:37:44 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:51:51 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ typedef enum s_asset
 	ATTACK_4_L = 'l',
 }	t_asset;
 
+# define ALLOWED_CHARACTERS "1E0CPBV"
+# define ANIMATED_CHARACTERS "CB"
+# define ASSETS_TO_LOAD "1E0CcPpBbVGgHhJjKkLlOo"
+
 # define A_PLAYER_R "assets/player-right.xpm"
 # define A_PLAYER_L "assets/player-left.xpm"
 # define A_EXIT "assets/exit.xpm"
@@ -123,13 +127,10 @@ typedef enum s_asset
 # define A_ATTACK_3_L "assets/attack-3-left.xpm"
 # define A_ATTACK_4_L "assets/attack-4-left.xpm"
 
-t_tile	*asset_factory(t_data *data, char type);
-void	*asset_get_by_type(t_tile **assets, char type);
-char	*asset_path_factory(char type);
-bool	init_assets(t_data *data);
-
-# define KEY_PRESS 3
-# define KEY_PRESS_MASK 1L<<1
+t_tile		*asset_factory(t_data *data, char type);
+void		*asset_get_by_type(t_tile **assets, char type);
+char		*asset_path_factory(char type);
+bool		init_assets(t_data *data);
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -159,31 +160,42 @@ bool	init_assets(t_data *data);
 
 # define END_GAME_WIN 0
 # define END_GAME_YOU_ARE_DEAD 911
-# define END_GAME_MSG_YOU_ARE_DEAD "\nDon't step on unsteppable! You are DEAD.\n\n"
+# define END_GAME_MSG_YOU_ARE_DEAD "\nDon't step on unsteppable! \
+You are DEAD.\n\n"
 # define PROGRAM_HALTED_WITH_ESCAPE 300
 # define PROGRAM_HALTED_MSG_WITH_ESCAPE "Escaped this hell!\n"
 # define MEMORY_ERR 9999
-# define MEMORY_ERR_MSG "Error\n -- Memory allocation failed.\n"
+# define MEMORY_ERR_MSG "Error\n \
+-- Memory allocation failed.\n"
 # define SCREEN_SIZE_ERR 1001
-# define SCREEN_SIZE_MSG "Error\n -- Cannot generate this map because of screen size limit.\n"
+# define SCREEN_SIZE_MSG "Error\n \
+-- Cannot generate this map because of screen size limit.\n"
 # define UNKNOWN_ERR 9998
-# define UNKNOWN_ERR_MSG "Error\n -- Game ended because of unknown error.\n"
+# define UNKNOWN_ERR_MSG "Error\n \
+-- Game ended because of unknown error.\n"
 # define INVALID_MAP 2005
-# define INVALID_MAP_MSG "Error\n -- Map is invalid.\n"
+# define INVALID_MAP_MSG "Error\n \
+-- Map is invalid.\n"
 # define INVALID_MAP_INCORRECT_COMPONENT 2000
-# define INVALID_MAP_MSG_INCORRECT_COMPONENT "Error\n -- Incorrect component.\n"
+# define INVALID_MAP_MSG_INCORRECT_COMPONENT "Error\n \
+-- Incorrect component.\n"
 # define INVALID_MAP_NO_MAP 2000
-# define INVALID_MAP_MSG_NO_MAP "Error\n -- Map is not provided.\n"
+# define INVALID_MAP_MSG_NO_MAP "Error\n \
+-- Map is not provided.\n"
 # define INVALID_MAP_WRONG_FILE_TYPE 2001
-# define INVALID_MAP_MSG_WRONG_FILE_TYPE "Error\n -- Map file type is invalid.\n"
+# define INVALID_MAP_MSG_WRONG_FILE_TYPE "Error\n \
+-- Map file type is invalid.\n"
 # define INVALID_MAP_NOT_RECTANGLE 2002
-# define INVALID_MAP_MSG_NOT_RECTANGLE "Error\n -- Map is not rectangular.\n"
+# define INVALID_MAP_MSG_NOT_RECTANGLE "Error\n \
+-- Map is not rectangular.\n"
 # define INVALID_MAP_WRONG_WALLS 2003
-# define INVALID_MAP_MSG_WRONG_WALLS "Error\n -- Map is not enclosed by walls.\n"
+# define INVALID_MAP_MSG_WRONG_WALLS "Error\n \
+-- Map is not enclosed by walls.\n"
 # define INVALID_MAP_NO_VALID_PATH 2004
-# define INVALID_MAP_MSG_NO_VALID_PATH "Error\n -- Map has no valid path.\n"
+# define INVALID_MAP_MSG_NO_VALID_PATH "Error\n \
+-- Map has no valid path.\n"
 
-t_bool	draw_board_border(t_data *data, int padding, int border_width);
+t_bool		draw_board_border(t_data *data, int padding, int border_width);
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -208,7 +220,6 @@ int			animate(t_data *data);
 char		get_attack_frame_empty(long long diff);
 char		get_attack_frame_villain(long long diff);
 void		change_state(t_data *data, t_tile *tile);
-long long	time_in_milliseconds(void);
 void		init_data(t_data *data);
 void		enhance_data(t_data *data, char *map_str);
 int			perform_attack(t_data *data, t_tile *next_tile, char direction);
@@ -219,35 +230,29 @@ int			perform_move(t_data *data, t_tile *tile);
 /*	    MLX HOOKS                                                             */
 /*                                                                            */
 /* ************************************************************************** */
-int		key_hook(int keycode, t_data *data);
-void	add_hooks(t_data *data);
+int			key_hook(int keycode, t_data *data);
+void		add_hooks(t_data *data);
 
 /* ************************************************************************** */
 /*                                                                            */
 /*	    CLEANER FUNCS                                                         */
 /*                                                                            */
 /* ************************************************************************** */
-void	free_tile(t_data *data);
-void	free_assets(t_data *data);
-
-#define MAP_LVL_1 "111111C0P11C0E111111"
-#define MAP_LVL_2 "111111111C000P111C000011100000C11C000E111C00001111111111"
-
+void		free_tile(t_data *data);
+void		free_assets(t_data *data);
 
 /* ************************************************************************** */
 /*                                                                            */
 /*	    MAP VALIDATION                                                        */
 /*                                                                            */
 /* ************************************************************************** */
-char	*get_map(t_data *data, char *filename, int *x_tile_count,
-					int *y_tile_count);
-void	init_map(t_data *data, char *map_str);
-int		is_valid_line(char *line, int expected_size);
-int		is_valid_map(t_data *data, char *map);
-bool	has_valid_path(t_data *data, char *map);
+char		*get_map(t_data *data, char *filename, int *x_tile_count,
+				int *y_tile_count);
+void		init_map(t_data *data, char *map_str);
+int			is_valid_line(char *line, int expected_size);
+int			is_valid_map(t_data *data, char *map);
+bool		has_valid_path(t_data *data, char *map);
 
-# define ALLOWED_CHARACTERS "1E0CPBV"
-# define ANIMATED_CHARACTERS "CB"
-# define ASSETS_TO_LOAD "1E0CcPpBbVGgHhJjKkLlOo"
+long long	time_in_milliseconds(void);
 
 #endif
