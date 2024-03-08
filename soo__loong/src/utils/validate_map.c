@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:12:09 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/06 21:03:45 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/08 20:11:08 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,40 @@ int	is_valid_map(t_data *data, char *map)
 	return (data->exit_code);
 }
 
+/*
+	Flood fill doesn't consider bombs and villains as blocker
+	unless they are adjacent to current cell.
+
+	Map below is valid and it will be filled like this and it
+	is invalid.
+
+	111   ==>   111
+	1P1   ==>   1-1
+	1B1   ==>   1B1
+	1C1   ==>   1C1
+	1E1   ==>   1E1
+	111   ==>   111
+
+	However, map below is valid as player can destroy some sprites
+	on horizontal line.
+
+	1111111111   ==>   1111111111
+	1PBVCE1111   ==>   1-----1111
+	1111111111   ==>   1111111111
+*/
 void	flood(int position, int x_count, char *map, char new)
 {
 	if (position > (int) ft_strlen(map) || position < 0)
 		return ;
-	if (chr_in(map[position], "1-B"))
+	if (chr_in(map[position], "1-"))
 		return ;
 	map[position] = new;
 	flood(position + 1, x_count, map, new);
 	flood(position - 1, x_count, map, new);
-	flood(position + x_count, x_count, map, new);
-	flood(position - x_count, x_count, map, new);
+	if (!chr_in(map[position + x_count], "VB"))
+		flood(position + x_count, x_count, map, new);
+	if (!chr_in(map[position + x_count], "VB"))
+		flood(position - x_count, x_count, map, new);
 }
 
 bool	has_valid_path(t_data *data, char *map)
