@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 16:56:35 by codespace         #+#    #+#             */
-/*   Updated: 2024/02/07 16:32:19 by jkhasiza         ###   ########.fr       */
+/*   Created: 2024/01/26 22:07:49 by jkhasiza          #+#    #+#             */
+/*   Updated: 2024/01/26 22:21:22 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/push_swap.h"
+#ifndef TESTS_H
+# define TESTS_H
 
-void	exit_for(int reason)
-{
-	if (reason == INVALID_INPUT)
-		ft_putstr_fd("Error", 2);
-	else if (reason == NO_INPUT)
-		ft_putstr_fd("./push_swap\n", 2);
-	exit(reason);
-}
+# include "../../libunit/include/libunit.h"
+# include "map_validation/map_validation.h"
+
+#endif

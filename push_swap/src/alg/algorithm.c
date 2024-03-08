@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 20:57:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/01/17 19:19:50 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:28:15 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	*get_cheapest(t_number *from, t_number *to, t_bool reverse)
 
 	if (!from || !to)
 		return (NULL);
-	cheapest = initialize_steps(2147483646);
+	cheapest = initialize_steps(2147483647);
 	if (!cheapest)
 		return (NULL);
 	i = 0;
@@ -113,7 +113,7 @@ int	*get_cheapest(t_number *from, t_number *to, t_bool reverse)
 	{
 		steps = get_steps_to_move((*tmp)->number, from, to, reverse);
 		if (!steps)
-			return (NULL);
+			return (free(cheapest), NULL);
 		if (calculate_cost(steps) < calculate_cost(cheapest))
 			ft_int_arrcpy(cheapest, steps, STEP_SIZE);
 		tmp = &((*tmp)->next);

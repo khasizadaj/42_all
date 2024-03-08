@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:31:21 by jkhasizada        #+#    #+#             */
-/*   Updated: 2024/01/16 17:27:30 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/02/04 00:22:48 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_raw_numbers(char ***raw_numbers, int argc, char **argv)
 		i = -1;
 		while ((*raw_numbers)[++i])
 		{
-			if (ft_isint((*raw_numbers)[i]) == FALSE)
+			if (ft_str_isdigit((*raw_numbers)[i]) == false)
 				has_noninteger = TRUE;
 		}
 		if (has_noninteger == TRUE || !(*raw_numbers)[0])
@@ -80,7 +80,11 @@ void	generate_stack(t_data *data, int argc, char **argv)
 	{
 		new_elem = ft_stacknew(ft_atoi(raw_numbers[i]));
 		if (!new_elem)
+		{
+			if (argc == 2)
+				free_numbers(data->size, raw_numbers);
 			return ;
+		}
 		ft_stackadd_back(&(data->stack_a), new_elem);
 	}
 	if (argc == 2)
