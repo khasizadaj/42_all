@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 19:43:28 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/08 20:02:11 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	}
 	enhance_data(&data, map_str);
 	init_map(&data, map_str);
-	mlx_hook(data.win, 3, 1L<<1,
+	mlx_hook(data.win, 3, 1L << 1,
 		key_hook, &data);
 	mlx_loop_hook(data.mlx, animate, &data);
 	mlx_loop(data.mlx);
