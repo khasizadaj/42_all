@@ -1,58 +1,78 @@
-NAME 		=	so_long
+###############################################################################
+######                            PROPERTIES                             ######
+###############################################################################
 
-CC 			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -I ./include -g
+NAME		= so_long
+CFLAGS		= -Wall -Wextra -Werror -MP -MD -g
+MLX_FLAGS	= -lmlx -lXext -lX11
 
-SRC_DIR 	=	src
-UTILS_DIR 	=	${SRC_DIR}/utils
-LIBFT_DIR 	=	${SRC_DIR}/libft
-LIBFT		=	${SRC_DIR}/libft/libft.a
+SRCS_DIR	= src
+UTILS_DIR	= src/utils
+LIBFT		= ft
+LIBFT_DIR	= src/libft
+TEST_DIR	= tests
 
-SRCS 		=	${SRC_DIR}/main.c \
-				${UTILS_DIR}/animate.c \
-				${UTILS_DIR}/animate_helper.c \
-				${UTILS_DIR}/asset.c \
-				${UTILS_DIR}/data.c \
-				${UTILS_DIR}/draw.c \
-				${UTILS_DIR}/error.c \
-				${UTILS_DIR}/freer.c \
-				${UTILS_DIR}/game.c \
-				${UTILS_DIR}/game_helper.c \
-				${UTILS_DIR}/hook.c \
-				${UTILS_DIR}/map.c \
-				${UTILS_DIR}/tile.c \
-				${UTILS_DIR}/time.c \
-				${UTILS_DIR}/validate_map.c
+SRCS		= \
+	${SRCS_DIR}/main.c
 
-OBJS 		=	${SRCS:.c=.o}
-LIBFT_OBJS	=	$(wildcard $(LIBFT_DIR)/*.o)
+SRCS_UTILS	= \
+	${UTILS_DIR}/animate.c \
+	${UTILS_DIR}/animate_helper.c \
+	${UTILS_DIR}/asset.c \
+	${UTILS_DIR}/data.c \
+	${UTILS_DIR}/draw.c \
+	${UTILS_DIR}/error.c \
+	${UTILS_DIR}/freer.c \
+	${UTILS_DIR}/game.c \
+	${UTILS_DIR}/game_helper.c \
+	${UTILS_DIR}/hook.c \
+	${UTILS_DIR}/map.c \
+	${UTILS_DIR}/tile.c \
+	${UTILS_DIR}/time.c \
+	${UTILS_DIR}/validate_map.c
 
-MLX_FLAGS	=	-lmlx -lXext -lX11
+OBJS_DIR	= ${SRCS_DIR}/objs
+OBJS		= \
+	${SRCS:${SRCS_DIR}/%.c=${OBJS_DIR}/%.o} \
+	${SRCS_UTILS:${UTILS_DIR}/%.c=${OBJS_DIR}/%.o}
 
+# New directories should be added like this
+#	${SRCS_DIR}/%.c=${OBJS_DIR}/%.o}
+
+###############################################################################
+######                               RULES                               ######
+###############################################################################
 
 all: ${NAME}
 
-run: ${NAME}
-	./${NAME} ./maps/basic.ber
+${NAME}: ${OBJS}
+	@make -C ${LIBFT_DIR} --no-print-directory
+	@cc ${CFLAGS} -o ${NAME} ${OBJS} -L${LIBFT_DIR} -l${LIBFT} ${MLX_FLAGS}
 
-${NAME}: ${OBJS} ${LIBFT_OBJS}
-	@${MAKE} -C ${LIBFT_DIR} --no-print-directory
-	@${CC} ${CFLAGS} ${OBJS} ./${LIBFT_DIR}/libft.a -o ${NAME} ${MLX_FLAGS}
-
-valgrind: debug
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} maps/invalid_non_rectangle.ber
-
-clean: 
-	@${MAKE} -C ${LIBFT_DIR} --no-print-directory clean
-	@${RM} ${OBJS}
+clean:
+	@make -C ${LIBFT_DIR} clean --no-print-directory
+	@rm -rf ${OBJS_DIR}
 
 fclean: clean
-	@${MAKE} -C ${LIBFT_DIR} --no-print-directory fclean
-	@${RM} -f ${NAME}
+	@make -C ${LIBFT_DIR} fclean --no-print-directory
+	@rm -f ${NAME}
+
+run: ${NAME}
+	./${NAME}
 
 re: fclean all
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
+	@mkdir -p $(dir $@)
+	@cc ${CFLAGS} -c $< -o $@
 
-.PHONY: all clean fclean re debug valgrind
+${OBJS_DIR}/%.o: ${UTILS_DIR}/%.c
+	@mkdir -p $(dir $@)
+	${CC} ${CFLAGS} -c $< -o $@
+
+# New rules for should be added like this
+# ${OBJS_DIR}/%.o: ${NEW_DIR}/%.c
+# 	@mkdir -p $(dir $@)
+# 	${CC} ${CFLAGS} -c $< -o $@
+
+.PHONY: all clean fclean re
