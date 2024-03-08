@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:09:07 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 19:17:11 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/08 20:14:11 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	perform_attack(t_data *data, t_tile *next_tile, char direction)
 
 int	perform_move(t_data *data, t_tile *tile)
 {
+	data->move_count++;
+	ft_printf("Curr move count: %d\n", data->move_count);
 	if (tile->type == 'C')
 	{
 		tile->type = '0';
@@ -67,8 +69,6 @@ int	perform_move(t_data *data, t_tile *tile)
 		exit_gracefully(data, END_GAME_YOU_ARE_DEAD);
 	else if (tile->type == '1')
 		return (0);
-	data->move_count++;
-	ft_printf("Curr move count: %d\n", data->move_count);
 	return (1);
 }
 
