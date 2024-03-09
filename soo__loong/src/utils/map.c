@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/04 21:40:00 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:54:49 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ char	*get_map(t_data *data, char *filename, int *x_tile_count,
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
+	{
+		data->exit_code = INVALID_MAP_NO_MAP;
 		return (NULL);
+	}
 	result = get_map_content(fd, x_tile_count, y_tile_count);
 	if (!result)
 	{

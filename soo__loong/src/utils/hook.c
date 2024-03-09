@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:20:04 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/08 20:24:37 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:47:21 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	key_hook(int keycode, t_data *data)
 
 int	exit_hook(t_data *data)
 {
-	exit_gracefully(data, 0);
+	exit_gracefully(data, PROGRAM_HALTED_WITH_X_ICON);
 	return (0);
 }
