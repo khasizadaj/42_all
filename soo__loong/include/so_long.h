@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/08 20:25:04 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/09 20:02:43 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ bool		init_assets(t_data *data);
 You are DEAD.\n\n"
 # define PROGRAM_HALTED_WITH_ESCAPE 300
 # define PROGRAM_HALTED_MSG_WITH_ESCAPE "Escaped this hell!\n"
+# define PROGRAM_HALTED_WITH_X_ICON 301
+# define PROGRAM_HALTED_MSG_X_ICON "Xited this hell!\n"
 # define MEMORY_ERR 9999
 # define MEMORY_ERR_MSG "Error\n \
 -- Memory allocation failed.\n"
@@ -173,15 +175,9 @@ You are DEAD.\n\n"
 # define UNKNOWN_ERR 9998
 # define UNKNOWN_ERR_MSG "Error\n \
 -- Game ended because of unknown error.\n"
-# define INVALID_MAP 2005
-# define INVALID_MAP_MSG "Error\n \
--- Map is invalid.\n"
 # define INVALID_MAP_INCORRECT_COMPONENT 2000
 # define INVALID_MAP_MSG_INCORRECT_COMPONENT "Error\n \
 -- Incorrect component.\n"
-# define INVALID_MAP_NO_MAP 2000
-# define INVALID_MAP_MSG_NO_MAP "Error\n \
--- Map is not provided.\n"
 # define INVALID_MAP_WRONG_FILE_TYPE 2001
 # define INVALID_MAP_MSG_WRONG_FILE_TYPE "Error\n \
 -- Map file type is invalid.\n"
@@ -194,6 +190,12 @@ You are DEAD.\n\n"
 # define INVALID_MAP_NO_VALID_PATH 2004
 # define INVALID_MAP_MSG_NO_VALID_PATH "Error\n \
 -- Map has no valid path.\n"
+# define INVALID_MAP 2005
+# define INVALID_MAP_MSG "Error\n \
+-- Map is invalid.\n"
+# define INVALID_MAP_NO_MAP 2006
+# define INVALID_MAP_MSG_NO_MAP "Error\n \
+-- Map is not provided.\n"
 
 t_bool		draw_board_border(t_data *data, int padding, int border_width);
 
