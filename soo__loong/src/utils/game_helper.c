@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:09:07 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/11 18:14:25 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:44:41 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ void	update_collected_coins(t_data *data)
 	}
 }
 
-int	perform_attack(t_data *data, t_tile *next_tile, char direction)
+void	perform_attack(t_data *data, t_tile *next_tile, char direction)
 {
-	if (chr_in(next_tile->type, "1E") == 1)
-		return (0);
-	else if (next_tile->type == 'V')
+	if (next_tile->type == 'V')
 	{
 		if (direction == 'R')
 			data->attack = "1VR";
@@ -46,10 +44,10 @@ int	perform_attack(t_data *data, t_tile *next_tile, char direction)
 		{
 			if (next_tile->type == 'C')
 				update_collected_coins(data);
-			next_tile->type = '0';
+			if (next_tile->type != 'E')
+				next_tile->type = '0';
 		}
 	}
-	return (1);
 }
 
 int	perform_move(t_data *data, t_tile *tile)

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/11 18:27:23 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:45:07 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,12 @@ void	attack(t_data *data, int keycode)
 
 	direction = 'R';
 	next_tile = get_next_tile(data, keycode);
+	if (chr_in(next_tile->type, "1") == 1
+		|| (next_tile->type == 'E' && data->collected == data->total_coins))
+		return ;
 	if (keycode == K_E)
 		direction = 'R';
 	else if (keycode == K_Q)
 		direction = 'L';
-	if (!perform_attack(data, next_tile, direction))
-		return ;
+	perform_attack(data, next_tile, direction);
 }
