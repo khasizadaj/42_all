@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 22:25:21 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/09 19:54:49 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:14:41 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_map(t_data *data, char *map_str)
 
 	i = -1;
 	x = 0;
-	y = 72;
+	y = 0;
 	while (map_str[++i])
 	{
 		if (i % data->x_count == 0 && i != 0)

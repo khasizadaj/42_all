@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:09:07 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/08 20:14:11 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:14:25 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int	get_y(int position, int x_tile_count)
 {
 	int	y;
 
-	y = (position / x_tile_count) * 72 + 72;
+	y = (position / x_tile_count) * 72;
 	return (y);
 }
