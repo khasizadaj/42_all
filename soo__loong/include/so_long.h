@@ -224,7 +224,7 @@ char		get_attack_frame_villain(long long diff);
 void		change_state(t_data *data, t_tile *tile);
 void		init_data(t_data *data);
 void		enhance_data(t_data *data, char *map_str);
-int			perform_attack(t_data *data, t_tile *next_tile, char direction);
+void		perform_attack(t_data *data, t_tile *next_tile, char direction);
 int			perform_move(t_data *data, t_tile *tile);
 
 /* ************************************************************************** */
