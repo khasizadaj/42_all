@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:23:40 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/10 14:10:00 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:14:19 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	enhance_data(t_data *data, char *map_str)
 		if (map_str[i] == 'E')
 			data->exit = i + 1;
 	}
-	data->height = data->y_count * data->side_length + 72;
+	data->height = data->y_count * data->side_length;
 	data->width = data->x_count * data->side_length;
 	data->total_coins = ft_count_char(map_str, 'C');
 	data->mlx = mlx_init();
