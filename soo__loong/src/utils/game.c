@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:51:52 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/09 19:19:19 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:27:23 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ t_tile	*get_next_tile(t_data *data, int keycode)
 	return (tile);
 }
 
+/*
+	Function checks if character is able to move and based on that
+	performs necessary actions.
+
+	Tile that player is moving from will always be drawn as floor.
+	if current one is exit tile and all coins are collected already
+	no tile is redrawn by this function.
+
+	Note: Drawing of exit tile is handled by another function.
+*/
 void	move(t_data *data, int keycode)
 {
 	t_tile	*next_tile;
@@ -41,7 +51,7 @@ void	move(t_data *data, int keycode)
 	next_tile = get_next_tile(data, keycode);
 	if (!perform_move(data, next_tile))
 		return ;
-	if (data->player_pos != data->exit)
+	if (data->player_pos != data->exit || data->collected != data->total_coins)
 	{
 		img = asset_get_by_type(&data->assets, '0');
 		mlx_put_image_to_window(data->mlx, data->win, img,
