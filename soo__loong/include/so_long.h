@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/13 17:58:02 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:27:20 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,6 @@ int			is_valid_line(char *line, int expected_size);
 int			is_valid_map(t_data *data, char *map);
 bool		has_valid_path(t_data *data, char *map);
 
-long long	time_in_milliseconds(void);
+long long	time_in_milliseconds(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:18:03 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 17:51:04 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:25:16 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	animate_nonmoving_sprites(t_data *data)
 	t_tile		**curr_tile;
 	int			state;
 
-	now = time_in_milliseconds();
+	now = time_in_milliseconds(data);
 	curr_tile = &data->tile;
 	diff = now - data->start;
 	if (diff % 500 < 250)
@@ -97,8 +97,8 @@ void	animate_attack(t_data *data)
 	if (data->attack[0] != '0')
 	{
 		if (attack_start == -1)
-			attack_start = time_in_milliseconds();
-		diff = time_in_milliseconds() - attack_start;
+			attack_start = time_in_milliseconds(data);
+		diff = time_in_milliseconds(data) - attack_start;
 		if ((diff % 250 > 225 && data->attack[1] == '0')
 			|| (diff % 700 > 675 && data->attack[1] == 'V'))
 		{

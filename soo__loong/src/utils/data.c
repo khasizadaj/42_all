@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:23:40 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/13 18:01:00 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:25:19 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_data(t_data *data)
 	data->assets = NULL;
 	data->move_count = 0;
 	data->attack = "0";
-	data->start = time_in_milliseconds();
+	data->start = time_in_milliseconds(data);
 	return ;
 }
 
