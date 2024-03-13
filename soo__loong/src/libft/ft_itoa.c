@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:34:08 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/13 18:20:56 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:35:25 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_itoa(int n)
 	i = 0;
 	while (size - i - 1 >= 0)
 	{
-		if (size - i - 1  == 0 && n < 0)
+		if (size - i - 1 == 0 && n < 0)
 			break ;
 		str[size - i - 1] = big_number % 10 + '0';
 		big_number = big_number / 10;
