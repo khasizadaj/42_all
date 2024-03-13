@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:23:40 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/11 18:14:19 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:01:00 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	enhance_data(t_data *data, char *map_str)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		exit_gracefully(data, MEMORY_ERR);
+	if (!init_assets(data))
+	{
+		free(map_str);
+		exit_gracefully(data, ASSET_ERR);
+	}
 	data->win = mlx_new_window(data->mlx, data->width,
 			data->height, PROGRAM_NAME);
 	if (!data->win)
 		exit_gracefully(data, MEMORY_ERR);
-	if (!init_assets(data))
-	{
-		free(map_str);
-		exit_gracefully(data, MEMORY_ERR);
-	}
 }

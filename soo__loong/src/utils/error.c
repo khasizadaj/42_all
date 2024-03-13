@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:01:31 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/09 19:58:11 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:53:32 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	print_other_reasons(int reason)
 {
 	if (reason == PROGRAM_HALTED_WITH_ESCAPE)
 		ft_putstr_fd(PROGRAM_HALTED_MSG_WITH_ESCAPE, STDERR_FILENO);
+	else if (reason == ASSET_ERR)
+		ft_putstr_fd(ASSET_ERR_MSG, STDERR_FILENO);
 	else if (reason == PROGRAM_HALTED_WITH_X_ICON)
 		ft_putstr_fd(PROGRAM_HALTED_MSG_X_ICON, STDERR_FILENO);
 	else if (reason == SCREEN_SIZE_ERR)

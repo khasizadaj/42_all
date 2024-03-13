@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/09 20:02:43 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:58:02 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,9 @@ You are DEAD.\n\n"
 # define PROGRAM_HALTED_MSG_WITH_ESCAPE "Escaped this hell!\n"
 # define PROGRAM_HALTED_WITH_X_ICON 301
 # define PROGRAM_HALTED_MSG_X_ICON "Xited this hell!\n"
+# define ASSET_ERR 1972
+# define ASSET_ERR_MSG "Error\n \
+-- Assets couldn't be loaded.\n"
 # define MEMORY_ERR 9999
 # define MEMORY_ERR_MSG "Error\n \
 -- Memory allocation failed.\n"
