@@ -6,12 +6,16 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:41:45 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/02/11 19:33:03 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:07:24 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
+/*
+	`init_assets` function makes sure that all assets are present.
+	that's why edge case for missing type in assets is not protected.
+*/
 void	*asset_get_by_type(t_tile **assets, char type)
 {
 	t_tile	*curr_tile;
