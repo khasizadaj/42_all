@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:12:09 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/08 20:11:08 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:27:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int	is_valid_map(t_data *data, char *map)
 {
 	int	i;
 
-	if (data->x_count > 1920 / SIDE_LEN || data->y_count > 1080 / SIDE_LEN)
-		data->exit_code = SCREEN_SIZE_ERR;
-	else if (ft_count_char(map, 'P') != 1 || ft_count_char(map, 'E') != 1
+	if (ft_count_char(map, 'P') != 1 || ft_count_char(map, 'E') != 1
 		|| ft_count_char(map, 'C') < 1)
 		data->exit_code = INVALID_MAP_INCORRECT_COMPONENT;
 	else if ((int) ft_strlen(map) != data->x_count * data->y_count)

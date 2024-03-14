@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:37:41 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/13 18:34:35 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:46:01 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_data
 	void	*win;
 	int		width;
 	int		height;
+	int		screen_width;
+	int		screen_height;
 	int		side_length;
 	int		player_pos;
 	int		exit;
