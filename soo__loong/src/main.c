@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:30:10 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/08 20:24:21 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:28:45 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	main(int argc, char **argv)
 		exit_gracefully(&data, data.exit_code);
 	}
 	enhance_data(&data, map_str);
+	if (data.height > data.screen_height || data.width > data.screen_width)
+		exit_gracefully(&data, SCREEN_SIZE_ERR);
 	init_map(&data, map_str);
 	mlx_hook(data.win, 3, 1L << 1,
 		key_hook, &data);

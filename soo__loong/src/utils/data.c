@@ -6,7 +6,7 @@
 /*   By: jkhasiza <jkhasiza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:23:40 by jkhasiza          #+#    #+#             */
-/*   Updated: 2024/03/13 18:25:19 by jkhasiza         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:25:52 by jkhasiza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	init_data(t_data *data)
 	data->collected = 0;
 	data->height = 0;
 	data->width = 0;
+	data->screen_height = 0;
+	data->screen_width = 0;
 	data->side_length = SIDE_LEN;
 	data->player_pos = -1;
 	data->exit = 1;
@@ -51,6 +53,7 @@ void	enhance_data(t_data *data, char *map_str)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		exit_gracefully(data, MEMORY_ERR);
+	mlx_get_screen_size(data->mlx, &data->screen_width, &data->screen_height);
 	if (!init_assets(data))
 	{
 		free(map_str);
